@@ -58,6 +58,7 @@ export const App: React.FC = () => {
   // Station Image Modal & Custom Images Map (roundIndex -> imageUrl)
   const [isImageModalOpen, setIsImageModalOpen] = useState<boolean>(false);
   const [customStationImages, setCustomStationImages] = useState<Record<number, string>>({});
+  const [customStationHotspots, setCustomStationHotspots] = useState<Record<number, import('./types/game').StationHotspot[]>>({});
 
   // Current Round Result & Feedback Banner
   const [lastConsequence, setLastConsequence] = useState<{
@@ -334,7 +335,7 @@ export const App: React.FC = () => {
               totalRounds={totalRounds}
               lastReactionChoice={lastConsequence?.choiceLabel}
               lastReactionType={lastReactionType}
-              hotspots={currentStory.hotspots}
+              hotspots={customStationHotspots[currentRoundIndex] || currentStory.hotspots}
               onOpenImageModal={() => setIsImageModalOpen(true)}
             />
 
@@ -518,10 +519,17 @@ export const App: React.FC = () => {
             currentImage={customStationImages[currentRoundIndex] || currentStory.imagePath}
             suggestedPrompt={currentStory.imagePrompt}
             currentArtStyle={activeGameDefinition?.artStyle || 'pixel_art'}
+            currentHotspots={customStationHotspots[currentRoundIndex] || currentStory.hotspots}
             onSelectImage={(newUrl) => {
               setCustomStationImages((prev) => ({
                 ...prev,
                 [currentRoundIndex]: newUrl,
+              }));
+            }}
+            onUpdateHotspots={(updatedHotspots) => {
+              setCustomStationHotspots((prev) => ({
+                ...prev,
+                [currentRoundIndex]: updatedHotspots,
               }));
             }}
           />

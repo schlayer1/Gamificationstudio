@@ -72,6 +72,15 @@ export interface DecisionChoice {
   };
 }
 
+export interface StationHotspot {
+  id: string;
+  x: number; // percentage from left (0-100)
+  y: number; // percentage from top (0-100)
+  label: string;
+  description: string;
+  icon?: string;
+}
+
 export interface RoundStory {
   id: string; // unique event id
   roundNumber: number; // 1 to 20/26
@@ -80,14 +89,7 @@ export interface RoundStory {
   milestoneTitle: string;
   imagePath?: string;
   imagePrompt?: string; // Pre-configured image generation prompt for Gemini Imagen / Midjourney / DALL-E
-  hotspots?: Array<{
-    id: string;
-    x: number; // percentage from left (0-100)
-    y: number; // percentage from top (0-100)
-    label: string;
-    description: string;
-    icon?: string;
-  }>;
+  hotspots?: StationHotspot[];
   quiz?: QuizQuestion; // Optional Quiz Prüfstein (Mythologie/Schnitzeljagd)
   scavengerClue?: string; // Optionaler Rätsel-Hinweis (Rom-Schnitzeljagd)
   branchCondition?: {

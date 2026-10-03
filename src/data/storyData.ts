@@ -10,6 +10,32 @@ const FIXED_START_STORIES: RoundStory[] = [
     locationName: "Elephantine & die Granitbrüche von Assuan",
     milestoneTitle: "Runde 1: Die erste Bewährungsprobe am Nil",
     imagePath: "/assets/aswan_quarry.jpg",
+    hotspots: [
+      {
+        id: "hs_aswan_keile",
+        x: 32,
+        y: 68,
+        label: "Holzkeil-Spalttechnik",
+        description: "Steinmetze treiben trockene Sykomorenholzkeile in Bohrlöcher und tränken sie mit Nilwasser. Das Quellholz sprengt den härtesten Rosengranit geradlinig ab.",
+        icon: "⛏️"
+      },
+      {
+        id: "hs_aswan_felswand",
+        x: 64,
+        y: 38,
+        label: "Granit-Abbaustelle",
+        description: "Aus diesen massiven Felswänden wurden Kolossalstatuen und Obelisken für Karnak und Gizeh herausgehauen.",
+        icon: "🏛️"
+      },
+      {
+        id: "hs_aswan_nilufer",
+        x: 82,
+        y: 72,
+        label: "Verladestelle am 1. Katarakt",
+        description: "Hier warten robuste Lastkähne mit Rollbalken, um die tonnenschwere Fracht bei Hochwasser nilabwärts zu transportieren.",
+        icon: "⛵"
+      }
+    ],
     situation: {
       unterstufe: "Deine Reise beginnt ganz im Süden Ägyptens. Du sollst riesige Granitblöcke für den königlichen Tempel beschaffen. Doch die Steinmetze klagen über brennende Hitze und zu wenig Wasser.",
       mittelstufe: "Am ersten Nilkatarakt bei Syene (Assuan) bist du verantwortlich für den Granitabbau. Die Arbeiter fordern zusätzliche Rationen Bier und Brot, während die Steuereintreiber des Adels auf strikte Sparsamkeit pochen.",
@@ -86,6 +112,32 @@ const FIXED_START_STORIES: RoundStory[] = [
     locationName: "Kom Ombo – Die Sandbänke der Krokodile",
     milestoneTitle: "Runde 2: Die Zähne des Sobek",
     imagePath: "/assets/kom_ombo.jpg",
+    hotspots: [
+      {
+        id: "hs_kom_krokodil",
+        x: 48,
+        y: 65,
+        label: "Heilige Nilkrokodile",
+        description: "Die Reptilien sonnen sich auf Sandbänken. Das Volk fürchtet und verehrt sie zugleich als Boten des Schöpfergottes Sobek.",
+        icon: "🐊"
+      },
+      {
+        id: "hs_kom_tempel",
+        x: 75,
+        y: 35,
+        label: "Doppeltempel von Kom Ombo",
+        description: "Einzigartige Doppelanlage: Die rechte Hälfte ist Sobek geweiht, die linke dem Falkengott Haroeris.",
+        icon: "🏛️"
+      },
+      {
+        id: "hs_kom_sandbank",
+        x: 22,
+        y: 55,
+        label: "Flussbiegung & Untiefe",
+        description: "Gefährliche Strömung zwingt Schiffe nah ans Ufer. Ein Ruderfehler kann die Ladung zum Kentern bringen.",
+        icon: "🌊"
+      }
+    ],
     situation: {
       unterstufe: "Eure Schiffe nähern sich einer Flussbiegung. Auf den Sandbänken sonnen sich Dutzende riesige Nilkrokodile. Die Ruderer haben furchtbare Angst, weiterzufahren.",
       mittelstufe: "Bei Kom Ombo blockiert ein Krokodilrudel das Fahrwasser. Die Schiffer sehen darin ein Omen des Gottes Sobek. Eine Umrundung würde kostbare Zeit und Rationen kosten.",
@@ -162,6 +214,32 @@ const FIXED_START_STORIES: RoundStory[] = [
     locationName: "Edfu – Das Reich des Himmelsfalken Horus",
     milestoneTitle: "Runde 3: Die Bewachung der Kornkammern",
     imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      {
+        id: "hs_edfu_pylon",
+        x: 52,
+        y: 40,
+        label: "Monumentaler Tempelpylon",
+        description: "Riesige Reliefs zeigen den Pharao beim Erschlagen von Feinden unter dem Schutz der Falkenflügel von Horus.",
+        icon: "🦅"
+      },
+      {
+        id: "hs_edfu_silo",
+        x: 24,
+        y: 65,
+        label: "Königliche Rundsilos",
+        description: "Lehmziegelspeicher für Emmer und Gerste. Von oben befüllbar, unten mit Schiebetüren für die Notrationierung.",
+        icon: "🌾"
+      },
+      {
+        id: "hs_edfu_schreiber",
+        x: 78,
+        y: 70,
+        label: "Kornschreiber-Station",
+        description: "Beamte wiegen Getreidesäcke und notieren jede Ration auf Tonscherben (Ostraka) und Papyrus.",
+        icon: "📜"
+      }
+    ],
     situation: {
       unterstufe: "In Edfu lagern riesige Berge von Getreide. Eine Dürrewelle in den Nachbardörfern treibt hungernde Familien vor die Mauern der Festung.",
       mittelstufe: "Die Kornkammern von Edfu sind prall gefüllt für den Hofstaat des Pharaos. Bauern aus verdorrten Nachbargaue bitten verzweifelt um Notsaatgut.",
@@ -243,6 +321,32 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Waset (Theben) – Das goldene Allerheiligste von Karnak",
       milestoneTitle: "Runde 4 [Weg der Götter]: Die Forderung des Amun-Klerus",
       imagePath: "/assets/thebes_karnak.jpg",
+      hotspots: [
+        {
+          id: "hs_karnak_amun",
+          x: 50,
+          y: 42,
+          label: "Das Allerheiligste von Amun-Re",
+          description: "Nur der Pharao und der Hohepriester durften den Schrein mit der goldenen Statue des Reichsgottes betreten.",
+          icon: "⚡"
+        },
+        {
+          id: "hs_karnak_saeulen",
+          x: 28,
+          y: 52,
+          label: "Monumentaler Säulensaal (Hypostyl)",
+          description: "Über 130 gigantische Papyrus-Säulen symbolisieren den Ursumpf der ägyptischen Schöpfungsgeschichte.",
+          icon: "🏛️"
+        },
+        {
+          id: "hs_karnak_opfer",
+          x: 74,
+          y: 68,
+          label: "Opfertische & Rauchfässer",
+          description: "Rinder, Gänse, Weihrauch und Lotosblüten werden täglich als Speiseopfer für die Götter dargebracht.",
+          icon: "🏺"
+        }
+      ],
       branchCondition: { requiredStatHigher: 'priester' },
       situation: {
         unterstufe: "Ihr erreicht die Tempelstadt Theben! Der Hohepriester empfängt dich im tiefsten Inneren des Tempels und verlangt einen gewaltigen Goldschatz als Tempelspende.",
@@ -2549,6 +2653,32 @@ const FIXED_END_STORY: RoundStory = {
   locationName: "Der Krönungssaal von Memphis & Gizeh",
   milestoneTitle: "Runde 20: DAS FINALE – DIE GROSSE KRÖNUNGSZEREMONIE",
   imagePath: "/assets/coronation.jpg",
+  hotspots: [
+    {
+      id: "hs_coronation_krone",
+      x: 50,
+      y: 36,
+      label: "Die Doppelkrone (Pschent)",
+      description: "Vereinigung der weißen oberägyptischen Hedjet-Krone mit der roten unterägyptischen Descheret-Krone als Symbol des geeinten Reiches.",
+      icon: "👑"
+    },
+    {
+      id: "hs_coronation_insignien",
+      x: 35,
+      y: 58,
+      label: "Krummstab (Heka) & Geißel (Nechaja)",
+      description: "Zeichen der Herrschergewalt: Der Krummstab als Hirte des Volkes, die Geißel zur Verteidigung und Zucht.",
+      icon: "🦯"
+    },
+    {
+      id: "hs_coronation_priester",
+      x: 72,
+      y: 62,
+      label: "Hohepriesterschaft & Salbungsöl",
+      description: "Die Kleriker vollziehen die rituelle Waschung mit heiligem Nilwasser und salben den Thronfolger mit edler Myrrhe.",
+      icon: "🏺"
+    }
+  ],
   situation: {
     unterstufe: "Der große Tag ist gekommen! Posaunen ertönen im ganzen Niltal. Du trittst vor den goldenen Thron. Volk, Priester, Adel und Götter blicken auf dich. Welches Thronversprechen gibst du der Welt?",
     mittelstufe: "Die Krönung zum Pharao von Ober- und Unterägypten: Nun wiegen deine Taten, deine Weisheit und deine Werte schwerer als alles andere. Wähle dein ewiges Regierungsmotto.",

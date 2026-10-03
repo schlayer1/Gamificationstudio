@@ -69,12 +69,8 @@ Regeln & Vorgaben:
    - oberstufe: ab Kl. 10 (anspruchsvoll, staatsphilosophisch, quellennah)
 6. Jede Runde enthält 4 Optionen (A, B, C, und die exklusive Option D, die 3 Spezialressourcen kostet).
 7. Jede Runde enthält ein didaktisches Lexikon ('lexiconEntry') mit Begriff, Erklärung und 'curiosityFact' ("💡 Hast du gewusst?").
-8. Antwort MUSS zwingend als valides JSON formatiert sein.
-   - mittelstufe: Kl. 7-9 (Fachbegriffe, ausgewogen, erste Grauzonen)
-   - oberstufe: ab Kl. 10 (anspruchsvoll, staatsphilosophisch, quellennah)
-6. Jede Runde enthält 4 Optionen (A, B, C, und die exklusive Option D, die 3 Spezialressourcen kostet).
-7. Jede Runde enthält ein didaktisches Lexikon ('lexiconEntry') mit Begriff, Erklärung und 'curiosityFact' ("💡 Hast du gewusst?").
-8. Antwort MUSS zwingend als valides JSON formatiert sein.
+8. Jede Runde enthält genau 3 bildpassende Entdecker-Hotspots ('hotspots') mit präzisen Prozent-Koordinaten (x: 0-100, y: 0-100), die reale Details des Bildes erklären (z.B. Architektur, Werkzeuge, Kleidung, Schriftzeichen, Göttersymbole).
+9. Antwort MUSS zwingend als valides JSON formatiert sein.
 `;
 
     const prompt = `
@@ -91,6 +87,32 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
       "locationName": "Name der Station 1",
       "milestoneTitle": "Runde 1: Titel",
       "imagePrompt": "${selectedStylePrompt} of [historische Szene], atmospheric lighting, educational game visual, 16:9 aspect ratio",
+      "hotspots": [
+        {
+          "id": "hs_1",
+          "x": 30,
+          "y": 65,
+          "label": "Detail im Vordergrund",
+          "description": "Historische Erklärung zu Werkzeugen oder Personen hier...",
+          "icon": "🔍"
+        },
+        {
+          "id": "hs_2",
+          "x": 60,
+          "y": 45,
+          "label": "Hauptarchitektur",
+          "description": "Historische Erklärung zum Monument...",
+          "icon": "🏛️"
+        },
+        {
+          "id": "hs_3",
+          "x": 50,
+          "y": 20,
+          "label": "Himmel & Sakrales",
+          "description": "Göttliche oder landschaftliche Bedeutung...",
+          "icon": "✨"
+        }
+      ],
       "situation": {
         "unterstufe": "Einführender Text für Unterstufe...",
         "mittelstufe": "Einführender Text für Mittelstufe...",

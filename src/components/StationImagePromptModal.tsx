@@ -15,8 +15,8 @@ import {
   HelpCircle,
 } from 'lucide-react';
 import { geminiRotationService } from '../services/geminiRotation';
-import { ArtStyleType } from '../types/game';
-import { Palette } from 'lucide-react';
+import { ArtStyleType, StationHotspot } from '../types/game';
+import { Palette, MapPin, Plus, Trash2 } from 'lucide-react';
 
 interface StationImagePromptModalProps {
   isOpen: boolean;
@@ -27,7 +27,9 @@ interface StationImagePromptModalProps {
   currentImage?: string;
   suggestedPrompt?: string;
   currentArtStyle?: ArtStyleType;
+  currentHotspots?: StationHotspot[];
   onSelectImage: (imageUrl: string) => void;
+  onUpdateHotspots?: (hotspots: StationHotspot[]) => void;
 }
 
 export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = ({
@@ -39,10 +41,12 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
   currentImage,
   suggestedPrompt: initialPrompt,
   currentArtStyle = 'pixel_art',
+  currentHotspots = [],
   onSelectImage,
+  onUpdateHotspots,
 }) => {
-  // Active Tab: 'prompt' (Generieren) | 'gallery' (Fertiger Pool)
-  const [activeTab, setActiveTab] = useState<'prompt' | 'gallery'>('prompt');
+  // Active Tab: 'prompt' (Generieren) | 'gallery' (Fertiger Pool) | 'hotspots' (Entdecker-Punkte Editor)
+  const [activeTab, setActiveTab] = useState<'prompt' | 'gallery' | 'hotspots'>('prompt');
   
   // Style Selector State
   const [selectedStyle, setSelectedStyle] = useState<ArtStyleType>(currentArtStyle);
@@ -98,6 +102,34 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
   const [isGeneratingImage, setIsGeneratingImage] = useState<boolean>(false);
   const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
   const [generationError, setGenerationError] = useState<string | null>(null);
+
+  // Hotspot Editor State
+  const [localHotspots, setLocalHotspots] = useState<StationHotspot[]>(
+    currentHotspots && currentHotspots.length > 0
+      ? currentHotspots
+      : [
+          {
+            id: 'hs1',
+            x: 30,
+            y: 60,
+            label: 'Detail im Vordergrund',
+            description: `Historische Besonderheit von ${locationName}.`,
+            icon: '🔍',
+          },
+          {
+            id: 'hs2',
+            x: 65,
+            y: 40,
+            label: 'Architektur & Bauwerk',
+            description: 'Bauweise und Bedeutung dieses Ortes im Alten Ägypten.',
+            icon: '🏛️',
+          },
+        ]
+  );
+  const [selectedHotspotId, setSelectedHotspotId] = useState<string>(
+    (currentHotspots && currentHotspots.length > 0 ? currentHotspots[0].id : 'hs1')
+  );
+  const [clickToPlaceMode, setClickToPlaceMode] = useState<boolean>(true);
 
   if (!isOpen) return null;
 
@@ -215,6 +247,21 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
           >
             <ImageIcon className="w-4 h-4 text-amber-400" />
             <span>Fertige Geschichts-Galerie ({PREDEFINED_HISTORY_ASSETS.length} Bilder)</span>
+          </button>
+
+          <button
+            onClick={() => {
+              soundFX.playClick();
+              setActiveTab('hotspots');
+            }}
+            className={`flex items-center gap-2 py-3 px-4 font-bold text-xs border-b-2 transition-all ${
+              activeTab === 'hotspots'
+                ? 'border-amber-400 text-amber-300 bg-amber-500/10'
+                : 'border-transparent text-stone-400 hover:text-stone-200'
+            }`}
+          >
+            <MapPin className="w-4 h-4 text-amber-400" />
+            <span>Entdecker-Punkte Editor ({localHotspots.length})</span>
           </button>
         </div>
 
@@ -455,6 +502,264 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
                   Keine Bilder für diese Suche gefunden.
                 </div>
               )}
+            </div>
+          )}
+
+          {/* TAB 3: VISUAL HOTSPOT PLACEMENT & CONTENT EDITOR */}
+          {activeTab === 'hotspots' && (
+            <div className="space-y-6 animate-fade-in">
+              <div className="p-4 rounded-xl bg-amber-950/40 border border-amber-600/40 space-y-2">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-bold text-amber-300">
+                    <MapPin className="w-4 h-4 text-amber-400" />
+                    <span>Interaktiver Entdecker-Punkte Editor: Klicke direkt ins Bild!</span>
+                  </div>
+                  <span className="text-[11px] font-mono text-amber-400 bg-black/60 px-2 py-0.5 rounded border border-amber-800/40">
+                    {localHotspots.length} Punkte aktiv
+                  </span>
+                </div>
+                <p className="text-xs text-stone-300 leading-relaxed">
+                  Klicke auf eine Stelle im Vorschaubild, um den ausgewählten Punkt dorthin zu bewegen. Die Koordinaten (X% und Y%) passen sich auf allen Geräten automatisch an!
+                </p>
+              </div>
+
+              {/* Interactive Visual Canvas / Image */}
+              <div className="relative w-full h-64 sm:h-80 rounded-2xl overflow-hidden border-2 border-amber-600/70 bg-stone-950 shadow-2xl select-none">
+                <img
+                  src={currentImage || "/assets/nile_banner.jpg"}
+                  alt={locationName}
+                  className="w-full h-full object-cover pointer-events-none"
+                />
+
+                {/* Click target overlay */}
+                <div
+                  className="absolute inset-0 cursor-crosshair"
+                  onClick={(e) => {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const clickX = Math.round(((e.clientX - rect.left) / rect.width) * 100);
+                    const clickY = Math.round(((e.clientY - rect.top) / rect.height) * 100);
+                    
+                    soundFX.playClick();
+                    setLocalHotspots(prev =>
+                      prev.map(hs =>
+                        hs.id === selectedHotspotId
+                          ? { ...hs, x: Math.max(5, Math.min(95, clickX)), y: Math.max(5, Math.min(95, clickY)) }
+                          : hs
+                      )
+                    );
+                  }}
+                >
+                  {/* Render all hotspots with visual highlight on selected */}
+                  {localHotspots.map((hs) => {
+                    const isSelected = hs.id === selectedHotspotId;
+                    return (
+                      <div
+                        key={hs.id}
+                        style={{ left: `${hs.x}%`, top: `${hs.y}%` }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          soundFX.playClick();
+                          setSelectedHotspotId(hs.id);
+                        }}
+                        className="absolute -translate-x-1/2 -translate-y-1/2 cursor-pointer z-10 group/marker"
+                      >
+                        {isSelected && (
+                          <span className="absolute -inset-2 rounded-full bg-amber-400/40 animate-ping pointer-events-none" />
+                        )}
+                        <span
+                          className={`flex items-center justify-center w-8 h-8 rounded-full border-2 shadow-2xl transition-all ${
+                            isSelected
+                              ? 'bg-amber-400 text-stone-950 border-white scale-125 ring-2 ring-amber-300'
+                              : 'bg-stone-950/90 text-amber-300 border-amber-400 hover:scale-110'
+                          }`}
+                        >
+                          <span className="text-xs">{hs.icon || '✨'}</span>
+                        </span>
+                        <span className="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 px-2 py-0.5 rounded bg-stone-950 border border-amber-500 text-[10px] font-bold text-amber-200 whitespace-nowrap shadow-lg pointer-events-none">
+                          {hs.label} ({hs.x}%, {hs.y}%)
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div className="absolute bottom-2 left-2 px-2.5 py-1 rounded-lg bg-black/80 backdrop-blur-md text-[10px] text-amber-300 font-mono border border-stone-800">
+                  🎯 Klicke ins Bild, um Punkt #{localHotspots.findIndex(h => h.id === selectedHotspotId) + 1} zu platzieren
+                </div>
+              </div>
+
+              {/* Hotspot List & Content Editor */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {/* List of Hotspots on Left */}
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs text-stone-300 font-bold mb-1">
+                    <span>Punkte dieser Station:</span>
+                    {localHotspots.length < 5 && (
+                      <button
+                        type="button"
+                        onClick={() => {
+                          soundFX.playClick();
+                          const newId = `hs_${Date.now()}`;
+                          const newPoint: StationHotspot = {
+                            id: newId,
+                            x: 50,
+                            y: 50,
+                            label: 'Neues Entdecker-Detail',
+                            description: 'Erkläre hier ein didaktisches Detail zum Bild.',
+                            icon: '🔍',
+                          };
+                          setLocalHotspots([...localHotspots, newPoint]);
+                          setSelectedHotspotId(newId);
+                        }}
+                        className="flex items-center gap-1 text-[11px] text-amber-400 hover:text-amber-300 font-bold"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                        <span>Punkt +</span>
+                      </button>
+                    )}
+                  </div>
+
+                  {localHotspots.map((hs, idx) => {
+                    const isSelected = hs.id === selectedHotspotId;
+                    return (
+                      <div
+                        key={hs.id}
+                        onClick={() => {
+                          soundFX.playClick();
+                          setSelectedHotspotId(hs.id);
+                        }}
+                        className={`p-3 rounded-xl border cursor-pointer transition-all flex items-center justify-between ${
+                          isSelected
+                            ? 'bg-amber-950/80 border-amber-400 ring-1 ring-amber-400'
+                            : 'bg-stone-900 border-stone-800 hover:border-amber-700/60'
+                        }`}
+                      >
+                        <div className="flex items-center gap-2.5 overflow-hidden">
+                          <span className="text-base">{hs.icon || '✨'}</span>
+                          <div className="truncate">
+                            <span className="text-xs font-bold text-amber-200 block truncate">
+                              #{idx + 1}: {hs.label}
+                            </span>
+                            <span className="text-[10px] font-mono text-stone-400">
+                              Pos: {hs.x}% / {hs.y}%
+                            </span>
+                          </div>
+                        </div>
+
+                        {localHotspots.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              soundFX.playClick();
+                              const filtered = localHotspots.filter(h => h.id !== hs.id);
+                              setLocalHotspots(filtered);
+                              if (selectedHotspotId === hs.id && filtered.length > 0) {
+                                setSelectedHotspotId(filtered[0].id);
+                              }
+                            }}
+                            className="p-1 rounded text-stone-500 hover:text-red-400 hover:bg-stone-800 transition-colors"
+                            title="Punkt löschen"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Selected Hotspot Detail Form on Right (2 Cols) */}
+                <div className="md:col-span-2 p-4 rounded-xl bg-stone-900 border border-stone-800 space-y-3">
+                  {(() => {
+                    const activeHs = localHotspots.find(h => h.id === selectedHotspotId) || localHotspots[0];
+                    if (!activeHs) return null;
+
+                    return (
+                      <>
+                        <div className="flex items-center justify-between border-b border-stone-800 pb-2">
+                          <span className="text-xs font-bold text-amber-300 flex items-center gap-2">
+                            <span>Punkt-Inhalt bearbeiten:</span>
+                            <span className="font-mono text-[11px] text-stone-400">
+                              (X: {activeHs.x}%, Y: {activeHs.y}%)
+                            </span>
+                          </span>
+
+                          <div className="flex gap-1.5">
+                            {['🔍', '🏛️', '⚡', '👥', '⛏️', '📜', '🌾', '🐊', '👑', '🏺'].map((emoji) => (
+                              <button
+                                key={emoji}
+                                type="button"
+                                onClick={() => {
+                                  soundFX.playClick();
+                                  setLocalHotspots(prev =>
+                                    prev.map(h => h.id === activeHs.id ? { ...h, icon: emoji } : h)
+                                  );
+                                }}
+                                className={`w-6 h-6 rounded flex items-center justify-center text-xs transition-transform ${
+                                  activeHs.icon === emoji ? 'bg-amber-500 scale-110' : 'bg-stone-800 hover:bg-stone-700'
+                                }`}
+                              >
+                                {emoji}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="text-[11px] text-stone-400 block mb-1 font-medium">
+                            Titel des Erkundungs-Markers (z.B. "Holzkeil-Spalttechnik"):
+                          </label>
+                          <input
+                            type="text"
+                            value={activeHs.label}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setLocalHotspots(prev =>
+                                prev.map(h => h.id === activeHs.id ? { ...h, label: val } : h)
+                              );
+                            }}
+                            className="w-full px-3 py-2 rounded-lg bg-stone-950 border border-stone-800 text-xs text-stone-200 focus:outline-none focus:ring-1 focus:ring-amber-500 font-bold"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="text-[11px] text-stone-400 block mb-1 font-medium">
+                            Didaktische Erklärung / Zeitzeugen-Text bei Klick:
+                          </label>
+                          <textarea
+                            rows={3}
+                            value={activeHs.description}
+                            onChange={(e) => {
+                              const val = e.target.value;
+                              setLocalHotspots(prev =>
+                                prev.map(h => h.id === activeHs.id ? { ...h, description: val } : h)
+                              );
+                            }}
+                            className="w-full px-3 py-2 rounded-lg bg-stone-950 border border-stone-800 text-xs text-stone-200 focus:outline-none focus:ring-1 focus:ring-amber-500 resize-none font-sans leading-relaxed"
+                          />
+                        </div>
+
+                        {onUpdateHotspots && (
+                          <div className="pt-2 flex justify-end">
+                            <button
+                              type="button"
+                              onClick={() => {
+                                soundFX.playBlessing();
+                                onUpdateHotspots(localHotspots);
+                                onClose();
+                              }}
+                              className="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 text-xs font-bold transition-all shadow-md cursor-pointer"
+                            >
+                              Entdecker-Punkte für Station speichern
+                            </button>
+                          </div>
+                        )}
+                      </>
+                    );
+                  })()}
+                </div>
+              </div>
             </div>
           )}
         </div>
