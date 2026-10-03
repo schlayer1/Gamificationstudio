@@ -7,6 +7,7 @@ interface ExpeditionProgressBarProps {
   totalRounds: number;
   locationName: string;
   theme?: EraThemeConfig;
+  onOpenMap?: () => void;
 }
 
 export const ExpeditionProgressBar: React.FC<ExpeditionProgressBarProps> = ({
@@ -14,6 +15,7 @@ export const ExpeditionProgressBar: React.FC<ExpeditionProgressBarProps> = ({
   totalRounds,
   locationName,
   theme,
+  onOpenMap,
 }) => {
   const progressPercent = Math.min(100, Math.max(0, Math.round(((round - 1) / (totalRounds - 1 || 1)) * 100)));
 
@@ -32,17 +34,29 @@ export const ExpeditionProgressBar: React.FC<ExpeditionProgressBarProps> = ({
 
   return (
     <div className="w-full px-4 py-2.5 rounded-2xl bg-stone-950/90 border border-stone-800 shadow-xl backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-3">
-      {/* Left: Station info badge */}
+      {/* Left: Station info badge + optional Map Toggle */}
       <div className="flex items-center gap-2.5 shrink-0">
-        <span className="flex items-center justify-center w-7 h-7 rounded-xl bg-stone-900 border border-stone-800 text-stone-200">
-          <Compass className="w-3.5 h-3.5 text-amber-400 animate-spin-slow" />
-        </span>
+        <button
+          onClick={onOpenMap}
+          className="flex items-center justify-center w-7 h-7 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-800 hover:border-amber-500/50 text-stone-200 transition-all cursor-pointer group"
+          title="Expeditionskarte öffnen (🗺️)"
+        >
+          <Compass className="w-3.5 h-3.5 text-amber-400 group-hover:scale-110 transition-transform animate-spin-slow" />
+        </button>
         <div className="leading-tight">
           <div className="flex items-center gap-1.5">
             <span className={`text-[11px] font-mono font-bold ${badgeText}`}>
               Station {round} von {totalRounds}
             </span>
             <span className="text-[10px] text-stone-500 font-mono">({progressPercent}%)</span>
+            {onOpenMap && (
+              <button
+                onClick={onOpenMap}
+                className="text-[10px] px-1.5 py-0.5 rounded bg-stone-900 hover:bg-stone-800 border border-stone-800 text-stone-400 hover:text-amber-300 transition-colors ml-1 cursor-pointer"
+              >
+                🗺️ Karte
+              </button>
+            )}
           </div>
           <span className="text-xs text-stone-300 font-medium truncate max-w-[200px] sm:max-w-xs block">
             {locationName}

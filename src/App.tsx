@@ -10,6 +10,7 @@ import { GameOverScreen } from './components/GameOverScreen';
 import { TeacherStudio } from './components/TeacherStudio';
 import { StationImagePromptModal } from './components/StationImagePromptModal';
 import { StationHeroStage } from './components/StationHeroStage';
+import { ExpeditionMapModal } from './components/ExpeditionMapModal';
 import { soundFX } from './utils/sound';
 import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon } from 'lucide-react';
 import { detectEraTheme, ERA_THEMES } from './utils/themeManager';
@@ -55,6 +56,7 @@ export const App: React.FC = () => {
   // Logs & History for the Lexicon
   const [logs, setLogs] = useState<GameLogEntry[]>([]);
   const [isLexiconOpen, setIsLexiconOpen] = useState<boolean>(false);
+  const [isMapOpen, setIsMapOpen] = useState<boolean>(false);
 
   // Station Image Modal & Custom Images Map (roundIndex -> imageUrl)
   const [isImageModalOpen, setIsImageModalOpen] = useState<boolean>(false);
@@ -233,10 +235,12 @@ export const App: React.FC = () => {
       statChanges: choice.statChanges,
     });
 
-    // Visual Stage Reaction FX
+    // Visual & Acoustic Reaction FX
     if (choice.id === 'D') {
       setLastReactionType('divine');
+      soundFX.playBlessing();
     } else {
+      soundFX.playSealStamp();
       const hasMajorDrop = Object.values(choice.statChanges).some((v) => typeof v === 'number' && v < -5);
       setLastReactionType(hasMajorDrop ? 'negative' : 'positive');
     }
@@ -246,8 +250,14 @@ export const App: React.FC = () => {
     if (currentRoundIndex + 1 >= totalRounds) {
       setGameState('ending');
     } else {
+      const nextRound = currentRoundIndex + 2;
+      // Play triumphant milestone fanfare at 25%, 50%, 75%
+      if (nextRound === 6 || nextRound === 11 || nextRound === 16) {
+        soundFX.playMilestone();
+      } else {
+        soundFX.playSailing();
+      }
       setCurrentRoundIndex((prev) => prev + 1);
-      soundFX.playSailing();
     }
   };
 
@@ -294,6 +304,7 @@ export const App: React.FC = () => {
           profile={profile}
           stats={stats}
           skills={skills}
+          theme={currentTheme}
           onRestart={handleRestart}
         />
       )}
@@ -325,12 +336,13 @@ export const App: React.FC = () => {
               </div>
             )}
 
-            {/* Sleek Cinematic Journey Progress Rail (Schlanke Stations-Fortschrittsleiste) */}
+            {/* Sleek Cinematic Journey Progress Rail with Map Button */}
             <ExpeditionProgressBar
               round={currentStory.roundNumber}
               totalRounds={totalRounds}
               locationName={currentStory.locationName}
               theme={currentTheme}
+              onOpenMap={() => setIsMapOpen(true)}
             />
 
             {/* PROMINENT STATION HERO STAGE: Panoramic 16:9 Illustration with Interactive Hotspots & Visual Reaction FX */}
@@ -535,6 +547,25 @@ export const App: React.FC = () => {
             onClose={() => setIsLexiconOpen(false)}
             logs={logs}
             gradeLevel={profile.gradeLevel}
+          />
+
+          {/* Collapsible Interactive Expedition Map Modal */}
+          <ExpeditionMapModal
+            isOpen={isMapOpen}
+            onClose={() => setIsMapOpen(false)}
+            stations={Array.from({ length: totalRounds }).map((_, idx) => {
+              const rStory = activeGameDefinition?.rounds?.[idx] || getStoryForRound(idx + 1, stats, skills);
+              return {
+                roundNumber: idx + 1,
+                locationName: rStory.locationName,
+                milestoneTitle: rStory.milestoneTitle,
+                completed: idx < currentRoundIndex,
+                current: idx === currentRoundIndex,
+              };
+            })}
+            currentRound={currentStory.roundNumber}
+            totalRounds={totalRounds}
+            theme={currentTheme}
           />
         </>
       )}

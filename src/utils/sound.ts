@@ -156,6 +156,99 @@ class SoundFX {
     osc.stop(this.ctx.currentTime + 0.75);
   }
 
+  // Dice / Wooden Roll Sound (Klopfen & Rollen)
+  playDiceRoll() {
+    if (!this.soundEnabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const clicks = [0, 0.06, 0.13, 0.22, 0.32];
+    clicks.forEach((timeOffset, idx) => {
+      const osc = this.ctx!.createOscillator();
+      const gain = this.ctx!.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(220 + (idx * 45), this.ctx!.currentTime + timeOffset);
+      osc.frequency.exponentialRampToValueAtTime(110, this.ctx!.currentTime + timeOffset + 0.04);
+
+      gain.gain.setValueAtTime(0.12 - (idx * 0.015), this.ctx!.currentTime + timeOffset);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx!.currentTime + timeOffset + 0.04);
+
+      osc.connect(gain);
+      gain.connect(this.ctx!.destination);
+
+      osc.start(this.ctx!.currentTime + timeOffset);
+      osc.stop(this.ctx!.currentTime + timeOffset + 0.05);
+    });
+  }
+
+  // Wax / Royal Seal Stamp (Kräftiges Siegel auf Papyrus / Pergament)
+  playSealStamp() {
+    if (!this.soundEnabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    // Deep thud
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(140, this.ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(45, this.ctx.currentTime + 0.15);
+
+    gain.gain.setValueAtTime(0.25, this.ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.18);
+
+    osc.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc.start();
+    osc.stop(this.ctx.currentTime + 0.2);
+
+    // High papyrus parchment snap
+    const snapOsc = this.ctx.createOscillator();
+    const snapGain = this.ctx.createGain();
+
+    snapOsc.type = 'triangle';
+    snapOsc.frequency.setValueAtTime(900, this.ctx.currentTime + 0.02);
+    snapOsc.frequency.exponentialRampToValueAtTime(300, this.ctx.currentTime + 0.07);
+
+    snapGain.gain.setValueAtTime(0.08, this.ctx.currentTime + 0.02);
+    snapGain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.07);
+
+    snapOsc.connect(snapGain);
+    snapGain.connect(this.ctx.destination);
+
+    snapOsc.start(this.ctx.currentTime + 0.02);
+    snapOsc.stop(this.ctx.currentTime + 0.08);
+  }
+
+  // Milestone / Etappe erreicht Chime (Sonnenglocke / Fanfare)
+  playMilestone() {
+    if (!this.soundEnabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6
+    notes.forEach((freq, idx) => {
+      const osc = this.ctx!.createOscillator();
+      const gain = this.ctx!.createGain();
+
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, this.ctx!.currentTime + idx * 0.09);
+
+      gain.gain.setValueAtTime(0.001, this.ctx!.currentTime + idx * 0.09);
+      gain.gain.linearRampToValueAtTime(0.12, this.ctx!.currentTime + idx * 0.09 + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx!.currentTime + idx * 0.09 + 0.6);
+
+      osc.connect(gain);
+      gain.connect(this.ctx!.destination);
+
+      osc.start(this.ctx!.currentTime + idx * 0.09);
+      osc.stop(this.ctx!.currentTime + idx * 0.09 + 0.65);
+    });
+  }
+
   // Coronation fanfare (Royal victory)
   playCoronation() {
     if (!this.soundEnabled) return;

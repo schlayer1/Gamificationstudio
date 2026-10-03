@@ -38,18 +38,27 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Print Styles for Certificate & Diploma Export */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-only-sheet {
+    display: block !important;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 2.5cm;
+    background: #ffffff;
+    box-sizing: border-box;
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
 }
-::-webkit-scrollbar-track {
-  background: #1e1711;
-}
-::-webkit-scrollbar-thumb {
-  background: #785226;
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #d97706;
-}
+
