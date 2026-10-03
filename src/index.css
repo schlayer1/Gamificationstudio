@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-amber-950/20 text-stone-100 min-h-screen font-sans selection:bg-amber-500 selection:text-amber-950;
+    background-color: #120d09;
+    background-image: radial-gradient(#271d15 1px, transparent 1px), radial-gradient(#271d15 1px, #120d09 1px);
+    background-size: 40px 40px;
+    background-position: 0 0, 20px 20px;
+  }
+}
+
+/* Retro Pixel Font Simulation & Egyptian Glyphs look */
+@font-face {
+  font-family: 'Cinzel Decorative';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Cinzel Decorative'), local('Georgia');
+}
+
+.papyrus-card {
+  background: linear-gradient(135deg, #f7ebd2 0%, #e8d3aa 50%, #dfc38d 100%);
+  color: #2c1a0e;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(139, 87, 42, 0.2);
+  border: 2px solid #b8860b;
+}
+
+.papyrus-dark {
+  background: linear-gradient(135deg, #2a1f17 0%, #1c140e 100%);
+  border: 1px solid #785226;
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fef08a 0%, #eab308 50%, #ca8a04 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1e1711;
+}
+::-webkit-scrollbar-thumb {
+  background: #785226;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #d97706;
+}

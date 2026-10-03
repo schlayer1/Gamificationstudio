@@ -1,0 +1,210 @@
+import React from 'react';
+import { Stats, Skills, PlayerProfile } from '../types/game';
+import { Zap, Heart, ShieldAlert, Users, Sparkles, BookOpen, Volume2, VolumeX, Shield, Award, Sword } from 'lucide-react';
+import { soundFX } from '../utils/sound';
+
+interface DashboardHeaderProps {
+  profile: PlayerProfile;
+  stats: Stats;
+  skills: Skills;
+  round: number;
+  totalRounds: number;
+  graceUsed: boolean;
+  soundEnabled: boolean;
+  onToggleSound: () => void;
+  onOpenLexicon: () => void;
+  onOpenStudio?: () => void;
+}
+
+export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
+  profile,
+  stats,
+  skills,
+  round,
+  totalRounds,
+  graceUsed,
+  soundEnabled,
+  onToggleSound,
+  onOpenLexicon,
+  onOpenStudio,
+}) => {
+  // Stat Bar helper with color coding
+  const renderStatBar = (
+    label: string,
+    value: number,
+    icon: React.ReactNode,
+    colorClass: string,
+    badgeColor: string
+  ) => {
+    const isCritical = value <= 15;
+    return (
+      <div className={`flex flex-col p-2.5 rounded-lg border transition-all ${
+        isCritical 
+          ? 'bg-red-950/40 border-red-500/80 animate-pulse' 
+          : 'bg-stone-900/80 border-amber-800/40'
+      }`}>
+        <div className="flex items-center justify-between text-xs font-semibold mb-1">
+          <span className="flex items-center gap-1.5 text-stone-200">
+            {icon}
+            {label}
+          </span>
+          <span className={`px-1.5 py-0.5 rounded text-[11px] font-bold ${badgeColor}`}>
+            {value}%
+          </span>
+        </div>
+        <div className="w-full h-2.5 bg-stone-950 rounded-full overflow-hidden border border-stone-800">
+          <div
+            className={`h-full transition-all duration-500 rounded-full ${colorClass}`}
+            style={{ width: `${Math.min(100, Math.max(0, value))}%` }}
+          />
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <header className="w-full bg-stone-950/90 border-b border-amber-700/50 p-3 sm:p-4 sticky top-0 z-40 backdrop-blur-md shadow-xl">
+      <div className="max-w-[2100px] mx-auto flex flex-col gap-3">
+        {/* Top line: Player title, round indicator & quick tools */}
+        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-800/80 pb-2">
+          <div className="flex items-center gap-2.5">
+            <span className="text-2xl select-none" role="img" aria-label="Krone">👑</span>
+            <div>
+              <div className="flex items-center gap-2">
+                <h1 className="text-base sm:text-lg font-bold text-amber-300 tracking-wide font-serif m-0">
+                  {profile.throneName}
+                </h1>
+                <span className="text-[11px] px-2 py-0.5 rounded-full bg-amber-900/60 border border-amber-600/50 text-amber-200 uppercase font-mono">
+                  {profile.gradeLevel === 'unterstufe' ? 'Klasse 5–6' : profile.gradeLevel === 'mittelstufe' ? 'Klasse 7–9' : 'Oberstufe 10+'}
+                </span>
+              </div>
+              <p className="text-xs text-stone-400">
+                Reiseabschnitt: <strong className="text-amber-400">Runde {round} von {totalRounds}</strong>
+              </p>
+            </div>
+          </div>
+
+          {/* Controls: Audio, Lexicon, Grace Indicator */}
+          <div className="flex items-center gap-2">
+            {/* Grace Status Badge */}
+            <div
+              className={`flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md border ${
+                graceUsed
+                  ? 'bg-stone-900 text-stone-500 border-stone-700 line-through'
+                  : 'bg-emerald-950/70 border-emerald-500/60 text-emerald-300'
+              }`}
+              title={graceUsed ? "Gnadenfrist bereits verbraucht" : "Gnadenfrist bereit: Rettet dich einmalig bei 0%!"}
+            >
+              <Shield className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Gnadenfrist:</span>
+              <span className="font-bold">{graceUsed ? 'Erloschen' : 'Aktiv (1x)'}</span>
+            </div>
+
+            {/* Studio / Lehrermodus Button */}
+            <button
+              onClick={() => {
+                soundFX.playClick();
+                onOpenStudio && onOpenStudio();
+              }}
+              className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md bg-stone-900 border border-amber-500/70 text-amber-300 hover:bg-stone-800 transition-all cursor-pointer"
+              title="Lehrer-Studio öffnen"
+            >
+              <span>🧙‍♂️</span>
+              <span className="hidden md:inline font-bold">Lehrer-Studio</span>
+            </button>
+
+            {/* Lexicon / Archiv Button */}
+            <button
+              onClick={() => {
+                soundFX.playClick();
+                onOpenLexicon();
+              }}
+              className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md bg-amber-950/60 border border-amber-600/60 text-amber-300 hover:bg-amber-900/70 active:scale-95 transition-all"
+            >
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Papyrus-Archiv</span>
+            </button>
+
+            {/* Sound Toggle */}
+            <button
+              onClick={onToggleSound}
+              className={`p-1.5 rounded-md border transition-all ${
+                soundEnabled
+                  ? 'bg-amber-950/80 border-amber-600/80 text-amber-300 hover:bg-amber-900'
+                  : 'bg-stone-900 border-stone-700 text-stone-500'
+              }`}
+              title={soundEnabled ? "Audio stummschalten" : "Audio aktivieren"}
+            >
+              {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Core Stats Row: Götter, Priester, Adel, Volk & EP */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
+          {renderStatBar(
+            'Götter ⚡',
+            stats.goetter,
+            <Zap className="w-3.5 h-3.5 text-yellow-400" />,
+            'bg-gradient-to-r from-yellow-600 to-amber-400',
+            stats.goetter <= 15 ? 'bg-red-500 text-white' : 'bg-yellow-950 text-yellow-300'
+          )}
+          {renderStatBar(
+            'Priester 🙏',
+            stats.priester,
+            <Sparkles className="w-3.5 h-3.5 text-purple-400" />,
+            'bg-gradient-to-r from-purple-700 to-indigo-400',
+            stats.priester <= 15 ? 'bg-red-500 text-white' : 'bg-purple-950 text-purple-300'
+          )}
+          {renderStatBar(
+            'Adel 👑',
+            stats.adel,
+            <Award className="w-3.5 h-3.5 text-blue-400" />,
+            'bg-gradient-to-r from-blue-700 to-cyan-400',
+            stats.adel <= 15 ? 'bg-red-500 text-white' : 'bg-blue-950 text-blue-300'
+          )}
+          {renderStatBar(
+            'Volk 😊',
+            stats.volk,
+            <Heart className="w-3.5 h-3.5 text-emerald-400" />,
+            'bg-gradient-to-r from-emerald-600 to-green-400',
+            stats.volk <= 15 ? 'bg-red-500 text-white' : 'bg-emerald-950 text-emerald-300'
+          )}
+
+          {/* EP Brain Box */}
+          <div className="col-span-2 sm:col-span-1 flex items-center justify-between p-2.5 rounded-lg bg-gradient-to-br from-amber-950 to-stone-900 border border-amber-500/70 shadow-inner">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">🧠</span>
+              <div>
+                <span className="text-[11px] block uppercase text-amber-300 font-bold">Erfahrungspunkte</span>
+                <span className="text-xs text-stone-400">Schaltet Option D frei (3 EP)</span>
+              </div>
+            </div>
+            <div className="flex items-center justify-center px-3 py-1 rounded-md bg-amber-500/20 border border-amber-400 text-amber-300 font-extrabold text-base">
+              {stats.ep} EP
+            </div>
+          </div>
+        </div>
+
+        {/* Secondary Skill Ribbons: Auserwähltheit, Politik, Militär */}
+        <div className="flex flex-wrap items-center gap-3 text-xs bg-stone-900/60 px-3 py-1.5 rounded-md border border-stone-800">
+          <span className="text-stone-400 font-medium">Königliche Talente:</span>
+          <span className="flex items-center gap-1 text-amber-300">
+            <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
+            Göttliche Auserwähltheit: <strong>{skills.goettlicheAuserwaehltheit}</strong>
+          </span>
+          <span className="text-stone-600">•</span>
+          <span className="flex items-center gap-1 text-cyan-300">
+            <Users className="w-3.5 h-3.5 text-cyan-400" />
+            Politische Geschicklichkeit: <strong>{skills.politischeGeschicklichkeit}</strong>
+          </span>
+          <span className="text-stone-600">•</span>
+          <span className="flex items-center gap-1 text-red-300">
+            <Sword className="w-3.5 h-3.5 text-red-400" />
+            Militärische Stärke: <strong>{skills.militaerischeStaerke}</strong>
+          </span>
+        </div>
+      </div>
+    </header>
+  );
+};
