@@ -21,6 +21,8 @@ export interface EraThemeConfig {
   primaryButton: string;
   titleGradient: string;
   icon: string;
+  vehicleIcon: string; // Thematic expedition icon (e.g. ⛵ Nilbarke, 🛒 Planwagen/Karren, 🐎 Streitwagen)
+  destinationLabel: string; // Thematic finish label (e.g. 'Ziel: Krönung', 'Ziel: Wartburg')
 }
 
 export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
@@ -39,6 +41,8 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     primaryButton: 'bg-gradient-to-r from-amber-600 to-yellow-600 hover:from-amber-500 hover:to-yellow-500 text-stone-950',
     titleGradient: 'from-amber-200 via-amber-400 to-yellow-500',
     icon: '🏛️',
+    vehicleIcon: '⛵',
+    destinationLabel: 'Ziel: Gizeh & Krönung',
   },
   rome_imperial: {
     id: 'rome_imperial',
@@ -55,6 +59,8 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     primaryButton: 'bg-gradient-to-r from-rose-700 to-red-600 hover:from-rose-600 hover:to-red-500 text-rose-50',
     titleGradient: 'from-rose-200 via-rose-400 to-amber-300',
     icon: '🦅',
+    vehicleIcon: '🐎',
+    destinationLabel: 'Ziel: Triumph & Kapitol',
   },
   luther_ink: {
     id: 'luther_ink',
@@ -71,6 +77,8 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     primaryButton: 'bg-gradient-to-r from-orange-700 to-amber-700 hover:from-orange-600 hover:to-amber-600 text-amber-100',
     titleGradient: 'from-orange-200 via-amber-300 to-yellow-500',
     icon: '📜',
+    vehicleIcon: '🛒',
+    destinationLabel: 'Ziel: Wartburg & Bibel',
   },
   stoneage_earth: {
     id: 'stoneage_earth',
@@ -87,6 +95,8 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     primaryButton: 'bg-gradient-to-r from-emerald-700 to-teal-700 hover:from-emerald-600 hover:to-teal-600 text-emerald-100',
     titleGradient: 'from-emerald-200 via-green-400 to-amber-300',
     icon: '🪨',
+    vehicleIcon: '👣',
+    destinationLabel: 'Ziel: Erste Siedlung',
   },
   greece_aegean: {
     id: 'greece_aegean',
@@ -103,6 +113,8 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     primaryButton: 'bg-gradient-to-r from-cyan-700 to-sky-600 hover:from-cyan-600 hover:to-sky-500 text-cyan-50',
     titleGradient: 'from-cyan-200 via-sky-300 to-amber-300',
     icon: '⚡',
+    vehicleIcon: '🏇',
+    destinationLabel: 'Ziel: Alexander-Reich',
   },
   mythology_rune: {
     id: 'mythology_rune',
@@ -119,6 +131,8 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     primaryButton: 'bg-gradient-to-r from-teal-700 to-emerald-600 hover:from-teal-600 hover:to-emerald-500 text-teal-100',
     titleGradient: 'from-teal-200 via-emerald-300 to-yellow-300',
     icon: '🌲',
+    vehicleIcon: '⚔️',
+    destinationLabel: 'Ziel: Heiliger Hain / Walhall',
   },
 };
 

@@ -61,13 +61,15 @@ export const ExpeditionProgressBar: React.FC<ExpeditionProgressBarProps> = ({
             />
           </div>
 
-          {/* Traveling Marker Icon (Mini Sail / Banner) positioned along the track */}
+          {/* Traveling Marker Icon (Thematic Vehicle / Avatar pin) */}
           <div
-            style={{ left: `calc(${progressPercent}% - 10px)` }}
-            className="absolute top-1/2 -translate-y-1/2 w-5 h-5 rounded-full bg-stone-950 border-2 border-amber-400 flex items-center justify-center shadow-lg transition-all duration-700 z-10"
+            style={{ left: `calc(${progressPercent}% - 12px)` }}
+            className={`absolute top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-stone-950 border-2 ${badgeBorder} flex items-center justify-center shadow-lg transition-all duration-700 z-10 hover:scale-110`}
             title={`Aktueller Fortschritt: ${progressPercent}%`}
           >
-            <span className="text-[9px]">⛵</span>
+            <span className="text-[11px] select-none leading-none">
+              {theme?.vehicleIcon || '⛵'}
+            </span>
           </div>
         </div>
 
@@ -76,7 +78,7 @@ export const ExpeditionProgressBar: React.FC<ExpeditionProgressBarProps> = ({
           {milestoneRounds.map((m) => (
             <span
               key={m.pct}
-              className={progressPercent >= m.pct ? 'text-amber-400/80 font-bold' : 'text-stone-600'}
+              className={progressPercent >= m.pct ? `${badgeText} font-bold` : 'text-stone-600'}
             >
               {m.label}
             </span>
@@ -85,9 +87,9 @@ export const ExpeditionProgressBar: React.FC<ExpeditionProgressBarProps> = ({
       </div>
 
       {/* Right: Target finish marker */}
-      <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-stone-900/80 border border-stone-800 text-[11px] text-stone-400 shrink-0 font-mono">
-        <Flag className="w-3 h-3 text-amber-500" />
-        <span>Ziel: Krönung</span>
+      <div className={`hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-stone-900/80 border ${badgeBorder} text-[11px] ${badgeText} shrink-0 font-mono shadow-sm`}>
+        <Flag className="w-3 h-3" />
+        <span>{theme?.destinationLabel || 'Ziel: Finale'}</span>
       </div>
     </div>
   );
