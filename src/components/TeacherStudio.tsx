@@ -19,7 +19,10 @@ import {
   FileCode,
   Download,
   Upload,
-  Play
+  Play,
+  FileText,
+  Image,
+  X
 } from 'lucide-react';
 
 interface TeacherStudioProps {
@@ -62,6 +65,13 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     skill2: selectedTemplate.skills.skill2,
     skill3: selectedTemplate.skills.skill3,
   });
+
+  // Game Customization (Rounds, Reflection, Source Material, Scanned Textbook Photo)
+  const [roundCount, setRoundCount] = useState<number>(20);
+  const [reflectionInterval, setReflectionInterval] = useState<number>(5);
+  const [sourceMaterialText, setSourceMaterialText] = useState<string>('');
+  const [imageAttachment, setImageAttachment] = useState<{ mimeType: string; base64: string } | null>(null);
+  const [imageFileName, setImageFileName] = useState<string>('');
 
   // Generator Process State
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
@@ -117,6 +127,37 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     soundFX.playClick();
   };
 
+  // Handle textbook image upload to base64
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      setErrorNotice("Bitte lade eine Bilddatei hoch (z.B. JPG oder PNG).");
+      return;
+    }
+
+    setImageFileName(file.name);
+    soundFX.playClick();
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      const base64Data = result.split(',')[1];
+      setImageAttachment({
+        mimeType: file.type,
+        base64: base64Data,
+      });
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleRemoveImage = () => {
+    setImageAttachment(null);
+    setImageFileName('');
+    soundFX.playClick();
+  };
+
   // Launch AI Generation
   const handleGenerateGame = async () => {
     soundFX.playBlessing();
@@ -125,13 +166,17 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     setGenerationProgress("Verbinde mit Gemini AI (Schlüssel-Rotation aktiv)...");
 
     try {
-      setGenerationProgress("Generiere Stationen, didaktische Dilemmata und historische Lexikoneinträge...");
+      setGenerationProgress(`Generiere ${roundCount} didaktische Stationen, Dilemmata und Quellenlexikon...`);
       const newGame = await gameGeneratorService.generateFullGame({
         title: customTitle,
         era: customEra,
         archetype: selectedTemplate.archetype,
         targetGrades,
+        roundCount,
+        reflectionInterval,
         coreTopics,
+        sourceMaterialText: sourceMaterialText.trim() || undefined,
+        imageAttachment: imageAttachment || undefined,
         pillars,
         specialResourceName,
         specialResourceEmoji,
@@ -329,6 +374,150 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         </div>
       </div>
 
+      {/* STEP 2b: Game Length & Reflection Intervals */}
+      <div className="papyrus-dark p-6 rounded-2xl border border-amber-700/60 space-y-4 shadow-xl">
+        <div className="space-y-1">
+          <h2 className="text-base font-bold text-amber-200 font-serif flex items-center gap-2">
+            <span>Schritt 2b:</span> Spieldauer & Reflexions-Intervalle festlegen
+          </h2>
+          <p className="text-xs text-stone-300">
+            Passe die Rundenzahl an deine Unterrichtsstunde (z.B. 10 Runden für 45 Min., 20 Runden für Doppelstunde) an.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+          {/* Round count slider */}
+          <div className="p-4 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-stone-300 font-medium">Anzahl der Spielrunden:</span>
+              <span className="font-mono font-bold text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded-lg border border-amber-700/60 text-sm">
+                {roundCount} Runden
+              </span>
+            </div>
+            <input
+              type="range"
+              min={5}
+              max={26}
+              value={roundCount}
+              onChange={(e) => setRoundCount(parseInt(e.target.value, 10))}
+              className="w-full accent-amber-500 cursor-pointer"
+            />
+            <div className="flex justify-between text-[10px] text-stone-500 font-mono">
+              <span>5 (Schnellrunde)</span>
+              <span>10–15 (Einzelstunde)</span>
+              <span>20 (Standard)</span>
+              <span>26 (Projekt)</span>
+            </div>
+          </div>
+
+          {/* Reflection interval selector */}
+          <div className="p-4 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2">
+            <div className="flex items-center justify-between text-xs">
+              <span className="text-stone-300 font-medium">Reflexions- & Hefterphase:</span>
+              <span className="font-mono font-bold text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded-lg border border-amber-700/60 text-sm">
+                alle {reflectionInterval} Runden
+              </span>
+            </div>
+            <div className="grid grid-cols-3 gap-2 pt-1">
+              {[3, 4, 5].map((interval) => (
+                <button
+                  key={interval}
+                  type="button"
+                  onClick={() => {
+                    soundFX.playClick();
+                    setReflectionInterval(interval);
+                  }}
+                  className={`py-2 px-3 rounded-lg text-xs font-bold transition-all ${
+                    reflectionInterval === interval
+                      ? 'bg-amber-600 text-stone-950 shadow'
+                      : 'bg-stone-950 text-stone-300 border border-stone-800 hover:border-amber-700'
+                  }`}
+                >
+                  Alle {interval}
+                </button>
+              ))}
+            </div>
+            <p className="text-[10px] text-stone-400">
+              Schüler sichern ihre Erkenntnisse im Schulheft und besprechen Dilemmata.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* STEP 2c: Source Material & Scanned Textbook Page */}
+      <div className="papyrus-dark p-6 rounded-2xl border border-amber-700/60 space-y-4 shadow-xl">
+        <div className="space-y-1">
+          <h2 className="text-base font-bold text-amber-200 font-serif flex items-center gap-2">
+            <span>Schritt 2c:</span> Eigenes Quellenmaterial oder Lehrbuchseite übergeben (Multimodal)
+          </h2>
+          <p className="text-xs text-stone-300">
+            Füge einen Arbeitsblatt-Text ein oder lade ein Foto einer Schulbuchseite hoch. Gemini extrahiert daraus automatisch die historischen Dilemmata und Fakten!
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-1">
+          {/* Textarea for pasted text */}
+          <div className="p-4 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold text-amber-300">
+              <FileText className="w-4 h-4 text-amber-400" />
+              <span>Infotext, Quelle oder Arbeitsblatt (Text)</span>
+            </div>
+            <textarea
+              rows={4}
+              placeholder="Füge hier z.B. einen Textauszug aus dem Geschichtsbuch, einen Quellentext oder Arbeitsblattfragen ein..."
+              value={sourceMaterialText}
+              onChange={(e) => setSourceMaterialText(e.target.value)}
+              className="w-full px-3 py-2 rounded-lg bg-stone-950 border border-stone-800 text-xs text-stone-200 focus:outline-none focus:ring-1 focus:ring-amber-500 font-sans resize-none"
+            />
+            <p className="text-[10px] text-stone-500">
+              Wird direkt in den Systemprompt eingespeist, um stationsgetreue Aufgaben zu generieren.
+            </p>
+          </div>
+
+          {/* Photo upload for scanned textbook page */}
+          <div className="p-4 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-xs font-bold text-amber-300 mb-2">
+                <Image className="w-4 h-4 text-amber-400" />
+                <span>Foto einer Lehrbuchseite hochladen (Multimodal)</span>
+              </div>
+              
+              {!imageAttachment ? (
+                <label className="flex flex-col items-center justify-center p-4 border-2 border-dashed border-stone-700 hover:border-amber-500 rounded-xl cursor-pointer bg-stone-950/60 hover:bg-stone-950 transition-all text-center">
+                  <Upload className="w-6 h-6 text-amber-400 mb-1" />
+                  <span className="text-xs text-stone-300 font-medium">Foto oder Scan auswählen (JPG / PNG)</span>
+                  <span className="text-[10px] text-stone-500 mt-0.5">Gemini Flash analysiert Bild & Text direkt</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                  />
+                </label>
+              ) : (
+                <div className="flex items-center justify-between p-3 rounded-xl bg-amber-950/60 border border-amber-600/70 text-xs">
+                  <div className="flex items-center gap-2 overflow-hidden">
+                    <CheckCircle className="w-4 h-4 text-green-400 shrink-0" />
+                    <span className="font-mono text-amber-200 truncate">{imageFileName}</span>
+                  </div>
+                  <button
+                    onClick={handleRemoveImage}
+                    className="p-1 rounded hover:bg-stone-800 text-stone-400 hover:text-red-400 transition-colors shrink-0"
+                    title="Bild entfernen"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <p className="text-[10px] text-stone-500 mt-2">
+              Ideal für spontane Vorbereitung: Buchseite abfotografieren und fertiges Spiel generieren lassen.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* STEP 3: The 4 Pillars & Resources */}
       <div className="papyrus-dark p-6 rounded-2xl border border-amber-700/60 space-y-4 shadow-xl">
         <h2 className="text-base font-bold text-amber-200 font-serif">
@@ -405,7 +594,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
           className="w-full sm:w-auto px-10 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-stone-950 font-black text-lg shadow-2xl flex items-center justify-center gap-3 cursor-pointer transition-all active:scale-98 disabled:opacity-50"
         >
           <Sparkles className="w-6 h-6 animate-spin-slow" />
-          <span>{isGenerating ? "Erstelle didaktisches Spiel..." : "Neues 20-Runden Spiel jetzt generieren"}</span>
+          <span>{isGenerating ? "Erstelle didaktisches Spiel..." : `Neues ${roundCount}-Runden Spiel jetzt generieren`}</span>
         </button>
 
         {isGenerating && (

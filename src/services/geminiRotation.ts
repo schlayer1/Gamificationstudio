@@ -64,10 +64,11 @@ class GeminiRotationService {
 
   /**
    * Robust multi-key and multi-model cascade generation
+   * Supports both pure text prompts and multimodal image attachments (textbook photos, worksheets)
    * Automatically catches 429 Rate Limits and 503 Overloads, switches to next key & model
    */
   public async generateContentWithRotation(
-    prompt: string,
+    promptOrParts: string | Array<{ text?: string; inlineData?: { mimeType: string; data: string } }>,
     systemInstruction?: string,
     isJsonOutput: boolean = false
   ): Promise<string> {
@@ -75,13 +76,17 @@ class GeminiRotationService {
     const maxAttempts = Math.max(1, this.keys.length) * candidateModels.length;
     let attempts = 0;
 
+    const parts = typeof promptOrParts === 'string'
+      ? [{ text: promptOrParts }]
+      : promptOrParts;
+
     while (attempts < maxAttempts) {
       const activeKey = this.getActiveKey();
       const model = candidateModels[attempts % candidateModels.length];
       const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${activeKey}`;
 
       const bodyPayload: any = {
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+        contents: [{ role: 'user', parts }],
         generationConfig: {
           temperature: 0.3,
           maxOutputTokens: 8192,

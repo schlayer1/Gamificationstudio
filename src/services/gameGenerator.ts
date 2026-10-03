@@ -6,31 +6,40 @@ export interface GenerationRequest {
   era: string;
   archetype?: import('../types/game').GameMechanicArchetype;
   targetGrades: string;
+  roundCount?: number; // 5 to 26 rounds
+  reflectionInterval?: number; // every 3, 4, 5 rounds
   coreTopics: string[];
+  sourceMaterialText?: string; // Manually pasted worksheet / textbook text
+  imageAttachment?: { mimeType: string; base64: string }; // Scanned textbook photo
   pillars: [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
   specialResourceName: string;
   specialResourceEmoji: string;
   skills: { skill1: string; skill2: string; skill3: string };
-  roundCount?: number; // defaults to 20
 }
 
 export class GameGeneratorService {
   /**
-   * Generates a complete 20-round educational game with A/B branches and 3-level grade differentiation
+   * Generates a complete educational game with customizable round count, A/B branches and source material support
    */
   async generateFullGame(req: GenerationRequest): Promise<GameDefinition> {
     const roundCount = req.roundCount || 20;
     const archetype = req.archetype || 'reigns_balance';
+    const reflectionInterval = req.reflectionInterval || 5;
 
     const systemInstruction = `
 Du bist ein professioneller Didaktik-Experte für Geschichtsunterricht und Senior Game Designer.
 Erstelle ein didaktisch anspruchsvolles Geschichts-Abenteuerspiel im Schulunterricht-Standard.
 
 SPIELMECHANIK-ARCHETYP: ${archetype}
+RUNDENANZAHL: Genau ${roundCount} Runden/Stationen.
+REFLEXIONSPHASE: Alle ${reflectionInterval} Runden eine Reflexions- und Strategiepause für den Geschichtshefter.
+
 ${archetype === 'mythology_duel' ? '- Integriere Quiz-Prüfungen (❓) mit Tipp-Button (💡), Erklärung und Belohnung (🏆) sowie mythologische Artefakte (🗡️, 🔮).' : ''}
 ${archetype === 'conquest_campaign' ? '- Integriere Konsequenzen-Bäume mit unmittelbaren und langfristigen Auswirkungen auf Heeresdisziplin und Eroberung.' : ''}
 ${archetype === 'survival_settlement' ? '- Fokussiere auf existenzielle Entscheidungen: Nahrung, Werkzeuge, Sesshaftwerdung und handwerkliche Fähigkeiten.' : ''}
 ${archetype === 'city_scavenger_hunt' ? '- Baue Stationen als Schnitzeljagd mit architektonischen Hinweisen und Monumenten auf.' : ''}
+
+${req.sourceMaterialText ? `VORGEGEBENES QUELLENMATERIAL / LEHRBUCH-TEXT (Zwingend berücksichtigen):\n"""\n${req.sourceMaterialText}\n"""\n` : ''}
 
 Regeln & Vorgaben:
 1. 4 Mächtesäulen:
@@ -43,6 +52,11 @@ Regeln & Vorgaben:
 4. Verbindliche Kernthemen aus dem Lehrplan: ${req.coreTopics.join(', ')}.
 5. Dreifache Sprachadaption für JEDE Station und JEDE Option:
    - unterstufe: Kl. 5-6 (lebendig, narrativ, klare Konsequenzen, einfache Begriffe)
+   - mittelstufe: Kl. 7-9 (Fachbegriffe, ausgewogen, erste Grauzonen)
+   - oberstufe: ab Kl. 10 (anspruchsvoll, staatsphilosophisch, quellennah)
+6. Jede Runde enthält 4 Optionen (A, B, C, und die exklusive Option D, die 3 Spezialressourcen kostet).
+7. Jede Runde enthält ein didaktisches Lexikon ('lexiconEntry') mit Begriff, Erklärung und 'curiosityFact' ("💡 Hast du gewusst?").
+8. Antwort MUSS zwingend als valides JSON formatiert sein.
    - mittelstufe: Kl. 7-9 (Fachbegriffe, ausgewogen, erste Grauzonen)
    - oberstufe: ab Kl. 10 (anspruchsvoll, staatsphilosophisch, quellennah)
 6. Jede Runde enthält 4 Optionen (A, B, C, und die exklusive Option D, die 3 Spezialressourcen kostet).
