@@ -23,9 +23,9 @@ export const App: React.FC = () => {
     throneName: 'Prinzessin Nefertari',
   });
 
-  // Round tracking (1-20)
+  // Round tracking (1-20 or custom length)
   const [currentRoundIndex, setCurrentRoundIndex] = useState<number>(0);
-  const totalRounds = 20;
+  const totalRounds = activeGameDefinition?.rounds?.length || 20;
 
   // Primary Stats (Start values from user request: 10% each, EP: 2)
   const [stats, setStats] = useState<Stats>({
@@ -252,6 +252,10 @@ export const App: React.FC = () => {
         <SetupScreen
           onStartGame={handleStartGame}
           onOpenStudio={() => setGameState('studio')}
+          activeGame={activeGameDefinition}
+          onSelectGame={(game) => {
+            setActiveGameDefinition(game);
+          }}
         />
       )}
 

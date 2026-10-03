@@ -21,12 +21,18 @@ import {
   Upload,
   Play,
   FileText,
-  Image,
-  X,
   Camera,
-  Palette
+  Palette,
+  Share2,
+  Eye,
+  Lock,
+  Unlock,
+  Copy,
+  X,
+  Image as ImageIcon
 } from 'lucide-react';
 import { StationImagePromptModal } from './StationImagePromptModal';
+import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
 
 interface TeacherStudioProps {
   onLoadGameToPlayer: (game: GameDefinition) => void;
@@ -82,6 +88,12 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [generationProgress, setGenerationProgress] = useState<string>('');
   const [errorNotice, setErrorNotice] = useState<string | null>(null);
+
+  // Published Games Management (Lehrer-Freigabe & geschützte Ansicht)
+  const [publishedGames, setPublishedGames] = useState<PublishedGameRecord[]>(gameStorageService.getPublishedGames());
+  const [createdGamePreview, setCreatedGamePreview] = useState<GameDefinition | null>(null);
+  const [publishedNotice, setPublishedNotice] = useState<string | null>(null);
+  const [copiedShareCode, setCopiedShareCode] = useState<string | null>(null);
 
   // Switch template
   const handleSelectTemplate = (tpl: PredefinedTemplate) => {
@@ -192,14 +204,36 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       setGenerationProgress("Spiel erfolgreich erstellt!");
       setTimeout(() => {
         setIsGenerating(false);
-        onLoadGameToPlayer(newGame);
-      }, 800);
+        setCreatedGamePreview(newGame);
+        soundFX.playCoronation();
+      }, 700);
     } catch (err: any) {
       console.error(err);
       setErrorNotice(err.message || "Fehler bei der Generierung.");
       setIsGenerating(false);
       soundFX.playCrisis();
     }
+  };
+
+  // Freigabe / Publish Game for Students
+  const handlePublishGame = (gameToPublish: GameDefinition) => {
+    soundFX.playBlessing();
+    const record = gameStorageService.publishGame(gameToPublish);
+    setPublishedGames(gameStorageService.getPublishedGames());
+    setPublishedNotice(`Spiel freigegeben! Freigabe-Code für Schüler: ${record.shareCode}`);
+  };
+
+  const handleUnpublishGame = (gameId: string) => {
+    soundFX.playClick();
+    gameStorageService.unpublishGame(gameId);
+    setPublishedGames(gameStorageService.getPublishedGames());
+  };
+
+  const handleCopyCode = (code: string) => {
+    soundFX.playClick();
+    navigator.clipboard.writeText(code);
+    setCopiedShareCode(code);
+    setTimeout(() => setCopiedShareCode(null), 2000);
   };
 
   return (
@@ -311,7 +345,146 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         </div>
       )}
 
-      {/* STEP 1: Choose Template or Start Blank */}
+      {/* Published Notice Banner */}
+      {publishedNotice && (
+        <div className="p-4 rounded-xl bg-emerald-950/90 border border-emerald-500 text-emerald-200 text-xs flex items-center justify-between animate-fade-in shadow-lg">
+          <div className="flex items-center gap-2">
+            <CheckCircle className="w-5 h-5 text-emerald-400 shrink-0" />
+            <span className="font-semibold">{publishedNotice}</span>
+          </div>
+          <button
+            onClick={() => setPublishedNotice(null)}
+            className="text-stone-400 hover:text-white px-2"
+          >
+            ×
+          </button>
+        </div>
+      )}
+
+      {/* GESCHÜTZTE VORSCHAU DES NEU ERSTELLTEN SPIELS (Vor Freigabe durch Lehrer) */}
+      {createdGamePreview && (
+        <div className="p-6 rounded-2xl bg-gradient-to-br from-stone-900 to-amber-950/60 border-2 border-amber-400 shadow-2xl space-y-5 animate-fade-in">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-amber-700/60 pb-3">
+            <div className="flex items-center gap-2.5">
+              <div className="p-2 rounded-xl bg-amber-500/20 text-amber-300">
+                <Shield className="w-6 h-6" />
+              </div>
+              <div>
+                <span className="text-[11px] font-mono uppercase text-amber-400 font-bold">
+                  🔒 Geschützte Lehrer-Ansicht (Neu generiert)
+                </span>
+                <h3 className="text-xl font-black text-amber-200 font-serif m-0">
+                  {createdGamePreview.title}
+                </h3>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => handlePublishGame(createdGamePreview)}
+                className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-stone-950 text-xs font-bold shadow-lg transition-all cursor-pointer"
+              >
+                <Share2 className="w-4 h-4" />
+                <span>Für Schüler freigeben</span>
+              </button>
+
+              <button
+                onClick={() => onLoadGameToPlayer(createdGamePreview)}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 text-xs font-bold transition-all cursor-pointer"
+              >
+                <Play className="w-4 h-4" />
+                <span>Selbst anspielen</span>
+              </button>
+
+              <button
+                onClick={() => setCreatedGamePreview(null)}
+                className="p-2 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-400 hover:text-white transition-colors"
+                title="Vorschau schließen"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+
+          <p className="text-xs text-stone-300">
+            Dieses Spiel ist vorerst nur in deinem Studio sichtbar. Schüler können es erst betreten, nachdem du es freigegeben hast.
+          </p>
+
+          {/* Quick Round Overview Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 max-h-60 overflow-y-auto pr-1">
+            {createdGamePreview.rounds.map((r, idx) => (
+              <div key={idx} className="p-3 rounded-xl bg-stone-950/80 border border-amber-900/40 text-xs space-y-1">
+                <span className="text-[10px] font-mono text-amber-400 font-bold block">
+                  Station {r.roundNumber}: {r.locationName}
+                </span>
+                <h4 className="font-bold text-stone-200 line-clamp-1">{r.milestoneTitle}</h4>
+                <p className="text-[11px] text-stone-400 line-clamp-2">{r.situation.mittelstufe}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* FREIGEGEBENE SCHÜLER-SPIELE (Aktive Freigaben) */}
+      {publishedGames.length > 0 && (
+        <div className="p-5 rounded-2xl bg-stone-900/90 border border-emerald-600/60 shadow-xl space-y-3 animate-fade-in">
+          <div className="flex items-center justify-between border-b border-stone-800 pb-2">
+            <div className="flex items-center gap-2 text-emerald-300 text-sm font-bold">
+              <Share2 className="w-4 h-4 text-emerald-400" />
+              <span>Aktive Schüler-Freigaben ({publishedGames.length} Spiele freigeschaltet)</span>
+            </div>
+            <span className="text-[11px] text-stone-400">Schüler treten mit dem Freigabe-Code bei</span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {publishedGames.map((pub) => (
+              <div
+                key={pub.id}
+                className="p-3.5 rounded-xl bg-stone-950 border border-stone-800 hover:border-emerald-500/60 transition-all space-y-2 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-[10px] font-mono text-stone-400">{pub.publishedAt}</span>
+                    <span className="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700/60 text-[10px] font-mono font-bold">
+                      Code: {pub.shareCode}
+                    </span>
+                  </div>
+                  <h4 className="text-xs font-bold text-amber-200">{pub.game.title}</h4>
+                  <p className="text-[11px] text-stone-400">{pub.game.era}</p>
+                </div>
+
+                <div className="pt-2 border-t border-stone-800/80 flex items-center justify-between gap-2">
+                  <button
+                    onClick={() => handleCopyCode(pub.shareCode)}
+                    className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 hover:text-emerald-300"
+                    title="Code für Beamer/Tafel kopieren"
+                  >
+                    <Copy className="w-3.5 h-3.5" />
+                    <span>{copiedShareCode === pub.shareCode ? "Kopiert!" : "Code kopieren"}</span>
+                  </button>
+
+                  <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => onLoadGameToPlayer(pub.game)}
+                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200"
+                      title="Als Schüler starten"
+                    >
+                      <Play className="w-3.5 h-3.5 text-amber-400" />
+                    </button>
+                    <button
+                      onClick={() => handleUnpublishGame(pub.id)}
+                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-red-900/60 text-stone-400 hover:text-red-300 transition-colors"
+                      title="Freigabe beenden"
+                    >
+                      <Trash2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-sm font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
@@ -496,7 +669,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
           <div className="p-4 rounded-xl bg-stone-900/90 border border-stone-800 space-y-2 flex flex-col justify-between">
             <div>
               <div className="flex items-center gap-2 text-xs font-bold text-amber-300 mb-2">
-                <Image className="w-4 h-4 text-amber-400" />
+                <ImageIcon className="w-4 h-4 text-amber-400" />
                 <span>Foto einer Lehrbuchseite hochladen (Multimodal)</span>
               </div>
               

@@ -78,11 +78,11 @@ Regeln & Vorgaben:
 `;
 
     const prompt = `
-Erstelle nun die ersten 6 Stationen (Runde 1 bis 6) für das Spiel:
+Erstelle nun genau ${Math.min(roundCount, 12)} Stationen (Runde 1 bis ${Math.min(roundCount, 12)}) für das Spiel:
 Titel: "${req.title}"
 Epoche / Setting: "${req.era}"
 
-WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem JSON-Format (kein Markdown drumherum, nur JSON):
+WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
 {
   "rounds": [
     {
@@ -90,11 +90,11 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem JSON-Format (kein Markdown drumh
       "locationKey": "station_1",
       "locationName": "Name der Station 1",
       "milestoneTitle": "Runde 1: Titel",
-      "imagePrompt": "${selectedStylePrompt} of [historische Szene der Station], atmospheric lighting, educational game visual, 16:9 aspect ratio",
+      "imagePrompt": "${selectedStylePrompt} of [historische Szene], atmospheric lighting, educational game visual, 16:9 aspect ratio",
       "situation": {
-        "unterstufe": "Text für 5.-6. Klasse...",
-        "mittelstufe": "Text für 7.-9. Klasse...",
-        "oberstufe": "Text ab 10. Klasse..."
+        "unterstufe": "Einführender Text für Unterstufe...",
+        "mittelstufe": "Einführender Text für Mittelstufe...",
+        "oberstufe": "Einführender Text für Oberstufe..."
       },
       "choices": [
         {
@@ -103,9 +103,9 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem JSON-Format (kein Markdown drumh
           "description": "Erklärung Option A",
           "statChanges": { "${req.pillars[0].key}": 15, "${req.pillars[1].key}": -10, "ep": 1 },
           "consequenceText": {
-            "unterstufe": "...",
-            "mittelstufe": "...",
-            "oberstufe": "..."
+            "unterstufe": "Konsequenz Unterstufe...",
+            "mittelstufe": "Konsequenz Mittelstufe...",
+            "oberstufe": "Konsequenz Oberstufe..."
           }
         },
         {
@@ -154,12 +154,26 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem JSON-Format (kein Markdown drumh
 
     let parsedRounds: RoundStory[] = [];
     try {
-      const cleanJson = rawJson.replace(/```json/g, '').replace(/```/g, '').trim();
+      // Robust JSON extraction
+      let cleanJson = rawJson.trim();
+      const firstBrace = cleanJson.indexOf('{');
+      const lastBrace = cleanJson.lastIndexOf('}');
+      if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+        cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+      }
+      
       const parsed = JSON.parse(cleanJson);
       parsedRounds = parsed.rounds || [];
-    } catch (e) {
-      console.error("JSON parsing error during game generation:", e);
-      throw new Error("Fehler beim Verarbeiten der generierten Spieldaten. Bitte erneut versuchen.");
+
+      // Validate at least 1 round exists
+      if (!Array.isArray(parsedRounds) || parsedRounds.length === 0) {
+        throw new Error("Keine Stationen im JSON gefunden.");
+      }
+    } catch (e: any) {
+      console.error("JSON parsing error during game generation:", e, "Raw output:", rawJson);
+      throw new Error(
+        `Fehler beim Verarbeiten der Spieldaten (${e.message || "Unvollständige KI-Antwort"}). Bitte klicke nochmals auf "Generieren" – dank Schlüssel-Rotation startet der Versuch direkt mit der nächsten Modell-Instanz.`
+      );
     }
 
     const gameDefinition: GameDefinition = {

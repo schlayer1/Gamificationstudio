@@ -1,17 +1,73 @@
 import React, { useState } from 'react';
-import { GradeLevel, PlayerProfile } from '../types/game';
+import { GradeLevel, PlayerProfile, GameDefinition } from '../types/game';
 import { soundFX } from '../utils/sound';
-import { Crown, Sparkles, BookCheck, Shield } from 'lucide-react';
+import { Crown, Sparkles, BookCheck, Shield, Lock, Key, ArrowRight, Share2, CheckCircle } from 'lucide-react';
+import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
 
 interface SetupScreenProps {
   onStartGame: (profile: PlayerProfile) => void;
   onOpenStudio?: () => void;
+  activeGame?: GameDefinition | null;
+  onSelectGame?: (game: GameDefinition) => void;
 }
 
-export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame, onOpenStudio }) => {
+export const SetupScreen: React.FC<SetupScreenProps> = ({
+  onStartGame,
+  onOpenStudio,
+  activeGame,
+  onSelectGame,
+}) => {
   const [name, setName] = useState('');
   const [gradeLevel, setGradeLevel] = useState<GradeLevel>('mittelstufe');
   const [gender, setGender] = useState<'prinz' | 'prinzessin' | 'neutral'>('prinzessin');
+
+  // Teacher PIN Protection State
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [enteredPin, setEnteredPin] = useState('');
+  const [pinError, setPinError] = useState(false);
+
+  // Student Share Code Input
+  const [shareCodeInput, setShareCodeInput] = useState('');
+  const [shareCodeNotice, setShareCodeNotice] = useState<string | null>(null);
+
+  // Available games from teacher storage
+  const [publishedGames] = useState<PublishedGameRecord[]>(gameStorageService.getPublishedGames());
+
+  const handleOpenTeacherStudio = () => {
+    soundFX.playClick();
+    setShowPinModal(true);
+    setPinError(false);
+    setEnteredPin('');
+  };
+
+  const handleVerifyTeacherPin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (gameStorageService.verifyPin(enteredPin)) {
+      soundFX.playBlessing();
+      setShowPinModal(false);
+      onOpenStudio && onOpenStudio();
+    } else {
+      soundFX.playCrisis();
+      setPinError(true);
+    }
+  };
+
+  const handleJoinWithCode = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!shareCodeInput.trim()) return;
+
+    soundFX.playClick();
+    const found = gameStorageService.findGameByShareCode(shareCodeInput);
+    if (found && onSelectGame) {
+      soundFX.playBlessing();
+      onSelectGame(found);
+      setShareCodeNotice(`Erfolgreich geladen: "${found.title}"!`);
+      setShareCodeInput('');
+    } else {
+      soundFX.playCrisis();
+      setShareCodeNotice(`Kein Spiel mit dem Code "${shareCodeInput.toUpperCase()}" gefunden.`);
+    }
+  };
 
   // Generate regal throne name based on input
   const getPreviewThroneName = () => {
@@ -45,36 +101,116 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame, onOpenStu
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6 sm:py-10 flex flex-col items-center">
-      {/* Top action bar: Studio link */}
-      {onOpenStudio && (
-        <div className="w-full flex justify-end mb-3">
+      {/* Top action bar: Protected Teacher Access & Share Code Join */}
+      <div className="w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-5">
+        {/* Share code input for students */}
+        <form onSubmit={handleJoinWithCode} className="flex items-center gap-1.5 flex-1 max-w-sm">
+          <div className="relative flex-1">
+            <Share2 className="w-4 h-4 text-amber-400 absolute left-3 top-2.5" />
+            <input
+              type="text"
+              placeholder="Spiel-Code eingeben (z.B. ROM44)..."
+              value={shareCodeInput}
+              onChange={(e) => setShareCodeInput(e.target.value.toUpperCase())}
+              className="w-full pl-9 pr-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-xs font-mono font-bold text-amber-300 placeholder-stone-500 uppercase focus:outline-none focus:ring-1 focus:ring-amber-500"
+            />
+          </div>
           <button
-            onClick={() => {
-              soundFX.playClick();
-              onOpenStudio();
-            }}
-            className="flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-stone-900 border border-amber-600/60 hover:border-amber-400 text-xs font-bold text-amber-300 shadow-md transition-all cursor-pointer"
+            type="submit"
+            className="px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs flex items-center gap-1 transition-all cursor-pointer"
           >
-            <span>🧙‍♂️</span>
-            <span>Lehrer-Studio öffnen (Neue Spiele erstellen)</span>
+            <span>Beitreten</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
+        </form>
+
+        {/* Teacher Studio Button (PIN Protected) */}
+        {onOpenStudio && (
+          <button
+            onClick={handleOpenTeacherStudio}
+            className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-stone-900 border border-amber-600/70 hover:border-amber-400 text-xs font-bold text-amber-300 shadow-md transition-all cursor-pointer"
+          >
+            <Lock className="w-3.5 h-3.5 text-amber-400" />
+            <span>Lehrkraft-Baukasten (PIN-geschützt)</span>
+          </button>
+        )}
+      </div>
+
+      {/* Share Code Notice */}
+      {shareCodeNotice && (
+        <div className="w-full p-3 mb-4 rounded-xl bg-stone-900 border border-amber-500/60 text-xs text-amber-200 flex items-center justify-between">
+          <span>{shareCodeNotice}</span>
+          <button onClick={() => setShareCodeNotice(null)} className="text-stone-400 hover:text-white">×</button>
         </div>
       )}
 
-      {/* Decorative Pixel Art Banner */}
+      {/* Teacher PIN Modal */}
+      {showPinModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+          <div className="w-full max-w-sm p-6 rounded-2xl bg-stone-950 border-2 border-amber-500 shadow-2xl space-y-4 text-center">
+            <div className="w-12 h-12 mx-auto rounded-full bg-amber-500/20 border border-amber-500/50 flex items-center justify-center text-amber-400">
+              <Lock className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="text-base font-bold text-amber-200 font-serif">Lehrkraft-Bereich</h3>
+              <p className="text-xs text-stone-400 mt-1">
+                Bitte gib deine Lehrer-PIN ein, um den Baukasten und die Freigaben zu öffnen (Standard-PIN: <strong>1234</strong>).
+              </p>
+            </div>
+
+            <form onSubmit={handleVerifyTeacherPin} className="space-y-3">
+              <input
+                type="password"
+                autoFocus
+                placeholder="PIN eingeben (z.B. 1234)"
+                value={enteredPin}
+                onChange={(e) => {
+                  setEnteredPin(e.target.value);
+                  setPinError(false);
+                }}
+                className={`w-full text-center px-4 py-2.5 rounded-xl bg-stone-900 border text-base tracking-widest font-mono text-amber-200 focus:outline-none ${
+                  pinError ? 'border-red-500 ring-1 ring-red-500' : 'border-stone-700 focus:border-amber-500'
+                }`}
+              />
+
+              {pinError && (
+                <p className="text-xs text-red-400">Falsche PIN. Bitte erneut versuchen.</p>
+              )}
+
+              <div className="flex gap-2 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowPinModal(false)}
+                  className="flex-1 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 text-stone-300 text-xs font-bold transition-colors"
+                >
+                  Abbrechen
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 text-xs font-bold transition-all cursor-pointer"
+                >
+                  Entsperren
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Decorative Banner (Adapts to Active Game or Default Nile) */}
       <div className="w-full relative rounded-2xl overflow-hidden border-2 border-amber-600/60 shadow-2xl mb-6 group">
         <img
-          src="/assets/nile_banner.jpg"
-          alt="Die große Nil-Expedition"
+          src={activeGame?.rounds[0]?.imagePath || "/assets/nile_banner.jpg"}
+          alt="Banner"
           className="w-full h-48 sm:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-700"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-transparent flex items-end p-4 sm:p-6">
           <div className="space-y-1">
             <span className="text-xs font-mono font-bold tracking-widest text-amber-400 uppercase bg-stone-950/80 px-2.5 py-1 rounded border border-amber-600/50 inline-block">
-              16-Bit Retro Schulabenteuer
+              {activeGame ? activeGame.era : "16-Bit Retro Schulabenteuer"}
             </span>
             <h2 className="text-xl sm:text-3xl font-extrabold text-amber-200 font-serif m-0 drop-shadow-md">
-              Die Nil-Expedition nach Gizeh
+              {activeGame ? activeGame.title : "Die Nil-Expedition nach Gizeh"}
             </h2>
           </div>
         </div>
@@ -87,10 +223,12 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({ onStartGame, onOpenStu
           <span>Interaktives Geschichts-Abenteuerspiel</span>
         </div>
         <h1 className="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 font-serif tracking-tight">
-          Aufstieg zum Pharao
+          {activeGame ? activeGame.title : "Aufstieg zum Pharao"}
         </h1>
         <p className="text-sm sm:text-base text-stone-300 max-w-xl mx-auto font-light">
-          Begib dich auf die abenteuerliche Nil-Expedition von Elephantine nach Gizeh. Meistere 20 historische Runden, balanciere die 4 Mächte des Reiches und kröne dich zum Herrscher beider Länder!
+          {activeGame 
+            ? activeGame.description 
+            : "Begib dich auf die abenteuerliche Nil-Expedition von Elephantine nach Gizeh. Meistere 20 historische Runden, balanciere die 4 Mächte des Reiches und kröne dich zum Herrscher beider Länder!"}
         </p>
       </div>
 
