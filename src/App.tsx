@@ -8,8 +8,9 @@ import { LexiconModal } from './components/LexiconModal';
 import { EndingScreen } from './components/EndingScreen';
 import { GameOverScreen } from './components/GameOverScreen';
 import { TeacherStudio } from './components/TeacherStudio';
+import { StationImagePromptModal } from './components/StationImagePromptModal';
 import { soundFX } from './utils/sound';
-import { Lock, Sparkles, BookOpen, AlertTriangle } from 'lucide-react';
+import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon } from 'lucide-react';
 
 export const App: React.FC = () => {
   // Game Lifecycle State
@@ -52,6 +53,10 @@ export const App: React.FC = () => {
   // Logs & History for the Lexicon
   const [logs, setLogs] = useState<GameLogEntry[]>([]);
   const [isLexiconOpen, setIsLexiconOpen] = useState<boolean>(false);
+
+  // Station Image Modal & Custom Images Map (roundIndex -> imageUrl)
+  const [isImageModalOpen, setIsImageModalOpen] = useState<boolean>(false);
+  const [customStationImages, setCustomStationImages] = useState<Record<number, string>>({});
 
   // Current Round Result & Feedback Banner
   const [lastConsequence, setLastConsequence] = useState<{
@@ -448,13 +453,26 @@ export const App: React.FC = () => {
                     {currentStory.lexiconEntry.explanation[profile.gradeLevel]}
                   </p>
 
-                  {/* Contextual Historical Illustration */}
-                  <div className="rounded-xl overflow-hidden border border-amber-900/30 shadow-md">
+                  {/* Contextual Historical Illustration with Image / Prompt Generator Button */}
+                  <div className="relative rounded-xl overflow-hidden border border-amber-900/30 shadow-md group">
                     <img
-                      src={currentStory.imagePath || "/assets/nile_banner.jpg"}
+                      src={customStationImages[currentRoundIndex] || currentStory.imagePath || "/assets/nile_banner.jpg"}
                       alt={currentStory.lexiconEntry.title}
                       className="w-full h-40 sm:h-52 object-cover object-center transition-all duration-500"
                     />
+                    
+                    {/* Floating Prompt / Gallery Action Pill */}
+                    <button
+                      onClick={() => {
+                        soundFX.playClick();
+                        setIsImageModalOpen(true);
+                      }}
+                      className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-950/85 hover:bg-stone-950 text-amber-300 hover:text-amber-200 border border-amber-600/60 shadow-lg text-xs font-bold transition-all backdrop-blur-md cursor-pointer hover:scale-102"
+                      title="Bild für diese Station generieren oder aus Galerie wählen"
+                    >
+                      <Camera className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Bild & Prompt</span>
+                    </button>
                   </div>
 
                   <div className="p-3 rounded-xl bg-amber-900/10 border border-amber-900/20 text-xs text-amber-950 space-y-1">
@@ -465,6 +483,23 @@ export const App: React.FC = () => {
               </div>
             </div>
           </main>
+
+          {/* Station Image & Prompt Generator Modal */}
+          <StationImagePromptModal
+            isOpen={isImageModalOpen}
+            onClose={() => setIsImageModalOpen(false)}
+            stationTitle={currentStory.milestoneTitle}
+            locationName={currentStory.locationName}
+            roundNumber={currentStory.roundNumber}
+            currentImage={customStationImages[currentRoundIndex] || currentStory.imagePath}
+            suggestedPrompt={currentStory.imagePrompt}
+            onSelectImage={(newUrl) => {
+              setCustomStationImages((prev) => ({
+                ...prev,
+                [currentRoundIndex]: newUrl,
+              }));
+            }}
+          />
 
           {/* Papyrus Lexicon Modal */}
           <LexiconModal

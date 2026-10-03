@@ -77,6 +77,7 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem JSON-Format (kein Markdown drumh
       "locationKey": "station_1",
       "locationName": "Name der Station 1",
       "milestoneTitle": "Runde 1: Titel",
+      "imagePrompt": "16-bit pixel art retro video game style illustration of [historische Szene der Station], atmospheric lighting, highly detailed historical setting, educational game visual, 16:9 aspect ratio",
       "situation": {
         "unterstufe": "Text für 5.-6. Klasse...",
         "mittelstufe": "Text für 7.-9. Klasse...",

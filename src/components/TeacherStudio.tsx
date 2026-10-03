@@ -22,8 +22,10 @@ import {
   Play,
   FileText,
   Image,
-  X
+  X,
+  Camera
 } from 'lucide-react';
+import { StationImagePromptModal } from './StationImagePromptModal';
 
 interface TeacherStudioProps {
   onLoadGameToPlayer: (game: GameDefinition) => void;
@@ -72,6 +74,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [sourceMaterialText, setSourceMaterialText] = useState<string>('');
   const [imageAttachment, setImageAttachment] = useState<{ mimeType: string; base64: string } | null>(null);
   const [imageFileName, setImageFileName] = useState<string>('');
+  const [isGalleryOpen, setIsGalleryOpen] = useState<boolean>(false);
 
   // Generator Process State
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
@@ -215,6 +218,18 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         </div>
 
         <div className="flex items-center gap-2">
+          {/* Lehrplan-Bildergalerie Button */}
+          <button
+            onClick={() => {
+              soundFX.playClick();
+              setIsGalleryOpen(true);
+            }}
+            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-xs text-amber-300 font-bold transition-all cursor-pointer"
+          >
+            <Camera className="w-4 h-4 text-amber-400" />
+            <span>Geschichts-Galerie & Prompts</span>
+          </button>
+
           {/* 4-Key Rotation Status Pill */}
           <button
             onClick={() => {
@@ -603,6 +618,19 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
           </p>
         )}
       </div>
+
+      {/* Lehrplan-Bildergalerie & Prompt Modal */}
+      <StationImagePromptModal
+        isOpen={isGalleryOpen}
+        onClose={() => setIsGalleryOpen(false)}
+        stationTitle={selectedTemplate.title}
+        locationName={customEra}
+        roundNumber={1}
+        suggestedPrompt={`16-bit pixel art style ancient historical illustration for ${customTitle} (${customEra}), educational adventure game visual, highly detailed, 16:9 aspect ratio`}
+        onSelectImage={(url) => {
+          setIsGalleryOpen(false);
+        }}
+      />
     </div>
   );
 };
