@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { PlayerProfile, Stats, Skills, GameLogEntry, DecisionChoice, GameDefinition } from './types/game';
 import { getStoryForRound } from './data/storyData';
-import { NileCanvas } from './components/NileCanvas';
+import { ExpeditionProgressBar } from './components/ExpeditionProgressBar';
 import { DashboardHeader } from './components/DashboardHeader';
 import { SetupScreen } from './components/SetupScreen';
 import { LexiconModal } from './components/LexiconModal';
@@ -325,11 +325,12 @@ export const App: React.FC = () => {
               </div>
             )}
 
-            {/* Canvas Trail Progress Animation */}
-            <NileCanvas
+            {/* Sleek Cinematic Journey Progress Rail (Schlanke Stations-Fortschrittsleiste) */}
+            <ExpeditionProgressBar
               round={currentStory.roundNumber}
               totalRounds={totalRounds}
               locationName={currentStory.locationName}
+              theme={currentTheme}
             />
 
             {/* PROMINENT STATION HERO STAGE: Panoramic 16:9 Illustration with Interactive Hotspots & Visual Reaction FX */}
