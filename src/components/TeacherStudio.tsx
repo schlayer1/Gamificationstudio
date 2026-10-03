@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { geminiRotationService } from '../services/geminiRotation';
 import { PREDEFINED_TEMPLATES, PredefinedTemplate } from '../templates/historyTemplates';
 import { gameGeneratorService } from '../services/gameGenerator';
-import { GameDefinition, PillarConfig } from '../types/game';
+import { GameDefinition, PillarConfig, ArtStyleType } from '../types/game';
 import { soundFX } from '../utils/sound';
 import {
   Sparkles,
@@ -23,7 +23,8 @@ import {
   FileText,
   Image,
   X,
-  Camera
+  Camera,
+  Palette
 } from 'lucide-react';
 import { StationImagePromptModal } from './StationImagePromptModal';
 
@@ -68,9 +69,10 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     skill3: selectedTemplate.skills.skill3,
   });
 
-  // Game Customization (Rounds, Reflection, Source Material, Scanned Textbook Photo)
+  // Game Customization (Rounds, Reflection, Source Material, Scanned Textbook Photo, Art Style)
   const [roundCount, setRoundCount] = useState<number>(20);
   const [reflectionInterval, setReflectionInterval] = useState<number>(5);
+  const [artStyle, setArtStyle] = useState<ArtStyleType>('pixel_art');
   const [sourceMaterialText, setSourceMaterialText] = useState<string>('');
   const [imageAttachment, setImageAttachment] = useState<{ mimeType: string; base64: string } | null>(null);
   const [imageFileName, setImageFileName] = useState<string>('');
@@ -177,6 +179,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         targetGrades,
         roundCount,
         reflectionInterval,
+        artStyle,
         coreTopics,
         sourceMaterialText: sourceMaterialText.trim() || undefined,
         imageAttachment: imageAttachment || undefined,
@@ -533,6 +536,91 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         </div>
       </div>
 
+      {/* STEP 2d: Art Style Selection (Stilabfrage für Bilder) */}
+      <div className="papyrus-dark p-6 rounded-2xl border border-amber-700/60 space-y-4 shadow-xl">
+        <div className="space-y-1">
+          <h2 className="text-base font-bold text-amber-200 font-serif flex items-center gap-2">
+            <Palette className="w-5 h-5 text-amber-400" />
+            <span>Schritt 2d:</span> Bild- & Grafikstil für die Stationen festlegen
+          </h2>
+          <p className="text-xs text-stone-300">
+            Wähle die visuelle Ästhetik für die Illustrationen und Bildprompts passend zur Altersstufe und Stimmung deines Geschichtsprojekts.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 pt-1">
+          {[
+            {
+              id: 'pixel_art' as ArtStyleType,
+              title: '16-Bit Pixel Art',
+              badge: 'Klassiker / Retro',
+              desc: 'Charmante Videospiel-Ästhetik à la Oregon Trail & LucasArts. Klare Formen, hoher Identifikationsfaktor für Schüler.',
+              icon: '🕹️',
+            },
+            {
+              id: 'photorealistic' as ArtStyleType,
+              title: 'Fotorealistisch',
+              badge: 'Dokumentar-Film',
+              desc: 'Cinematische, kinoreife Bildsprache wie in einer Terra-X- oder BBC-Geschichtsdokumentation.',
+              icon: '📸',
+            },
+            {
+              id: 'comic_bd' as ArtStyleType,
+              title: 'Comic & Graphic Novel',
+              badge: 'Ligne Claire / Franko-Belgisch',
+              desc: 'Dynamischer Comic-Stil (à la Asterix & Alix) mit klaren Tuschelinien und expressiven Charakteren.',
+              icon: '🎨',
+            },
+            {
+              id: 'oil_painting' as ArtStyleType,
+              title: 'Historien-Ölgemälde',
+              badge: 'Klassik / Museum',
+              desc: 'Dramatische Meisterschaft des 19. Jahrhunderts mit feiner Pinselführung und meisterhaftem Hell-Dunkel.',
+              icon: '🏛️',
+            },
+            {
+              id: 'papyrus_ink' as ArtStyleType,
+              title: 'Papyrus & Tuschezeichnung',
+              badge: 'Antike Handschrift',
+              desc: 'Historische Manuskript-Optik auf vergilbtem Papyrus oder Pergament mit feiner Buchmalerei.',
+              icon: '📜',
+            },
+          ].map((style) => (
+            <div
+              key={style.id}
+              onClick={() => {
+                soundFX.playClick();
+                setArtStyle(style.id);
+              }}
+              className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
+                artStyle === style.id
+                  ? 'bg-amber-950/80 border-amber-400 ring-2 ring-amber-500/40 shadow-lg'
+                  : 'bg-stone-900/80 border-stone-800 hover:border-amber-700/60'
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-lg">{style.icon}</span>
+                  <span className="text-[10px] font-mono font-bold text-amber-400 bg-black/50 px-2 py-0.5 rounded border border-amber-800/40">
+                    {style.badge}
+                  </span>
+                </div>
+                <h3 className="text-sm font-bold text-amber-200 mb-1">{style.title}</h3>
+                <p className="text-[11px] text-stone-300 leading-snug">{style.desc}</p>
+              </div>
+
+              <div className="pt-2 mt-2 border-t border-stone-800/70 flex items-center justify-between text-[11px]">
+                <span className="text-stone-400">Status:</span>
+                <span className={artStyle === style.id ? 'text-amber-300 font-bold flex items-center gap-1' : 'text-stone-500'}>
+                  {artStyle === style.id ? <CheckCircle className="w-3.5 h-3.5 text-amber-400 inline" /> : null}
+                  {artStyle === style.id ? 'Ausgewählt' : 'Aktivieren'}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
       {/* STEP 3: The 4 Pillars & Resources */}
       <div className="papyrus-dark p-6 rounded-2xl border border-amber-700/60 space-y-4 shadow-xl">
         <h2 className="text-base font-bold text-amber-200 font-serif">
@@ -626,6 +714,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         stationTitle={selectedTemplate.title}
         locationName={customEra}
         roundNumber={1}
+        currentArtStyle={artStyle}
         suggestedPrompt={`16-bit pixel art style ancient historical illustration for ${customTitle} (${customEra}), educational adventure game visual, highly detailed, 16:9 aspect ratio`}
         onSelectImage={(url) => {
           setIsGalleryOpen(false);

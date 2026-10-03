@@ -493,6 +493,7 @@ export const App: React.FC = () => {
             roundNumber={currentStory.roundNumber}
             currentImage={customStationImages[currentRoundIndex] || currentStory.imagePath}
             suggestedPrompt={currentStory.imagePrompt}
+            currentArtStyle={activeGameDefinition?.artStyle || 'pixel_art'}
             onSelectImage={(newUrl) => {
               setCustomStationImages((prev) => ({
                 ...prev,

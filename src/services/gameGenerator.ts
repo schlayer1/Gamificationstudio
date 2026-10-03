@@ -5,6 +5,7 @@ export interface GenerationRequest {
   title: string;
   era: string;
   archetype?: import('../types/game').GameMechanicArchetype;
+  artStyle?: import('../types/game').ArtStyleType;
   targetGrades: string;
   roundCount?: number; // 5 to 26 rounds
   reflectionInterval?: number; // every 3, 4, 5 rounds
@@ -25,12 +26,24 @@ export class GameGeneratorService {
     const roundCount = req.roundCount || 20;
     const archetype = req.archetype || 'reigns_balance';
     const reflectionInterval = req.reflectionInterval || 5;
+    const artStyle = req.artStyle || 'pixel_art';
+
+    const artStyleDescriptions: Record<string, string> = {
+      pixel_art: '16-bit pixel art retro video game style illustration, Oregon Trail aesthetic, atmospheric lighting, detailed historical pixel art',
+      photorealistic: 'Photorealistic historical documentary cinematic film still, ultra realistic textures, natural lighting, highly detailed',
+      comic_bd: 'Franco-Belgian comic book illustration, ligne claire style, clear ink line art with rich vibrant colors, graphic novel aesthetic',
+      oil_painting: 'Classic 19th century historical oil painting, dramatic chiaroscuro lighting, rich brushwork, museum masterpiece aesthetic',
+      papyrus_ink: 'Ancient historical papyrus manuscript illustration, delicate ink outlines, warm parchment and earth tone pigments',
+    };
+
+    const selectedStylePrompt = artStyleDescriptions[artStyle] || artStyleDescriptions.pixel_art;
 
     const systemInstruction = `
 Du bist ein professioneller Didaktik-Experte für Geschichtsunterricht und Senior Game Designer.
 Erstelle ein didaktisch anspruchsvolles Geschichts-Abenteuerspiel im Schulunterricht-Standard.
 
 SPIELMECHANIK-ARCHETYP: ${archetype}
+BILD-GRAFIKSTIL: ${artStyle} (${selectedStylePrompt})
 RUNDENANZAHL: Genau ${roundCount} Runden/Stationen.
 REFLEXIONSPHASE: Alle ${reflectionInterval} Runden eine Reflexions- und Strategiepause für den Geschichtshefter.
 
@@ -77,7 +90,7 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem JSON-Format (kein Markdown drumh
       "locationKey": "station_1",
       "locationName": "Name der Station 1",
       "milestoneTitle": "Runde 1: Titel",
-      "imagePrompt": "16-bit pixel art retro video game style illustration of [historische Szene der Station], atmospheric lighting, highly detailed historical setting, educational game visual, 16:9 aspect ratio",
+      "imagePrompt": "${selectedStylePrompt} of [historische Szene der Station], atmospheric lighting, educational game visual, 16:9 aspect ratio",
       "situation": {
         "unterstufe": "Text für 5.-6. Klasse...",
         "mittelstufe": "Text für 7.-9. Klasse...",

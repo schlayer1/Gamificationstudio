@@ -15,6 +15,8 @@ import {
   HelpCircle,
 } from 'lucide-react';
 import { geminiRotationService } from '../services/geminiRotation';
+import { ArtStyleType } from '../types/game';
+import { Palette } from 'lucide-react';
 
 interface StationImagePromptModalProps {
   isOpen: boolean;
@@ -24,6 +26,7 @@ interface StationImagePromptModalProps {
   roundNumber: number;
   currentImage?: string;
   suggestedPrompt?: string;
+  currentArtStyle?: ArtStyleType;
   onSelectImage: (imageUrl: string) => void;
 }
 
@@ -35,14 +38,55 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
   roundNumber,
   currentImage,
   suggestedPrompt: initialPrompt,
+  currentArtStyle = 'pixel_art',
   onSelectImage,
 }) => {
   // Active Tab: 'prompt' (Generieren) | 'gallery' (Fertiger Pool)
   const [activeTab, setActiveTab] = useState<'prompt' | 'gallery'>('prompt');
   
+  // Style Selector State
+  const [selectedStyle, setSelectedStyle] = useState<ArtStyleType>(currentArtStyle);
+
+  const getStylePrefix = (style: ArtStyleType): string => {
+    switch (style) {
+      case 'pixel_art':
+        return '16-bit pixel art style ancient historical illustration of';
+      case 'photorealistic':
+        return 'Photorealistic cinematic historical documentary film still of';
+      case 'comic_bd':
+        return 'Franco-Belgian comic book style graphic novel illustration of';
+      case 'oil_painting':
+        return 'Classic 19th-century historical oil painting of';
+      case 'papyrus_ink':
+        return 'Ancient historical papyrus manuscript ink drawing of';
+      default:
+        return '16-bit pixel art style ancient historical illustration of';
+    }
+  };
+
+  const getStyleSuffix = (style: ArtStyleType): string => {
+    switch (style) {
+      case 'pixel_art':
+        return 'educational adventure game aesthetic, highly detailed scene, atmospheric lighting, 16:9 ratio, retro pixel art graphics';
+      case 'photorealistic':
+        return 'hyper-realistic textures, natural dramatic lighting, museum quality historical accuracy, 16:9 ratio, cinematic 8k';
+      case 'comic_bd':
+        return 'ligne claire clear outlines, expressive characters, vibrant historic colors, graphic novel page panel, 16:9 ratio';
+      case 'oil_painting':
+        return 'museum masterpiece, dramatic chiaroscuro light, rich oil on canvas texture, historical romanticism, 16:9 ratio';
+      case 'papyrus_ink':
+        return 'detailed ancient ink linework, weathered papyrus texture, natural earth pigments, hieratic aesthetic, 16:9 ratio';
+      default:
+        return 'educational adventure game visual, 16:9 ratio';
+    }
+  };
+
+  const buildPromptForStyle = (style: ArtStyleType): string => {
+    return `${getStylePrefix(style)} ${locationName} – ${stationTitle}, ${getStyleSuffix(style)}`;
+  };
+
   // Custom Prompt State
-  const defaultPrompt = initialPrompt || 
-    `16-bit pixel art style ancient historical illustration of ${locationName} - ${stationTitle}, educational adventure game aesthetic, highly detailed scene, atmospheric lighting, 16:9 ratio, retro pixel art graphics`;
+  const defaultPrompt = initialPrompt || buildPromptForStyle(currentArtStyle);
   const [promptText, setPromptText] = useState<string>(defaultPrompt);
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
@@ -190,11 +234,50 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
                 </p>
               </div>
 
+              {/* Visual Art Style Selector */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between text-xs text-stone-300 font-bold">
+                  <span className="flex items-center gap-1.5 text-amber-300">
+                    <Palette className="w-4 h-4 text-amber-400" />
+                    <span>Gewünschter Bildstil für diesen Prompt:</span>
+                  </span>
+                  <span className="text-[11px] text-stone-400">Klick passt Prompt-Vokabular sofort an</span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
+                  {[
+                    { id: 'pixel_art' as ArtStyleType, label: '16-Bit Pixel', icon: '🕹️' },
+                    { id: 'photorealistic' as ArtStyleType, label: 'Fotorealistisch', icon: '📸' },
+                    { id: 'comic_bd' as ArtStyleType, label: 'Comic / BD', icon: '🎨' },
+                    { id: 'oil_painting' as ArtStyleType, label: 'Ölgemälde', icon: '🏛️' },
+                    { id: 'papyrus_ink' as ArtStyleType, label: 'Papyrus / Tusche', icon: '📜' },
+                  ].map((s) => (
+                    <button
+                      key={s.id}
+                      type="button"
+                      onClick={() => {
+                        soundFX.playClick();
+                        setSelectedStyle(s.id);
+                        setPromptText(buildPromptForStyle(s.id));
+                      }}
+                      className={`flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl border text-xs font-bold transition-all ${
+                        selectedStyle === s.id
+                          ? 'bg-amber-600 text-stone-950 border-amber-400 shadow-md scale-102 ring-1 ring-amber-300'
+                          : 'bg-stone-900 border-stone-800 text-stone-300 hover:border-amber-700/60'
+                      }`}
+                    >
+                      <span>{s.icon}</span>
+                      <span>{s.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {/* Editable Prompt Area */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between text-xs text-stone-400">
                   <span>Prompt-Text (Englisch für beste KI-Ergebnisse):</span>
-                  <span className="font-mono text-[11px] text-amber-400">16:9 Format • Retro Pixel Art</span>
+                  <span className="font-mono text-[11px] text-amber-400">16:9 Format • {selectedStyle}</span>
                 </div>
                 <textarea
                   rows={4}

@@ -7,6 +7,13 @@ export type GameMechanicArchetype =
   | 'mythology_duel'      // Held-Wahl, Gunst, Quiz-Prüfungen, Inventar, Gesundheit & Moral (Mythologie)
   | 'city_scavenger_hunt';// Schnitzeljagd, Rätsel-Hinweise, Stadtführer (Romulus)
 
+export type ArtStyleType =
+  | 'pixel_art'      // 16-Bit Pixel Art Retro Videospiel (Oregon Trail)
+  | 'photorealistic' // Fotorealistisch / Historisches Dokumentar-Film Still
+  | 'comic_bd'       // Franko-Belgischer Comic / Graphic Novel (z.B. Asterix, Alix, Ligne Claire)
+  | 'oil_painting'   // Klassisches Historien-Ölgemälde (19. Jhdt / Barock)
+  | 'papyrus_ink';   // Antike Papyrus-Tuschezeichnung / Buchmalerei
+
 export interface QuizQuestion {
   question: string;
   hint: string; // Tipp-Button (💡)
@@ -111,6 +118,7 @@ export interface GameDefinition {
   subtitle: string;
   era: string; // e.g. "Altes Ägypten", "Alexander der Große", "Reformation 1517", "Steinzeit"
   archetype?: GameMechanicArchetype; // Dynamic mechanic mode
+  artStyle?: ArtStyleType; // Visual style of the station illustrations
   description: string;
   targetGrades: string;
   coreTopics: string[]; // Teacher curriculum topics: e.g. ["Kanalbau", "95 Thesen", "Sesshaftwerdung"]
