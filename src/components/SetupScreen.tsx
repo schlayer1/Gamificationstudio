@@ -18,7 +18,6 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
   onSelectGame,
 }) => {
   const [name, setName] = useState('');
-  const [gradeLevel, setGradeLevel] = useState<GradeLevel>('mittelstufe');
   const [gender, setGender] = useState<'prinz' | 'prinzessin' | 'neutral'>('prinzessin');
 
   // Teacher PIN Protection State
@@ -90,9 +89,10 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
     if (!name.trim()) return;
 
     soundFX.playBlessing();
+    const resolvedGrade: GradeLevel = activeGame?.gradeLevel || 'mittelstufe';
     const finalProfile: PlayerProfile = {
       name: name.trim(),
-      gradeLevel,
+      gradeLevel: resolvedGrade,
       gender,
       throneName: getPreviewThroneName(),
     };
@@ -301,80 +301,6 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
               >
                 ✨ Herrscher/in
               </button>
-            </div>
-          </div>
-
-          {/* Question 3: Grade Level Adaptation */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-amber-200 flex items-center gap-2">
-              <span className="text-amber-400">3.</span> In welche Klassenstufe gehst du?
-            </label>
-            <p className="text-xs text-stone-400">
-              Die Sprache, historische Tiefe und Dilemmata passen sich exakt deiner Altersgruppe an!
-            </p>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-              {/* Unterstufe */}
-              <div
-                onClick={() => {
-                  soundFX.playClick();
-                  setGradeLevel('unterstufe');
-                }}
-                className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
-                  gradeLevel === 'unterstufe'
-                    ? 'bg-amber-950/70 border-amber-400 ring-2 ring-amber-500/50'
-                    : 'bg-stone-900/70 border-stone-800 hover:border-stone-700'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-sm text-amber-300">Unterstufe</span>
-                  <span className="text-xs text-stone-400 font-mono">5.–6. Kl.</span>
-                </div>
-                <p className="text-xs text-stone-300">
-                  Fokus auf spannende Erzählung, klare Entscheidungen & leicht verständliche Begriffe.
-                </p>
-              </div>
-
-              {/* Mittelstufe */}
-              <div
-                onClick={() => {
-                  soundFX.playClick();
-                  setGradeLevel('mittelstufe');
-                }}
-                className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
-                  gradeLevel === 'mittelstufe'
-                    ? 'bg-amber-950/70 border-amber-400 ring-2 ring-amber-500/50'
-                    : 'bg-stone-900/70 border-stone-800 hover:border-stone-700'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-sm text-amber-300">Mittelstufe</span>
-                  <span className="text-xs text-stone-400 font-mono">7.–9. Kl.</span>
-                </div>
-                <p className="text-xs text-stone-300">
-                  Ausgewogene Sprache, historische Fachbegriffe & erste moralische Grauzonen.
-                </p>
-              </div>
-
-              {/* Oberstufe */}
-              <div
-                onClick={() => {
-                  soundFX.playClick();
-                  setGradeLevel('oberstufe');
-                }}
-                className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
-                  gradeLevel === 'oberstufe'
-                    ? 'bg-amber-950/70 border-amber-400 ring-2 ring-amber-500/50'
-                    : 'bg-stone-900/70 border-stone-800 hover:border-stone-700'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold text-sm text-amber-300">Oberstufe</span>
-                  <span className="text-xs text-stone-400 font-mono">ab 10. Kl.</span>
-                </div>
-                <p className="text-xs text-stone-300">
-                  Anspruchsvolle Quellentexte, komplexe Machtdynamiken & Staatsphilosophie.
-                </p>
-              </div>
             </div>
           </div>
 

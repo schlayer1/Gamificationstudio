@@ -6,6 +6,7 @@ export interface GenerationRequest {
   era: string;
   archetype?: import('../types/game').GameMechanicArchetype;
   artStyle?: import('../types/game').ArtStyleType;
+  gradeLevel?: import('../types/game').GradeLevel;
   targetGrades: string;
   roundCount?: number; // 5 to 26 rounds
   reflectionInterval?: number; // every 3, 4, 5 rounds
@@ -204,6 +205,7 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
       subtitle: req.era,
       era: req.era,
       description: `Interaktives Geschichtsspiel zur Epoche ${req.era}.`,
+      gradeLevel: req.gradeLevel || 'mittelstufe',
       targetGrades: req.targetGrades,
       coreTopics: req.coreTopics,
       pillars: req.pillars,

@@ -171,17 +171,18 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             stats.volk <= 15 ? 'bg-red-500 text-white' : 'bg-emerald-950 text-emerald-300'
           )}
 
-          {/* EP Brain Box */}
-          <div className="col-span-2 sm:col-span-1 flex items-center justify-between p-2.5 rounded-lg bg-gradient-to-br from-amber-950 to-stone-900 border border-amber-500/70 shadow-inner">
+          {/* EP Brain Box (Dezente & elegante Anzeige) */}
+          <div className="col-span-2 sm:col-span-1 flex items-center justify-between px-3 py-2 rounded-xl bg-stone-900/80 border border-stone-800 hover:border-amber-700/50 transition-all">
             <div className="flex items-center gap-2">
-              <span className="text-xl">🧠</span>
-              <div>
-                <span className="text-[11px] block uppercase text-amber-300 font-bold">Erfahrungspunkte</span>
-                <span className="text-xs text-stone-400">Schaltet Option D frei (3 EP)</span>
+              <span className="text-base select-none">🧠</span>
+              <div className="leading-tight">
+                <span className="text-[10px] block uppercase font-mono font-semibold text-stone-400">Erfahrung (EP)</span>
+                <span className="text-[10px] text-stone-500">3 EP für Meisteroption</span>
               </div>
             </div>
-            <div className="flex items-center justify-center px-3 py-1 rounded-md bg-amber-500/20 border border-amber-400 text-amber-300 font-extrabold text-base">
-              {stats.ep} EP
+            <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-stone-950 border border-amber-600/40 text-amber-300 font-mono font-bold text-xs shadow-inner">
+              <span>{stats.ep}</span>
+              <span className="text-[10px] text-amber-500/80">EP</span>
             </div>
           </div>
         </div>

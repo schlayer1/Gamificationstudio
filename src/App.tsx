@@ -336,7 +336,6 @@ export const App: React.FC = () => {
               lastReactionChoice={lastConsequence?.choiceLabel}
               lastReactionType={lastReactionType}
               hotspots={customStationHotspots[currentRoundIndex] || currentStory.hotspots}
-              onOpenImageModal={() => setIsImageModalOpen(true)}
             />
 
             {/* Split Workbench: Left (Story & Decisions) | Right (Didactic Lexicon & Reaction) */}
@@ -483,21 +482,9 @@ export const App: React.FC = () => {
                   </p>
 
                   {/* Compact Scene Explorer Hint */}
-                  <div className="p-3 rounded-xl bg-stone-900/60 border border-amber-900/40 flex items-center justify-between text-xs text-amber-200">
-                    <span className="flex items-center gap-1.5 font-medium">
-                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-                      <span>Stations-Bühne aktiv erkunden</span>
-                    </span>
-                    <button
-                      onClick={() => {
-                        soundFX.playClick();
-                        setIsImageModalOpen(true);
-                      }}
-                      className="px-2.5 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-600/50 text-amber-300 font-bold text-[11px] transition-all flex items-center gap-1"
-                    >
-                      <Camera className="w-3 h-3" />
-                      <span>Bild & Stil</span>
-                    </button>
+                  <div className="p-2.5 rounded-xl bg-amber-950/20 border border-amber-900/30 flex items-center gap-2 text-xs text-amber-800">
+                    <Sparkles className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <span>Tippe auf die Station oben, um historische Zeitzeugen und Details zu erforschen.</span>
                   </div>
 
                   <div className="p-3 rounded-xl bg-amber-900/10 border border-amber-900/20 text-xs text-amber-950 space-y-1">

@@ -52,7 +52,8 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [selectedTemplate, setSelectedTemplate] = useState<PredefinedTemplate>(PREDEFINED_TEMPLATES[0]);
   const [customTitle, setCustomTitle] = useState<string>(selectedTemplate.title);
   const [customEra, setCustomEra] = useState<string>(selectedTemplate.era);
-  const [targetGrades, setTargetGrades] = useState<string>('Alle Stufen (Differenziert 5–12)');
+  const [gradeLevel, setGradeLevel] = useState<import('../types/game').GradeLevel>('mittelstufe');
+  const [targetGrades, setTargetGrades] = useState<string>('Mittelstufe (Klasse 7–9)');
   const [coreTopics, setCoreTopics] = useState<string[]>(selectedTemplate.defaultTopics);
   const [newTopicInput, setNewTopicInput] = useState<string>('');
 
@@ -188,6 +189,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         title: customTitle,
         era: customEra,
         archetype: selectedTemplate.archetype,
+        gradeLevel,
         targetGrades,
         roundCount,
         reflectionInterval,
@@ -562,6 +564,73 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
             <Plus className="w-4 h-4" />
             <span>Hinzufügen</span>
           </button>
+        </div>
+      </div>
+
+      {/* STEP 2a: Grade Level Selection (Lehrkraft legt Klassenstufe für Schüler fest) */}
+      <div className="papyrus-dark p-6 rounded-2xl border border-amber-700/60 space-y-4 shadow-xl">
+        <div className="space-y-1">
+          <h2 className="text-base font-bold text-amber-200 font-serif flex items-center gap-2">
+            <span>Schritt 2a:</span> Klassenstufe festlegen (Didaktische Sprache & Tiefe)
+          </h2>
+          <p className="text-xs text-stone-300">
+            Schüler müssen ihre Klassenstufe nicht selbst wählen – du bestimmst das Niveau direkt hier im Studio.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+          {[
+            {
+              id: 'unterstufe' as import('../types/game').GradeLevel,
+              title: 'Unterstufe',
+              badge: '5.–6. Klasse',
+              desc: 'Lebendige, anschauliche Sprache, klare moralische Dilemmata, einfache geschichtliche Begriffe.',
+            },
+            {
+              id: 'mittelstufe' as import('../types/game').GradeLevel,
+              title: 'Mittelstufe',
+              badge: '7.–9. Klasse',
+              desc: 'Ausgewogene historische Fachsprache, multiperspektivische Interessenkonflikte und Grauzonen.',
+            },
+            {
+              id: 'oberstufe' as import('../types/game').GradeLevel,
+              title: 'Oberstufe',
+              badge: 'ab 10. Klasse',
+              desc: 'Quellennah, anspruchsvolle Staatsphilosophie, geopolitische Kausalitäten und Abstraktionsgrad.',
+            },
+          ].map((item) => (
+            <div
+              key={item.id}
+              onClick={() => {
+                soundFX.playClick();
+                setGradeLevel(item.id);
+                setTargetGrades(`${item.title} (${item.badge})`);
+              }}
+              className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
+                gradeLevel === item.id
+                  ? 'bg-amber-950/80 border-amber-400 ring-2 ring-amber-500/40 shadow-lg'
+                  : 'bg-stone-900/80 border-stone-800 hover:border-amber-700/60'
+              }`}
+            >
+              <div>
+                <div className="flex items-center justify-between mb-1">
+                  <h3 className="text-sm font-bold text-amber-200">{item.title}</h3>
+                  <span className="text-[10px] font-mono text-amber-400 font-bold bg-black/50 px-2 py-0.5 rounded border border-amber-800/40">
+                    {item.badge}
+                  </span>
+                </div>
+                <p className="text-xs text-stone-300 leading-snug">{item.desc}</p>
+              </div>
+
+              <div className="pt-2 mt-2 border-t border-stone-800/70 flex items-center justify-between text-[11px]">
+                <span className="text-stone-400">Aktiv:</span>
+                <span className={gradeLevel === item.id ? 'text-amber-300 font-bold flex items-center gap-1' : 'text-stone-500'}>
+                  {gradeLevel === item.id ? <CheckCircle className="w-3.5 h-3.5 text-amber-400 inline" /> : null}
+                  {gradeLevel === item.id ? 'Gewählt' : 'Auswählen'}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
 

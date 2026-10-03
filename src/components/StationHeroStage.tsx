@@ -29,7 +29,7 @@ interface StationHeroStageProps {
     description: string;
     icon?: string;
   }>;
-  onOpenImageModal: () => void;
+  onOpenImageModal?: () => void;
 }
 
 export const StationHeroStage: React.FC<StationHeroStageProps> = ({
@@ -132,18 +132,20 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
 
         {/* Right Stage Controls */}
         <div className="flex items-center gap-2">
-          {/* Change Image & Prompt Button */}
-          <button
-            onClick={() => {
-              soundFX.playClick();
-              onOpenImageModal();
-            }}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-950/85 hover:bg-stone-950 text-amber-300 hover:text-amber-200 border border-amber-600/70 shadow-lg text-xs font-bold transition-all backdrop-blur-md cursor-pointer hover:scale-102"
-            title="Bildstil anpassen, KI-Prompt kopieren oder neues Bild zuweisen"
-          >
-            <Camera className="w-3.5 h-3.5 text-amber-400" />
-            <span className="hidden xs:inline">Bild & Prompt</span>
-          </button>
+          {/* Optional Change Image & Prompt Button (Only in Teacher/Studio context) */}
+          {onOpenImageModal && (
+            <button
+              onClick={() => {
+                soundFX.playClick();
+                onOpenImageModal();
+              }}
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-950/85 hover:bg-stone-950 text-amber-300 hover:text-amber-200 border border-amber-600/70 shadow-lg text-xs font-bold transition-all backdrop-blur-md cursor-pointer hover:scale-102"
+              title="Bildstil anpassen, KI-Prompt kopieren oder neues Bild zuweisen"
+            >
+              <Camera className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden xs:inline">Bild & Prompt</span>
+            </button>
+          )}
 
           {/* Fullscreen Toggle */}
           <button
