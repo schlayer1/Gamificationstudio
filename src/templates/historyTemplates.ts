@@ -16,6 +16,7 @@ export interface PredefinedTemplate {
   specialResource: { name: string; emoji: string };
   skills: { skill1: string; skill2: string; skill3: string };
   historicalContext: string;
+  eraThemeId: import('../utils/themeManager').EraThemeId;
 }
 
 export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
@@ -24,6 +25,7 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     id: "aegypten_trail",
     title: "Aufstieg zum Pharao – Helfer des Pharaos",
     era: "Altes Ägypten (ca. 2600 v. Chr.)",
+    eraThemeId: "egypt_gold",
     archetype: "reigns_balance",
     tagline: "Expedition auf dem Nil von Elephantine nach Gizeh",
     defaultTopics: [
@@ -53,6 +55,7 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     id: "alexander_der_grosse",
     title: "Alexander der Große und seine Eroberungszüge",
     era: "Antikes Griechenland & Persien (334 v. Chr.)",
+    eraThemeId: "greece_aegean",
     archetype: "conquest_campaign",
     tagline: "Vom Hellespont und Granikos bis nach Indien (26 Stationen)",
     defaultTopics: [
@@ -82,6 +85,7 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     id: "luther_reformation",
     title: "Luthers Reformationsreise & die Bauernkriege",
     era: "Heiliges Römisches Reich (1517–1525)",
+    eraThemeId: "luther_ink",
     archetype: "reigns_balance",
     tagline: "Vom Thesenanschlag in Wittenberg bis zu den Bauernaufständen",
     defaultTopics: [
@@ -111,6 +115,7 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     id: "steinzeit_neolithikum",
     title: "Die Reise in die Steinzeit – Auf dem Weg zur Sesshaftwerdung",
     era: "Neolithische Revolution (vor ca. 10.000 Jahren)",
+    eraThemeId: "stoneage_earth",
     archetype: "survival_settlement",
     tagline: "Vom Jäger und Sammler zur ersten dauerhaften Dorfsiedlung",
     defaultTopics: [
@@ -140,6 +145,7 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     id: "antikes_rom_kaiser",
     title: "Aufstieg zum Caesar – Der Weg zur Herrschaft über Rom",
     era: "Römische Republik & Kaiserzeit (44 v. Chr. – 14 n. Chr.)",
+    eraThemeId: "rome_imperial",
     archetype: "city_scavenger_hunt",
     tagline: "Vom Senat und Forum Romanum zum Prinzipat des Augustus",
     defaultTopics: [
@@ -169,6 +175,7 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     id: "mythologie_rom_germanen",
     title: "Götterdämmerung am Limes: Römer vs. Germanen",
     era: "Mythologie der Antike (1. Jh. n. Chr.)",
+    eraThemeId: "mythology_rune",
     archetype: "mythology_duel",
     tagline: "Wähle deinen Helden (🏛️ Rom oder 🌳 Germanien) – Quiz-Prüfungen, Göttergunst & Artefakte",
     defaultTopics: [

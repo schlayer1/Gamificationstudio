@@ -30,6 +30,7 @@ interface StationHeroStageProps {
     icon?: string;
   }>;
   onOpenImageModal?: () => void;
+  theme?: import('../utils/themeManager').EraThemeConfig;
 }
 
 export const StationHeroStage: React.FC<StationHeroStageProps> = ({
@@ -42,6 +43,7 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
   lastReactionType,
   hotspots,
   onOpenImageModal,
+  theme,
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [activeHotspot, setActiveHotspot] = useState<{
@@ -79,10 +81,11 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
   ];
 
   const currentHotspots = hotspots && hotspots.length > 0 ? hotspots : defaultHotspots;
+  const heroBorder = theme?.borderHero || 'border-amber-600/70';
 
   return (
     <div
-      className={`relative w-full rounded-2xl overflow-hidden border-2 border-amber-600/70 shadow-2xl transition-all duration-500 group bg-stone-950 ${
+      className={`relative w-full rounded-2xl overflow-hidden border-2 ${heroBorder} shadow-2xl transition-all duration-500 group bg-stone-950 ${
         isFullscreen ? 'fixed inset-4 z-50 rounded-2xl max-h-[96vh]' : 'h-64 sm:h-80 md:h-96 lg:h-[420px]'
       }`}
     >

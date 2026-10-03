@@ -1,5 +1,6 @@
 import { geminiRotationService } from './geminiRotation';
 import { GameDefinition, PillarConfig, RoundStory } from '../types/game';
+import { detectEraTheme } from '../utils/themeManager';
 
 export interface GenerationRequest {
   title: string;
@@ -207,6 +208,7 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
       description: `Interaktives Geschichtsspiel zur Epoche ${req.era}.`,
       gradeLevel: req.gradeLevel || 'mittelstufe',
       targetGrades: req.targetGrades,
+      eraThemeId: detectEraTheme(req.era + ' ' + req.title, req.archetype).id,
       coreTopics: req.coreTopics,
       pillars: req.pillars,
       specialResourceName: req.specialResourceName,

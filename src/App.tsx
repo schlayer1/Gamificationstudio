@@ -12,6 +12,7 @@ import { StationImagePromptModal } from './components/StationImagePromptModal';
 import { StationHeroStage } from './components/StationHeroStage';
 import { soundFX } from './utils/sound';
 import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon } from 'lucide-react';
+import { detectEraTheme, ERA_THEMES } from './utils/themeManager';
 
 export const App: React.FC = () => {
   // Game Lifecycle State
@@ -108,6 +109,11 @@ export const App: React.FC = () => {
     setActiveGameDefinition(newGame);
     setGameState('setup');
   };
+
+  // Dynamic Theme according to active game era
+  const currentTheme = activeGameDefinition?.eraThemeId
+    ? ERA_THEMES[activeGameDefinition.eraThemeId]
+    : detectEraTheme(activeGameDefinition?.era || 'Altes Ägypten', activeGameDefinition?.archetype);
 
   // Current Story round data resolved dynamically based on current player state
   const currentStory = (activeGameDefinition && activeGameDefinition.rounds[currentRoundIndex])
@@ -250,7 +256,7 @@ export const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#120d09] text-stone-100">
+    <div className={`min-h-screen flex flex-col ${currentTheme.bodyBgClass} text-stone-100 transition-colors duration-700`}>
       {/* 0. TEACHER STUDIO STATE */}
       {gameState === 'studio' && (
         <TeacherStudio
@@ -336,6 +342,7 @@ export const App: React.FC = () => {
               lastReactionChoice={lastConsequence?.choiceLabel}
               lastReactionType={lastReactionType}
               hotspots={customStationHotspots[currentRoundIndex] || currentStory.hotspots}
+              theme={currentTheme}
             />
 
             {/* Split Workbench: Left (Story & Decisions) | Right (Didactic Lexicon & Reaction) */}
@@ -343,18 +350,18 @@ export const App: React.FC = () => {
               {/* Left Column: Situation & The 4 Choices (A, B, C, D) */}
               <div className="lg:col-span-7 xl:col-span-7 2xl:col-span-7 space-y-4">
                 {/* Round Title & Milestone header */}
-                <div className="papyrus-dark p-4 sm:p-6 rounded-2xl border border-amber-700/60 shadow-xl space-y-3">
-                  <div className="flex items-center justify-between border-b border-stone-800 pb-2">
-                    <span className="text-xs uppercase font-mono tracking-widest text-amber-400 font-bold">
+                <div className={`${currentTheme.cardBg} p-4 sm:p-6 rounded-2xl border-2 ${currentTheme.cardBorder} shadow-xl space-y-3`}>
+                  <div className="flex items-center justify-between border-b border-stone-800/80 pb-2">
+                    <span className={`text-xs uppercase font-mono tracking-widest ${currentTheme.badgeText} font-bold`}>
                       {currentStory.milestoneTitle}
                     </span>
-                    <span className="text-xs px-2.5 py-1 rounded bg-stone-900 border border-stone-700 text-stone-300 font-serif">
+                    <span className={`text-xs px-2.5 py-1 rounded bg-stone-900 border ${currentTheme.badgeBorder} ${currentTheme.badgeText} font-serif`}>
                       Station: {currentStory.locationName}
                     </span>
                   </div>
 
                   {/* Story Situation Prompt adapted to grade */}
-                  <p className="text-base sm:text-lg text-amber-100 font-medium leading-relaxed font-serif">
+                  <p className="text-base sm:text-lg text-stone-100 font-medium leading-relaxed font-serif">
                     {currentStory.situation[profile.gradeLevel]}
                   </p>
                 </div>

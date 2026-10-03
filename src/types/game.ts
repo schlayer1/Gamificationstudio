@@ -129,6 +129,7 @@ export interface GameDefinition {
   era: string; // e.g. "Altes Ägypten", "Alexander der Große", "Reformation 1517", "Steinzeit"
   archetype?: GameMechanicArchetype; // Dynamic mechanic mode
   artStyle?: ArtStyleType; // Visual style of the station illustrations
+  eraThemeId?: import('../utils/themeManager').EraThemeId; // Color theme for UI surfaces
   gradeLevel?: GradeLevel; // Assigned grade level set by the teacher
   description: string;
   targetGrades: string;

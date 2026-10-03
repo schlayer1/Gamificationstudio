@@ -3,6 +3,7 @@ import { GradeLevel, PlayerProfile, GameDefinition } from '../types/game';
 import { soundFX } from '../utils/sound';
 import { Crown, Sparkles, BookCheck, Shield, Lock, Key, ArrowRight, Share2, CheckCircle } from 'lucide-react';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
+import { detectEraTheme, ERA_THEMES } from '../utils/themeManager';
 
 interface SetupScreenProps {
   onStartGame: (profile: PlayerProfile) => void;
@@ -19,6 +20,11 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState<'prinz' | 'prinzessin' | 'neutral'>('prinzessin');
+
+  // Dynamic Theme
+  const theme = activeGame?.eraThemeId
+    ? ERA_THEMES[activeGame.eraThemeId]
+    : detectEraTheme(activeGame?.era || 'Altes Ägypten', activeGame?.archetype);
 
   // Teacher PIN Protection State
   const [showPinModal, setShowPinModal] = useState(false);
@@ -206,10 +212,10 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
         />
         <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-transparent flex items-end p-4 sm:p-6">
           <div className="space-y-1">
-            <span className="text-xs font-mono font-bold tracking-widest text-amber-400 uppercase bg-stone-950/80 px-2.5 py-1 rounded border border-amber-600/50 inline-block">
+            <span className={`text-xs font-mono font-bold tracking-widest uppercase ${theme.badgeBg} ${theme.badgeText} px-2.5 py-1 rounded border ${theme.badgeBorder} inline-block`}>
               {activeGame ? activeGame.era : "16-Bit Retro Schulabenteuer"}
             </span>
-            <h2 className="text-xl sm:text-3xl font-extrabold text-amber-200 font-serif m-0 drop-shadow-md">
+            <h2 className="text-xl sm:text-3xl font-extrabold text-stone-100 font-serif m-0 drop-shadow-md">
               {activeGame ? activeGame.title : "Die Nil-Expedition nach Gizeh"}
             </h2>
           </div>
@@ -218,11 +224,11 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
 
       {/* Title & Introduction */}
       <div className="text-center space-y-2 mb-6">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/50 text-amber-300 text-xs sm:text-sm font-semibold tracking-wide">
-          <Crown className="w-4 h-4 text-amber-400" />
+        <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full ${theme.badgeBg} border ${theme.badgeBorder} ${theme.badgeText} text-xs sm:text-sm font-semibold tracking-wide`}>
+          <span>{theme.icon}</span>
           <span>Interaktives Geschichts-Abenteuerspiel</span>
         </div>
-        <h1 className="text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 font-serif tracking-tight">
+        <h1 className={`text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${theme.titleGradient} font-serif tracking-tight`}>
           {activeGame ? activeGame.title : "Aufstieg zum Pharao"}
         </h1>
         <p className="text-sm sm:text-base text-stone-300 max-w-xl mx-auto font-light">
@@ -233,15 +239,15 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
       </div>
 
       {/* Main Setup Card */}
-      <div className="w-full papyrus-dark rounded-2xl p-6 sm:p-8 border border-amber-700/60 shadow-2xl relative overflow-hidden">
-        {/* Subtle decorative pharaoh accent */}
+      <div className={`w-full ${theme.cardBg} rounded-2xl p-6 sm:p-8 border-2 ${theme.cardBorder} shadow-2xl relative overflow-hidden`}>
+        {/* Subtle decorative accent */}
         <div className="absolute -top-12 -right-12 w-36 h-36 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Question 1: Name */}
           <div className="space-y-2">
-            <label className="block text-sm font-semibold text-amber-200 flex items-center gap-2">
-              <span className="text-amber-400">1.</span> Wie lautet dein Name?
+            <label className="block text-sm font-semibold text-stone-200 flex items-center gap-2">
+              <span className={theme.badgeText}>1.</span> Wie lautet dein Name?
             </label>
             <input
               type="text"
@@ -341,7 +347,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
           <button
             type="submit"
             disabled={!name.trim()}
-            className="w-full py-4 rounded-xl bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600 text-stone-950 font-bold text-lg shadow-xl hover:from-amber-400 hover:to-yellow-500 transition-all active:scale-[0.99] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2"
+            className={`w-full py-4 rounded-xl ${theme.primaryButton} font-bold text-lg shadow-xl transition-all active:scale-[0.99] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer flex items-center justify-center gap-2`}
           >
             <span>Expedition beginnen & Runde 1 betreten</span>
             <span className="text-xl">➔</span>
