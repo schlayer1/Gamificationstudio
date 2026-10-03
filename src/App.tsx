@@ -9,6 +9,7 @@ import { EndingScreen } from './components/EndingScreen';
 import { GameOverScreen } from './components/GameOverScreen';
 import { TeacherStudio } from './components/TeacherStudio';
 import { StationImagePromptModal } from './components/StationImagePromptModal';
+import { StationHeroStage } from './components/StationHeroStage';
 import { soundFX } from './utils/sound';
 import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon } from 'lucide-react';
 
@@ -65,6 +66,7 @@ export const App: React.FC = () => {
     round: number;
     statChanges: Partial<Stats>;
   } | null>(null);
+  const [lastReactionType, setLastReactionType] = useState<'positive' | 'negative' | 'divine' | null>(null);
 
   // Failure tracking
   const [fallenStat, setFallenStat] = useState<string>('Kollaps');
@@ -224,6 +226,15 @@ export const App: React.FC = () => {
       statChanges: choice.statChanges,
     });
 
+    // Visual Stage Reaction FX
+    if (choice.id === 'D') {
+      setLastReactionType('divine');
+    } else {
+      const hasMajorDrop = Object.values(choice.statChanges).some((v) => typeof v === 'number' && v < -5);
+      setLastReactionType(hasMajorDrop ? 'negative' : 'positive');
+    }
+    setTimeout(() => setLastReactionType(null), 1800);
+
     // Advance to next round or ending
     if (currentRoundIndex + 1 >= totalRounds) {
       setGameState('ending');
@@ -312,6 +323,19 @@ export const App: React.FC = () => {
               round={currentStory.roundNumber}
               totalRounds={totalRounds}
               locationName={currentStory.locationName}
+            />
+
+            {/* PROMINENT STATION HERO STAGE: Panoramic 16:9 Illustration with Interactive Hotspots & Visual Reaction FX */}
+            <StationHeroStage
+              imageSrc={customStationImages[currentRoundIndex] || currentStory.imagePath || "/assets/nile_banner.jpg"}
+              locationName={currentStory.locationName}
+              milestoneTitle={currentStory.milestoneTitle}
+              roundNumber={currentStory.roundNumber}
+              totalRounds={totalRounds}
+              lastReactionChoice={lastConsequence?.choiceLabel}
+              lastReactionType={lastReactionType}
+              hotspots={currentStory.hotspots}
+              onOpenImageModal={() => setIsImageModalOpen(true)}
             />
 
             {/* Split Workbench: Left (Story & Decisions) | Right (Didactic Lexicon & Reaction) */}
@@ -457,25 +481,21 @@ export const App: React.FC = () => {
                     {currentStory.lexiconEntry.explanation[profile.gradeLevel]}
                   </p>
 
-                  {/* Contextual Historical Illustration with Image / Prompt Generator Button */}
-                  <div className="relative rounded-xl overflow-hidden border border-amber-900/30 shadow-md group">
-                    <img
-                      src={customStationImages[currentRoundIndex] || currentStory.imagePath || "/assets/nile_banner.jpg"}
-                      alt={currentStory.lexiconEntry.title}
-                      className="w-full h-40 sm:h-52 object-cover object-center transition-all duration-500"
-                    />
-                    
-                    {/* Floating Prompt / Gallery Action Pill */}
+                  {/* Compact Scene Explorer Hint */}
+                  <div className="p-3 rounded-xl bg-stone-900/60 border border-amber-900/40 flex items-center justify-between text-xs text-amber-200">
+                    <span className="flex items-center gap-1.5 font-medium">
+                      <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Stations-Bühne aktiv erkunden</span>
+                    </span>
                     <button
                       onClick={() => {
                         soundFX.playClick();
                         setIsImageModalOpen(true);
                       }}
-                      className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-950/85 hover:bg-stone-950 text-amber-300 hover:text-amber-200 border border-amber-600/60 shadow-lg text-xs font-bold transition-all backdrop-blur-md cursor-pointer hover:scale-102"
-                      title="Bild für diese Station generieren oder aus Galerie wählen"
+                      className="px-2.5 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-600/50 text-amber-300 font-bold text-[11px] transition-all flex items-center gap-1"
                     >
-                      <Camera className="w-3.5 h-3.5 text-amber-400" />
-                      <span>Bild & Prompt</span>
+                      <Camera className="w-3 h-3" />
+                      <span>Bild & Stil</span>
                     </button>
                   </div>
 

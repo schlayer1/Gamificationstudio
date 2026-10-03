@@ -80,6 +80,14 @@ export interface RoundStory {
   milestoneTitle: string;
   imagePath?: string;
   imagePrompt?: string; // Pre-configured image generation prompt for Gemini Imagen / Midjourney / DALL-E
+  hotspots?: Array<{
+    id: string;
+    x: number; // percentage from left (0-100)
+    y: number; // percentage from top (0-100)
+    label: string;
+    description: string;
+    icon?: string;
+  }>;
   quiz?: QuizQuestion; // Optional Quiz Prüfstein (Mythologie/Schnitzeljagd)
   scavengerClue?: string; // Optionaler Rätsel-Hinweis (Rom-Schnitzeljagd)
   branchCondition?: {
