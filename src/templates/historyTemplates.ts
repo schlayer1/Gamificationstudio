@@ -4,6 +4,7 @@ export interface PredefinedTemplate {
   id: string;
   title: string;
   era: string;
+  archetype: import('../types/game').GameMechanicArchetype;
   tagline: string;
   defaultTopics: string[];
   suggestedPillars: [
@@ -18,11 +19,12 @@ export interface PredefinedTemplate {
 }
 
 export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
-  // 1. Ägypten (Bereits fertig)
+  // 1. Ägypten
   {
     id: "aegypten_trail",
     title: "Aufstieg zum Pharao – Helfer des Pharaos",
     era: "Altes Ägypten (ca. 2600 v. Chr.)",
+    archetype: "reigns_balance",
     tagline: "Expedition auf dem Nil von Elephantine nach Gizeh",
     defaultTopics: [
       "Nilflut & Nilometer",
@@ -46,12 +48,13 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     historicalContext: "Reise eines Thronfolgers auf dem Nil, der Ressourcen beschaffen und 4 Stände balancieren muss."
   },
 
-  // 2. Alexander der Große (Aus Prompt 1)
+  // 2. Alexander der Große (Conquest Campaign)
   {
     id: "alexander_der_grosse",
     title: "Alexander der Große und seine Eroberungszüge",
     era: "Antikes Griechenland & Persien (334 v. Chr.)",
-    tagline: "Vom Hellespont und Granikos bis nach Indien",
+    archetype: "conquest_campaign",
+    tagline: "Vom Hellespont und Granikos bis nach Indien (26 Stationen)",
     defaultTopics: [
       "Schlacht am Granikos & Issos",
       "Belagerung von Tyros",
@@ -60,8 +63,8 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
       "Makedonische Phalanx & Heeresmeuterei am Hyphasis"
     ],
     suggestedPillars: [
-      { key: "truppenstaerke", label: "Truppenstärke ⚔️", icon: "⚔️", description: "Makedonische Phalanx und Reiterei" },
-      { key: "vorraete", label: "Vorräte 🍖", icon: "🍖", description: "Nahrung, Wasser und Tross auf langen Märschen" },
+      { key: "truppenstaerke", label: "Truppenstärke ⚔️", icon: "⚔️", description: "Makedonische Phalanx und Hetairoi-Reiterei" },
+      { key: "vorraete", label: "Vorräte 🍖", icon: "🍖", description: "Nahrung, Wasser und Tross auf langen Wüstenmärschen" },
       { key: "soldatenmoral", label: "Soldatenzufriedenheit 😊", icon: "😊", description: "Kriegsmüdigkeit und Loyalität des Heeres" },
       { key: "reichskontrolle", label: "Reichskontrolle 🏛️", icon: "🏛️", description: "Akzeptanz der unterworfenen Völker und Satrapen" }
     ],
@@ -74,11 +77,12 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     historicalContext: "Als junger Berater begleitest du Alexander auf seinem 10-jährigen Feldzug gegen das Perserreich."
   },
 
-  // 3. Luther & Bauernkriege (Aus Prompt 2)
+  // 3. Luther & Bauernkriege (Reformation Balance)
   {
     id: "luther_reformation",
     title: "Luthers Reformationsreise & die Bauernkriege",
-    era: "Heiliges Römisches Reich Deutscher Nation (1517–1525)",
+    era: "Heiliges Römisches Reich (1517–1525)",
+    archetype: "reigns_balance",
     tagline: "Vom Thesenanschlag in Wittenberg bis zu den Bauernaufständen",
     defaultTopics: [
       "95 Thesen & Kritik am Ablasshandel",
@@ -102,11 +106,12 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     historicalContext: "Als junger Gelehrter in Wittenberg begleitest du Martin Luther durch religiöse Debatten und soziale Umbrüche."
   },
 
-  // 4. Steinzeit – Auf dem Weg zur Sesshaftwerdung (Aus Prompt 3)
+  // 4. Steinzeit (Survival & Settlement)
   {
     id: "steinzeit_neolithikum",
     title: "Die Reise in die Steinzeit – Auf dem Weg zur Sesshaftwerdung",
     era: "Neolithische Revolution (vor ca. 10.000 Jahren)",
+    archetype: "survival_settlement",
     tagline: "Vom Jäger und Sammler zur ersten dauerhaften Dorfsiedlung",
     defaultTopics: [
       "Nomadische Großwildjagd vs. feste Wasserquellen",
@@ -130,11 +135,12 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
     historicalContext: "Du begleitest einen Sippenverband beim existenziellen Wandel vom nomadischen Jagen zum Ackerbau."
   },
 
-  // 5. Antikes Rom – Schnitzeljagd & Bürgerkrieg (Aus Prompt 4 & 5)
+  // 5. Antikes Rom (Schnitzeljagd & Metropole)
   {
     id: "antikes_rom_kaiser",
     title: "Aufstieg zum Caesar – Der Weg zur Herrschaft über Rom",
     era: "Römische Republik & Kaiserzeit (44 v. Chr. – 14 n. Chr.)",
+    archetype: "city_scavenger_hunt",
     tagline: "Vom Senat und Forum Romanum zum Prinzipat des Augustus",
     defaultTopics: [
       "Forum Romanum & Senatsintrigen (Curia Julia)",
@@ -156,5 +162,35 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
       skill3: "Staatsverwaltung 📜"
     },
     historicalContext: "Führe deinen Charakter durch die Wirren der späten Republik vom Konsul zur Herrschaft über das Imperium Romanum."
+  },
+
+  // 6. Römische & Germanische Mythologie (Mythology Duel & Quiz-Prüfungen)
+  {
+    id: "mythologie_rom_germanen",
+    title: "Götterdämmerung am Limes: Römer vs. Germanen",
+    era: "Mythologie der Antike (1. Jh. n. Chr.)",
+    archetype: "mythology_duel",
+    tagline: "Wähle deinen Helden (🏛️ Rom oder 🌳 Germanien) – Quiz-Prüfungen, Göttergunst & Artefakte",
+    defaultTopics: [
+      "Jupiter & Mars vs. Odin (Wodan) & Thor (Donar)",
+      "Römische Staatsreligion vs. Heilige Haine und Irminsul",
+      "Unterwelt: Pluto & Tartaros vs. Hel & Walhall",
+      "Schicksalsmächte: Parzen vs. Nornen",
+      "Mythologische Wesen: Zentauren & Sirenen vs. Lindwürmer & Walküren"
+    ],
+    suggestedPillars: [
+      { key: "goettergunst", label: "Göttliche Gunst ✨", icon: "✨", description: "Beistand von Jupiter/Odin für Heilung & Wunder" },
+      { key: "gesundheit", label: "Lebenskraft (HP) ❤️", icon: "❤️", description: "Körperliche Gesundheit gegen Ungeheuer und Prüfungen" },
+      { key: "moral", label: "Moral & Mut 😊", icon: "😊", description: "Seelische Standhaftigkeit gegen Flüche und Zweifel" },
+      { key: "wissen", label: "Mythologie-Wissen 📜", icon: "📜", description: "Verständnis der alten Mythen, Riten und Götterbündnisse" }
+    ],
+    specialResource: { name: "Götter-Amulett (Gunst)", emoji: "🔮" },
+    skills: {
+      skill1: "Körperliche Stärke 💪",
+      skill2: "Göttliche Weisheit 🧠",
+      skill3: "Helden-Charisma 🗣️"
+    },
+    historicalContext: "Wähle zu Beginn, ob du als römischer Held (🏛️) mit Disziplin und Tempelriten oder als germanischer Recke (🌳) aus dem heiligen Hain antrittst!"
   }
 ];
+

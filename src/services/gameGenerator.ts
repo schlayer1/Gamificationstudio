@@ -4,6 +4,7 @@ import { GameDefinition, PillarConfig, RoundStory } from '../types/game';
 export interface GenerationRequest {
   title: string;
   era: string;
+  archetype?: import('../types/game').GameMechanicArchetype;
   targetGrades: string;
   coreTopics: string[];
   pillars: [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
@@ -19,10 +20,17 @@ export class GameGeneratorService {
    */
   async generateFullGame(req: GenerationRequest): Promise<GameDefinition> {
     const roundCount = req.roundCount || 20;
+    const archetype = req.archetype || 'reigns_balance';
 
     const systemInstruction = `
 Du bist ein professioneller Didaktik-Experte für Geschichtsunterricht und Senior Game Designer.
-Erstelle ein didaktisch anspruchsvolles, 20-Runden Geschichts-Abenteuerspiel im Oregon-Trail-Stil für den Schulunterricht.
+Erstelle ein didaktisch anspruchsvolles Geschichts-Abenteuerspiel im Schulunterricht-Standard.
+
+SPIELMECHANIK-ARCHETYP: ${archetype}
+${archetype === 'mythology_duel' ? '- Integriere Quiz-Prüfungen (❓) mit Tipp-Button (💡), Erklärung und Belohnung (🏆) sowie mythologische Artefakte (🗡️, 🔮).' : ''}
+${archetype === 'conquest_campaign' ? '- Integriere Konsequenzen-Bäume mit unmittelbaren und langfristigen Auswirkungen auf Heeresdisziplin und Eroberung.' : ''}
+${archetype === 'survival_settlement' ? '- Fokussiere auf existenzielle Entscheidungen: Nahrung, Werkzeuge, Sesshaftwerdung und handwerkliche Fähigkeiten.' : ''}
+${archetype === 'city_scavenger_hunt' ? '- Baue Stationen als Schnitzeljagd mit architektonischen Hinweisen und Monumenten auf.' : ''}
 
 Regeln & Vorgaben:
 1. 4 Mächtesäulen:

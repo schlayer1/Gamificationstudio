@@ -1,24 +1,48 @@
 export type GradeLevel = 'unterstufe' | 'mittelstufe' | 'oberstufe';
 
+export type GameMechanicArchetype = 
+  | 'reigns_balance'      // 4-Mächte Balance (Ägypten / Luther / Rom)
+  | 'conquest_campaign'   // Heer, Vorräte, Soldatenmoral, Konsequenzenbaum (Alexander)
+  | 'survival_settlement' // Nahrung, Werkzeuge, Sippenzusammenhalt, Fähigkeiten (Steinzeit)
+  | 'mythology_duel'      // Held-Wahl, Gunst, Quiz-Prüfungen, Inventar, Gesundheit & Moral (Mythologie)
+  | 'city_scavenger_hunt';// Schnitzeljagd, Rätsel-Hinweise, Stadtführer (Romulus)
+
+export interface QuizQuestion {
+  question: string;
+  hint: string; // Tipp-Button (💡)
+  options: { id: 'A' | 'B' | 'C' | 'D'; text: string; isCorrect: boolean }[];
+  rewardText: string;
+  explanation: string;
+}
+
+export interface InventoryItem {
+  id: string;
+  name: string;
+  icon: string; // e.g. 🗡️, 🔮, 📜
+  description: string;
+  obtainedInRound: number;
+}
+
 export interface PlayerProfile {
   name: string;
   gradeLevel: GradeLevel;
   gender: 'prinz' | 'prinzessin' | 'neutral';
   throneName: string;
+  heroOrigin?: 'roemisch' | 'germanisch' | 'makedonisch' | 'siedler'; // For mythology & campaigns
 }
 
 export interface Stats {
-  goetter: number;   // ⚡ Götter (0-100%)
-  priester: number;  // 🙏 Priester (0-100%)
-  adel: number;      // 👑 Adel (0-100%)
-  volk: number;      // 😊 Volk (0-100%)
-  ep: number;        // 🧠 Erfahrungspunkte (EP)
+  goetter: number;   // ⚡ Götter / Gunst / Truppenstärke (0-100%)
+  priester: number;  // 🙏 Priester / Vorräte / Werkzeuge (0-100%)
+  adel: number;      // 👑 Adel / Gesundheit / Fürsten (0-100%)
+  volk: number;      // 😊 Volk / Moral / Zusammenhalt (0-100%)
+  ep: number;        // 🧠 Erfahrungspunkte / Strategie / Wissen
 }
 
 export interface Skills {
-  goettlicheAuserwaehltheit: number; // 🌟
-  politischeGeschicklichkeit: number; // 🗣️
-  militaerischeStaerke: number;       // ⚔️
+  goettlicheAuserwaehltheit: number; // 🌟 Stärke / Kriegsführung / Jagd
+  politischeGeschicklichkeit: number; // 🗣️ Weisheit / Diplomatie / Landwirtschaft
+  militaerischeStaerke: number;       // ⚔️ Charisma / Verwaltung / Gemeinschaft
 }
 
 export interface DecisionChoice {
@@ -29,6 +53,11 @@ export interface DecisionChoice {
   isLocked?: boolean;
   statChanges: Partial<Stats>;
   skillChanges?: Partial<Skills>;
+  consequenceTree?: {
+    immediate: string;
+    longterm: string;
+  };
+  itemReward?: InventoryItem;
   consequenceText: {
     unterstufe: string;
     mittelstufe: string;
@@ -37,12 +66,14 @@ export interface DecisionChoice {
 }
 
 export interface RoundStory {
-  id: string; // unique event id, e.g. "assuan_start", "thebes_priest_path", "thebes_revolt_path"
-  roundNumber: number; // 1 to 20
-  locationKey: string; // e.g. 'aswan', 'kom_ombo', 'edfu', 'thebes', 'abydos', 'amarna', 'fayum', 'saqqara', 'giza'
+  id: string; // unique event id
+  roundNumber: number; // 1 to 20/26
+  locationKey: string;
   locationName: string;
   milestoneTitle: string;
-  imagePath?: string; // e.g. '/assets/thebes_karnak.jpg'
+  imagePath?: string;
+  quiz?: QuizQuestion; // Optional Quiz Prüfstein (Mythologie/Schnitzeljagd)
+  scavengerClue?: string; // Optionaler Rätsel-Hinweis (Rom-Schnitzeljagd)
   branchCondition?: {
     requiredStatHigher?: 'goetter' | 'priester' | 'adel' | 'volk';
     preferredSkill?: 'goettlicheAuserwaehltheit' | 'politischeGeschicklichkeit' | 'militaerischeStaerke';
@@ -78,6 +109,7 @@ export interface GameDefinition {
   title: string;
   subtitle: string;
   era: string; // e.g. "Altes Ägypten", "Alexander der Große", "Reformation 1517", "Steinzeit"
+  archetype?: GameMechanicArchetype; // Dynamic mechanic mode
   description: string;
   targetGrades: string;
   coreTopics: string[]; // Teacher curriculum topics: e.g. ["Kanalbau", "95 Thesen", "Sesshaftwerdung"]

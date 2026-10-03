@@ -129,6 +129,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       const newGame = await gameGeneratorService.generateFullGame({
         title: customTitle,
         era: customEra,
+        archetype: selectedTemplate.archetype,
         targetGrades,
         coreTopics,
         pillars,
