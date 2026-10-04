@@ -329,6 +329,42 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     setTimeout(() => setCopiedShareCode(null), 2000);
   };
 
+  // Export game to JSON file
+  const handleExportJson = (gameToExport: GameDefinition, shareCode?: string) => {
+    soundFX.playClick();
+    gameStorageService.exportGameToJson(gameToExport, shareCode);
+    setPublishedNotice(`Spieldatei für „${gameToExport.title}“ wurde als .json heruntergeladen!`);
+  };
+
+  // Import game from JSON file
+  const handleImportJsonFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    soundFX.playClick();
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        const content = reader.result as string;
+        const parsed = gameStorageService.parseGameFromJson(content);
+        
+        // Auto-publish imported game
+        const rec = gameStorageService.publishGame(parsed.game);
+        setPublishedGames(gameStorageService.getPublishedGames());
+        soundFX.playCoronation();
+        setPublishedNotice(`🎉 Spiel „${parsed.game.title}“ erfolgreich importiert! Freigabe-Code: ${rec.shareCode}`);
+        setBoardModalCode({ code: rec.shareCode, title: parsed.game.title });
+      } catch (err: any) {
+        console.error(err);
+        soundFX.playCrisis();
+        setErrorNotice(err.message || 'Fehler beim Lesen der JSON-Spieldatei.');
+      }
+    };
+    reader.readAsText(file);
+    // Reset input so same file can be reselected
+    e.target.value = '';
+  };
+
   const handleSaveArtworkGame = (updatedGame: GameDefinition) => {
     soundFX.playBlessing();
     if (createdGamePreview && createdGamePreview.id === updatedGame.id) {
@@ -368,6 +404,20 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
 
         {/* Top Actions: Wrapped & touch-optimized */}
         <div className="flex items-center flex-wrap gap-2 w-full sm:w-auto justify-between sm:justify-end">
+          <label
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-900 border border-emerald-600/60 hover:border-emerald-400 text-xs text-emerald-300 font-bold transition-all cursor-pointer shadow-sm hover:text-white"
+            title="Ein gespeichertes Spiel als .json Datei importieren"
+          >
+            <Upload className="w-3.5 h-3.5 text-emerald-400" />
+            <span className="hidden xs:inline">Spiel importieren (.json)</span>
+            <input
+              type="file"
+              accept=".json,application/json"
+              onChange={handleImportJsonFile}
+              className="hidden"
+            />
+          </label>
+
           <a
             href="https://drive.google.com/drive/folders/1HMsm3Bl6WziQdpMZK1t3FypCsQHs22jG"
             target="_blank"
@@ -551,6 +601,15 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
               </button>
 
               <button
+                onClick={() => handleExportJson(createdGamePreview)}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-amber-600/60 text-amber-300 text-xs font-bold transition-all cursor-pointer shadow-md"
+                title="Als .json Spieldatei auf den Computer herunterladen"
+              >
+                <Download className="w-4 h-4 text-amber-400" />
+                <span>Exportieren (.json)</span>
+              </button>
+
+              <button
                 onClick={() => handlePublishGame(createdGamePreview)}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-stone-950 text-xs font-bold shadow-lg transition-all cursor-pointer"
               >
@@ -662,6 +721,13 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
                       title="Bilder & Prompts per Drag & Drop bearbeiten"
                     >
                       <Camera className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => handleExportJson(pub.game, pub.shareCode)}
+                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-amber-300 cursor-pointer"
+                      title="Als .json Spieldatei exportieren / herunterladen"
+                    >
+                      <Download className="w-3.5 h-3.5 text-amber-400" />
                     </button>
                     <button
                       onClick={() => onLoadGameToPlayer(pub.game)}

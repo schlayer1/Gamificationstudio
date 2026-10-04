@@ -170,6 +170,53 @@ export class GameStorageService {
     const match = games.find((g) => g.shareCode.toUpperCase() === cleanCode);
     return match ? match.game : null;
   }
+
+  /**
+   * Export a single game definition as downloadable .json file
+   */
+  public exportGameToJson(game: GameDefinition, shareCode?: string): void {
+    const exportData = {
+      format: 'history-trail-game-v1',
+      exportedAt: new Date().toISOString(),
+      shareCode: shareCode || 'CUSTOM',
+      game: game,
+    };
+
+    const jsonStr = JSON.stringify(exportData, null, 2);
+    const blob = new Blob([jsonStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    
+    // Clean safe filename
+    const cleanTitle = (game.title || 'spiel')
+      .toLowerCase()
+      .replace(/[^a-z0-9äöüß]+/gi, '_')
+      .replace(/^_+|_+$/g, '');
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${cleanTitle}_${shareCode || 'export'}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  /**
+   * Parse and validate an imported game JSON object
+   */
+  public parseGameFromJson(jsonString: string): { game: GameDefinition; shareCode?: string } {
+    const data = JSON.parse(jsonString);
+    const game = data.game || data;
+
+    if (!game.title || !game.rounds || !Array.isArray(game.rounds)) {
+      throw new Error('Ungültiges Spielformat: Titel oder Spielrunden fehlen in der JSON-Datei.');
+    }
+
+    return {
+      game: game,
+      shareCode: data.shareCode,
+    };
+  }
 }
 
 export const gameStorageService = new GameStorageService();
+
