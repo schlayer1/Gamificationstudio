@@ -76,11 +76,14 @@ Regeln & Vorgaben:
 `;
 
     const prompt = `
-Erstelle nun genau ${Math.min(roundCount, 12)} Stationen (Runde 1 bis ${Math.min(roundCount, 12)}) für das Spiel:
+Erstelle genau 5 packende, didaktisch hochwertige Stationen (Runde 1 bis 5) für das Spiel:
 Titel: "${req.title}"
 Epoche / Setting: "${req.era}"
 
-WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
+WICHTIGSTE REGELN:
+1. Halte Texte prägnant und zielgerichtet (1-2 kurze Sätze je Klassenstufe).
+2. Keine Formatierungsfehler, keine unmaskierten Anführungszeichen innerhalb von Texten.
+3. Antworte AUSSCHLIESSLICH mit reinem, validem JSON in folgendem Schema:
 {
   "rounds": [
     {
@@ -90,30 +93,9 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
       "milestoneTitle": "Runde 1: Titel",
       "imagePrompt": "${selectedStylePrompt} of [historische Szene], atmospheric lighting, educational game visual, 16:9 aspect ratio",
       "hotspots": [
-        {
-          "id": "hs_1",
-          "x": 30,
-          "y": 65,
-          "label": "Detail im Vordergrund",
-          "description": "Historische Erklärung zu Werkzeugen oder Personen hier...",
-          "icon": "🔍"
-        },
-        {
-          "id": "hs_2",
-          "x": 60,
-          "y": 45,
-          "label": "Hauptarchitektur",
-          "description": "Historische Erklärung zum Monument...",
-          "icon": "🏛️"
-        },
-        {
-          "id": "hs_3",
-          "x": 50,
-          "y": 20,
-          "label": "Himmel & Sakrales",
-          "description": "Göttliche oder landschaftliche Bedeutung...",
-          "icon": "✨"
-        }
+        { "id": "hs_1", "x": 30, "y": 65, "label": "Detail 1", "description": "Historische Erklärung...", "icon": "🔍" },
+        { "id": "hs_2", "x": 60, "y": 45, "label": "Detail 2", "description": "Historische Erklärung...", "icon": "🏛️" },
+        { "id": "hs_3", "x": 50, "y": 20, "label": "Detail 3", "description": "Historische Erklärung...", "icon": "✨" }
       ],
       "situation": {
         "unterstufe": "Einführender Text für Unterstufe...",
@@ -126,11 +108,7 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
           "label": "Kurztitel Option A",
           "description": "Erklärung Option A",
           "statChanges": { "${req.pillars[0].key}": 15, "${req.pillars[1].key}": -10, "ep": 1 },
-          "consequenceText": {
-            "unterstufe": "Konsequenz Unterstufe...",
-            "mittelstufe": "Konsequenz Mittelstufe...",
-            "oberstufe": "Konsequenz Oberstufe..."
-          }
+          "consequenceText": { "unterstufe": "...", "mittelstufe": "...", "oberstufe": "..." }
         },
         {
           "id": "B",
@@ -157,7 +135,7 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
       ],
       "lexiconEntry": {
         "title": "Lexikon-Titel",
-        "term": "Historischer Fachbegriff",
+        "term": "Historischer Begriff",
         "explanation": {
           "unterstufe": "Einfache Erklärung...",
           "mittelstufe": "Detaillierte Erklärung...",
@@ -178,13 +156,18 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
 
     let parsedRounds: RoundStory[] = [];
     try {
-      // Robust JSON extraction
+      // 1. Clean markdown code fences if present (```json ... ```)
       let cleanJson = rawJson.trim();
+      cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
+      
       const firstBrace = cleanJson.indexOf('{');
       const lastBrace = cleanJson.lastIndexOf('}');
       if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
         cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
       }
+
+      // 2. Remove trailing commas before } or ]
+      cleanJson = cleanJson.replace(/,\s*([\]}])/g, '$1');
       
       const parsed = JSON.parse(cleanJson);
       parsedRounds = parsed.rounds || [];
@@ -196,7 +179,7 @@ WICHTIG: Antworte AUSSCHLIESSLICH mit folgendem validen JSON-Format:
     } catch (e: any) {
       console.error("JSON parsing error during game generation:", e, "Raw output:", rawJson);
       throw new Error(
-        `Fehler beim Verarbeiten der Spieldaten (${e.message || "Unvollständige KI-Antwort"}). Bitte klicke nochmals auf "Generieren" – dank Schlüssel-Rotation startet der Versuch direkt mit der nächsten Modell-Instanz.`
+        `Fehler beim Verarbeiten der Spieldaten (${e.message || "Unvollständige KI-Antwort"}). Bitte klicke nochmals auf "Jetzt generieren" – dank Schlüssel-Rotation startet der Versuch direkt mit der nächsten Modell-Instanz.`
       );
     }
 
