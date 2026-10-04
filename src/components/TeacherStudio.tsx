@@ -53,7 +53,11 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [showKeyManager, setShowKeyManager] = useState<boolean>(false);
 
   // Selected Template / Creation State
+  const [creationMode, setCreationMode] = useState<'template' | 'freeform'>('template');
+  const [freeformSettingInput, setFreeformSettingInput] = useState<string>('');
+  const [isAnalyzingSetting, setIsAnalyzingSetting] = useState<boolean>(false);
   const [selectedTemplate, setSelectedTemplate] = useState<PredefinedTemplate>(PREDEFINED_TEMPLATES[0]);
+  const [customArchetype, setCustomArchetype] = useState<import('../types/game').GameMechanicArchetype>('reigns_balance');
   const [customTitle, setCustomTitle] = useState<string>(selectedTemplate.title);
   const [customEra, setCustomEra] = useState<string>(selectedTemplate.era);
   const [gradeLevel, setGradeLevel] = useState<import('../types/game').GradeLevel>('mittelstufe');
@@ -121,6 +125,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     }
 
     setSelectedTemplate(tpl);
+    setCustomArchetype(tpl.archetype);
     setCustomTitle(tpl.title);
     setCustomEra(tpl.era);
     setCoreTopics(tpl.defaultTopics);
@@ -143,6 +148,44 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     setSpecialResourceName(tpl.specialResource.name);
     setSpecialResourceEmoji(tpl.specialResource.emoji);
     setSkills(tpl.skills);
+  };
+
+  // KI-Auto-Design für freies Lehrer-Setting (ohne Vorlage)
+  const handleAutoDesignFromSetting = async () => {
+    if (!freeformSettingInput.trim()) {
+      setErrorNotice('Bitte gib ein Thema oder ein historisches Setting ein (z. B. "Die Seidenstraße im 13. Jahrhundert" oder "Mauerfall in Berlin 1989").');
+      return;
+    }
+
+    soundFX.playBlessing();
+    setIsAnalyzingSetting(true);
+    setErrorNotice(null);
+
+    try {
+      const proposal = await gameGeneratorService.analyzeAndDesignCustomSetting(
+        freeformSettingInput.trim(),
+        sourceMaterialText.trim() || undefined
+      );
+
+      setCustomTitle(proposal.title);
+      setCustomEra(proposal.era);
+      setCustomArchetype(proposal.archetype);
+      setGradeLevel(proposal.defaultGradeLevel);
+      setTargetGrades(proposal.defaultTargetGrades);
+      setCoreTopics(proposal.defaultTopics);
+      setPillars(proposal.suggestedPillars);
+      setSpecialResourceName(proposal.specialResource.name);
+      setSpecialResourceEmoji(proposal.specialResource.emoji);
+      setSkills(proposal.skills);
+
+      setIsAnalyzingSetting(false);
+      soundFX.playMilestone();
+    } catch (err: any) {
+      console.error(err);
+      setErrorNotice(err.message || 'Fehler beim Analysieren des Settings.');
+      setIsAnalyzingSetting(false);
+      soundFX.playCrisis();
+    }
   };
 
   // Add teacher topic
@@ -219,7 +262,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       const newGame = await gameGeneratorService.generateFullGame({
         title: customTitle,
         era: customEra,
-        archetype: selectedTemplate.archetype,
+        archetype: customArchetype,
         gradeLevel,
         targetGrades,
         roundCount,
@@ -641,46 +684,169 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
           </div>
         </div>
       )}
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
-            <span>Schritt 1:</span> Wähle eine historische Vorlage oder passe sie an
-          </h2>
-          <span className="text-xs text-stone-400">Aus deinen Prompt-Klassikern</span>
-        </div>
+      <div className="space-y-4">
+        {/* Toggle between Predefined Templates and Completely Freeform Setting */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1 border-b border-stone-800">
+          <div>
+            <h2 className="text-sm font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
+              <span>Schritt 1:</span> {creationMode === 'template' ? 'Historische Vorlage wählen' : 'Freies Thema / Eigenes Setting eingeben'}
+            </h2>
+            <p className="text-xs text-stone-400">
+              {creationMode === 'template'
+                ? 'Wähle aus den bewährten Lehrplan-Vorlagen oder wechsle zur freien Themeneingabe.'
+                : 'Gib ein beliebiges historisches Thema oder Setting ein – die KI konzipiert das Spiel automatisch!'}
+            </p>
+          </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {PREDEFINED_TEMPLATES.map((tpl) => (
-            <div
-              key={tpl.id}
-              onClick={() => handleSelectTemplate(tpl)}
-              className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
-                selectedTemplate.id === tpl.id
-                  ? 'bg-amber-950/70 border-amber-400 ring-2 ring-amber-500/40 shadow-lg'
-                  : 'bg-stone-900/80 border-stone-800 hover:border-amber-700/60'
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-stone-900 border border-stone-800 self-start sm:self-auto shrink-0">
+            <button
+              type="button"
+              onClick={() => {
+                soundFX.playClick();
+                setCreationMode('template');
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                creationMode === 'template'
+                  ? 'bg-amber-600 text-stone-950 shadow-md font-black'
+                  : 'text-stone-400 hover:text-stone-200'
               }`}
             >
-              <div>
-                <div className="flex items-center justify-between mb-1.5 gap-2">
-                  <span className="text-[11px] font-mono font-bold text-amber-400 truncate">{tpl.era}</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/60 text-amber-300 border border-amber-800/40 shrink-0 font-bold">
-                    {tpl.defaultTargetGrades.split(' ')[0]}
+              <BookOpen className="w-3.5 h-3.5" />
+              <span>Aus Vorlage (14)</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                soundFX.playClick();
+                setCreationMode('freeform');
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                creationMode === 'freeform'
+                  ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-stone-950 shadow-md font-black'
+                  : 'text-amber-400 hover:text-amber-300'
+              }`}
+            >
+              <Wand2 className="w-3.5 h-3.5 animate-pulse" />
+              <span>✨ Völlig freies Setting</span>
+            </button>
+          </div>
+        </div>
+
+        {/* MODE A: PREDEFINED TEMPLATES GRID */}
+        {creationMode === 'template' && (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {PREDEFINED_TEMPLATES.map((tpl) => (
+              <div
+                key={tpl.id}
+                onClick={() => handleSelectTemplate(tpl)}
+                className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
+                  selectedTemplate.id === tpl.id
+                    ? 'bg-amber-950/70 border-amber-400 ring-2 ring-amber-500/40 shadow-lg'
+                    : 'bg-stone-900/80 border-stone-800 hover:border-amber-700/60'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-1.5 gap-2">
+                    <span className="text-[11px] font-mono font-bold text-amber-400 truncate">{tpl.era}</span>
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/60 text-amber-300 border border-amber-800/40 shrink-0 font-bold">
+                      {tpl.defaultTargetGrades.split(' ')[0]}
+                    </span>
+                  </div>
+                  <h3 className="text-sm font-bold text-amber-200 mb-1">{tpl.title}</h3>
+                  <p className="text-xs text-stone-300 leading-snug">{tpl.tagline}</p>
+                </div>
+
+                <div className="pt-2 mt-2 border-t border-stone-800/70 flex items-center justify-between text-[11px]">
+                  <span className="text-stone-400 text-[10px]">Lehrplan Thüringen:</span>
+                  <span className={selectedTemplate.id === tpl.id ? 'text-amber-300 font-bold flex items-center gap-1' : 'text-stone-400'}>
+                    {selectedTemplate.id === tpl.id ? <CheckCircle className="w-3.5 h-3.5 text-amber-400 inline" /> : null}
+                    {tpl.defaultTargetGrades.includes('5') ? 'Kl. 5/6' : tpl.defaultTargetGrades.includes('7') ? 'Kl. 7/8' : 'Kl. 9/10'}
                   </span>
                 </div>
-                <h3 className="text-sm font-bold text-amber-200 mb-1">{tpl.title}</h3>
-                <p className="text-xs text-stone-300 leading-snug">{tpl.tagline}</p>
               </div>
+            ))}
+          </div>
+        )}
 
-              <div className="pt-2 mt-2 border-t border-stone-800/70 flex items-center justify-between text-[11px]">
-                <span className="text-stone-400 text-[10px]">Lehrplan Thüringen:</span>
-                <span className={selectedTemplate.id === tpl.id ? 'text-amber-300 font-bold flex items-center gap-1' : 'text-stone-400'}>
-                  {selectedTemplate.id === tpl.id ? <CheckCircle className="w-3.5 h-3.5 text-amber-400 inline" /> : null}
-                  {tpl.defaultTargetGrades.includes('5') ? 'Kl. 5/6' : tpl.defaultTargetGrades.includes('7') ? 'Kl. 7/8' : 'Kl. 9/10'}
-                </span>
+        {/* MODE B: FREEFORM SETTING (KOMPLETT OHNE VORLAGE) */}
+        {creationMode === 'freeform' && (
+          <div className="p-6 rounded-2xl bg-gradient-to-br from-amber-950/40 via-stone-900 to-stone-950 border-2 border-amber-500/80 shadow-2xl space-y-5 animate-fade-in">
+            <div className="flex items-start gap-3">
+              <div className="p-2.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/40 shrink-0 mt-0.5">
+                <Wand2 className="w-6 h-6 text-amber-400 animate-spin-slow" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-base font-bold text-amber-200 font-serif">
+                  Freies Thema oder historisches Setting eingeben
+                </h3>
+                <p className="text-xs text-stone-300 leading-relaxed">
+                  Gib einfach stichpunktartig oder im Freitext dein Wunschthema ein (z. B. <em>"Die Seidenstraße im 13. Jahrhundert"</em>, <em>"Das antike Japan zur Samurai-Zeit"</em>, <em>"Der Berliner Mauerfall 1989"</em> oder <em>"Die Hexenverfolgung in der Frühen Neuzeit"</em>). Die KI leitet daraus automatisch die Epoche, 4 Spielsäulen, Kernthemen und Bildprompts ab!
+                </p>
               </div>
             </div>
-          ))}
-        </div>
+
+            <div className="space-y-3">
+              <div className="relative">
+                <textarea
+                  rows={3}
+                  value={freeformSettingInput}
+                  onChange={(e) => setFreeformSettingInput(e.target.value)}
+                  placeholder="Thema oder Epoche beschreiben, z. B.: 'Wikinger auf Entdeckungsfahrt nach Island und Grönland (ca. 9. Jahrhundert)'..."
+                  className="w-full px-4 py-3 rounded-xl bg-stone-950 border border-amber-600/60 text-sm text-stone-100 placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-amber-500 font-sans shadow-inner"
+                />
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-wrap gap-1.5 text-[11px] text-stone-400">
+                  <span className="text-stone-500 font-medium">Beispiele zum Ausprobieren:</span>
+                  {[
+                    "Seidenstraße im 13. Jh.",
+                    "Samurai im antiken Japan",
+                    "Mauerfall 1989 in Berlin",
+                    "Wikinger-Überfall auf Lindisfarne",
+                    "Kolonialismus & Unabhängigkeit Indiens"
+                  ].map((example, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => {
+                        soundFX.playClick();
+                        setFreeformSettingInput(example);
+                      }}
+                      className="px-2 py-0.5 rounded-md bg-stone-900 border border-stone-800 hover:border-amber-600/70 text-amber-300 hover:text-amber-200 transition-colors cursor-pointer"
+                    >
+                      {example}
+                    </button>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={handleAutoDesignFromSetting}
+                  disabled={isAnalyzingSetting || !freeformSettingInput.trim()}
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-stone-950 font-black text-xs flex items-center gap-2 shadow-lg transition-all active:scale-95 disabled:opacity-40 cursor-pointer"
+                >
+                  <Sparkles className="w-4 h-4" />
+                  <span>{isAnalyzingSetting ? "Analysiere Setting & erstelle Konzept..." : "Setting jetzt automatisch konzipieren"}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Live Feedback of configured game title and era */}
+            <div className="p-3.5 rounded-xl bg-stone-950/80 border border-amber-900/40 flex flex-wrap items-center justify-between gap-2 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="text-stone-400">Aktuelles Setting:</span>
+                <span className="font-bold text-amber-300 font-serif text-sm">{customTitle}</span>
+                <span className="text-stone-500">•</span>
+                <span className="font-mono text-amber-400">{customEra}</span>
+              </div>
+              <span className="text-[11px] px-2 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800/40 font-mono font-bold">
+                Archetyp: {customArchetype}
+              </span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* STEP 2: Core Curriculum Topics (Teacher Requirements) */}

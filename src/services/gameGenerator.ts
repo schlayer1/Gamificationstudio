@@ -22,7 +22,116 @@ export interface GenerationRequest {
   onProgress?: (status: string) => void;
 }
 
+export interface CustomSettingProposal {
+  title: string;
+  era: string;
+  archetype: import('../types/game').GameMechanicArchetype;
+  defaultGradeLevel: GradeLevel;
+  defaultTargetGrades: string;
+  defaultTopics: string[];
+  suggestedPillars: [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
+  specialResource: { name: string; emoji: string };
+  skills: { skill1: string; skill2: string; skill3: string };
+  heroImagePrompt: string;
+}
+
 export class GameGeneratorService {
+  /**
+   * Generates a complete tailored game configuration proposal from a completely free-form
+   * teacher setting description (e.g. "Seidenstraße im 13. Jahrhundert", "Antikes Japan", "Mauerfall 1989").
+   */
+  async analyzeAndDesignCustomSetting(
+    freeformSetting: string,
+    optionalWorksheetText?: string
+  ): Promise<CustomSettingProposal> {
+    const prompt = `
+Du bist ein erfahrener Fachberater für Geschichtsdidaktik und Lead Game Designer.
+Eine Lehrkraft möchte ein didaktisches Geschichtsspiel erstellen, jedoch OHNE vorgegebene Vorlage.
+Hier ist das freie Thema / Setting der Lehrkraft:
+"""
+${freeformSetting}
+"""
+
+${optionalWorksheetText ? `Zusätzlicher Quellentext / Lehrbuchtext:\n"""\n${optionalWorksheetText}\n"""\n` : ''}
+
+Erstelle daraus ein pädagogisch stimmiges und spielmechanisch ausgewogenes Konzept:
+1. "title": Ein packender, bildhafter Spieltitel (z. B. "Händler auf der Seidenstraße – Karawanen im Reich der Mongolen").
+2. "era": Präzise Epochenbezeichnung mit Jahrhundert / Zeitspanne (z. B. "13. Jahrhundert (Pax Mongolica)").
+3. "archetype": Wähle den am besten passenden Spielmechanik-Archetyp aus:
+   - "reigns_balance" (Politisches 4-Säulen Gleichgewicht & Staatslenkung)
+   - "conquest_campaign" (Militärischer Feldzug, Disziplin & Eroberung)
+   - "survival_settlement" (Überleben, Sesshaftwerdung, Handwerk, Landwirtschaft)
+   - "mythology_duel" (Mythen, Götter, Prüfungen & Wissensduelle)
+   - "city_scavenger_hunt" (Architektur, Entdeckungen & urbane Erkundung)
+4. "defaultGradeLevel": Passendste Klassenstufe ("unterstufe" für Kl. 5/6, "mittelstufe" für Kl. 7-9, "oberstufe" ab Kl. 10).
+5. "defaultTargetGrades": Ausgeschriebene Angabe (z. B. "Mittelstufe (7.–9. Klasse)").
+6. "defaultTopics": Genau 5 didaktische Kernthemen aus dem Geschichtsunterricht als Array von Strings.
+7. "suggestedPillars": Genau 4 spezifische Mächte- oder Ressourcensäulen mit:
+   - "key": Eindeutiger englischer Key (z.B. "patricians", "supplies", "morale", "legions")
+   - "label": Titel mit passendem Emoji (z.B. "🏛️ Senat", "🌾 Vorräte", "⚔️ Legionen")
+   - "icon": Einzelnes Emoji
+   - "description": 1 kurzer didaktischer Satz zur Bedeutung im Spiel
+8. "specialResource": Name und Emoji für die besondere Ressource (z.B. { "name": "Golddinare", "emoji": "🪙" } oder { "name": "Seide & Jade", "emoji": "🧵" }).
+9. "skills": 3 historische Kompetenzen (z.B. { "skill1": "Verhandlungsgeschick", "skill2": "Topografischer Weitblick", "skill3": "Kulturelle Diplomatie" }).
+10. "heroImagePrompt": Ein detailreicher englischer Bild-Prompt im 16-Bit Pixel-Art SNES-Retro-Stil für das epische Titel-Banner (16:9).
+
+Antworte STRENG als valides JSON nach diesem Schema:
+{
+  "title": "...",
+  "era": "...",
+  "archetype": "reigns_balance",
+  "defaultGradeLevel": "mittelstufe",
+  "defaultTargetGrades": "Mittelstufe (7.–9. Klasse)",
+  "defaultTopics": ["Thema 1", "Thema 2", "Thema 3", "Thema 4", "Thema 5"],
+  "suggestedPillars": [
+    { "key": "p1", "label": "... Emoji", "icon": "Emoji", "description": "..." },
+    { "key": "p2", "label": "... Emoji", "icon": "Emoji", "description": "..." },
+    { "key": "p3", "label": "... Emoji", "icon": "Emoji", "description": "..." },
+    { "key": "p4", "label": "... Emoji", "icon": "Emoji", "description": "..." }
+  ],
+  "specialResource": { "name": "...", "emoji": "..." },
+  "skills": { "skill1": "...", "skill2": "...", "skill3": "..." },
+  "heroImagePrompt": "16-bit pixel art style of ..., atmospheric retro SNES RPG aesthetic, 16:9 aspect ratio"
+}
+`;
+
+    const rawJson = await geminiRotationService.generateContentWithRotation(
+      prompt,
+      'Du bist ein Senior Game Designer und Geschichtsdidaktiker. Antworte AUSSCHLIESSLICH mit reinem JSON.',
+      true
+    );
+
+    let cleanJson = rawJson.trim();
+    cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
+    const firstBrace = cleanJson.indexOf('{');
+    const lastBrace = cleanJson.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+    }
+    cleanJson = cleanJson.replace(/,\s*([\]}])/g, '$1');
+
+    const parsed = JSON.parse(cleanJson);
+    return {
+      title: parsed.title || freeformSetting,
+      era: parsed.era || 'Historische Epoche',
+      archetype: parsed.archetype || 'reigns_balance',
+      defaultGradeLevel: parsed.defaultGradeLevel || 'mittelstufe',
+      defaultTargetGrades: parsed.defaultTargetGrades || 'Mittelstufe (7.–9. Klasse)',
+      defaultTopics: Array.isArray(parsed.defaultTopics) && parsed.defaultTopics.length > 0 ? parsed.defaultTopics : [freeformSetting],
+      suggestedPillars: (parsed.suggestedPillars && parsed.suggestedPillars.length === 4)
+        ? parsed.suggestedPillars
+        : [
+            { key: 'power1', label: 'Macht I 👑', icon: '👑', description: 'Erste Säule der Ordnung' },
+            { key: 'power2', label: 'Macht II ⚖️', icon: '⚖️', description: 'Zweite Säule der Ordnung' },
+            { key: 'power3', label: 'Macht III 🌾', icon: '🌾', description: 'Wirtschaft und Versorgung' },
+            { key: 'power4', label: 'Macht IV 😊', icon: '😊', description: 'Bevölkerung und Moral' }
+          ],
+      specialResource: parsed.specialResource || { name: 'Einfluss', emoji: '✨' },
+      skills: parsed.skills || { skill1: 'Strategie', skill2: 'Weitsicht', skill3: 'Diplomatie' },
+      heroImagePrompt: parsed.heroImagePrompt || `16-bit pixel art illustration of ${freeformSetting}, retro SNES RPG title screen, 16:9 aspect ratio`
+    };
+  }
+
   /**
    * Generates a complete educational game tailored specifically to ONE selected grade level,
    * avoiding redundant token usage for non-selected grades and supporting full 20-round expeditions.
