@@ -176,7 +176,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Blick auf das Kapitol & die Ewige Stadt (Hero Banner)",
     description: "Monumentales Panorama des antiken Rom mit Marmortempeln, Triumphbögen und kaiserlichen Standarten.",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/rome_hero.jpg",
     tags: ["Hero", "Banner", "Rom", "SPQR", "Kapitol", "Marmor"],
     suggestedPrompt: "16-bit pixel art style grand panoramic vista of imperial ancient Rome at golden hour, marble temples on Capitoline Hill, red banners with golden eagle SPQR insignia fluttering, aqueduct in background, retro 16-bit strategy game title screen",
     hotspots: [
@@ -334,7 +334,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Wittenberg & der Beginn der Reformation (Hero Banner)",
     description: "Silhouette von Wittenberg mit Schlosskirche, Druckerstuben an der Elbe und flatternden Flugschriften.",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/luther_hero.jpg",
     tags: ["Hero", "Banner", "Reformation", "Luther", "Wittenberg", "Elbe"],
     suggestedPrompt: "16-bit pixel art style panoramic view of medieval Wittenberg town skyline along the Elbe river at autumn sunrise, Castle church tower, timbered houses with smoking chimneys, flying printed pamphlets in wind, retro historical adventure title banner",
     hotspots: [
@@ -492,7 +492,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Vom Eiszeit-Jäger zum ersten Ackerbauern (Hero Banner)",
     description: "Urzeitliches Panorama: Schneebedeckte Mammuttundra geht über in die ersten grünen Weizenfelder eines Langhausdorfes.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/stoneage_hero.jpg",
     tags: ["Hero", "Banner", "Steinzeit", "Mammut", "Sesshaftwerdung", "Urzeit"],
     suggestedPrompt: "16-bit pixel art style epic split panorama of Stone Age transition, left side icy paleolithic tundra with mammoth herd, right side warm neolithic river valley with early thatched longhouses and golden wheat fields, retro SNES title screen banner",
     hotspots: [
@@ -650,7 +650,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Der Zug nach Asien – Alexander der Große (Hero Banner)",
     description: "Alexanders Heer am Hellespont mit Blick nach Osten, Sarissa-Speere und makedonische Sonnenstandarten.",
-    imageUrl: "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/greece_hero.jpg",
     tags: ["Hero", "Banner", "Alexander", "Makedonien", "Griechenland", "Eroberung"],
     suggestedPrompt: "16-bit pixel art style grand panorama of Alexander the Great army crossing Hellespont strait into Asia, royal purple banners with Vergina sun, endless ranks of sarissa pikes glinting under Aegean sun, retro 16-bit military strategy banner",
     hotspots: [
@@ -808,7 +808,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Die Welt des Mittelalters – Burg, Kloster & Stadt (Hero Banner)",
     description: "Panoramablick über das Lehnsgut: Höhenburg, bäuerliche Dreifelderwirtschaft, romanische Abtei und Marktflecken.",
-    imageUrl: "https://images.unsplash.com/photo-1533158307587-828f0a76ef96?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/medieval_hero.jpg",
     tags: ["Hero", "Banner", "Mittelalter", "Ritterburg", "Feudalismus", "Burg"],
     suggestedPrompt: "16-bit pixel art style majestic medieval panorama, high stone castle perched on rocky crag overlooking winding river, patchwork quilt of three-field farm crops, fortified market town in valley, retro SNES fantasy kingdom title banner",
     hotspots: [
@@ -966,7 +966,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Das Reich Karls des Großen (Hero Banner)",
     description: "Reise von der Königspfalz Aachen durch grüne Flusstäler und fränkische Gaue bis nach Rom.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/franks_hero.jpg",
     tags: ["Hero", "Banner", "Frankenreich", "Karl der Große", "Aachen", "Pfalz"],
     suggestedPrompt: "16-bit pixel art style panoramic view of the Frankish Empire under Charlemagne, royal palatine chapel of Aachen with golden imperial eagle banners, knights on horseback escorting king travel caravan across misty European forest valley, retro SNES strategy title banner",
     hotspots: [
@@ -1124,7 +1124,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Freiheit, Gleichheit, Brüderlichkeit (Hero Banner)",
     description: "Paris im Sturm der Revolution: Trikolore-Fahnen auf den Barrikaden vor Notre-Dame.",
-    imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/revolution_hero.jpg",
     tags: ["Hero", "Banner", "Französische Revolution", "Trikolore", "Paris", "Freiheit"],
     suggestedPrompt: "16-bit pixel art style dramatic panoramic painting of French Revolution in Paris, citizen militia waving blue-white-red Tricolore flag on cobblestone street barricades, smoke over Seine bridges, retro 16-bit historical rebellion banner",
     hotspots: [
@@ -1282,7 +1282,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Zeitalter des Dampfes & Rauchende Schlote (Hero Banner)",
     description: "Industrielandschaft mit Hochöfen, Zechen, Fabrikhallen und dampfenden Dampflokomotiven.",
-    imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/industrial_hero.jpg",
     tags: ["Hero", "Banner", "Industrialisierung", "Dampfmaschine", "Eisenbahn", "Fabrik"],
     suggestedPrompt: "16-bit pixel art style grand industrial cityscape of 19th century Britain and Ruhr area, rows of brick factories with tall smoking chimneys at dusk, iron bridge with steam locomotive hauling coal wagons, retro factory builder title banner",
     hotspots: [
@@ -1440,7 +1440,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Die Weimarer Republik & Die Moderne (Hero Banner)",
     description: "Deutsches Nationaltheater Weimar, Bauhaus-Moderne und das schillernde Leben der 1920er Jahre.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/weimar_hero.jpg",
     tags: ["Hero", "Banner", "Weimar", "Demokratie", "Bauhaus", "Goldene Zwanziger"],
     suggestedPrompt: "16-bit pixel art style panoramic view of Weimar Theaterplatz with Goethe-Schiller monument and illuminated National Theater, vintage 1920s cars, Bauhaus architectural elements, retro Weimar era title banner",
     hotspots: [
@@ -1598,7 +1598,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Im Schützengraben – Die Urkatastrophe 1914–1918 (Hero Banner)",
     description: "Zerstörte Mondlandschaft an der Westfront mit Schützengräben, Stacheldrahtverhauen und rotem Mohn.",
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/ww1_hero.jpg",
     tags: ["Hero", "Banner", "Erster Weltkrieg", "Westfront", "Grabenkrieg", "Verdun", "Poilu", "Landser"],
     suggestedPrompt: "16-bit pixel art style poignant panoramic view of Western Front trench line at dawn, muddy no-mans-land with barbed wire entanglements and water-filled shell craters, distant silhouette of soldiers in steel helmets, red poppies blooming in mud, retro 16-bit historical anti-war title banner",
     hotspots: [
@@ -1756,7 +1756,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Schatten über Deutschland – Alltag & Diktatur 1933–1939 (Hero Banner)",
     description: "Berlin in den 1930er Jahren zwischen scheinbarem Alltag, totalitärer Propaganda und mutigem Widerstand im Verborgenen.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "/assets/nsdap_hero.jpg",
     tags: ["Hero", "Banner", "NS-Diktatur", "1933", "Widerstand", "Zivilcourage", "Alltag", "Berlin"],
     suggestedPrompt: "16-bit pixel art style atmospheric panorama of Berlin street in 1930s, vintage tram passing gray apartment blocks, subtle red propaganda banners hanging from government building, citizens on sidewalk, single glowing window with secret typewriter, retro historical drama title banner",
     hotspots: [

@@ -69,7 +69,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🦅',
     vehicleIcon: '🐎',
     destinationLabel: 'Ziel: Triumph & Kapitol',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/rome_hero.jpg',
   },
   luther_ink: {
     id: 'luther_ink',
@@ -126,7 +126,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '⚡',
     vehicleIcon: '🏇',
     destinationLabel: 'Ziel: Akropolis & Weltreich',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/greece_hero.jpg',
   },
   mythology_rune: {
     id: 'mythology_rune',
@@ -145,7 +145,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🌲',
     vehicleIcon: '⚔️',
     destinationLabel: 'Ziel: Heiliger Hain / Walhall',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/limes_hero.jpg',
   },
   franks_charlemagne: {
     id: 'franks_charlemagne',
@@ -164,7 +164,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '⚜️',
     vehicleIcon: '🐴',
     destinationLabel: 'Ziel: Kaiserpfalz Aachen',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/franks_hero.jpg',
   },
   revolution_tricolore: {
     id: 'revolution_tricolore',
@@ -183,7 +183,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🇫🇷',
     vehicleIcon: '🚩',
     destinationLabel: 'Ziel: Freiheit & Republik',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/revolution_hero.jpg',
   },
   industrial_steam: {
     id: 'industrial_steam',
@@ -202,7 +202,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '⚙️',
     vehicleIcon: '🚂',
     destinationLabel: 'Ziel: Fortschritt & Soziale Rechte',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/industrial_hero.jpg',
   },
   weimar_cabaret: {
     id: 'weimar_cabaret',
@@ -221,7 +221,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🎭',
     vehicleIcon: '📻',
     destinationLabel: 'Ziel: Demokratie & Bauhaus Weimar',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/weimar_hero.jpg',
   },
   ww1_trenches: {
     id: 'ww1_trenches',
@@ -240,7 +240,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🎖️',
     vehicleIcon: '🪖',
     destinationLabel: 'Ziel: Waffenstillstand 1918 & Frieden',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/ww1_hero.jpg',
   },
   nsdap_resistance: {
     id: 'nsdap_resistance',
@@ -259,7 +259,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🕯️',
     vehicleIcon: '🚲',
     destinationLabel: 'Ziel: Menschlichkeit & Zivilcourage',
-    defaultBannerUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
+    defaultBannerUrl: '/assets/nsdap_hero.jpg',
   },
 };
 
