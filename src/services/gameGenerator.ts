@@ -19,7 +19,7 @@ export interface GenerationRequest {
   specialResourceName: string;
   specialResourceEmoji: string;
   skills: { skill1: string; skill2: string; skill3: string };
-  onProgress?: (status: string) => void;
+  onProgress?: (status: string, percent?: number) => void;
 }
 
 export interface CustomSettingProposal {
@@ -357,11 +357,18 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
 
       for (let cIdx = 0; cIdx < chunks.length; cIdx++) {
         const chunk = chunks[cIdx];
+        const progressPct = Math.round(15 + ((cIdx + 0.1) / chunks.length) * 70);
         req.onProgress?.(
-          `Generiere Stationen ${chunk.start} bis ${chunk.end} von ${totalRounds} (${Math.round(((cIdx + 1) / chunks.length) * 100)}%)...`
+          `Generiere Stationen ${chunk.start} bis ${chunk.end} von ${totalRounds} (Dilemmata, 4 Optionen & Fachlexikon)...`,
+          progressPct
         );
         const batchRounds = await generateRoundBatch(chunk.start, chunk.end);
         allRawRounds = [...allRawRounds, ...batchRounds];
+        const completedPct = Math.round(15 + ((cIdx + 1) / chunks.length) * 70);
+        req.onProgress?.(
+          `Stationen 1 bis ${chunk.end} von ${totalRounds} erfolgreich fertiggestellt.`,
+          completedPct
+        );
       }
 
       if (!Array.isArray(allRawRounds) || allRawRounds.length === 0) {
@@ -552,7 +559,7 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
     // Generate didactically structured worksheet & solutions
     let worksheet: import('../types/game').GameWorksheet | undefined = undefined;
     try {
-      req.onProgress?.('Erstelle didaktischen Begleitbogen & Musterlösung für den Unterricht...');
+      req.onProgress?.('Erstelle didaktischen Begleitbogen & Musterlösung für den Unterricht...', 92);
       worksheet = await this.generateWorksheetForGame({
         title: req.title,
         era: req.era,

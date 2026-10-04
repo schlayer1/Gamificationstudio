@@ -98,6 +98,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   // Generator Process State
   const [isGenerating, setIsGenerating] = useState<boolean>(false);
   const [generationProgress, setGenerationProgress] = useState<string>('');
+  const [generationPercent, setGenerationPercent] = useState<number>(0);
   const [errorNotice, setErrorNotice] = useState<string | null>(null);
 
   // Published Games Management (Lehrer-Freigabe & geschützte Ansicht)
@@ -258,10 +259,12 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     soundFX.playBlessing();
     setIsGenerating(true);
     setErrorNotice(null);
+    setGenerationPercent(5);
     setGenerationProgress("Verbinde mit Gemini AI (Schlüssel-Rotation aktiv)...");
 
     try {
-      setGenerationProgress(`Generiere ${roundCount} didaktische Stationen gezielt für ${targetGrades}...`);
+      setGenerationPercent(10);
+      setGenerationProgress(`Analysiere Lehrplan & konfiguriere ${roundCount} Stationen für ${targetGrades}...`);
       const newGame = await gameGeneratorService.generateFullGame({
         title: customTitle,
         era: customEra,
@@ -278,12 +281,19 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         specialResourceName,
         specialResourceEmoji,
         skills,
-        onProgress: (status) => setGenerationProgress(status),
+        onProgress: (status, percent) => {
+          setGenerationProgress(status);
+          if (typeof percent === 'number') {
+            setGenerationPercent(percent);
+          }
+        },
       });
 
-      setGenerationProgress("Spiel erfolgreich erstellt!");
+      setGenerationPercent(100);
+      setGenerationProgress("Spiel & Arbeitsblatt erfolgreich generiert!");
       setTimeout(() => {
         setIsGenerating(false);
+        setGenerationPercent(0);
         setCreatedGamePreview(newGame);
         soundFX.playCoronation();
       }, 700);
@@ -291,6 +301,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       console.error(err);
       setErrorNotice(err.message || "Fehler bei der Generierung.");
       setIsGenerating(false);
+      setGenerationPercent(0);
       soundFX.playCrisis();
     }
   };
@@ -1366,9 +1377,28 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         </button>
 
         {isGenerating && (
-          <p className="text-xs text-amber-300 animate-pulse font-mono">
-            {generationProgress}
-          </p>
+          <div className="w-full max-w-lg mt-2 p-4 rounded-2xl bg-stone-900/90 border border-amber-500/40 shadow-xl flex flex-col gap-2.5 animate-fade-in">
+            <div className="flex items-center justify-between text-xs font-mono">
+              <span className="text-amber-400 font-bold flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                KI-Generierung läuft
+              </span>
+              <span className="text-amber-300 font-bold">{generationPercent}%</span>
+            </div>
+
+            {/* Progress Bar Track */}
+            <div className="w-full h-3 bg-stone-950 rounded-full overflow-hidden border border-stone-800 p-0.5">
+              <div
+                className="h-full bg-gradient-to-r from-amber-600 via-amber-400 to-yellow-300 rounded-full transition-all duration-500 ease-out shadow-sm"
+                style={{ width: `${Math.max(5, generationPercent)}%` }}
+              />
+            </div>
+
+            {/* Current Step Description */}
+            <p className="text-xs text-stone-300 font-sans leading-relaxed text-center">
+              {generationProgress}
+            </p>
+          </div>
         )}
       </div>
 
