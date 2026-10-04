@@ -572,49 +572,68 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
     rounds: RoundStory[];
     pillars: [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
   }): Promise<import('../types/game').GameWorksheet> {
-    const roundSummary = params.rounds.slice(0, 10).map((r) => 
-      `- Station ${r.roundNumber} (${r.locationName}): ${r.milestoneTitle} | Begriff: ${r.lexiconEntry?.term || ''}`
-    ).join('\n');
+    const totalRounds = params.rounds.length || 20;
+    const rEarly = params.rounds[Math.min(1, totalRounds - 1)];
+    const rMid = params.rounds[Math.floor(totalRounds / 2)];
+    const rLate = params.rounds[Math.max(0, totalRounds - 2)];
+
+    const sampleSummary = [
+      `Frühe Station: Station ${rEarly.roundNumber} (${rEarly.locationName}): ${rEarly.milestoneTitle} | Begriff: ${rEarly.lexiconEntry?.term || ''}`,
+      `Mittlere Station: Station ${rMid.roundNumber} (${rMid.locationName}): ${rMid.milestoneTitle} | Begriff: ${rMid.lexiconEntry?.term || ''}`,
+      `Späte Station: Station ${rLate.roundNumber} (${rLate.locationName}): ${rLate.milestoneTitle} | Begriff: ${rLate.lexiconEntry?.term || ''}`
+    ].join('\n');
 
     const prompt = `
-Du bist ein Fachleiter für Geschichtsdidaktik (Thüringer Lehrplan Regelschule & Gymnasium).
-Erstelle einen perfekten, analogen Begleit- und Sicherungsbogen (DIN-A4) für Schüler im Unterricht:
-Spiel: "${params.title}" (${params.era})
-Zielgruppe: ${params.targetGrades}
-Kernthemen: ${params.coreTopics.join(', ')}
+Du bist ein Fachberater für Geschichtsdidaktik an Thüringer Regelschulen und Gymnasien.
+Erstelle ein übersichtliches, didaktisch hochwertiges DIN-A4-Arbeitsblatt für Schülerinnen und Schüler (Alter 10 bis 16 Jahre, Klasse 5 bis 10):
 
-Stations-Auszug:
-${roundSummary}
+Spiel: "${params.title}"
+Themenbereich: "${params.era}"
+Lehrplan-Kernthemen: ${params.coreTopics.join(', ')}
 
-VORGABEN FÜR DAS ARBEITSBLATT:
-1. "learningGoal": Klares, handlungsorientiertes Unterrichtsziel in einem prägnanten Satz (z.B. "Die Schülerinnen und Schüler analysieren die Interessenkonflikte... und beurteilen...").
-2. "coreQuestions": Genau 3 didaktische Leitfragen zu den Stationen mit EPA-Operatoren (z.B. "Nenne...", "Erkläre...", "Vergleiche...").
-   Jede Frage muss eine fundierte Musterlösung ("sampleSolution") für die Lehrkraft enthalten!
-3. "dilemmaTask": Eine tiefgründige Reflexions- und Urteilsaufgabe (AFB III) zu einem echten historischen Entscheidungskonflikt des Spiels mit "title", "situationContext", "taskPrompt" und "sampleSolution".
-4. "glossaryTerms": Genau 3 historische Schlüsselbegriffe aus dem Spiel mit Suchhinweis ("hint") und präziser Schüler-Definition ("solution").
-5. "reflectionCheck": Eine zusammenfassende Impulsfrage für das abschließende Unterrichtsgespräch im Plenum.
+Stations-Orientierung:
+${sampleSummary}
+
+STRENGE VORGABEN FÜR DAS ARBEITSBLATT:
+1. "learningGoal": Didaktisches Stundenziel in 1 prägnanten Satz (NUR als Information für die Lehrkraft / Lösungsblatt).
+2. "coreQuestions": Genau 3 didaktische Leitfragen, die sich über den GESAMTEN Verlauf des Spiels verteilen:
+   - Frage 1 zu einer frühen Station (z. B. Station ${rEarly.roundNumber})
+   - Frage 2 zu einer mittleren Station (z. B. Station ${rMid.roundNumber})
+   - Frage 3 zu einer späten Station (z. B. Station ${rLate.roundNumber})
+   Formuliere die Fragen altersgerecht, klar und verständlich (Altersgruppe 10–16 Jahre!).
+   Jede Frage enthält eine fundierte Musterlösung ("sampleSolution") für die Lehrkraft.
+3. "dilemmaTask": Ein echtes historisches Entscheidungsproblem aus dem Spiel.
+   WICHTIG: Die Aufgabenstellung muss ganz einfach und direkt formuliert sein!
+   Beispiel für den Ton: "An Station X standest du vor einer schwierigen Wahl: Sollte man ... oder lieber ...? Was hättest du damals getan und warum gab es keine leichte Lösung?"
+   Enthält "title", "situationContext", "taskPrompt" und "sampleSolution".
+4. "glossaryTerms": Genau SECHS (6) zentrale historische Fachbegriffe und Kerninhalte des gesamten Settings (z. B. für Ägypten: Nilflut, Pharao, Hieroglyphen, Papyrus, Pyramide, Ma'at).
+   Jeder Begriff mit kurzem Such-Hinweis ("hint") und altersgerechter 1-Satz-Erklärung ("solution").
+5. "reflectionCheck": Leer lassen oder kurzen Lehrer-Hinweis ("").
 
 Antworte AUSSCHLIESSLICH als valides JSON:
 {
-  "subtitle": "Didaktischer Begleit- und Heftersicherungsbogen",
+  "subtitle": "Begleit- und Sicherungsbogen",
   "learningGoal": "...",
   "coreQuestions": [
-    { "stationRef": "Station X", "question": "...", "sampleSolution": "..." },
-    { "stationRef": "Station Y", "question": "...", "sampleSolution": "..." },
-    { "stationRef": "Station Z", "question": "...", "sampleSolution": "..." }
+    { "stationRef": "Station ${rEarly.roundNumber}", "question": "...", "sampleSolution": "..." },
+    { "stationRef": "Station ${rMid.roundNumber}", "question": "...", "sampleSolution": "..." },
+    { "stationRef": "Station ${rLate.roundNumber}", "question": "...", "sampleSolution": "..." }
   ],
   "dilemmaTask": {
-    "title": "Historisches Urteil & Dilemma",
+    "title": "Historische Entscheidung & Dilemma",
     "situationContext": "...",
     "taskPrompt": "...",
     "sampleSolution": "..."
   },
   "glossaryTerms": [
-    { "term": "...", "hint": "...", "solution": "..." },
-    { "term": "...", "hint": "...", "solution": "..." },
-    { "term": "...", "hint": "...", "solution": "..." }
+    { "term": "Begriff 1", "hint": "...", "solution": "..." },
+    { "term": "Begriff 2", "hint": "...", "solution": "..." },
+    { "term": "Begriff 3", "hint": "...", "solution": "..." },
+    { "term": "Begriff 4", "hint": "...", "solution": "..." },
+    { "term": "Begriff 5", "hint": "...", "solution": "..." },
+    { "term": "Begriff 6", "hint": "...", "solution": "..." }
   ],
-  "reflectionCheck": "..."
+  "reflectionCheck": ""
 }
 `;
 
@@ -637,7 +656,7 @@ Antworte AUSSCHLIESSLICH als valides JSON:
   }
 
   /**
-   * Safe didactic fallback worksheet when offline or API limit reached
+   * Safe didactic fallback worksheet distributed evenly across the whole game with 6 core terms
    */
   public createFallbackWorksheet(
     title: string,
@@ -646,54 +665,55 @@ Antworte AUSSCHLIESSLICH als valides JSON:
     topics: string[],
     rounds: RoundStory[]
   ): import('../types/game').GameWorksheet {
-    const r1 = rounds[0] || { roundNumber: 1, milestoneTitle: 'Auftakt', lexiconEntry: { term: 'Auftakt', explanation: { mittelstufe: 'Beginn' } } };
-    const r2 = rounds[Math.floor(rounds.length / 2)] || r1;
-    const r3 = rounds[rounds.length - 1] || r1;
+    const total = rounds.length || 20;
+    const r1 = rounds[Math.min(1, total - 1)] || { roundNumber: 2, milestoneTitle: 'Frühe Station', locationName: 'Auftakt', lexiconEntry: { term: 'Start', explanation: { mittelstufe: 'Beginn' } } };
+    const r2 = rounds[Math.floor(total / 2)] || { roundNumber: Math.floor(total / 2), milestoneTitle: 'Mittlere Station', locationName: 'Zentrum', lexiconEntry: { term: 'Mitte', explanation: { mittelstufe: 'Zentrum' } } };
+    const r3 = rounds[Math.max(0, total - 2)] || { roundNumber: total - 1, milestoneTitle: 'Späte Station', locationName: 'Finale', lexiconEntry: { term: 'Finale', explanation: { mittelstufe: 'Ende' } } };
+
+    // Extract up to 6 unique core terms
+    const rawTerms = [
+      ...topics,
+      r1.lexiconEntry?.term,
+      r2.lexiconEntry?.term,
+      r3.lexiconEntry?.term,
+      'Herrschaft',
+      'Gemeinschaft',
+      'Alltag'
+    ].filter(Boolean) as string[];
+    const uniqueTerms = [...new Set(rawTerms)].slice(0, 6);
 
     return {
-      subtitle: `Didaktischer Begleit- & Sicherungsbogen (${classes})`,
+      subtitle: `Begleit- und Sicherungsbogen`,
       learningGoal: `Die Schülerinnen und Schüler untersuchen die Lebenswelt und die Herrschaftsstrukturen in der Epoche ${era} und beurteilen historische Weichenstellungen.`,
       coreQuestions: [
         {
           stationRef: `Station ${r1.roundNumber}`,
-          question: `Beschreibe die Ausgangslage zu Beginn der Expedition: Welche Herausforderungen standen im Vordergrund?`,
-          sampleSolution: `Zu Beginn mussten Ressourcen und Vertrauen aufgebaut sowie erste Richtungsentscheidungen getroffen werden.`
+          question: `Welche wichtige Aufgabe oder Herausforderung musste an ${r1.locationName} bewältigt werden?`,
+          sampleSolution: `Es mussten erste Grundlagen für die Gemeinschaft geschaffen und wichtige Vorräte gesichert werden.`
         },
         {
           stationRef: `Station ${r2.roundNumber}`,
-          question: `Erkläre den zentralen Konflikt an ${r2.milestoneTitle}: Welche Interessen der verschiedenen Stände prallten aufeinander?`,
-          sampleSolution: `Hier traten gegensätzliche Interessen der Mächtestände zutage, die einen diplomatischen Kompromiss erforderten.`
+          question: `An ${r2.locationName} (${r2.milestoneTitle}) gab es Streit: Welche unterschiedlichen Meinungen standen sich gegenüber?`,
+          sampleSolution: `Verschiedene Gruppen hatten gegensätzliche Interessen, weshalb ein gerechter Kompromiss gefunden werden musste.`
         },
         {
           stationRef: `Station ${r3.roundNumber}`,
-          question: `Beurteile die langfristigen Auswirkungen deiner Entscheidungen auf das Überleben und den Erfolg der Gemeinschaft.`,
-          sampleSolution: `Ausgewogene Entscheidungen sicherten den Zusammenhalt und verhinderten Unruhen oder Mangelzustände.`
+          question: `Rückblick vor dem Ziel (${r3.locationName}): Was war rückblickend die klügste Entscheidung auf deiner Reise und warum?`,
+          sampleSolution: `Besonnene und vorausschauende Entscheidungen sicherten das Überleben und den Erfolg aller Beteiligten.`
         }
       ],
       dilemmaTask: {
-        title: "Historisches Dilemma & Perspektivenwechsel",
-        situationContext: `Im Spielverlauf gab es wiederholt Momente, in denen kein Beschluss allen Mächten gerecht werden konnte.`,
-        taskPrompt: `Wähle eine Entscheidung aus deiner Reise. Erläutere, warum es historisch keine 'perfekte' Lösung gab und welche Gruppe den höchsten Preis zahlen musste.`,
-        sampleSolution: `Historische Akteure handelten unter Unsicherheit und Ressourcenknappheit; jeder Gewinn für eine Gruppe bedeutete oft Einschnitte für eine andere.`
+        title: "Schwierige Entscheidung: Was hättest du getan?",
+        situationContext: `Auf deiner historischen Reise gab es Situationen, in denen jede Entscheidung auch Nachteile mit sich brachte.`,
+        taskPrompt: `Wähle eine schwierige Situation aus dem Spiel: Vor welcher Wahl standest du? Wie hast du entschieden und warum gab es damals keine einfache Lösung für alle?`,
+        sampleSolution: `In historischen Notlagen oder Umbrüchen gab es selten einfache Lösungen; jede Entscheidung forderte von einer Gruppe Opfer oder Verzicht.`
       },
-      glossaryTerms: [
-        {
-          term: r1.lexiconEntry?.term || topics[0] || 'Fachbegriff 1',
-          hint: 'Siehe Lexikon Station 1',
-          solution: (typeof r1.lexiconEntry?.explanation === 'object' ? r1.lexiconEntry.explanation.mittelstufe : r1.lexiconEntry?.explanation) || 'Zentraler historischer Begriff.'
-        },
-        {
-          term: r2.lexiconEntry?.term || topics[1] || 'Fachbegriff 2',
-          hint: 'Siehe Lexikon Hauptstation',
-          solution: (typeof r2.lexiconEntry?.explanation === 'object' ? r2.lexiconEntry.explanation.mittelstufe : r2.lexiconEntry?.explanation) || 'Wichtige geschichtliche Erscheinung.'
-        },
-        {
-          term: r3.lexiconEntry?.term || topics[2] || 'Fachbegriff 3',
-          hint: 'Siehe Lexikon Endstation',
-          solution: (typeof r3.lexiconEntry?.explanation === 'object' ? r3.lexiconEntry.explanation.mittelstufe : r3.lexiconEntry?.explanation) || 'Bedeutsamer Begriff für die Epoche.'
-        }
-      ],
-      reflectionCheck: `Welcher erreichte Stand (Säule) war in deiner Klasse am schwierigsten zu stabilisieren und warum?`
+      glossaryTerms: uniqueTerms.map((t, i) => ({
+        term: t,
+        hint: `Zentraler Begriff ${i + 1}`,
+        solution: `Wichtiger historischer Begriff zur Epoche ${era}.`
+      })),
+      reflectionCheck: ""
     };
   }
 }

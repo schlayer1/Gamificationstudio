@@ -135,7 +135,7 @@ export const WorksheetPrintModal: React.FC<WorksheetPrintModalProps> = ({
                   {game.title}
                 </h1>
                 <p className="text-xs text-stone-600 font-medium mt-0.5">
-                  Themenbereich: <strong>{game.era}</strong> • {game.targetGrades}
+                  Themenbereich: <strong>{game.era}</strong>
                 </p>
               </div>
 
@@ -156,28 +156,30 @@ export const WorksheetPrintModal: React.FC<WorksheetPrintModalProps> = ({
               </div>
             </div>
 
-            {/* Teacher Solution Banner (Only if solution view active) */}
+            {/* Teacher Solution Banner & Learning Goal (NUR BEI LEHRER-LÖSUNG sichtbar) */}
             {showTeacherSolutions && (
-              <div className="mb-4 p-2.5 rounded bg-emerald-50 border border-emerald-500 text-emerald-900 text-xs font-semibold flex items-center gap-2">
-                <Key className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>LEHRKRAFT-EXEMPLAR MIT ERWARTUNGSHORIZONT UND MUSTERLÖSUNGEN</span>
+              <div className="mb-4 space-y-2">
+                <div className="p-2.5 rounded bg-emerald-50 border border-emerald-500 text-emerald-900 text-xs font-semibold flex items-center gap-2">
+                  <Key className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <span>LEHRKRAFT-EXEMPLAR MIT ERWARTUNGSHORIZONT UND MUSTERLÖSUNGEN</span>
+                </div>
+                {worksheet.learningGoal && (
+                  <div className="p-2 rounded bg-stone-100 border-l-4 border-emerald-600 text-xs text-stone-800">
+                    <strong className="text-stone-900 block font-bold mb-0.5">🎯 Didaktisches Stundenziel (Lehrkraft):</strong>
+                    <p className="m-0 italic">{worksheet.learningGoal}</p>
+                  </div>
+                )}
               </div>
             )}
 
-            {/* 2. STUNDENZIEL (Learning Goal) */}
-            <div className="mb-4 p-2.5 rounded bg-amber-50/70 border-l-4 border-amber-600 text-xs text-stone-800">
-              <strong className="text-stone-900 block font-bold mb-0.5">🎯 Didaktisches Stundenziel:</strong>
-              <p className="m-0 italic">{worksheet.learningGoal}</p>
-            </div>
-
-            {/* 3. AUFGABENBLOCK A: STATIONEN-KOMPASS (AFB I & II) */}
+            {/* 2. AUFGABENBLOCK 1: STATIONEN-KOMPASS (Verteilt über das ganze Spiel) */}
             <div className="mb-5 space-y-3">
               <div className="flex items-center gap-2 border-b border-stone-300 pb-1">
                 <span className="w-5 h-5 rounded-full bg-stone-800 text-white flex items-center justify-center font-bold text-xs">
                   1
                 </span>
                 <h3 className="font-bold text-xs sm:text-sm text-stone-900 uppercase tracking-wide m-0">
-                  Stationen-Kompass: Historische Leitfragen zur Expedition
+                  Stationen-Kompass: Leitfragen zu deiner Reise
                 </h3>
               </div>
 
@@ -185,7 +187,7 @@ export const WorksheetPrintModal: React.FC<WorksheetPrintModalProps> = ({
                 {worksheet.coreQuestions.map((q, idx) => (
                   <div key={idx} className="space-y-1 text-xs">
                     <p className="font-bold text-stone-800 m-0 flex items-start gap-1.5">
-                      <span className="text-amber-800 shrink-0">[{q.stationRef}]</span>
+                      <span className="text-amber-800 shrink-0 font-mono">[{q.stationRef}]</span>
                       <span>{q.question}</span>
                     </p>
 
@@ -194,7 +196,7 @@ export const WorksheetPrintModal: React.FC<WorksheetPrintModalProps> = ({
                         <strong>Erwartungshorizont:</strong> {q.sampleSolution}
                       </div>
                     ) : (
-                      <div className="pt-1 pb-2 space-y-2">
+                      <div className="pt-1 pb-1 space-y-2">
                         <div className="border-b border-stone-300 h-4 w-full"></div>
                         <div className="border-b border-stone-300 h-4 w-full"></div>
                       </div>
@@ -204,23 +206,25 @@ export const WorksheetPrintModal: React.FC<WorksheetPrintModalProps> = ({
               </div>
             </div>
 
-            {/* 4. AUFGABENBLOCK B: HISTORISCHES DILEMMA & URTEIL (AFB III) */}
+            {/* 3. AUFGABENBLOCK 2: HISTORISCHE ENTSCHEIDUNG (Einfach formuliert für 10-16 Jahre) */}
             <div className="mb-5 space-y-2">
               <div className="flex items-center gap-2 border-b border-stone-300 pb-1">
                 <span className="w-5 h-5 rounded-full bg-stone-800 text-white flex items-center justify-center font-bold text-xs">
                   2
                 </span>
                 <h3 className="font-bold text-xs sm:text-sm text-stone-900 uppercase tracking-wide m-0">
-                  {worksheet.dilemmaTask.title || "Historisches Dilemma & Perspektivenwechsel"}
+                  {worksheet.dilemmaTask.title || "Schwierige Entscheidung: Was hättest du getan?"}
                 </h3>
               </div>
 
-              <p className="text-[11px] text-stone-600 italic m-0">
-                {worksheet.dilemmaTask.situationContext}
-              </p>
+              {worksheet.dilemmaTask.situationContext && (
+                <p className="text-[11px] text-stone-600 italic m-0">
+                  {worksheet.dilemmaTask.situationContext}
+                </p>
+              )}
 
               <div className="p-2.5 rounded bg-stone-50 border border-stone-300 text-xs">
-                <strong className="text-stone-900 block mb-1">Deine Urteilsaufgabe:</strong>
+                <strong className="text-stone-900 block mb-1">Deine Aufgabe:</strong>
                 <p className="m-0 text-stone-800">{worksheet.dilemmaTask.taskPrompt}</p>
 
                 {showTeacherSolutions ? (
@@ -237,23 +241,23 @@ export const WorksheetPrintModal: React.FC<WorksheetPrintModalProps> = ({
               </div>
             </div>
 
-            {/* 5. AUFGABENBLOCK C: BEGRIFFS-GLOSSAR & HEFTEREINTRAG */}
-            <div className="mb-5 space-y-2">
+            {/* 4. AUFGABENBLOCK 3: FACHBEGRIFFS-GLOSSAR (6 ZENTRALE BEGRIFFE) */}
+            <div className="mb-4 space-y-2">
               <div className="flex items-center gap-2 border-b border-stone-300 pb-1">
                 <span className="w-5 h-5 rounded-full bg-stone-800 text-white flex items-center justify-center font-bold text-xs">
                   3
                 </span>
                 <h3 className="font-bold text-xs sm:text-sm text-stone-900 uppercase tracking-wide m-0">
-                  Fachbegriffs-Glossar: Halte 3 Schlüsselbegriffe fest
+                  Fachbegriffs-Glossar: Erkläre 6 wichtige Begriffe der Epoche in eigenen Worten
                 </h3>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1">
-                {worksheet.glossaryTerms.map((term, idx) => (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 pt-1">
+                {worksheet.glossaryTerms.slice(0, 6).map((term, idx) => (
                   <div key={idx} className="border border-stone-300 p-2 rounded bg-stone-50 text-[11px] flex flex-col justify-between">
                     <div>
                       <strong className="text-stone-900 block font-bold text-xs mb-0.5">
-                        {term.term}
+                        {idx + 1}. {term.term}
                       </strong>
                       <span className="text-[10px] text-stone-500 block mb-1">
                         ({term.hint})
@@ -261,7 +265,7 @@ export const WorksheetPrintModal: React.FC<WorksheetPrintModalProps> = ({
                     </div>
 
                     {showTeacherSolutions ? (
-                      <p className="m-0 text-emerald-900 bg-emerald-50 p-1.5 rounded border border-emerald-200 text-[10px]">
+                      <p className="m-0 text-emerald-900 bg-emerald-50 p-1.5 rounded border border-emerald-200 text-[10px] leading-snug">
                         {term.solution}
                       </p>
                     ) : (
@@ -275,37 +279,10 @@ export const WorksheetPrintModal: React.FC<WorksheetPrintModalProps> = ({
               </div>
             </div>
 
-            {/* 6. AUFGABENBLOCK D: MÄCHTE-CHECK & REFLEXION */}
-            <div className="space-y-2 border-t border-stone-300 pt-3">
-              <div className="flex items-center gap-2">
-                <span className="w-5 h-5 rounded-full bg-stone-800 text-white flex items-center justify-center font-bold text-xs">
-                  4
-                </span>
-                <h3 className="font-bold text-xs sm:text-sm text-stone-900 uppercase tracking-wide m-0">
-                  Strategie- & Reflexionspause: Die 4 Säulen
-                </h3>
-              </div>
-
-              {/* 4 Pillars Mini Tracker */}
-              <div className="grid grid-cols-4 gap-2 text-center text-[10px] pt-1">
-                {game.pillars.map((p, idx) => (
-                  <div key={idx} className="border border-stone-300 p-1 rounded bg-stone-50">
-                    <span className="font-bold text-stone-800 truncate block">{p.label}</span>
-                    <span className="text-[9px] text-stone-500 block">Endstand: _____ %</span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="p-2 rounded bg-amber-50/60 border border-amber-300 text-[11px] mt-2">
-                <strong>💡 Reflexions-Impuls für das Unterrichtsgespräch:</strong>
-                <p className="m-0 text-stone-800 italic mt-0.5">{worksheet.reflectionCheck}</p>
-              </div>
-            </div>
-
             {/* FOOTER */}
-            <div className="mt-5 pt-2 border-t border-stone-300 flex items-center justify-between text-[10px] text-stone-500">
-              <span>Geschichts-Gamification-Studio • Lehrplan Thüringen</span>
-              <span>Erreichter Herrscher-Rang / Titel: ____________________________</span>
+            <div className="mt-6 pt-2 border-t border-stone-300 flex items-center justify-between text-[10px] text-stone-500">
+              <span>Geschichts-Gamification-Studio • Heimbürgeschule Kahla</span>
+              <span>Lernstands-Sicherung Geschichtsunterricht</span>
             </div>
 
           </div>
