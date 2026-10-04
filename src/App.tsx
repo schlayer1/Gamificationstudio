@@ -141,25 +141,41 @@ export const App: React.FC = () => {
 
     soundFX.playClick();
 
-    // 1. Calculate new stats
-    let newGoetter = stats.goetter + (choice.statChanges.goetter || 0);
-    let newPriester = stats.priester + (choice.statChanges.priester || 0);
-    let newAdel = stats.adel + (choice.statChanges.adel || 0);
-    let newVolk = stats.volk + (choice.statChanges.volk || 0);
+    // 1. Calculate new stats dynamically according to game pillars
+    const p1 = activeGameDefinition?.pillars?.[0] || { key: 'goetter', label: 'Götter ⚡', icon: '⚡' };
+    const p2 = activeGameDefinition?.pillars?.[1] || { key: 'priester', label: 'Priester 🙏', icon: '🙏' };
+    const p3 = activeGameDefinition?.pillars?.[2] || { key: 'adel', label: 'Adel 👑', icon: '👑' };
+    const p4 = activeGameDefinition?.pillars?.[3] || { key: 'volk', label: 'Volk 😊', icon: '😊' };
+
+    const rawStatChanges = choice.statChanges as any;
+    const p1Delta = (typeof rawStatChanges[p1.key] === 'number') ? rawStatChanges[p1.key] : (choice.statChanges.goetter || 0);
+    const p2Delta = (typeof rawStatChanges[p2.key] === 'number') ? rawStatChanges[p2.key] : (choice.statChanges.priester || 0);
+    const p3Delta = (typeof rawStatChanges[p3.key] === 'number') ? rawStatChanges[p3.key] : (choice.statChanges.adel || 0);
+    const p4Delta = (typeof rawStatChanges[p4.key] === 'number') ? rawStatChanges[p4.key] : (choice.statChanges.volk || 0);
+
+    let newGoetter = stats.goetter + p1Delta;
+    let newPriester = stats.priester + p2Delta;
+    let newAdel = stats.adel + p3Delta;
+    let newVolk = stats.volk + p4Delta;
     let newEp = stats.ep + (choice.statChanges.ep || 0);
 
     // Option D cost deduction if applicable
-    if (choice.id === 'D' && choice.epCost) {
-      newEp -= choice.epCost;
+    if (choice.id === 'D' && (choice.epCost ?? 3)) {
+      newEp -= (choice.epCost ?? 3);
     }
     if (newEp < 0) newEp = 0;
 
-    // 2. Calculate skills
+    // 2. Calculate skills (supports goettlicheAuserwaehltheit or skill1 etc.)
     let newSkills = { ...skills };
     if (choice.skillChanges) {
-      newSkills.goettlicheAuserwaehltheit += choice.skillChanges.goettlicheAuserwaehltheit || 0;
-      newSkills.politischeGeschicklichkeit += choice.skillChanges.politischeGeschicklichkeit || 0;
-      newSkills.militaerischeStaerke += choice.skillChanges.militaerischeStaerke || 0;
+      const rawSc = choice.skillChanges as any;
+      const s1Inc = rawSc.goettlicheAuserwaehltheit ?? rawSc.skill1 ?? 0;
+      const s2Inc = rawSc.politischeGeschicklichkeit ?? rawSc.skill2 ?? 0;
+      const s3Inc = rawSc.militaerischeStaerke ?? rawSc.skill3 ?? 0;
+
+      newSkills.goettlicheAuserwaehltheit += s1Inc;
+      newSkills.politischeGeschicklichkeit += s2Inc;
+      newSkills.militaerischeStaerke += s3Inc;
     }
 
     // 3. Check for 0% crash condition & Gnadenfrist
@@ -414,13 +430,47 @@ export const App: React.FC = () => {
                 {/* Choices Grid */}
                 <div className="space-y-3">
                   <h3 className="text-xs font-bold uppercase tracking-wider text-amber-400 px-1">
-                    Triff deine königliche Entscheidung:
+                    {(() => {
+                      const eraL = (activeGameDefinition?.era || '').toLowerCase();
+                      const titleL = (activeGameDefinition?.title || '').toLowerCase();
+                      if (eraL.includes('ägypt') || titleL.includes('pharao') || titleL.includes('nil') || !activeGameDefinition) {
+                        return 'Triff deine königliche Entscheidung:';
+                      }
+                      if (eraL.includes('industrie') || eraL.includes('weimar') || eraL.includes('revolution')) {
+                        return 'Triff deine weitsichtige Entscheidung:';
+                      }
+                      return 'Triff deine historische Entscheidung:';
+                    })()}
                   </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {currentStory.choices.map((choice) => {
                       const isOptionD = choice.id === 'D';
                       const isDLocked = isOptionD && stats.ep < (choice.epCost ?? 3);
+
+                      // Helper to get pillar key and label dynamically
+                      const p1 = activeGameDefinition?.pillars?.[0] || { key: 'goetter', label: 'Götter ⚡', icon: '⚡' };
+                      const p2 = activeGameDefinition?.pillars?.[1] || { key: 'priester', label: 'Priester 🙏', icon: '🙏' };
+                      const p3 = activeGameDefinition?.pillars?.[2] || { key: 'adel', label: 'Adel 👑', icon: '👑' };
+                      const p4 = activeGameDefinition?.pillars?.[3] || { key: 'volk', label: 'Volk 😊', icon: '😊' };
+
+                      // Stat changes mapping (both canonical key and pillar key)
+                      const rawStats = choice.statChanges as any;
+                      const p1Delta = rawStats[p1.key] ?? rawStats.goetter;
+                      const p2Delta = rawStats[p2.key] ?? rawStats.priester;
+                      const p3Delta = rawStats[p3.key] ?? rawStats.adel;
+                      const p4Delta = rawStats[p4.key] ?? rawStats.volk;
+                      const epDelta = rawStats.ep;
+
+                      // Skill changes mapping
+                      const s1Name = activeGameDefinition?.skillNames?.skill1 || 'Göttliche Auserwähltheit';
+                      const s2Name = activeGameDefinition?.skillNames?.skill2 || 'Politische Geschicklichkeit';
+                      const s3Name = activeGameDefinition?.skillNames?.skill3 || 'Militärische Stärke';
+
+                      const rawSkills = (choice.skillChanges as any) || {};
+                      const s1Delta = rawSkills.goettlicheAuserwaehltheit ?? rawSkills.skill1;
+                      const s2Delta = rawSkills.politischeGeschicklichkeit ?? rawSkills.skill2;
+                      const s3Delta = rawSkills.militaerischeStaerke ?? rawSkills.skill3;
 
                       return (
                         <button
@@ -451,7 +501,7 @@ export const App: React.FC = () => {
                                   isDLocked ? 'text-red-400' : 'text-amber-300'
                                 }`}>
                                   {isDLocked ? <Lock className="w-3.5 h-3.5" /> : <Sparkles className="w-3.5 h-3.5 text-yellow-400" />}
-                                  {choice.epCost ?? 3} EP
+                                  {choice.epCost ?? 3} {activeGameDefinition?.specialResourceEmoji || 'EP'}
                                 </span>
                               )}
                             </div>
@@ -467,31 +517,48 @@ export const App: React.FC = () => {
                             </p>
                           </div>
 
-                          {/* Stat Preview Pills */}
+                          {/* Stat & Skill Preview Pills */}
                           <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-stone-800/80 text-[11px]">
-                            {choice.statChanges.goetter && (
-                              <span className={`px-1.5 py-0.5 rounded ${choice.statChanges.goetter > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
-                                ⚡ {choice.statChanges.goetter > 0 ? `+${choice.statChanges.goetter}` : choice.statChanges.goetter}%
+                            {typeof p1Delta === 'number' && p1Delta !== 0 && (
+                              <span className={`px-1.5 py-0.5 rounded ${p1Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
+                                {p1.icon} {p1Delta > 0 ? `+${p1Delta}` : p1Delta}%
                               </span>
                             )}
-                            {choice.statChanges.priester && (
-                              <span className={`px-1.5 py-0.5 rounded ${choice.statChanges.priester > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
-                                🙏 {choice.statChanges.priester > 0 ? `+${choice.statChanges.priester}` : choice.statChanges.priester}%
+                            {typeof p2Delta === 'number' && p2Delta !== 0 && (
+                              <span className={`px-1.5 py-0.5 rounded ${p2Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
+                                {p2.icon} {p2Delta > 0 ? `+${p2Delta}` : p2Delta}%
                               </span>
                             )}
-                            {choice.statChanges.adel && (
-                              <span className={`px-1.5 py-0.5 rounded ${choice.statChanges.adel > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
-                                👑 {choice.statChanges.adel > 0 ? `+${choice.statChanges.adel}` : choice.statChanges.adel}%
+                            {typeof p3Delta === 'number' && p3Delta !== 0 && (
+                              <span className={`px-1.5 py-0.5 rounded ${p3Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
+                                {p3.icon} {p3Delta > 0 ? `+${p3Delta}` : p3Delta}%
                               </span>
                             )}
-                            {choice.statChanges.volk && (
-                              <span className={`px-1.5 py-0.5 rounded ${choice.statChanges.volk > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
-                                😊 {choice.statChanges.volk > 0 ? `+${choice.statChanges.volk}` : choice.statChanges.volk}%
+                            {typeof p4Delta === 'number' && p4Delta !== 0 && (
+                              <span className={`px-1.5 py-0.5 rounded ${p4Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
+                                {p4.icon} {p4Delta > 0 ? `+${p4Delta}` : p4Delta}%
                               </span>
                             )}
-                            {choice.statChanges.ep && (
+                            {typeof epDelta === 'number' && epDelta !== 0 && (
                               <span className="px-1.5 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800 font-bold">
-                                🧠 +{choice.statChanges.ep} EP
+                                {activeGameDefinition?.specialResourceEmoji || '🧠'} {epDelta > 0 ? `+${epDelta}` : epDelta} {activeGameDefinition?.specialResourceName || 'EP'}
+                              </span>
+                            )}
+
+                            {/* Talent/Fertigkeiten Zuwachs-Pills */}
+                            {typeof s1Delta === 'number' && s1Delta > 0 && (
+                              <span className="px-1.5 py-0.5 rounded bg-yellow-950/80 text-yellow-300 border border-yellow-700/60 font-semibold" title={s1Name}>
+                                🌟 +{s1Delta} {s1Name.split(' ')[0]}
+                              </span>
+                            )}
+                            {typeof s2Delta === 'number' && s2Delta > 0 && (
+                              <span className="px-1.5 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 font-semibold" title={s2Name}>
+                                🗣️ +{s2Delta} {s2Name.split(' ')[0]}
+                              </span>
+                            )}
+                            {typeof s3Delta === 'number' && s3Delta > 0 && (
+                              <span className="px-1.5 py-0.5 rounded bg-rose-950/80 text-rose-300 border border-rose-700/60 font-semibold" title={s3Name}>
+                                ⚔️ +{s3Delta} {s3Name.split(' ')[0]}
                               </span>
                             )}
                           </div>

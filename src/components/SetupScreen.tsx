@@ -162,7 +162,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
     }
 
     // 3. Reformation / Mittelalter
-    if (eraLower.includes('reformation') || eraLower.includes('luther') || eraLower.includes('mittelalter')) {
+    if (eraLower.includes('reformation') || eraLower.includes('luther') || eraLower.includes('mittelalter') || eraLower.includes('stamm')) {
       if (gender === 'prinzessin') {
         const titles = ['Burgfräulein Katharina', 'Gelehrte Elisabeth', 'Magistra Anna', 'Fürstin Sophie'];
         const chosen = titles[Math.abs(trimmed.length) % titles.length];
@@ -177,7 +177,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
     }
 
     // 4. Antikes Griechenland / Alexander
-    if (eraLower.includes('alexander') || eraLower.includes('griechen') || titleLower.includes('alexander')) {
+    if (eraLower.includes('alexander') || eraLower.includes('griechen') || titleLower.includes('alexander') || titleLower.includes('athen')) {
       if (gender === 'prinzessin') {
         const titles = ['Strategin Helena', 'Priesterin Kassandra', 'Prinzessin Roxane', 'Gelehrte Sophia'];
         const chosen = titles[Math.abs(trimmed.length) % titles.length];
@@ -191,7 +191,67 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
       }
     }
 
-    // 5. Erster Weltkrieg: Soldaten-Perspektiven (Multiperspektivität)
+    // 5. Frankenreich & Karl der Große
+    if (eraLower.includes('frank') || titleLower.includes('karl der große') || titleLower.includes('frankenreich')) {
+      if (gender === 'prinzessin') {
+        const titles = ['Pfalzgräfin Fastrada', 'Gelehrte Bertha', 'Hofmagistra Gisela'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else if (gender === 'prinz') {
+        const titles = ['Pfalzgraf Einhard', 'Königsbote Gerold', 'Ritter Roland'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else {
+        return `Reichsgesandte/r ${trimmed}`;
+      }
+    }
+
+    // 6. Französische Revolution & Napoleon
+    if (eraLower.includes('revolution') || eraLower.includes('napoleon') || titleLower.includes('revolution')) {
+      if (gender === 'prinzessin') {
+        const titles = ['Citoyenne Olympe', 'Abgeordnete Madame Roland', 'Patriotin Sophie'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else if (gender === 'prinz') {
+        const titles = ['Citoyen Camille', 'Volksvertreter Jean', 'Deputierter Henri'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else {
+        return `Repräsentant/in ${trimmed} der Nation`;
+      }
+    }
+
+    // 7. Industrielle Revolution & 19. Jahrhundert
+    if (eraLower.includes('industrie') || eraLower.includes('dampf') || titleLower.includes('industrie') || titleLower.includes('schlot') || titleLower.includes('arbeiter')) {
+      if (gender === 'prinzessin') {
+        const titles = ['Fabrikinspektorin Ada', 'Sozialreformerin Bertha', 'Ingenieurin Clara', 'Betriebsärztin Elisabeth'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else if (gender === 'prinz') {
+        const titles = ['Fabrikinspektor James', 'Chefingenieur Friedrich', 'Gewerkschafter August', 'Eisenbahnpionier Robert'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else {
+        return `Gewerbeinspektor/in ${trimmed}`;
+      }
+    }
+
+    // 8. Weimarer Republik
+    if (eraLower.includes('weimar') || titleLower.includes('weimar') || eraLower.includes('1920')) {
+      if (gender === 'prinzessin') {
+        const titles = ['Reichstagsabgeordnete Marie', 'Bauhaus-Gestalterin Marianne', 'Journalistin Gabriele'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else if (gender === 'prinz') {
+        const titles = ['Abgeordneter Friedrich', 'Bauhaus-Architekt Walter', 'Verfassungsexperte Hugo'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else {
+        return `Demokratie-Verteidiger/in ${trimmed}`;
+      }
+    }
+
+    // 9. Erster Weltkrieg: Soldaten-Perspektiven (Multiperspektivität)
     if (eraLower.includes('weltkrieg') || eraLower.includes('graben') || titleLower.includes('weltkrieg')) {
       if (selectedHeroOrigin === 'franzoesischer_soldat') {
         return `Soldat de 1re classe ${trimmed} ('Poilu')`;
@@ -202,7 +262,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
       }
     }
 
-    // 6. Nationalsozialismus & Vorkriegszeit 1933–1939: Zivilisten-Perspektive
+    // 10. Nationalsozialismus & Vorkriegszeit 1933–1939: Zivilisten-Perspektive
     if (eraLower.includes('nsdap') || eraLower.includes('nationalsozialismus') || titleLower.includes('diktatur') || titleLower.includes('schatten über deutschland')) {
       if (selectedHeroOrigin === 'zivilist_arbeiter') {
         return `Werkmeister / Dreher ${trimmed} (Siemens-Werke Berlin)`;
@@ -213,17 +273,28 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
       }
     }
 
-    // Default: Altes Ägypten
+    // 11. Altes Ägypten (oder Standard Pharaonen-Expedition)
+    if (eraLower.includes('ägypten') || eraLower.includes('nil') || titleLower.includes('pharao') || titleLower.includes('nil') || !activeGame) {
+      if (gender === 'prinzessin') {
+        const titles = ['Nefertari', 'Hatschepsut', 'Meritaten', 'Cleopatra'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `Prinzessin ${chosen}-${trimmed}`;
+      } else if (gender === 'prinz') {
+        const titles = ['Tutanchamun', 'Thutmosis', 'Ramses', 'Amenophis'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `Prinz ${chosen}-${trimmed}`;
+      } else {
+        return `Herrscher/in ${trimmed} von Kemet`;
+      }
+    }
+
+    // 12. Allgemeiner historischer Fallback für völlig freie Spiele
     if (gender === 'prinzessin') {
-      const titles = ['Nefertari', 'Hatschepsut', 'Meritaten', 'Cleopatra'];
-      const chosen = titles[Math.abs(trimmed.length) % titles.length];
-      return `Prinzessin ${chosen}-${trimmed}`;
+      return `Historische Akteurin ${trimmed}`;
     } else if (gender === 'prinz') {
-      const titles = ['Tutanchamun', 'Thutmosis', 'Ramses', 'Amenophis'];
-      const chosen = titles[Math.abs(trimmed.length) % titles.length];
-      return `Prinz ${chosen}-${trimmed}`;
+      return `Historischer Akteur ${trimmed}`;
     } else {
-      return `Herrscher/in ${trimmed} von Kemet`;
+      return `Expeditionsleiter/in ${trimmed}`;
     }
   };
 
@@ -576,10 +647,19 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
               );
             }
 
+            // Determine appropriate labels for Question 2 and character role
+            const isModernOrIndustrial = eraLower.includes('industrie') || eraLower.includes('dampf') || titleLower.includes('industrie') || eraLower.includes('weimar') || eraLower.includes('revolution');
+            const isAncientEgypt = eraLower.includes('ägypt') || titleLower.includes('pharao') || titleLower.includes('nil') || !activeGame;
+
+            const femaleLabel = isModernOrIndustrial ? '👩 Dame / Bürgerin' : isAncientEgypt ? '👑 Prinzessin' : '👑 Dame / Anführerin';
+            const maleLabel = isModernOrIndustrial ? '👨 Herr / Bürger' : isAncientEgypt ? '👑 Prinz' : '👑 Herr / Anführer';
+            const neutralLabel = isModernOrIndustrial ? '✨ Person / Pionier' : '✨ Herrscher/in';
+            const roleBoxLabel = isModernOrIndustrial ? 'Deine historische Identität im Spiel:' : isAncientEgypt ? 'Dein zugewiesener Thronname:' : 'Dein historischer Rollenname:';
+
             return (
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-amber-200 flex items-center gap-2">
-                  <span className="text-amber-400">2.</span> Wähle deinen Titel:
+                  <span className="text-amber-400">2.</span> Wähle deinen Charakter & Anrede:
                 </label>
                 <div className="grid grid-cols-3 gap-2.5">
                   <button
@@ -588,13 +668,13 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
                       soundFX.playClick();
                       setGender('prinzessin');
                     }}
-                    className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
+                    className={`py-2.5 px-3 rounded-lg border text-xs sm:text-sm font-medium transition-all ${
                       gender === 'prinzessin'
                         ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
                         : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
                     }`}
                   >
-                    👑 Prinzessin / Dame
+                    {femaleLabel}
                   </button>
                   <button
                     type="button"
@@ -602,13 +682,13 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
                       soundFX.playClick();
                       setGender('prinz');
                     }}
-                    className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
+                    className={`py-2.5 px-3 rounded-lg border text-xs sm:text-sm font-medium transition-all ${
                       gender === 'prinz'
                         ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
                         : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
                     }`}
                   >
-                    👑 Prinz / Herr
+                    {maleLabel}
                   </button>
                   <button
                     type="button"
@@ -616,24 +696,34 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
                       soundFX.playClick();
                       setGender('neutral');
                     }}
-                    className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
+                    className={`py-2.5 px-3 rounded-lg border text-xs sm:text-sm font-medium transition-all ${
                       gender === 'neutral'
                         ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
                         : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
                     }`}
                   >
-                    ✨ Herrscher/in
+                    {neutralLabel}
                   </button>
                 </div>
               </div>
             );
           })()}
 
-          {/* Generated Royal Title Preview Box */}
+          {/* Generated Royal/Character Title Preview Box */}
           <div className="p-4 rounded-xl bg-amber-950/40 border border-amber-600/40 flex items-center justify-between">
             <div>
               <span className="text-xs text-stone-400 uppercase tracking-wider block font-semibold">
-                Dein zugewiesener Thronname:
+                {(() => {
+                  const el = (activeGame?.era || '').toLowerCase();
+                  const tl = (activeGame?.title || '').toLowerCase();
+                  if (el.includes('industrie') || el.includes('weimar') || el.includes('revolution') || el.includes('weltkrieg') || el.includes('nsdap')) {
+                    return 'Deine historische Rolle im Spiel:';
+                  }
+                  if (el.includes('ägypt') || tl.includes('pharao') || tl.includes('nil') || !activeGame) {
+                    return 'Dein zugewiesener Thronname:';
+                  }
+                  return 'Dein historischer Rollenname:';
+                })()}
               </span>
               <strong className="text-amber-300 text-lg font-serif">
                 {getPreviewThroneName()}
@@ -645,16 +735,20 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
           {/* Key Game Mechanics Reminder */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs text-stone-300">
             <div className="p-2 rounded bg-stone-900 border border-stone-800">
-              <span className="block font-bold text-amber-400">⚡ 🙏 👑 😊</span>
+              <span className="block font-bold text-amber-400">
+                {activeGame?.pillars ? activeGame.pillars.map(p => p.icon).join(' ') : '⚡ 🙏 👑 😊'}
+              </span>
               <span>Startwerte je 10%</span>
             </div>
             <div className="p-2 rounded bg-stone-900 border border-stone-800">
-              <span className="block font-bold text-amber-400">🧠 2 Start-EP</span>
-              <span>Erfahrungspunkte</span>
+              <span className="block font-bold text-amber-400">
+                {activeGame?.specialResourceEmoji || '🧠'} 2 Start-Punkte
+              </span>
+              <span className="truncate block max-w-[120px] mx-auto">{activeGame?.specialResourceName || 'Erfahrungspunkte'}</span>
             </div>
             <div className="p-2 rounded bg-stone-900 border border-stone-800">
               <span className="block font-bold text-amber-400">🔒 Option D</span>
-              <span>Freischaltbar ab 3 EP</span>
+              <span>Freischaltbar ab 3 {activeGame?.specialResourceEmoji || 'EP'}</span>
             </div>
             <div className="p-2 rounded bg-stone-900 border border-stone-800">
               <span className="block font-bold text-amber-400">🛡️ Gnadenfrist</span>

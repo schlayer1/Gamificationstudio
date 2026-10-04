@@ -244,6 +244,7 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
           "label": "Kurztitel Option A",
           "description": "Erklärung der Entscheidung",
           "statChanges": { "${req.pillars[0].key}": 15, "${req.pillars[1].key}": -10, "ep": 1 },
+          "skillChanges": { "skill2": 1 },
           "consequenceText": "Altersgerechte Konsequenz der Option A..."
         },
         {
@@ -251,6 +252,7 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
           "label": "Kurztitel Option B",
           "description": "Erklärung der Entscheidung",
           "statChanges": { "${req.pillars[2].key}": 15, "${req.pillars[3].key}": -10, "ep": 1 },
+          "skillChanges": { "skill3": 1 },
           "consequenceText": "Altersgerechte Konsequenz der Option B..."
         },
         {
@@ -258,6 +260,7 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
           "label": "Kurztitel Option C",
           "description": "Erklärung der Entscheidung",
           "statChanges": { "${req.pillars[3].key}": 15, "${req.pillars[0].key}": -10, "ep": 1 },
+          "skillChanges": { "skill1": 1 },
           "consequenceText": "Altersgerechte Konsequenz der Option C..."
         },
         {
@@ -266,6 +269,7 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
           "description": "Erklärung der Meisteroption",
           "epCost": 3,
           "statChanges": { "${req.pillars[0].key}": 20, "${req.pillars[1].key}": 15, "${req.pillars[2].key}": 15, "${req.pillars[3].key}": 15, "ep": -1 },
+          "skillChanges": { "skill1": 1, "skill2": 1, "skill3": 1 },
           "consequenceText": "Besonders wirkungsvolle historische Konsequenz..."
         }
       ],
@@ -398,14 +402,39 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       };
       situationObj[selectedGradeLevel] = situationText;
 
-      // 2. Choices: Normalize consequenceText
-      const choices = (round.choices || []).map((c: any) => {
+      // 2. Choices: Normalize consequenceText and skillChanges
+      const choices = (round.choices || []).map((c: any, cIdx: number) => {
         const consText = typeof c.consequenceText === 'string'
           ? c.consequenceText
           : (c.consequenceText?.[selectedGradeLevel] || c.consequenceText?.mittelstufe || c.consequenceText?.unterstufe || '');
 
+        // Resolve skillChanges (supports { skill1: 1 } or { goettlicheAuserwaehltheit: 1 } or auto-assigns didactically)
+        const rawSkills = c.skillChanges || {};
+        const skillChanges: Partial<import('../types/game').Skills> = {};
+        
+        const s1Val = rawSkills.skill1 ?? rawSkills.goettlicheAuserwaehltheit;
+        const s2Val = rawSkills.skill2 ?? rawSkills.politischeGeschicklichkeit;
+        const s3Val = rawSkills.skill3 ?? rawSkills.militaerischeStaerke;
+
+        if (typeof s1Val === 'number') skillChanges.goettlicheAuserwaehltheit = s1Val;
+        if (typeof s2Val === 'number') skillChanges.politischeGeschicklichkeit = s2Val;
+        if (typeof s3Val === 'number') skillChanges.militaerischeStaerke = s3Val;
+
+        // If AI omitted skillChanges, assign sensible educational skill growth based on option ID
+        if (Object.keys(skillChanges).length === 0) {
+          if (c.id === 'A') skillChanges.politischeGeschicklichkeit = 1;
+          else if (c.id === 'B') skillChanges.militaerischeStaerke = 1;
+          else if (c.id === 'C') skillChanges.goettlicheAuserwaehltheit = 1;
+          else if (c.id === 'D') {
+            skillChanges.goettlicheAuserwaehltheit = 1;
+            skillChanges.politischeGeschicklichkeit = 1;
+            skillChanges.militaerischeStaerke = 1;
+          }
+        }
+
         return {
           ...c,
+          skillChanges,
           consequenceText: {
             unterstufe: consText,
             mittelstufe: consText,
