@@ -35,6 +35,90 @@ export interface CustomSettingProposal {
   heroImagePrompt: string;
 }
 
+/**
+ * Robust JSON Parser & Auto-Repair:
+ * Handles markdown fences, trailing commas, single quotes, unescaped linebreaks,
+ * and recovers valid slices from truncated AI stream responses.
+ */
+function parseJsonSafely(raw: string, defaultKey?: string): any {
+  if (!raw || !raw.trim()) return null;
+
+  let clean = raw.trim();
+  // Strip markdown code fences
+  clean = clean.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
+
+  const firstBrace = clean.indexOf('{');
+  if (firstBrace === -1) return null;
+  clean = clean.substring(firstBrace);
+
+  // 1. Direct parse attempt
+  try {
+    return JSON.parse(clean);
+  } catch {}
+
+  // 2. Remove trailing commas before } or ]
+  let sanitized = clean.replace(/,\s*([\]}])/g, '$1');
+  try {
+    return JSON.parse(sanitized);
+  } catch {}
+
+  // 3. If array inside object was cut off (e.g. {"rounds": [{...}, {...}, {"trunc...):
+  // Recover all completely closed round items up to the last "}"
+  const checkKeys = defaultKey ? [defaultKey, 'rounds', 'coreQuestions', 'glossaryTerms'] : ['rounds', 'coreQuestions', 'glossaryTerms'];
+  for (const key of checkKeys) {
+    const keyIdx = sanitized.indexOf(`"${key}"`);
+    if (keyIdx !== -1) {
+      const arrStart = sanitized.indexOf('[', keyIdx);
+      if (arrStart !== -1) {
+        let lastGoodEnd = -1;
+        let pos = arrStart;
+        while ((pos = sanitized.indexOf('}', pos + 1)) !== -1) {
+          const candidate = sanitized.substring(0, pos + 1).replace(/,\s*$/, '') + ']}';
+          try {
+            const testObj = JSON.parse(candidate);
+            if (testObj[key] && Array.isArray(testObj[key]) && testObj[key].length > 0) {
+              lastGoodEnd = pos;
+            }
+          } catch {}
+        }
+        if (lastGoodEnd !== -1) {
+          const recoveredCandidate = sanitized.substring(0, lastGoodEnd + 1).replace(/,\s*$/, '') + ']}';
+          try {
+            return JSON.parse(recoveredCandidate);
+          } catch {}
+        }
+      }
+    }
+  }
+
+  // 4. Fallback: Close unclosed quotes and open curly braces
+  let attempt = sanitized;
+  const quoteCount = (attempt.match(/"/g) || []).length;
+  if (quoteCount % 2 !== 0) {
+    attempt += '"';
+  }
+  let openBraces = 0;
+  let inString = false;
+  for (let i = 0; i < attempt.length; i++) {
+    if (attempt[i] === '"' && attempt[i - 1] !== '\\') inString = !inString;
+    if (!inString) {
+      if (attempt[i] === '{' || attempt[i] === '[') openBraces++;
+      if (attempt[i] === '}' || attempt[i] === ']') openBraces--;
+    }
+  }
+  while (openBraces > 0) {
+    attempt += '}';
+    openBraces--;
+  }
+
+  try {
+    return JSON.parse(attempt);
+  } catch (err: any) {
+    console.error('All JSON repair attempts failed. Raw snippet:', clean.substring(0, 300));
+    throw err;
+  }
+}
+
 export class GameGeneratorService {
   /**
    * Generates a complete tailored game configuration proposal from a completely free-form
@@ -101,16 +185,10 @@ Antworte STRENG als valides JSON nach diesem Schema:
       true
     );
 
-    let cleanJson = rawJson.trim();
-    cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
-    const firstBrace = cleanJson.indexOf('{');
-    const lastBrace = cleanJson.lastIndexOf('}');
-    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-      cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+    const parsed = parseJsonSafely(rawJson);
+    if (!parsed) {
+      throw new Error('Die KI konnte für dieses Setting kein gültiges Datenformat erstellen. Bitte versuche es erneut.');
     }
-    cleanJson = cleanJson.replace(/,\s*([\]}])/g, '$1');
-
-    const parsed = JSON.parse(cleanJson);
     return {
       title: parsed.title || freeformSetting,
       era: parsed.era || 'Historische Epoche',
@@ -303,49 +381,22 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         true
       );
 
-      // Clean markdown code fences if present (```json ... ```)
-      let cleanJson = rawJson.trim();
-      cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
-
-      const firstBrace = cleanJson.indexOf('{');
-      const lastBrace = cleanJson.lastIndexOf('}');
-      if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-        cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
-      }
-
-      // Remove trailing commas before } or ]
-      cleanJson = cleanJson.replace(/,\s*([\]}])/g, '$1');
-
       try {
-        const parsed = JSON.parse(cleanJson);
-        return parsed.rounds || [];
-      } catch (parseErr: any) {
-        // Advanced JSON Repair: If a string was cut off mid-way (Unterminated string), repair it
-        console.warn('Direct JSON parse failed, attempting intelligent repair:', parseErr.message);
-        
-        // Remove truncated unclosed property and close open brackets
-        let repaired = cleanJson;
-        // Fix unescaped control chars / linebreaks in strings
-        repaired = repaired.replace(/[\n\r\t]+/g, ' ');
-
-        // If string was unterminated, try closing the last string and the json structure
-        if (parseErr.message && (parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end'))) {
-          // Find the last completely closed round object "}"
-          const lastRoundEnd = repaired.lastIndexOf('}');
-          if (lastRoundEnd !== -1) {
-            const cutToLastRound = repaired.substring(0, lastRoundEnd + 1);
-            const wrapped = cutToLastRound.trim() + ']}';
-            try {
-              const recovered = JSON.parse(wrapped);
-              if (recovered.rounds && recovered.rounds.length > 0) {
-                console.log(`Successfully recovered ${recovered.rounds.length} rounds from truncated batch!`);
-                return recovered.rounds;
-              }
-            } catch {}
-          }
+        const parsed = parseJsonSafely(rawJson, 'rounds');
+        if (parsed && Array.isArray(parsed.rounds) && parsed.rounds.length > 0) {
+          return parsed.rounds;
         }
-        throw parseErr;
+      } catch (parseErr: any) {
+        console.warn('Batch parse error:', parseErr.message);
       }
+
+      // If parsing yielded nothing, attempt round recovery
+      const recovered = parseJsonSafely(rawJson, 'rounds');
+      if (recovered && Array.isArray(recovered.rounds) && recovered.rounds.length > 0) {
+        return recovered.rounds;
+      }
+
+      throw new Error(`Konnte Stationen ${startRound} bis ${endRound} nicht verarbeiten. Bitte erneut versuchen.`);
     };
 
     let allRawRounds: any[] = [];
@@ -709,16 +760,11 @@ Antworte AUSSCHLIESSLICH als valides JSON:
       true
     );
 
-    let cleanJson = rawJson.trim();
-    cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
-    const firstBrace = cleanJson.indexOf('{');
-    const lastBrace = cleanJson.lastIndexOf('}');
-    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
-      cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+    const parsed = parseJsonSafely(rawJson);
+    if (!parsed) {
+      throw new Error('Arbeitsblatt-JSON konnte nicht geparst werden.');
     }
-    cleanJson = cleanJson.replace(/,\s*([\]}])/g, '$1');
-
-    return JSON.parse(cleanJson);
+    return parsed;
   }
 
   /**
