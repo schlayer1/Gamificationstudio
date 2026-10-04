@@ -8,7 +8,9 @@ export type EraThemeId =
   | 'franks_charlemagne'  // Frankenreich / Karl der Große: Königsblau, Reichsadler-Gold, Pfalzstein
   | 'revolution_tricolore'// Französische Revolution: Trikolore Blau-Weiß-Rot, Sturm, Republik
   | 'industrial_steam'    // Industrielle Revolution: Rußschwarz, Gusseisen-Kupfer, Dampf & Zahnrad
-  | 'weimar_cabaret';     // Weimarer Republik / 1920er: Art-Déco Bernstein, Bauhaus-Rot, Nachtblau
+  | 'weimar_cabaret'      // Weimarer Republik / 1920er: Art-Déco Bernstein, Bauhaus-Rot, Nachtblau
+  | 'ww1_trenches'        // 1. Weltkrieg: Schlammgrau, Stahlhelm-Khaki, Mohnrot, Stacheldraht
+  | 'nsdap_resistance';   // NS-Diktatur 1933-1939: Schiefergrau, Warnrot, Flugblatt-Weiß, Zivilcourage
 
 export interface EraThemeConfig {
   id: EraThemeId;
@@ -221,6 +223,44 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     destinationLabel: 'Ziel: Demokratie & Bauhaus Weimar',
     defaultBannerUrl: 'https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80',
   },
+  ww1_trenches: {
+    id: 'ww1_trenches',
+    name: 'Schlamm & Stacheldraht (1. Weltkrieg)',
+    bodyBgClass: 'bg-[#101211]',
+    primaryColor: 'stone',
+    badgeBg: 'bg-stone-900/90',
+    badgeBorder: 'border-stone-600/70',
+    badgeText: 'text-stone-300',
+    accentGlow: 'red-500',
+    borderHero: 'border-stone-600/70',
+    cardBg: 'bg-gradient-to-br from-[#1a1c1a] to-[#0e100e]',
+    cardBorder: 'border-[#4a504b]',
+    primaryButton: 'bg-gradient-to-r from-stone-700 via-stone-800 to-red-800 hover:from-stone-600 hover:to-red-700 text-stone-100 font-bold',
+    titleGradient: 'from-stone-300 via-stone-400 to-red-400',
+    icon: '🎖️',
+    vehicleIcon: '🪖',
+    destinationLabel: 'Ziel: Waffenstillstand 1918 & Frieden',
+    defaultBannerUrl: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80',
+  },
+  nsdap_resistance: {
+    id: 'nsdap_resistance',
+    name: 'Zivilcourage & Widerstand (NS-Diktatur 1933–1939)',
+    bodyBgClass: 'bg-[#140f10]',
+    primaryColor: 'red',
+    badgeBg: 'bg-red-950/80',
+    badgeBorder: 'border-red-600/70',
+    badgeText: 'text-red-300',
+    accentGlow: 'red-500',
+    borderHero: 'border-red-700/70',
+    cardBg: 'bg-gradient-to-br from-[#241416] to-[#120a0b]',
+    cardBorder: 'border-[#6c282e]',
+    primaryButton: 'bg-gradient-to-r from-stone-800 via-red-900 to-amber-700 hover:from-stone-700 hover:to-amber-600 text-stone-100 font-bold',
+    titleGradient: 'from-stone-200 via-red-300 to-amber-200',
+    icon: '🕯️',
+    vehicleIcon: '🚲',
+    destinationLabel: 'Ziel: Menschlichkeit & Zivilcourage',
+    defaultBannerUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
+  },
 };
 
 /**
@@ -229,6 +269,14 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
 export function detectEraTheme(eraOrTitle?: string, archetype?: string): EraThemeConfig {
   if (!eraOrTitle) return ERA_THEMES.egypt_gold;
   const lower = eraOrTitle.toLowerCase();
+
+  if (lower.includes('weltkrieg') || lower.includes('graben') || lower.includes('verdun') || lower.includes('1914') || lower.includes('1918') || lower.includes('somme')) {
+    return ERA_THEMES.ww1_trenches;
+  }
+
+  if (lower.includes('nsdap') || lower.includes('diktatur') || lower.includes('nationalsozialismus') || lower.includes('1933') || lower.includes('widerstand') || lower.includes('reichstag')) {
+    return ERA_THEMES.nsdap_resistance;
+  }
 
   if (lower.includes('rom') || lower.includes('caesar') || lower.includes('augustus') || lower.includes('limes') || lower.includes('senat')) {
     if (lower.includes('german') || lower.includes('mytholog')) {

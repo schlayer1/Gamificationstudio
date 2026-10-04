@@ -416,6 +416,70 @@ export const PREDEFINED_TEMPLATES: PredefinedTemplate[] = [
       skill3: "Krisenmanagement ⚖️"
     },
     historicalContext: "Als junger Abgeordneter im Weimarer Nationaltheater musst du die erste deutsche Demokratie gegen Krisen, Inflation und Radikale verteidigen (Thüringer Lehrplan Kl. 7/8, LB VI & Kl. 9/10, LB I: Die Weimarer Republik)."
+  },
+
+  // 13. Erster Weltkrieg: Die Urkatastrophe aus drei Soldaten-Perspektiven (Multiperspektivität)
+  {
+    id: "erster_weltkrieg_perspektiven",
+    title: "Im Schützengraben: Der Erste Weltkrieg aus drei Soldaten-Perspektiven",
+    era: "Erster Weltkrieg & Industriezeitalter (1914–1918)",
+    eraThemeId: "ww1_trenches",
+    archetype: "conquest_campaign",
+    defaultGradeLevel: "mittelstufe",
+    defaultTargetGrades: "Mittelstufe (7.–8. Klasse)",
+    tagline: "Wähle deine Perspektive: Deutscher Landser (Westfront), Französischer Poilu (Verdun) oder Russischer Soldat (Ostfront)",
+    defaultTopics: [
+      "Juli-Krise 1914, Bündnissysteme & Kriegsbegeisterung vs. Realität",
+      "Stellungskrieg an der Westfront: Schützengräben, Trommelfeuer & Giftgas",
+      "Die Hölle von Verdun 1916 & Schlacht an der Somme",
+      "Feldpostbriefe, Hungerwinter 1916/17 (Steckrübenwinter) & Heimatfront",
+      "Epochenjahr 1917: Russische Revolution, Kriegseintritt der USA & Waffenstillstand 1918"
+    ],
+    suggestedPillars: [
+      { key: "truppenstaerke", label: "Kameradschaft & Zusammenhalt 👥", icon: "👥", description: "Unterstützung der Schicksalsgemeinschaft im Graben" },
+      { key: "vorraete", label: "Verpflegung & Ausrüstung 🍞", icon: "🍞", description: "Nahrung, Gasmaske, Patronen und trockene Kleidung" },
+      { key: "soldatenmoral", label: "Seelische Standhaftigkeit ❤️", icon: "❤️", description: "Widerstand gegen Kriegsmüdigkeit und Schock" },
+      { key: "reichskontrolle", label: "Menschlichkeit & Friedenswille 🕊️", icon: "🕊️", description: "Bewahrung des Gewissens gegen Verrohung" }
+    ],
+    specialResource: { name: "Feldpost-Briefe", emoji: "✉️" },
+    skills: {
+      skill1: "Graben-Überleben 🪖",
+      skill2: "Kameradschaftshilfe 🤝",
+      skill3: "Kritischer Scharfsinn 📜"
+    },
+    historicalContext: "Erlebe die Urkatastrophe des 20. Jahrhunderts als multiperspektivische Fallanalyse: Wähle, ob du als deutscher Infanterist, französischer 'Poilu' vor Verdun oder russischer Soldat an der Ostfront vor 1917 antrittst (Thüringer Lehrplan Kl. 7/8, LB V & Kl. 9/10: Erster Weltkrieg)."
+  },
+
+  // 14. Aufstieg der NSDAP & Alltag in der Diktatur 1933–1939 (Zivilisten-Perspektive)
+  {
+    id: "ns_diktatur_zivilcourage",
+    title: "Schatten über Deutschland: Aufstieg der Diktatur & Alltag 1933–1939",
+    era: "Nationalsozialismus & Vorkriegszeit (1933–1939)",
+    eraThemeId: "nsdap_resistance",
+    archetype: "reigns_balance",
+    defaultGradeLevel: "oberstufe",
+    defaultTargetGrades: "Oberstufe (9.–10. Klasse)",
+    tagline: "Erlebe den Alltag zwischen Anpassung, Bedrohung und Zivilcourage aus Sicht deutscher Zivilisten",
+    defaultTopics: [
+      "30. Januar 1933: Ernennung Hitlers, Reichstagsbrand & Ermächtigungsgesetz",
+      "Gleichschaltung: Verbot von Parteien, Gewerkschaften & freier Presse",
+      "Propaganda (Goebbels), Volksempfänger, Kult & totalitäre Erziehung (HJ/BDM)",
+      "Nürnberger Gesetze 1935, Entrechtung der jüdischen Nachbarn & Pogromnacht 1938",
+      "Alltag im Überwachungsstaat (Gestapo), heimlicher Widerstand & Weg in den Zweiten Weltkrieg"
+    ],
+    suggestedPillars: [
+      { key: "zivilcourage", label: "Menschlichkeit & Gewissen 🕯️", icon: "🕯️", description: "Schutz von Verfolgten und Beistand für Nachbarn" },
+      { key: "ueberleben", label: "Persönliche Sicherheit 🛡️", icon: "🛡️", description: "Vermeidung von Gestapo-Denunziation und Verhaftung" },
+      { key: "gemeinschaft", label: "Freundeskreis & Familie 👨‍👩‍👧", icon: "👨‍👩‍👧", description: "Zusammenhalt und Schutz der Liebsten im Alltag" },
+      { key: "aufklaerung", label: "Wahrheit & Geheimes Wissen 📜", icon: "📜", description: "Ausländische Sender, Flugblätter und Aufklärung" }
+    ],
+    specialResource: { name: "Mut-Punkte (Zivilcourage)", emoji: "🕊️" },
+    skills: {
+      skill1: "Zivilcourage & Haltung 🕯️",
+      skill2: "Kluges Schweigen 🤐",
+      skill3: "Solidaritätsnetzwerk 🤝"
+    },
+    historicalContext: "Als deutscher Zivilist (wählbar als couragierter Bürger, Industriearbeiter oder jugendlicher Andersdenkender) navigierst du durch die schleichende Zerstörung des Rechtsstaates bis zum Kriegsausbruch 1939 (Thüringer Lehrplan Kl. 9/10, LB I: Nationalsozialismus – Leben in der Diktatur)."
   }
 ];
 

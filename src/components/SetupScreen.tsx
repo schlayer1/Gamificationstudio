@@ -24,6 +24,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState<'prinz' | 'prinzessin' | 'neutral'>('prinzessin');
+  const [selectedHeroOrigin, setSelectedHeroOrigin] = useState<import('../types/game').PlayerProfile['heroOrigin']>('deutscher_soldat');
 
   // Dynamic Theme
   const theme = activeGame?.eraThemeId
@@ -144,6 +145,28 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
       }
     }
 
+    // 5. Erster Weltkrieg: Soldaten-Perspektiven (Multiperspektivität)
+    if (eraLower.includes('weltkrieg') || eraLower.includes('graben') || titleLower.includes('weltkrieg')) {
+      if (selectedHeroOrigin === 'franzoesischer_soldat') {
+        return `Soldat de 1re classe ${trimmed} ('Poilu')`;
+      } else if (selectedHeroOrigin === 'russischer_soldat') {
+        return `Infanterist ${trimmed} (Kaiserlich-Russische Armee)`;
+      } else {
+        return `Musketier / Landser ${trimmed} (Deutsches Heer)`;
+      }
+    }
+
+    // 6. Nationalsozialismus & Vorkriegszeit 1933–1939: Zivilisten-Perspektive
+    if (eraLower.includes('nsdap') || eraLower.includes('nationalsozialismus') || titleLower.includes('diktatur') || titleLower.includes('schatten über deutschland')) {
+      if (selectedHeroOrigin === 'zivilist_arbeiter') {
+        return `Werkmeister / Dreher ${trimmed} (Siemens-Werke Berlin)`;
+      } else if (selectedHeroOrigin === 'zivilist_jugend') {
+        return `Jugendliche/r ${trimmed} (Swing-Jugend / Freidenker)`;
+      } else {
+        return `Bürger/in & Chronist/in ${trimmed} (Zivilcourage)`;
+      }
+    }
+
     // Default: Altes Ägypten
     if (gender === 'prinzessin') {
       const titles = ['Nefertari', 'Hatschepsut', 'Meritaten', 'Cleopatra'];
@@ -169,6 +192,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
       gradeLevel: resolvedGrade,
       gender,
       throneName: getPreviewThroneName(),
+      heroOrigin: selectedHeroOrigin,
     };
     onStartGame(finalProfile);
   };
@@ -316,56 +340,139 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
             />
           </div>
 
-          {/* Question 2: Gender / Title preference */}
-          <div className="space-y-2">
-            <label className="block text-sm font-semibold text-amber-200 flex items-center gap-2">
-              <span className="text-amber-400">2.</span> Wähle deinen Throntitel:
-            </label>
-            <div className="grid grid-cols-3 gap-2.5">
-              <button
-                type="button"
-                onClick={() => {
-                  soundFX.playClick();
-                  setGender('prinzessin');
-                }}
-                className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
-                  gender === 'prinzessin'
-                    ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
-                    : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
-                }`}
-              >
-                👑 Prinzessin
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  soundFX.playClick();
-                  setGender('prinz');
-                }}
-                className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
-                  gender === 'prinz'
-                    ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
-                    : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
-                }`}
-              >
-                👑 Prinz
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  soundFX.playClick();
-                  setGender('neutral');
-                }}
-                className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
-                  gender === 'neutral'
-                    ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
-                    : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
-                }`}
-              >
-                ✨ Herrscher/in
-              </button>
-            </div>
-          </div>
+          {/* Question 2: Perspective or Gender selection depending on game era */}
+          {(() => {
+            const eraLower = (activeGame?.era || '').toLowerCase();
+            const titleLower = (activeGame?.title || '').toLowerCase();
+            const isWW1 = eraLower.includes('weltkrieg') || eraLower.includes('graben') || titleLower.includes('weltkrieg');
+            const isNS = eraLower.includes('nsdap') || eraLower.includes('nationalsozialismus') || titleLower.includes('diktatur') || titleLower.includes('schatten über deutschland');
+
+            if (isWW1) {
+              return (
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-stone-200 flex items-center justify-between">
+                    <span className="flex items-center gap-2">
+                      <span className="text-amber-400">2.</span> Wähle deine Soldaten-Perspektive:
+                    </span>
+                    <span className="text-[11px] font-mono text-stone-400">Historische Multiperspektivität</span>
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    {[
+                      { id: 'deutscher_soldat' as const, label: '🇩🇪 Deutscher Landser', sub: 'Westfront & Schützengraben' },
+                      { id: 'franzoesischer_soldat' as const, label: '🇫🇷 Französischer Poilu', sub: 'Verdun & Heimatverteidigung' },
+                      { id: 'russischer_soldat' as const, label: '🇷🇺 Russischer Infanterist', sub: 'Ostfront & Hungerwinter 1917' },
+                    ].map((opt) => (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => {
+                          soundFX.playClick();
+                          setSelectedHeroOrigin(opt.id);
+                        }}
+                        className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                          selectedHeroOrigin === opt.id
+                            ? 'bg-amber-950/80 border-amber-400 ring-2 ring-amber-500/40 shadow-lg text-amber-200'
+                            : 'bg-stone-900/90 border-stone-800 hover:border-amber-700/60 text-stone-300'
+                        }`}
+                      >
+                        <div className="text-xs font-bold">{opt.label}</div>
+                        <div className="text-[10px] text-stone-400 mt-0.5">{opt.sub}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            if (isNS) {
+              return (
+                <div className="space-y-2">
+                  <label className="block text-sm font-semibold text-stone-200 flex items-center justify-between">
+                    <span className="flex items-center gap-2">
+                      <span className="text-amber-400">2.</span> Wähle deine Zivilisten-Rolle im Alltag:
+                    </span>
+                    <span className="text-[11px] font-mono text-amber-400">Zivilcourage & Zeitzeuge</span>
+                  </label>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                    {[
+                      { id: 'zivilist_buerger' as const, label: '🕯️ Bürger/in & Chronist/in', sub: 'Nachbarschaft, Zivilcourage & Haltung' },
+                      { id: 'zivilist_arbeiter' as const, label: '⚙️ Industriearbeiter/in', sub: 'Fabrikalltag & verbotene Gewerkschaft' },
+                      { id: 'zivilist_jugend' as const, label: '📻 Jugendlicher Andersdenkender', sub: 'Swing-Jugend & Geheimsender' },
+                    ].map((opt) => (
+                      <button
+                        key={opt.id}
+                        type="button"
+                        onClick={() => {
+                          soundFX.playClick();
+                          setSelectedHeroOrigin(opt.id);
+                        }}
+                        className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                          selectedHeroOrigin === opt.id
+                            ? 'bg-red-950/80 border-red-400 ring-2 ring-red-500/40 shadow-lg text-red-200'
+                            : 'bg-stone-900/90 border-stone-800 hover:border-red-700/60 text-stone-300'
+                        }`}
+                      >
+                        <div className="text-xs font-bold">{opt.label}</div>
+                        <div className="text-[10px] text-stone-400 mt-0.5">{opt.sub}</div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+
+            return (
+              <div className="space-y-2">
+                <label className="block text-sm font-semibold text-amber-200 flex items-center gap-2">
+                  <span className="text-amber-400">2.</span> Wähle deinen Titel:
+                </label>
+                <div className="grid grid-cols-3 gap-2.5">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundFX.playClick();
+                      setGender('prinzessin');
+                    }}
+                    className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
+                      gender === 'prinzessin'
+                        ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
+                        : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
+                    }`}
+                  >
+                    👑 Prinzessin / Dame
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundFX.playClick();
+                      setGender('prinz');
+                    }}
+                    className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
+                      gender === 'prinz'
+                        ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
+                        : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
+                    }`}
+                  >
+                    👑 Prinz / Herr
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      soundFX.playClick();
+                      setGender('neutral');
+                    }}
+                    className={`py-2.5 px-3 rounded-lg border text-sm font-medium transition-all ${
+                      gender === 'neutral'
+                        ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
+                        : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
+                    }`}
+                  >
+                    ✨ Herrscher/in
+                  </button>
+                </div>
+              </div>
+            );
+          })()}
 
           {/* Generated Royal Title Preview Box */}
           <div className="p-4 rounded-xl bg-amber-950/40 border border-amber-600/40 flex items-center justify-between">

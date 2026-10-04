@@ -112,6 +112,10 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       soundFX.playRevolutionMarch();
     } else if (tpl.eraThemeId === 'industrial_steam') {
       soundFX.playSteamTrain();
+    } else if (tpl.eraThemeId === 'ww1_trenches') {
+      soundFX.playArtilleryRumble();
+    } else if (tpl.eraThemeId === 'nsdap_resistance') {
+      soundFX.playTypewriterSecret();
     } else {
       soundFX.playClick();
     }

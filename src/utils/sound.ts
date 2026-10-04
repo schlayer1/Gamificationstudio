@@ -369,6 +369,59 @@ class SoundFX {
       osc.stop(this.ctx!.currentTime + idx * 0.12 + 0.45);
     });
   }
+
+  // WW1 Distant Artillery Rumble (Trommelfeuer low-pass rumble)
+  playArtilleryRumble() {
+    if (!this.soundEnabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const bufferSize = this.ctx.sampleRate * 1.2;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+
+    const noise = this.ctx.createBufferSource();
+    noise.buffer = buffer;
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(140, this.ctx.currentTime);
+    filter.frequency.exponentialRampToValueAtTime(50, this.ctx.currentTime + 1.1);
+
+    const gain = this.ctx.createGain();
+    gain.gain.setValueAtTime(0.001, this.ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.14, this.ctx.currentTime + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 1.1);
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.ctx.destination);
+    noise.start();
+  }
+
+  // Typewriter & Secret leaflet printing click (Widerstand & Flugblätter)
+  playTypewriterSecret() {
+    if (!this.soundEnabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    for (let i = 0; i < 4; i++) {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'square';
+      osc.frequency.setValueAtTime(1200 + Math.random() * 400, this.ctx.currentTime + i * 0.07);
+
+      gain.gain.setValueAtTime(0.05, this.ctx.currentTime + i * 0.07);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + i * 0.07 + 0.02);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+      osc.start(this.ctx.currentTime + i * 0.07);
+      osc.stop(this.ctx.currentTime + i * 0.07 + 0.025);
+    }
+  }
 }
 
 export const soundFX = new SoundFX();

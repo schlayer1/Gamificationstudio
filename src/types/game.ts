@@ -35,7 +35,17 @@ export interface PlayerProfile {
   gradeLevel: GradeLevel;
   gender: 'prinz' | 'prinzessin' | 'neutral';
   throneName: string;
-  heroOrigin?: 'roemisch' | 'germanisch' | 'makedonisch' | 'siedler'; // For mythology & campaigns
+  heroOrigin?: 
+    | 'roemisch' 
+    | 'germanisch' 
+    | 'makedonisch' 
+    | 'siedler'
+    | 'deutscher_soldat'       // 1. Weltkrieg: Deutscher Infanterist (Frontalltag, Westfront)
+    | 'franzoesischer_soldat'   // 1. Weltkrieg: Französischer 'Poilu' (Verdun, Grabenkrieg)
+    | 'russischer_soldat'       // 1. Weltkrieg: Russischer Soldat (Ostfront, 1917 Umbruch)
+    | 'zivilist_arbeiter'       // NS-Zeit: Berliner Fabrikarbeiter (Gewerkschaft, Überwachung)
+    | 'zivilist_jugend'         // NS-Zeit: Jugendlicher (Hitlerjugend/BDM vs. Swing-Jugend/Edelweißpiraten)
+    | 'zivilist_buerger';       // NS-Zeit: Bürger/Lehrkraft/Kaufmann (Zivilcourage & Widerstand)
 }
 
 export interface Stats {
