@@ -185,6 +185,7 @@ export interface GameDefinition {
   heroPrompt?: string; // AI image generation prompt for the main game cover/hero
   rounds: RoundStory[]; // Array of 20 rounds or dynamic branch pairs
   worksheet?: GameWorksheet; // Didactic DIN-A4 student worksheet & teacher solution sheet
+  shareCode?: string; // Persistent cloud & export share code (e.g. "ROM44", "IND12")
 }
 
 export interface GameLogEntry {

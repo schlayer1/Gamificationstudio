@@ -99,15 +99,28 @@ export class GameStorageService {
   }
 
   /**
-   * Publish / Freigeben a game so students can join via share code or selection
+   * Publish / Freigeben a game so students can join via share code or selection.
+   * If a shareCode is already present in the game/imported JSON or passed explicitly, it is preserved!
    */
-  public publishGame(game: GameDefinition): PublishedGameRecord {
+  public publishGame(game: GameDefinition, preferredShareCode?: string): PublishedGameRecord {
     const existing = this.getPublishedGames();
     
-    // Generate clean 4-6 char share code, e.g., "ROM44" or "NIL20"
-    const prefix = (game.era.slice(0, 3) || 'HIS').toUpperCase().replace(/[^A-Z]/g, 'G');
-    const randomSuffix = Math.floor(10 + Math.random() * 90);
-    const shareCode = `${prefix}${randomSuffix}`;
+    // Check if an existing published record already had a code for this game id
+    const existingRec = existing.find((g) => g.id === game.id);
+
+    let shareCode = preferredShareCode || game.shareCode || existingRec?.shareCode;
+
+    // If still no share code, generate a clean 4-6 char code, e.g. "ROM44" or "NIL20"
+    if (!shareCode || !shareCode.trim()) {
+      const prefix = (game.era.slice(0, 3) || 'HIS').toUpperCase().replace(/[^A-Z]/g, 'G');
+      const randomSuffix = Math.floor(10 + Math.random() * 90);
+      shareCode = `${prefix}${randomSuffix}`;
+    } else {
+      shareCode = shareCode.trim().toUpperCase();
+    }
+
+    // Keep shareCode attached to game object for persistence
+    game.shareCode = shareCode;
 
     const record: PublishedGameRecord = {
       id: game.id,
@@ -175,10 +188,13 @@ export class GameStorageService {
    * Export a single game definition as downloadable .json file
    */
   public exportGameToJson(game: GameDefinition, shareCode?: string): void {
+    const finalCode = shareCode || game.shareCode || 'CUSTOM';
+    game.shareCode = finalCode;
+
     const exportData = {
       format: 'history-trail-game-v1',
       exportedAt: new Date().toISOString(),
-      shareCode: shareCode || 'CUSTOM',
+      shareCode: finalCode,
       game: game,
     };
 
@@ -193,7 +209,7 @@ export class GameStorageService {
       .replace(/^_+|_+$/g, '');
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${cleanTitle}_${shareCode || 'export'}.json`;
+    a.download = `${cleanTitle}_${finalCode}.json`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -211,9 +227,15 @@ export class GameStorageService {
       throw new Error('Ungültiges Spielformat: Titel oder Spielrunden fehlen in der JSON-Datei.');
     }
 
+    // Extract original share code from root level (exported files) or inner game level (drive game.json)
+    const code = data.shareCode || game.shareCode;
+    if (code) {
+      game.shareCode = code;
+    }
+
     return {
       game: game,
-      shareCode: data.shareCode,
+      shareCode: code,
     };
   }
 }

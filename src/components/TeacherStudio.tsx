@@ -362,8 +362,8 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         const content = reader.result as string;
         const parsed = gameStorageService.parseGameFromJson(content);
         
-        // Auto-publish imported game
-        const rec = gameStorageService.publishGame(parsed.game);
+        // Auto-publish imported game with preserved shareCode from JSON
+        const rec = gameStorageService.publishGame(parsed.game, parsed.shareCode);
         setPublishedGames(gameStorageService.getPublishedGames());
         soundFX.playCoronation();
         setPublishedNotice(`🎉 Spiel „${parsed.game.title}“ erfolgreich importiert! Freigabe-Code: ${rec.shareCode}`);
