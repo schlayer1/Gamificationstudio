@@ -314,8 +314,12 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         return t.includes('ägypten') || tags.includes('ägypten');
       });
 
+      // Distinct station location assets (excluding the hero banner asset)
+      const locationAssets = eraAssets.filter((a) => !a.tags.includes('Hero'));
+      const fallbackStationAssets = locationAssets.length > 0 ? locationAssets : eraAssets;
+
       // Try specific location keyword match first
-      const specificMatch = eraAssets.find((a) => {
+      const specificMatch = fallbackStationAssets.find((a) => {
         const titleL = a.title.toLowerCase();
         return a.tags.some((tag) => locText.includes(tag.toLowerCase())) || locText.includes(titleL);
       });
@@ -323,9 +327,10 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       let matchedImg = '';
       if (specificMatch) {
         matchedImg = specificMatch.imageUrl;
-      } else if (eraAssets.length > 0) {
-        // Rotate through all assets of this historical era
-        matchedImg = eraAssets[idx % eraAssets.length].imageUrl;
+      } else if (fallbackStationAssets.length > 0) {
+        // Didactic pairing: across 20 rounds, the location changes every 2 rounds (0-1: Loc 1, 2-3: Loc 2, etc.)
+        const locIndex = Math.floor(idx / 2) % fallbackStationAssets.length;
+        matchedImg = fallbackStationAssets[locIndex].imageUrl;
       } else {
         // Fallback to detected era theme banner
         const themeConfig = detectEraTheme(req.era + ' ' + req.title, req.archetype);
@@ -342,8 +347,22 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       };
     });
 
-    const heroPrompt = `${selectedStylePrompt} of panoramic grand historical landscape and iconic landmarks of ${req.era} representing "${req.title}", majestic composition, cinematic lighting, 16:9 banner aspect ratio`;
-    const defaultHeroImg = detectEraTheme(req.era + ' ' + req.title, req.archetype).defaultBannerUrl;
+    // Detect era Hero Banner asset if available in the pool
+    const eraHeroAsset = PREDEFINED_HISTORY_ASSETS.find((a) => {
+      const eraFull = `${req.era} ${req.title}`.toLowerCase();
+      const isHero = a.tags.includes('Hero');
+      if (!isHero) return false;
+      const t = a.topic.toLowerCase();
+      if (eraFull.includes('rom')) return t.includes('rom');
+      if (eraFull.includes('luther') || eraFull.includes('reformation')) return t.includes('reformation');
+      if (eraFull.includes('steinzeit') || eraFull.includes('neolith')) return t.includes('steinzeit');
+      if (eraFull.includes('alexander') || eraFull.includes('griechen')) return t.includes('griechen');
+      if (eraFull.includes('mittelalter')) return t.includes('mittelalter');
+      return t.includes('ägypten');
+    });
+
+    const heroPrompt = eraHeroAsset?.suggestedPrompt || `${selectedStylePrompt} of panoramic grand historical landscape and iconic landmarks of ${req.era} representing "${req.title}", majestic composition, cinematic lighting, 16:9 banner aspect ratio`;
+    const defaultHeroImg = eraHeroAsset?.imageUrl || detectEraTheme(req.era + ' ' + req.title, req.archetype).defaultBannerUrl;
 
     const gameDefinition: GameDefinition = {
       id: `game_${Date.now()}`,
