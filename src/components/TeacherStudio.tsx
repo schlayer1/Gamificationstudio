@@ -33,6 +33,7 @@ import {
 } from 'lucide-react';
 import { StationImagePromptModal } from './StationImagePromptModal';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
+import { googleDriveSyncService } from '../services/googleDriveSync';
 
 interface TeacherStudioProps {
   onLoadGameToPlayer: (game: GameDefinition) => void;
@@ -218,13 +219,28 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     }
   };
 
-  // Freigabe / Publish Game for Students
-  const handlePublishGame = (gameToPublish: GameDefinition) => {
+  // Freigabe / Publish Game for Students & Sync to Google Drive
+  const [isSyncingDrive, setIsSyncingDrive] = useState(false);
+
+  const handlePublishGame = async (gameToPublish: GameDefinition) => {
     soundFX.playBlessing();
     const record = gameStorageService.publishGame(gameToPublish);
     setPublishedGames(gameStorageService.getPublishedGames());
-    setPublishedNotice(`Spiel freigegeben! Freigabe-Code für Schüler: ${record.shareCode}`);
+    setPublishedNotice(`Spiel lokal freigegeben! Freigabe-Code: ${record.shareCode}`);
     setBoardModalCode({ code: record.shareCode, title: gameToPublish.title });
+
+    // Sync to Google Drive in the background into dedicated subfolder
+    setIsSyncingDrive(true);
+    try {
+      const driveRes = await googleDriveSyncService.saveGameToDrive(gameToPublish, record.shareCode);
+      if (driveRes.success) {
+        setPublishedNotice(`✅ Spiel erfolgreich auf Google Drive synchronisiert! (Ordner: ${driveRes.folderName})`);
+      }
+    } catch (err) {
+      console.error("Google Drive sync failed:", err);
+    } finally {
+      setIsSyncingDrive(false);
+    }
   };
 
   const handleUnpublishGame = (gameId: string) => {
@@ -1004,6 +1020,10 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
             <div className="py-8 px-6 rounded-3xl bg-stone-900/90 border-2 border-amber-400/80 shadow-inner flex flex-col items-center justify-center">
               <span className="text-6xl sm:text-8xl font-black font-mono tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-400 select-all">
                 {boardModalCode.code}
+              </span>
+              <span className="text-[11px] font-mono text-emerald-400 mt-3 flex items-center gap-1.5">
+                <CheckCircle className="w-3.5 h-3.5" />
+                <span>Synchronisiert mit Google Drive (Heimbürgeschule / Klasse)</span>
               </span>
             </div>
 

@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { GameDefinition } from '../types/game';
 import { soundFX } from '../utils/sound';
-import { KeyRound, ArrowRight, Lock, Sparkles, BookOpen, GraduationCap, Compass, ShieldCheck } from 'lucide-react';
+import { KeyRound, ArrowRight, Lock, Sparkles, BookOpen, GraduationCap, Compass, ShieldCheck, Loader2 } from 'lucide-react';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
+import { googleDriveSyncService } from '../services/googleDriveSync';
 import { detectEraTheme, ERA_THEMES } from '../utils/themeManager';
 
 interface EntryPortalProps {
@@ -28,20 +29,42 @@ export const EntryPortal: React.FC<EntryPortalProps> = ({
   const publishedGames = gameStorageService.getPublishedGames();
   const defaultEgyptRecord = publishedGames.find((g) => g.shareCode === 'EGY01') || publishedGames[0];
 
-  const handleJoinSubmit = (e: React.FormEvent) => {
+  const [isLoadingCode, setIsLoadingCode] = useState(false);
+
+  const handleJoinSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!code.trim()) return;
+    if (!code.trim() || isLoadingCode) return;
 
     soundFX.playClick();
     const clean = code.trim().toUpperCase();
-    const found = gameStorageService.findGameByShareCode(clean);
+    setErrorNotice(null);
 
-    if (found) {
+    // 1. Check local storage first (instant)
+    const localFound = gameStorageService.findGameByShareCode(clean);
+    if (localFound) {
       soundFX.playBlessing();
-      onJoinGameWithCode(found, clean);
-    } else {
+      onJoinGameWithCode(localFound, clean);
+      return;
+    }
+
+    // 2. Query Google Drive Cloud Storage (cross-device classroom sync)
+    setIsLoadingCode(true);
+    try {
+      const cloudFound = await googleDriveSyncService.fetchGameByCode(clean);
+      if (cloudFound) {
+        soundFX.playBlessing();
+        // Also cache locally for student session
+        gameStorageService.publishGame(cloudFound);
+        onJoinGameWithCode(cloudFound, clean);
+      } else {
+        soundFX.playCrisis();
+        setErrorNotice(`Kein Spiel mit dem Code "${clean}" auf Google Drive gefunden. Bitte überprüfe die Schreibweise an der Tafel.`);
+      }
+    } catch (err) {
       soundFX.playCrisis();
-      setErrorNotice(`Kein Spiel mit dem Code "${clean}" gefunden. Bitte überprüfe die Schreibweise an der Tafel.`);
+      setErrorNotice(`Verbindungsfehler beim Abrufen des Codes "${clean}". Bitte Lehrkraft ansprechen.`);
+    } finally {
+      setIsLoadingCode(false);
     }
   };
 
@@ -128,15 +151,24 @@ export const EntryPortal: React.FC<EntryPortalProps> = ({
 
           <button
             type="submit"
-            disabled={!code.trim()}
+            disabled={!code.trim() || isLoadingCode}
             className={`w-full py-4 px-6 rounded-2xl font-black text-base sm:text-lg flex items-center justify-center gap-3 transition-all cursor-pointer shadow-xl ${
-              code.trim()
+              code.trim() && !isLoadingCode
                 ? 'bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-stone-950 scale-100 hover:scale-[1.02] active:scale-95'
                 : 'bg-stone-800 text-stone-500 cursor-not-allowed opacity-60'
             }`}
           >
-            <span>Spiel betreten</span>
-            <ArrowRight className="w-5 h-5" />
+            {isLoadingCode ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin" />
+                <span>Lade Spiel von Google Drive...</span>
+              </>
+            ) : (
+              <>
+                <span>Spiel betreten</span>
+                <ArrowRight className="w-5 h-5" />
+              </>
+            )}
           </button>
         </form>
 
