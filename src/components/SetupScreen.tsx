@@ -411,10 +411,10 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
         <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/40 to-transparent flex items-end p-4 sm:p-6">
           <div className="space-y-1">
             <span className={`text-xs font-mono font-bold tracking-widest uppercase ${theme.badgeBg} ${theme.badgeText} px-2.5 py-1 rounded border ${theme.badgeBorder} inline-block`}>
-              {activeGame ? activeGame.era : "16-Bit Retro Schulabenteuer"}
+              {activeGame ? activeGame.era : (theme.id === 'egypt_gold' ? "Altes Ägypten (2600 v. Chr.)" : theme.name)}
             </span>
             <h2 className="text-xl sm:text-3xl font-extrabold text-stone-100 font-serif m-0 drop-shadow-md">
-              {activeGame ? activeGame.title : "Die Nil-Expedition nach Gizeh"}
+              {activeGame ? activeGame.title : (theme.id === 'egypt_gold' ? "Die Nil-Expedition nach Gizeh" : theme.name)}
             </h2>
           </div>
         </div>
@@ -427,12 +427,14 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
           <span>Interaktives Geschichts-Abenteuerspiel</span>
         </div>
         <h1 className={`text-3xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r ${theme.titleGradient} font-serif tracking-tight`}>
-          {activeGame ? activeGame.title : "Aufstieg zum Pharao"}
+          {activeGame ? activeGame.title : (theme.id === 'egypt_gold' ? "Aufstieg zum Pharao" : theme.name)}
         </h1>
         <p className="text-sm sm:text-base text-stone-300 max-w-xl mx-auto font-light">
           {activeGame 
             ? activeGame.description 
-            : "Begib dich auf die abenteuerliche Nil-Expedition von Elephantine nach Gizeh. Meistere 20 historische Runden, balanciere die 4 Mächte des Reiches und kröne dich zum Herrscher beider Länder!"}
+            : (theme.id === 'egypt_gold'
+                ? "Begib dich auf die abenteuerliche Nil-Expedition von Elephantine nach Gizeh. Meistere 20 historische Runden, balanciere die 4 Mächte des Reiches und kröne dich zum Herrscher beider Länder!"
+                : "Meistere 20 historische Runden, balanciere die 4 Mächte und gestalte die Geschichte dieser Epoche!")}
         </p>
       </div>
 

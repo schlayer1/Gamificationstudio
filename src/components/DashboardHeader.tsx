@@ -15,6 +15,7 @@ interface DashboardHeaderProps {
   onOpenLexicon: () => void;
   onOpenStudio?: () => void;
   activeGame?: import('../types/game').GameDefinition | null;
+  theme?: import('../utils/themeManager').EraThemeConfig;
 }
 
 export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
@@ -29,6 +30,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   onOpenLexicon,
   onOpenStudio,
   activeGame,
+  theme,
 }) => {
   // Dynamic Pillars
   const pillar1 = activeGame?.pillars?.[0] || { label: 'Götter ⚡', icon: '⚡' };
@@ -77,13 +79,32 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
     );
   };
 
+  // Dynamic Era Archive Label
+  const getArchiveLabel = () => {
+    const eraTitle = `${activeGame?.title || ''} ${activeGame?.era || ''}`.toLowerCase();
+    if (eraTitle.includes('weltkrieg') || eraTitle.includes('graben') || eraTitle.includes('1914') || eraTitle.includes('1918') || eraTitle.includes('verdun') || theme?.id === 'ww1_trenches') return 'Kriegstagebuch';
+    if (eraTitle.includes('industrie') || eraTitle.includes('dampf') || eraTitle.includes('fabrik') || theme?.id === 'industrial_steam') return 'Betriebsarchiv';
+    if (eraTitle.includes('weimar') || eraTitle.includes('1920') || eraTitle.includes('bauhaus') || theme?.id === 'weimar_cabaret') return 'Staatsarchiv';
+    if (eraTitle.includes('nsdap') || eraTitle.includes('diktatur') || eraTitle.includes('widerstand') || eraTitle.includes('nationalsozialismus') || theme?.id === 'nsdap_resistance') return 'Dokumentenarchiv';
+    if (eraTitle.includes('rom') || eraTitle.includes('caesar') || eraTitle.includes('augustus') || eraTitle.includes('senat') || theme?.id === 'rome_imperial') return 'Tabularium';
+    if (eraTitle.includes('luther') || eraTitle.includes('reformation') || eraTitle.includes('mittelalter') || eraTitle.includes('ritter') || theme?.id === 'luther_ink') return 'Gemeindechronik';
+    if (eraTitle.includes('steinzeit') || eraTitle.includes('neolith') || eraTitle.includes('jäger') || eraTitle.includes('mammut') || theme?.id === 'stoneage_earth') return 'Höhlenarchiv';
+    if (eraTitle.includes('revolution') || eraTitle.includes('bastille') || eraTitle.includes('frankreich') || theme?.id === 'revolution_tricolore') return 'Nationalarchiv';
+    if (eraTitle.includes('alexander') || eraTitle.includes('griechen') || eraTitle.includes('athen') || theme?.id === 'greece_aegean') return 'Bibliothek';
+    if (eraTitle.includes('frank') || eraTitle.includes('karl der große') || eraTitle.includes('aachen') || theme?.id === 'franks_charlemagne') return 'Reichsannalen';
+    if (eraTitle.includes('ägypt') || eraTitle.includes('nil') || eraTitle.includes('pharao') || (!activeGame && !theme)) return 'Papyrus-Archiv';
+    return 'Archiv & Lexikon';
+  };
+
+  const avatarIcon = theme?.icon || '👑';
+
   return (
     <header className="w-full bg-stone-950/90 border-b border-amber-700/50 p-3 sm:p-4 sticky top-0 z-40 backdrop-blur-md shadow-xl">
       <div className="max-w-[2100px] mx-auto flex flex-col gap-3">
         {/* Top line: Player title, round indicator & quick tools */}
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-stone-800/80 pb-2">
           <div className="flex items-center gap-2.5">
-            <span className="text-2xl select-none" role="img" aria-label="Krone">👑</span>
+            <span className="text-2xl select-none" role="img" aria-label="Avatar">{avatarIcon}</span>
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-base sm:text-lg font-bold text-amber-300 tracking-wide font-serif m-0">
@@ -150,7 +171,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md bg-amber-950/60 border border-amber-600/60 text-amber-300 hover:bg-amber-900/70 active:scale-95 transition-all"
             >
               <BookOpen className="w-3.5 h-3.5" />
-              <span>Papyrus-Archiv</span>
+              <span>{getArchiveLabel()}</span>
             </button>
 
             {/* Sound Toggle */}

@@ -55,14 +55,23 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
     icon?: string;
   } | null>(null);
 
-  // Default atmospheric hotspots if none provided (ensures every station is interactive)
-  const defaultHotspots = [
+  // Era-adaptive atmospheric hotspots if none provided (ensures every station is interactive and historically authentic)
+  const isAncientEgypt = !theme || theme.id === 'egypt_gold';
+  const isWW1 = theme?.id === 'ww1_trenches';
+  const isIndustrial = theme?.id === 'industrial_steam';
+  const isWeimar = theme?.id === 'weimar_cabaret';
+  const isNS = theme?.id === 'nsdap_resistance';
+  const isRome = theme?.id === 'rome_imperial';
+  const isLuther = theme?.id === 'luther_ink';
+  const isStoneage = theme?.id === 'stoneage_earth';
+
+  const defaultHotspots = isAncientEgypt ? [
     {
       id: 'hs1',
       x: 25,
       y: 40,
       label: 'Historischer Schauplatz',
-      description: `Erkunde die Details von ${locationName}. Jedes Denkmal birgt Geheimnisse der Epoche.`,
+      description: `Erkunde die Details von ${locationName}. Jedes Denkmal birgt Geheimnisse des Alten Reiches.`,
       icon: '🏛️',
     },
     {
@@ -70,7 +79,7 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
       x: 75,
       y: 65,
       label: 'Zeitzeugen & Akteure',
-      description: 'Hier versammeln sich Priester, Adelige, Handwerker und das einfache Volk.',
+      description: 'Hier versammeln sich Priester, Nomarchen, Handwerker und das einfache Volk.',
       icon: '👥',
     },
     {
@@ -80,6 +89,206 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
       label: 'Göttliche Sphäre',
       description: 'Die Götter wachen über diesen Ort. Deine Entscheidungen beeinflussen Ma\'at und das Schicksal.',
       icon: '⚡',
+    },
+  ] : isWW1 ? [
+    {
+      id: 'hs1',
+      x: 25,
+      y: 40,
+      label: 'Frontabschnitt & Stellung',
+      description: `Erkunde die Kulisse von ${locationName}. Schützengräben, Stacheldraht und Unterstände prägen das Bild.`,
+      icon: '🪖',
+    },
+    {
+      id: 'hs2',
+      x: 75,
+      y: 65,
+      label: 'Kameraden & Befehlsstellen',
+      description: 'Hier harren Soldaten, Meldegänger und Offiziere im ständigen Gefechtsalltag aus.',
+      icon: '👥',
+    },
+    {
+      id: 'hs3',
+      x: 50,
+      y: 20,
+      label: 'Lage & Schicksal der Truppe',
+      description: 'Jede Entscheidung hier entscheidet über Menschenleben, Nachschub und Standhaftigkeit.',
+      icon: '🎖️',
+    },
+  ] : isIndustrial ? [
+    {
+      id: 'hs1',
+      x: 25,
+      y: 40,
+      label: 'Fabrik & Schauplatz',
+      description: `Erkunde die Kulisse von ${locationName}. Dampfmaschinen, Hochöfen und Schornsteine prägen den Umbruch.`,
+      icon: '🏭',
+    },
+    {
+      id: 'hs2',
+      x: 75,
+      y: 65,
+      label: 'Arbeiter & Fabrikanten',
+      description: 'Hier ringen Fabrikbesitzer, Schlosser, Heizer und frühe Arbeitervereine um Rechte und Ertrag.',
+      icon: '👥',
+    },
+    {
+      id: 'hs3',
+      x: 50,
+      y: 20,
+      label: 'Fortschritt & Soziale Frage',
+      description: 'Technische Innovation trifft auf harte Lebensbedingungen. Jede Weichenstellung prägt die Zukunft.',
+      icon: '⚙️',
+    },
+  ] : isWeimar ? [
+    {
+      id: 'hs1',
+      x: 25,
+      y: 40,
+      label: 'Historischer Schauplatz',
+      description: `Erkunde die Szene in ${locationName}. Architektur, Kultur und politischer Puls der 1920er Jahre.`,
+      icon: '🎭',
+    },
+    {
+      id: 'hs2',
+      x: 75,
+      y: 65,
+      label: 'Bürger, Künstler & Politiker',
+      description: 'Hier begegnen sich Abgeordnete, Intellektuelle, Arbeiter und die bunte Gesellschaft der Republik.',
+      icon: '👥',
+    },
+    {
+      id: 'hs3',
+      x: 50,
+      y: 20,
+      label: 'Demokratie auf dem Prüfstand',
+      description: 'Das Schicksal der ersten deutschen Republik hängt von Mut, Reformen und Stabilität ab.',
+      icon: '🏛️',
+    },
+  ] : isNS ? [
+    {
+      id: 'hs1',
+      x: 25,
+      y: 40,
+      label: 'Ort des Geschehens',
+      description: `Die alltägliche Realität in ${locationName} unter dem Schatten der NS-Diktatur.`,
+      icon: '🏢',
+    },
+    {
+      id: 'hs2',
+      x: 75,
+      y: 65,
+      label: 'Mitbürger & Spitzel',
+      description: 'Misstrauen und Angst vor Denunziation prägen Begegnungen im Alltag und am Arbeitsplatz.',
+      icon: '👥',
+    },
+    {
+      id: 'hs3',
+      x: 50,
+      y: 20,
+      label: 'Gewissen & Zivilcourage',
+      description: 'Jede Haltung zählt: Mitläufertum oder mutiger Beistand für Bedrängte.',
+      icon: '🕯️',
+    },
+  ] : isRome ? [
+    {
+      id: 'hs1',
+      x: 25,
+      y: 40,
+      label: 'Römisches Denkmal & Forum',
+      description: `Erkunde die Details von ${locationName}. Marmor, Säulen und Straßen des Imperium Romanum.`,
+      icon: '🏛️',
+    },
+    {
+      id: 'hs2',
+      x: 75,
+      y: 65,
+      label: 'Patrizier & Plebejer',
+      description: 'Senatoren, Legionäre, Händler und das Stadtvolk gestalten das römische Leben.',
+      icon: '👥',
+    },
+    {
+      id: 'hs3',
+      x: 50,
+      y: 20,
+      label: 'Ehre & Pax Romana',
+      description: 'Deine Entscheidungen wahren den Ruhm Roms, den Senatsfrieden und die Gunst der Götter.',
+      icon: '🦅',
+    },
+  ] : isLuther ? [
+    {
+      id: 'hs1',
+      x: 25,
+      y: 40,
+      label: 'Historischer Schauplatz',
+      description: `Erkunde ${locationName}. Druckwerkstätten, Kirchenpforten und Bürgerhäuser im Wandel.`,
+      icon: '🏰',
+    },
+    {
+      id: 'hs2',
+      x: 75,
+      y: 65,
+      label: 'Gelehrte & Bürgerschaft',
+      description: 'Hier debattieren Reformatoren, Mönche, Ratsherren und aufbegehrende Bauern.',
+      icon: '👥',
+    },
+    {
+      id: 'hs3',
+      x: 50,
+      y: 20,
+      label: 'Glaube & Gewissen',
+      description: 'Die Macht des geschriebenen Wortes und der eigene Glaube verändern das Reich.',
+      icon: '📜',
+    },
+  ] : isStoneage ? [
+    {
+      id: 'hs1',
+      x: 25,
+      y: 40,
+      label: 'Lagerplatz der Urzeit',
+      description: `Erkunde ${locationName}. Felsüberhänge, Feuerstellen und Jagdgründe der Eiszeit.`,
+      icon: '⛺',
+    },
+    {
+      id: 'hs2',
+      x: 75,
+      y: 65,
+      label: 'Sippenmitglieder',
+      description: 'Erfahrene Jäger, Sammlerinnen und die Ältesten sichern gemeinsam das Überleben.',
+      icon: '👥',
+    },
+    {
+      id: 'hs3',
+      x: 50,
+      y: 20,
+      label: 'Naturkräfte & Einklang',
+      description: 'Der Respekt vor den Gewalten der Natur und dem Geist der Ahnen weist der Sippe den Weg.',
+      icon: '🔥',
+    },
+  ] : [
+    {
+      id: 'hs1',
+      x: 25,
+      y: 40,
+      label: 'Historischer Schauplatz',
+      description: `Erkunde die Details von ${locationName}. Jedes Denkmal birgt Geheimnisse dieser Epoche.`,
+      icon: '🏛️',
+    },
+    {
+      id: 'hs2',
+      x: 75,
+      y: 65,
+      label: 'Zeitzeugen & Akteure',
+      description: 'Historische Entscheidungsträger, Weggefährten und die Menschen dieser Epoche.',
+      icon: '👥',
+    },
+    {
+      id: 'hs3',
+      x: 50,
+      y: 20,
+      label: 'Historischer Wendepunkt',
+      description: 'Deine Entscheidungen formen die Zukunft und das Gleichgewicht der Kräfte.',
+      icon: '⚖️',
     },
   ];
 

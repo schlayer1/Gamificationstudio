@@ -199,10 +199,15 @@ export const App: React.FC = () => {
         if (newPriester <= 0) newPriester = 15;
         if (newAdel <= 0) newAdel = 15;
         if (newVolk <= 0) newVolk = 15;
-        const statLabel = criticalFailStat === 'Götter' ? p1.label : criticalFailStat === 'Priester' ? p2.label : criticalFailStat === 'Adel' ? p3.label : p4.label;
-        const eraGraceMsg = (activeGameDefinition?.era || '').toLowerCase().includes('weltkrieg') || (activeGameDefinition?.era || '').toLowerCase().includes('industrie') || (activeGameDefinition?.era || '').toLowerCase().includes('weimar')
-          ? `⚠️ LETZTE RETTUNG AKTIVIERT! ${statLabel} fiel auf 0%! Durch den Einsatz all deiner Erfahrungspunkte (${activeGameDefinition?.specialResourceName || 'EP'}) konntest du den Zusammenbruch im letzten Moment abwenden!`
-          : `⚡ GNADENFRIST AKTIVIERT! ${statLabel} fiel auf 0%. Durch das Opfer all deiner Punkte (${activeGameDefinition?.specialResourceName || 'EP'}) wurdest du vor dem Absturz gerettet!`;
+        const p1 = activeGameDefinition?.pillars?.[0]?.label || 'Säule 1';
+        const p2 = activeGameDefinition?.pillars?.[1]?.label || 'Säule 2';
+        const p3 = activeGameDefinition?.pillars?.[2]?.label || 'Säule 3';
+        const p4 = activeGameDefinition?.pillars?.[3]?.label || 'Säule 4';
+        const statLabel = criticalFailStat === 'Götter' ? p1 : criticalFailStat === 'Priester' ? p2 : criticalFailStat === 'Adel' ? p3 : p4;
+        const isEgypt = (activeGameDefinition?.era || '').toLowerCase().includes('ägypt') || (activeGameDefinition?.title || '').toLowerCase().includes('pharao') || !activeGameDefinition;
+        const eraGraceMsg = isEgypt
+          ? `⚡ GNADENFRIST DER GÖTTER AKTIVIERT! ${statLabel} fiel auf 0%. Durch das Opfer all deiner Gunst & Punkte (${activeGameDefinition?.specialResourceName || 'EP'}) wurdest du vor dem Absturz gerettet!`
+          : `⚠️ LETZTE NOTRESERVE AKTIVIERT! ${statLabel} fiel auf 0%! Durch den Einsatz all deiner Reserven (${activeGameDefinition?.specialResourceName || 'EP'}) konntest du den Zusammenbruch im letzten Moment abwenden!`;
 
         setGraceTriggeredNotice(eraGraceMsg);
       } else {
@@ -368,6 +373,7 @@ export const App: React.FC = () => {
             onOpenLexicon={() => setIsLexiconOpen(true)}
             onOpenStudio={() => setGameState('studio')}
             activeGame={activeGameDefinition}
+            theme={currentTheme}
           />
 
           {/* Main Gameplay Screen (Responsive Standard: fluid-adaptive w-full max-w-[2100px]) */}
@@ -643,12 +649,14 @@ export const App: React.FC = () => {
             }}
           />
 
-          {/* Papyrus Lexicon Modal */}
+          {/* Lexicon / Historical Archive Modal */}
           <LexiconModal
             isOpen={isLexiconOpen}
             onClose={() => setIsLexiconOpen(false)}
             logs={logs}
             gradeLevel={profile.gradeLevel}
+            activeGame={activeGameDefinition}
+            theme={currentTheme}
           />
 
           {/* Collapsible Interactive Expedition Map Modal */}
