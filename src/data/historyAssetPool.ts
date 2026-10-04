@@ -1612,7 +1612,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 1: Die Julikrise 1914 & Mobilmachung der Großmächte",
     description: "Attentat von Sarajevo, Kettenreaktion der Bündnisse und der Ausmarsch der Truppen unter euphorischem Abschied am Bahnhof.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Alianzen_in_Europa_1914.svg/1280px-Alianzen_in_Europa_1914.svg.png",
+    imageUrl: "/assets/ww1_station_01.jpg",
     tags: ["Julikrise", "Mobilmachung", "1914", "Bahnhof", "Sarajevo", "Bündnisse"],
     suggestedPrompt: "16-bit pixel art style crowded railway station platform in August 1914, steam train decorated with chalk slogans, young soldiers leaning out of train windows kissing sweethearts farewell, brass band playing, retro emotional departure scene",
     hotspots: [
@@ -1626,7 +1626,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 2: Das Wunder an der Marne & Erstarren der Fronten",
     description: "Der Schlieffen-Plan scheitert: Französische Truppen eilen mit Pariser Taxis an die Marne; der Bewegungskrieg erstarrt im Stellungskrieg.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Schlieffen_Plan_de_1905.svg/1280px-Schlieffen_Plan_de_1905.svg.png",
+    imageUrl: "/assets/ww1_station_02.jpg",
     tags: ["Marne", "Stellungskrieg", "Taxis", "Schlieffen-Plan", "Frankreich", "1914"],
     suggestedPrompt: "16-bit pixel art style autumn 1914 near the river Marne, column of vintage Parisian Renault taxicabs rushing French infantry in horizon-blue coats to the front, soldiers digging first shallow dirt trenches with entrenching tools, retro military maneuver scene",
     hotspots: [
@@ -1640,7 +1640,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 3: Alltag im Schützengraben – Schlamm, Ratten & Kälte",
     description: "Unterstande, Laufgräben, Holzstege über zähem Morast: Das Überleben gegen Läuse, Durst und ständigen Scharfschützenbeschuss.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Tranchee.svg/1280px-Tranchee.svg.png",
+    imageUrl: "/assets/ww1_station_03.jpg",
     tags: ["Schützengraben", "Grabenalltag", "Schlamm", "Unterstand", "Landser", "Poilu"],
     suggestedPrompt: "16-bit pixel art style deep muddy trench dugout, weary soldiers wrapped in sodden blankets drinking tea from tin canteen cups by candle, sandbag parapet with wooden periscope looking over barbed wire, rain pouring down, retro gritty survival visual",
     hotspots: [
@@ -1654,7 +1654,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 4: Die Materialschlacht – Trommelfeuer, Maschinengewehr & Giftgas",
     description: "Industrieller Massentod: Tagelanges Artillerietrommelfeuer und der erste verheerende Chlorgaseinsatz bei Ypern 1915.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Bundesarchiv_Bild_146-1976-007-32%2C_Champagne%2C_russische_Soldaten_mit_Gasmaske.jpg",
+    imageUrl: "/assets/ww1_station_04.jpg",
     tags: ["Giftgas", "Ypern", "Trommelfeuer", "Maschinengewehr", "Gasmaske", "Artillerie"],
     suggestedPrompt: "16-bit pixel art style eerie battlefield shrouded in greenish-yellow poison gas clouds, soldiers with round snout gas masks peering from machine gun nest, heavy artillery shells exploding on horizon sending columns of black dirt into sky, retro dramatic war visual",
     hotspots: [
@@ -1668,7 +1668,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 5: Die Hölle von Verdun 1916 (Fort Douaumont & Voie Sacrée)",
     description: "Verdun: Zehn Monate Blutmühle um Fort Douaumont; 700.000 Gefallene und Verwundete auf engstem Raum.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/La_reprise_de_Douaumont%2C_le_24_octobre_1916.PNG/1280px-La_reprise_de_Douaumont%2C_le_24_octobre_1916.PNG",
+    imageUrl: "/assets/ww1_station_05.jpg",
     tags: ["Verdun", "Fort Douaumont", "1916", "Voie Sacrée", "Poilu", "Materialschlacht"],
     suggestedPrompt: "16-bit pixel art style devastated concrete armored dome fortress Fort Douaumont on Verdun heights, French poilu soldiers holding position behind shattered parapet, heavy supply trucks rumbling along muddy Voie Sacrée road, retro tragic battlefield visual",
     hotspots: [
@@ -1682,7 +1682,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 6: Die Ostfront & der russische Schicksalswinter (Karpaten)",
     description: "Eisige Weiten Polens und der Karpaten: Schlechte Versorgung, Munitionsmangel und Kriegsmüdigkeit der russischen Zarenarmee.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Eastern_Front%2C_1914.jpg",
+    imageUrl: "/assets/ww1_station_06.jpg",
     tags: ["Ostfront", "Russland", "Karpaten", "Zarenarmee", "Winter", "Hunger"],
     suggestedPrompt: "16-bit pixel art style snowy frozen Russian front in Carpathian mountains, Russian infantrymen in heavy wool greatcoats and papakha fur hats sharing scarce black bread around fire in snow trench, frozen pines, retro eastern front atmosphere",
     hotspots: [
@@ -1696,7 +1696,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 7: Die Heimatfront – Feldpostbriefe & Steckrübenwinter 1916/17",
     description: "Hungerblockade der Entente: Frauen in Rüstungsfabriken, Brotkarten, Kohlrüben und die zitternde Hoffnung auf Post von der Front.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/%22YOU_CAN%27T_WIN_THIS_WAR_WITHOUT_SACRIFICE_ON_THE_HOME_FRONT_TOO%22_-_NARA_-_516217.jpg/1280px-%22YOU_CAN%27T_WIN_THIS_WAR_WITHOUT_SACRIFICE_ON_THE_HOME_FRONT_TOO%22_-_NARA_-_516217.jpg",
+    imageUrl: "/assets/ww1_station_07.jpg",
     tags: ["Heimatfront", "Feldpost", "Steckrübenwinter", "Munitionsfabrik", "Hunger"],
     suggestedPrompt: "16-bit pixel art style home front Berlin street scene during turnip winter 1917, long queue of shivering women and children outside municipal rationing store with ration tickets, woman reading handwritten field post letter by gas lamp, retro social history visual",
     hotspots: [
@@ -1710,7 +1710,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 8: Das Epochenjahr 1917 – Russische Revolution & USA-Kriegseintritt",
     description: "Zarensturz in Petrograd und Kriegseintritt der USA unter Präsident Wilson; uneingeschränkter U-Boot-Krieg.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/%D0%9C%D0%B8%D1%82%D0%B8%D0%BD%D0%B3_%D0%BD%D0%B0_%D0%9D%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%BC_%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B5_%281917%29.jpg/1280px-%D0%9C%D0%B8%D1%82%D0%B8%D0%BD%D0%B3_%D0%BD%D0%B0_%D0%9D%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%BC_%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B5_%281917%29.jpg",
+    imageUrl: "/assets/ww1_station_08.jpg",
     tags: ["1917", "Russische Revolution", "USA", "Woodrow Wilson", "U-Boot", "Lenin"],
     suggestedPrompt: "16-bit pixel art style stormy Petrograd Square 1917, Russian sailors and soldiers carrying red banners demanding peace and bread outside Winter Palace, while US transport ships cross ocean on horizon, retro 1917 turning point visual",
     hotspots: [
@@ -1724,7 +1724,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 9: Tanks an der Somme & die Frühjahrsoffensive 1918",
     description: "Erster Einsatz britischer Mark-I-Panzer und letzte verzweifelte deutsche Offensiven, bevor das Heer zusammenbricht.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/31/Renault-FT17-Saumur.0004gw9y.jpg",
+    imageUrl: "/assets/ww1_station_09.jpg",
     tags: ["Panzer", "Tank", "Somme", "1918", "Offensive", "Technik"],
     suggestedPrompt: "16-bit pixel art style early British rhomboid Mark IV tank crushing through barbed wire entanglement across trench ditch, infantry following behind armored tracks, artillery smoke on scarred plain, retro armored warfare visual",
     hotspots: [
@@ -1738,7 +1738,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 10: Der Waffenstillstand von Compiègne (11.11.1918, 11 Uhr)",
     description: "Im Eisenbahnwaggon im Wald von Compiègne schweigen die Waffen: Das Ende des Gemetzels und der Beginn eines schwierigen Friedens.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Waffenstillstand_gr.jpg/1280px-Waffenstillstand_gr.jpg",
+    imageUrl: "/assets/ww1_station_10.jpg",
     tags: ["Compiègne", "Waffenstillstand", "11. November", "Frieden", "Eisenbahnwagen"],
     suggestedPrompt: "16-bit pixel art style forest clearing in Compiègne on misty morning November 11 1918, interior of wooden railway salon carriage, French Marshal Foch and German delegation signing armistice treaty on table, clock showing exactly 11:00, retro historic ending visual",
     hotspots: [
