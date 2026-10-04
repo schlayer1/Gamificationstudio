@@ -24,7 +24,23 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
 }) => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState<'prinz' | 'prinzessin' | 'neutral'>('prinzessin');
-  const [selectedHeroOrigin, setSelectedHeroOrigin] = useState<import('../types/game').PlayerProfile['heroOrigin']>('deutscher_soldat');
+  
+  const getInitialHeroOrigin = (): import('../types/game').PlayerProfile['heroOrigin'] => {
+    const eraLower = (activeGame?.era || '').toLowerCase();
+    const titleLower = (activeGame?.title || '').toLowerCase();
+    if (eraLower.includes('german') || titleLower.includes('germanen') || activeGame?.archetype === 'mythology_duel') {
+      return 'germanisch';
+    }
+    if (eraLower.includes('weltkrieg') || eraLower.includes('graben') || titleLower.includes('weltkrieg')) {
+      return 'deutscher_soldat';
+    }
+    if (eraLower.includes('nsdap') || eraLower.includes('nationalsozialismus') || titleLower.includes('diktatur')) {
+      return 'zivilist_buerger';
+    }
+    return 'germanisch';
+  };
+
+  const [selectedHeroOrigin, setSelectedHeroOrigin] = useState<import('../types/game').PlayerProfile['heroOrigin']>(getInitialHeroOrigin());
 
   // Dynamic Theme
   const theme = activeGame?.eraThemeId
@@ -100,7 +116,37 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
       }
     }
 
-    // 2. Antikes Rom
+    // 2. Römer vs. Germanen (Götterdämmerung am Limes / Mythologie)
+    if (eraLower.includes('german') || titleLower.includes('germanen') || activeGame?.archetype === 'mythology_duel') {
+      if (selectedHeroOrigin === 'germanisch') {
+        if (gender === 'prinzessin') {
+          const titles = ['Seherin Veleda', 'Schildmaid Thusnelda', 'Hüterin Freya', 'Stammesfürstin Alruna'];
+          const chosen = titles[Math.abs(trimmed.length) % titles.length];
+          return `${chosen} (${trimmed} vom Stamm der Cherusker)`;
+        } else if (gender === 'prinz') {
+          const titles = ['Häuptling Arminius', 'Krieger Segimer', 'Späher Wulf', 'Bärenjäger Bodo'];
+          const chosen = titles[Math.abs(trimmed.length) % titles.length];
+          return `${chosen} (${trimmed} vom Stamm der Chatten)`;
+        } else {
+          return `Waldhüter/in ${trimmed} von Germanien`;
+        }
+      } else {
+        // Römischer Legionär / Tribun
+        if (gender === 'prinzessin') {
+          const titles = ['Präfektin Valeria', 'Patrizierin Julia', 'Senatorin Livia', 'Gelehrte Claudia'];
+          const chosen = titles[Math.abs(trimmed.length) % titles.length];
+          return `${chosen} (${trimmed} am Limes)`;
+        } else if (gender === 'prinz') {
+          const titles = ['Centurio Marcus', 'Legat Lucius', 'Tribun Flavius', 'Feldherr Drusus'];
+          const chosen = titles[Math.abs(trimmed.length) % titles.length];
+          return `${chosen} (${trimmed} der XIX. Legion)`;
+        } else {
+          return `Grenzoffizier ${trimmed} von Rom`;
+        }
+      }
+    }
+
+    // 2b. Antikes Rom (Aufstieg zum Caesar)
     if (eraLower.includes('rom') || eraLower.includes('caesar') || titleLower.includes('rom')) {
       if (gender === 'prinzessin') {
         const titles = ['Patrizierin Julia', 'Senatorin Livia', 'Augusta Octavia', 'Cornelia'];
@@ -346,6 +392,115 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
             const titleLower = (activeGame?.title || '').toLowerCase();
             const isWW1 = eraLower.includes('weltkrieg') || eraLower.includes('graben') || titleLower.includes('weltkrieg');
             const isNS = eraLower.includes('nsdap') || eraLower.includes('nationalsozialismus') || titleLower.includes('diktatur') || titleLower.includes('schatten über deutschland');
+            const isMythologyRomeGermanen = eraLower.includes('german') || titleLower.includes('germanen') || activeGame?.archetype === 'mythology_duel';
+
+            if (isMythologyRomeGermanen) {
+              return (
+                <div className="space-y-4">
+                  {/* Step A: Wähle deine Fraktion (Römer oder Germane) */}
+                  <div className="space-y-2">
+                    <label className="block text-sm font-semibold text-stone-200 flex items-center justify-between">
+                      <span className="flex items-center gap-2">
+                        <span className="text-amber-400">2.</span> Wähle dein Volk & Fraktion am Limes:
+                      </span>
+                      <span className="text-[11px] font-mono text-amber-400">Freie Wahlfreiheit</span>
+                    </label>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          soundFX.playClick();
+                          setSelectedHeroOrigin('roemisch');
+                        }}
+                        className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                          selectedHeroOrigin === 'roemisch'
+                            ? 'bg-amber-950/80 border-amber-400 ring-2 ring-amber-500/40 shadow-lg text-amber-200'
+                            : 'bg-stone-900/90 border-stone-800 hover:border-amber-700/60 text-stone-300'
+                        }`}
+                      >
+                        <div className="text-sm font-bold flex items-center gap-2">
+                          <span>🏛️</span> Römischer Offizier / Tribun
+                        </div>
+                        <div className="text-xs text-stone-400 mt-1 leading-snug">
+                          Verteidige das Imperium Romanum, halte den Limes und diene den Göttern Jupiter und Mars.
+                        </div>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          soundFX.playClick();
+                          setSelectedHeroOrigin('germanisch');
+                        }}
+                        className={`p-3.5 rounded-xl border text-left transition-all cursor-pointer ${
+                          selectedHeroOrigin === 'germanisch'
+                            ? 'bg-emerald-950/80 border-emerald-400 ring-2 ring-emerald-500/40 shadow-lg text-emerald-200'
+                            : 'bg-stone-900/90 border-stone-800 hover:border-emerald-700/60 text-stone-300'
+                        }`}
+                      >
+                        <div className="text-sm font-bold flex items-center gap-2">
+                          <span>🌳</span> Germanischer Krieger / Stammesheld
+                        </div>
+                        <div className="text-xs text-stone-400 mt-1 leading-snug">
+                          Kämpfe für die Freiheit deines Stammes in den Urwäldern, verehre Donar und hüte die heiligen Haine.
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Step B: Titel / Anrede */}
+                  <div className="space-y-2 pt-1">
+                    <label className="block text-xs font-semibold text-stone-300">
+                      Anrede & Rang:
+                    </label>
+                    <div className="grid grid-cols-3 gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          soundFX.playClick();
+                          setGender('prinzessin');
+                        }}
+                        className={`py-2 px-2.5 rounded-lg border text-xs font-medium transition-all ${
+                          gender === 'prinzessin'
+                            ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
+                            : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
+                        }`}
+                      >
+                        {selectedHeroOrigin === 'germanisch' ? '⚔️ Schildmaid / Seherin' : '🏛️ Patrizierin / Präfektin'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          soundFX.playClick();
+                          setGender('prinz');
+                        }}
+                        className={`py-2 px-2.5 rounded-lg border text-xs font-medium transition-all ${
+                          gender === 'prinz'
+                            ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
+                            : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
+                        }`}
+                      >
+                        {selectedHeroOrigin === 'germanisch' ? '🪓 Krieger / Häuptling' : '🛡️ Centurio / Tribun'}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          soundFX.playClick();
+                          setGender('neutral');
+                        }}
+                        className={`py-2 px-2.5 rounded-lg border text-xs font-medium transition-all ${
+                          gender === 'neutral'
+                            ? 'bg-amber-600 text-stone-950 border-amber-400 font-bold shadow-md'
+                            : 'bg-stone-900 text-stone-300 border-stone-700 hover:border-amber-600'
+                        }`}
+                      >
+                        ✨ Held/in
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
 
             if (isWW1) {
               return (
