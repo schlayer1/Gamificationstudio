@@ -199,11 +199,12 @@ export const App: React.FC = () => {
         if (newPriester <= 0) newPriester = 15;
         if (newAdel <= 0) newAdel = 15;
         if (newVolk <= 0) newVolk = 15;
-        newEp = 0;
+        const statLabel = criticalFailStat === 'Götter' ? p1.label : criticalFailStat === 'Priester' ? p2.label : criticalFailStat === 'Adel' ? p3.label : p4.label;
+        const eraGraceMsg = (activeGameDefinition?.era || '').toLowerCase().includes('weltkrieg') || (activeGameDefinition?.era || '').toLowerCase().includes('industrie') || (activeGameDefinition?.era || '').toLowerCase().includes('weimar')
+          ? `⚠️ LETZTE RETTUNG AKTIVIERT! ${statLabel} fiel auf 0%! Durch den Einsatz all deiner Erfahrungspunkte (${activeGameDefinition?.specialResourceName || 'EP'}) konntest du den Zusammenbruch im letzten Moment abwenden!`
+          : `⚡ GNADENFRIST AKTIVIERT! ${statLabel} fiel auf 0%. Durch das Opfer all deiner Punkte (${activeGameDefinition?.specialResourceName || 'EP'}) wurdest du vor dem Absturz gerettet!`;
 
-        setGraceTriggeredNotice(
-          `⚡ GNADENFRIST DER GÖTTER AKTIVIERT! ${criticalFailStat} fiel auf 0%. Durch das Opfer all deiner Erfahrungspunkte (EP) hat dich Ma'at vor dem Verderben gerettet!`
-        );
+        setGraceTriggeredNotice(eraGraceMsg);
       } else {
         // Gnadenfrist already spent -> Game Over!
         setFallenStat(criticalFailStat);
@@ -334,6 +335,8 @@ export const App: React.FC = () => {
           round={currentStory.roundNumber}
           stats={stats}
           onRestart={handleRestart}
+          activeGame={activeGameDefinition}
+          theme={currentTheme}
         />
       )}
 
