@@ -296,7 +296,19 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         const t = a.topic.toLowerCase();
         const tags = a.tags.join(' ').toLowerCase();
 
-        if (eraFull.includes('rom') || eraFull.includes('caesar') || eraFull.includes('latein')) {
+        if (eraFull.includes('weimar') || eraFull.includes('goldene zwanziger') || eraFull.includes('bauhaus') || eraFull.includes('1920')) {
+          return t.includes('weimar') || tags.includes('weimar');
+        }
+        if (eraFull.includes('industrie') || eraFull.includes('dampf') || eraFull.includes('arbeiter') || eraFull.includes('schlot') || eraFull.includes('fabrik')) {
+          return t.includes('industrie') || tags.includes('industrie');
+        }
+        if (eraFull.includes('revolution') || eraFull.includes('napoleon') || eraFull.includes('bastille') || eraFull.includes('menschenrechte')) {
+          return t.includes('revolution') || tags.includes('revolution');
+        }
+        if (eraFull.includes('frank') || eraFull.includes('karl der große') || eraFull.includes('chlodwig') || eraFull.includes('aachen') || eraFull.includes('pfalz')) {
+          return t.includes('franken') || tags.includes('franken');
+        }
+        if (eraFull.includes('rom') || eraFull.includes('caesar') || eraFull.includes('latein') || eraFull.includes('limes')) {
           return t.includes('rom') || tags.includes('rom');
         }
         if (eraFull.includes('luther') || eraFull.includes('reformation') || eraFull.includes('thesen')) {
@@ -305,8 +317,8 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         if (eraFull.includes('steinzeit') || eraFull.includes('urzeit') || eraFull.includes('neolith')) {
           return t.includes('steinzeit') || tags.includes('steinzeit');
         }
-        if (eraFull.includes('griechen') || eraFull.includes('alexander') || eraFull.includes('athen')) {
-          return t.includes('griechen') || tags.includes('alexander');
+        if (eraFull.includes('griechen') || eraFull.includes('alexander') || eraFull.includes('athen') || eraFull.includes('polis')) {
+          return t.includes('griechen') || tags.includes('alexander') || tags.includes('athen');
         }
         if (eraFull.includes('mittelalter') || eraFull.includes('ritter') || eraFull.includes('burg')) {
           return t.includes('mittelalter') || tags.includes('ritter');
@@ -353,10 +365,22 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       const isHero = a.tags.includes('Hero');
       if (!isHero) return false;
       const t = a.topic.toLowerCase();
+      if (eraFull.includes('weimar') || eraFull.includes('goldene zwanziger') || eraFull.includes('bauhaus') || eraFull.includes('1920')) {
+        return t.includes('weimar');
+      }
+      if (eraFull.includes('industrie') || eraFull.includes('dampf') || eraFull.includes('arbeiter') || eraFull.includes('schlot') || eraFull.includes('fabrik')) {
+        return t.includes('industrie');
+      }
+      if (eraFull.includes('revolution') || eraFull.includes('napoleon') || eraFull.includes('bastille') || eraFull.includes('menschenrechte')) {
+        return t.includes('revolution');
+      }
+      if (eraFull.includes('frank') || eraFull.includes('karl der große') || eraFull.includes('chlodwig') || eraFull.includes('aachen') || eraFull.includes('pfalz')) {
+        return t.includes('franken');
+      }
       if (eraFull.includes('rom')) return t.includes('rom');
       if (eraFull.includes('luther') || eraFull.includes('reformation')) return t.includes('reformation');
       if (eraFull.includes('steinzeit') || eraFull.includes('neolith')) return t.includes('steinzeit');
-      if (eraFull.includes('alexander') || eraFull.includes('griechen')) return t.includes('griechen');
+      if (eraFull.includes('alexander') || eraFull.includes('griechen') || eraFull.includes('athen')) return t.includes('griechen');
       if (eraFull.includes('mittelalter')) return t.includes('mittelalter');
       return t.includes('ägypten');
     });

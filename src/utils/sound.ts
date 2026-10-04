@@ -282,6 +282,93 @@ class SoundFX {
       });
     });
   }
+
+  // Revolutionary March (Snare drum roll & impact)
+  playRevolutionMarch() {
+    if (!this.soundEnabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    for (let i = 0; i < 8; i++) {
+      const bufferSize = this.ctx.sampleRate * 0.05;
+      const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+      const data = buffer.getChannelData(0);
+      for (let j = 0; j < bufferSize; j++) {
+        data[j] = Math.random() * 2 - 1;
+      }
+
+      const noise = this.ctx.createBufferSource();
+      noise.buffer = buffer;
+      const filter = this.ctx.createBiquadFilter();
+      filter.type = 'highpass';
+      filter.frequency.value = 1000;
+
+      const gain = this.ctx.createGain();
+      const startTime = this.ctx.currentTime + i * 0.08;
+      gain.gain.setValueAtTime(0.08, startTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, startTime + 0.04);
+
+      noise.connect(filter);
+      filter.connect(gain);
+      gain.connect(this.ctx.destination);
+      noise.start(startTime);
+    }
+  }
+
+  // Steam whistle & Industrial gear sound
+  playSteamTrain() {
+    if (!this.soundEnabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const osc1 = this.ctx.createOscillator();
+    const osc2 = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+
+    osc1.type = 'sawtooth';
+    osc2.type = 'sine';
+    osc1.frequency.setValueAtTime(587.33, this.ctx.currentTime); // D5
+    osc2.frequency.setValueAtTime(880, this.ctx.currentTime);    // A5
+
+    gain.gain.setValueAtTime(0.001, this.ctx.currentTime);
+    gain.gain.linearRampToValueAtTime(0.07, this.ctx.currentTime + 0.05);
+    gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.5);
+
+    osc1.connect(gain);
+    osc2.connect(gain);
+    gain.connect(this.ctx.destination);
+
+    osc1.start(this.ctx.currentTime);
+    osc2.start(this.ctx.currentTime);
+    osc1.stop(this.ctx.currentTime + 0.55);
+    osc2.stop(this.ctx.currentTime + 0.55);
+  }
+
+  // Imperial Holy Trumpet Fanfare
+  playImperialTrumpet() {
+    if (!this.soundEnabled) return;
+    this.initCtx();
+    if (!this.ctx) return;
+
+    const notes = [392, 523.25, 659.25, 783.99]; // G4, C5, E5, G5
+    notes.forEach((freq, idx) => {
+      const osc = this.ctx!.createOscillator();
+      const gain = this.ctx!.createGain();
+
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(freq, this.ctx!.currentTime + idx * 0.12);
+
+      gain.gain.setValueAtTime(0.001, this.ctx!.currentTime + idx * 0.12);
+      gain.gain.linearRampToValueAtTime(0.09, this.ctx!.currentTime + idx * 0.12 + 0.04);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx!.currentTime + idx * 0.12 + 0.4);
+
+      osc.connect(gain);
+      gain.connect(this.ctx!.destination);
+
+      osc.start(this.ctx!.currentTime + idx * 0.12);
+      osc.stop(this.ctx!.currentTime + idx * 0.12 + 0.45);
+    });
+  }
 }
 
 export const soundFX = new SoundFX();

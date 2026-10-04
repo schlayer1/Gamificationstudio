@@ -103,13 +103,33 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [mobileTab, setMobileTab] = useState<'create' | 'published' | 'keys'>('create');
   const [artworkModalGame, setArtworkModalGame] = useState<GameDefinition | null>(null);
 
-  // Switch template
+  // Switch template with automated curriculum grade level preset
   const handleSelectTemplate = (tpl: PredefinedTemplate) => {
-    soundFX.playClick();
+    // Sound FX depending on theme
+    if (tpl.eraThemeId === 'franks_charlemagne') {
+      soundFX.playImperialTrumpet();
+    } else if (tpl.eraThemeId === 'revolution_tricolore') {
+      soundFX.playRevolutionMarch();
+    } else if (tpl.eraThemeId === 'industrial_steam') {
+      soundFX.playSteamTrain();
+    } else {
+      soundFX.playClick();
+    }
+
     setSelectedTemplate(tpl);
     setCustomTitle(tpl.title);
     setCustomEra(tpl.era);
     setCoreTopics(tpl.defaultTopics);
+    
+    // Automatically preset grade level according to Thüringer Lehrplan
+    if (tpl.defaultGradeLevel) {
+      setGradeLevel(tpl.defaultGradeLevel);
+      setTargetGrades(tpl.defaultTargetGrades || (
+        tpl.defaultGradeLevel === 'unterstufe' ? 'Unterstufe (5.–6. Klasse)' :
+        tpl.defaultGradeLevel === 'mittelstufe' ? 'Mittelstufe (7.–9. Klasse)' : 'Oberstufe (ab 10. Klasse)'
+      ));
+    }
+
     setPillars([
       tpl.suggestedPillars[0],
       tpl.suggestedPillars[1],
@@ -630,18 +650,30 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
             <div
               key={tpl.id}
               onClick={() => handleSelectTemplate(tpl)}
-              className={`p-4 rounded-xl border cursor-pointer transition-all ${
+              className={`p-4 rounded-xl border cursor-pointer transition-all flex flex-col justify-between ${
                 selectedTemplate.id === tpl.id
                   ? 'bg-amber-950/70 border-amber-400 ring-2 ring-amber-500/40 shadow-lg'
                   : 'bg-stone-900/80 border-stone-800 hover:border-amber-700/60'
               }`}
             >
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-mono font-bold text-amber-400">{tpl.era}</span>
-                {selectedTemplate.id === tpl.id && <CheckCircle className="w-4 h-4 text-amber-400" />}
+              <div>
+                <div className="flex items-center justify-between mb-1.5 gap-2">
+                  <span className="text-[11px] font-mono font-bold text-amber-400 truncate">{tpl.era}</span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-black/60 text-amber-300 border border-amber-800/40 shrink-0 font-bold">
+                    {tpl.defaultTargetGrades.split(' ')[0]}
+                  </span>
+                </div>
+                <h3 className="text-sm font-bold text-amber-200 mb-1">{tpl.title}</h3>
+                <p className="text-xs text-stone-300 leading-snug">{tpl.tagline}</p>
               </div>
-              <h3 className="text-base font-bold text-amber-200 mb-1">{tpl.title}</h3>
-              <p className="text-xs text-stone-300 leading-snug">{tpl.tagline}</p>
+
+              <div className="pt-2 mt-2 border-t border-stone-800/70 flex items-center justify-between text-[11px]">
+                <span className="text-stone-400 text-[10px]">Lehrplan Thüringen:</span>
+                <span className={selectedTemplate.id === tpl.id ? 'text-amber-300 font-bold flex items-center gap-1' : 'text-stone-400'}>
+                  {selectedTemplate.id === tpl.id ? <CheckCircle className="w-3.5 h-3.5 text-amber-400 inline" /> : null}
+                  {tpl.defaultTargetGrades.includes('5') ? 'Kl. 5/6' : tpl.defaultTargetGrades.includes('7') ? 'Kl. 7/8' : 'Kl. 9/10'}
+                </span>
+              </div>
             </div>
           ))}
         </div>
