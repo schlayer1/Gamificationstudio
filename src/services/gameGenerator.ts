@@ -1,5 +1,5 @@
 import { geminiRotationService } from './geminiRotation';
-import { GameDefinition, PillarConfig, RoundStory } from '../types/game';
+import { GameDefinition, PillarConfig, RoundStory, GradeLevel } from '../types/game';
 import { detectEraTheme } from '../utils/themeManager';
 
 export interface GenerationRequest {
@@ -7,7 +7,7 @@ export interface GenerationRequest {
   era: string;
   archetype?: import('../types/game').GameMechanicArchetype;
   artStyle?: import('../types/game').ArtStyleType;
-  gradeLevel?: import('../types/game').GradeLevel;
+  gradeLevel?: GradeLevel;
   targetGrades: string;
   roundCount?: number; // 5 to 26 rounds
   reflectionInterval?: number; // every 3, 4, 5 rounds
@@ -18,17 +18,40 @@ export interface GenerationRequest {
   specialResourceName: string;
   specialResourceEmoji: string;
   skills: { skill1: string; skill2: string; skill3: string };
+  onProgress?: (status: string) => void;
 }
 
 export class GameGeneratorService {
   /**
-   * Generates a complete educational game with customizable round count, A/B branches and source material support
+   * Generates a complete educational game tailored specifically to ONE selected grade level,
+   * avoiding redundant token usage for non-selected grades and supporting full 20-round expeditions.
    */
   async generateFullGame(req: GenerationRequest): Promise<GameDefinition> {
-    const roundCount = req.roundCount || 20;
+    const totalRounds = req.roundCount || 20;
     const archetype = req.archetype || 'reigns_balance';
     const reflectionInterval = req.reflectionInterval || 5;
     const artStyle = req.artStyle || 'pixel_art';
+    const selectedGradeLevel: GradeLevel = req.gradeLevel || 'mittelstufe';
+
+    const gradeConfig: Record<GradeLevel, { name: string; classes: string; instructions: string }> = {
+      unterstufe: {
+        name: 'Unterstufe',
+        classes: '5.–6. Klasse',
+        instructions: 'Sprache bildhaft, lebendig und emotional greifbar. Kurze, leicht verständliche Sätze. Keine verschachtelten Fremdwörter ohne direkte Erklärung. Klare, greifbare Dilemmata (z.B. Mut, Freundschaft, Vorräte teilen, Gefahren trotzen).',
+      },
+      mittelstufe: {
+        name: 'Mittelstufe',
+        classes: '7.–9. Klasse',
+        instructions: 'Ausgewogene historische Fachsprache (z.B. Patrizier, Privilegien, Reformation, Handelsmonopol). Multiperspektivische Interessenkonflikte, gesellschaftliche Spannungen und ethische Grauzonen. Dilemmata über Verantwortung und Weitsicht.',
+      },
+      oberstufe: {
+        name: 'Oberstufe',
+        classes: 'ab 10. Klasse',
+        instructions: 'Anspruchsvolles akademisches Sprachniveau. Staatsphilosophische, soziologische und geopolitische Kausalitäten. Quellennah, tiefe historische Dilemmata, ethische Spannungsfelder und hoher Abstraktionsgrad.',
+      },
+    };
+
+    const currentGrade = gradeConfig[selectedGradeLevel];
 
     const artStyleDescriptions: Record<string, string> = {
       pixel_art: '16-bit pixel art retro video game style illustration, Oregon Trail aesthetic, atmospheric lighting, detailed historical pixel art',
@@ -46,8 +69,13 @@ Erstelle ein didaktisch anspruchsvolles Geschichts-Abenteuerspiel im Schulunterr
 
 SPIELMECHANIK-ARCHETYP: ${archetype}
 BILD-GRAFIKSTIL: ${artStyle} (${selectedStylePrompt})
-RUNDENANZAHL: Genau ${roundCount} Runden/Stationen.
+GESAMTE RUNDENANZAHL: ${totalRounds} Stationen.
 REFLEXIONSPHASE: Alle ${reflectionInterval} Runden eine Reflexions- und Strategiepause für den Geschichtshefter.
+
+ZIELGRUPPE & DIDAKTISCHES SPRACHNIVEAU (EXKLUSIV):
+- Zielgruppe: ${currentGrade.name} (${currentGrade.classes})
+- Didaktische Sprachanweisung: ${currentGrade.instructions}
+- STRENGSTE VORGABE: Generiere alle Texte (Situation, Optionen, Konsequenzen, Begriffserklärungen) AUSSCHLIESSLICH und EXAKT auf dem Niveau für ${currentGrade.classes}. Erstelle KEINE Texte für andere Jahrgangsstufen!
 
 ${archetype === 'mythology_duel' ? '- Integriere Quiz-Prüfungen (❓) mit Tipp-Button (💡), Erklärung und Belohnung (🏆) sowie mythologische Artefakte (🗡️, 🔮).' : ''}
 ${archetype === 'conquest_campaign' ? '- Integriere Konsequenzen-Bäume mit unmittelbaren und langfristigen Auswirkungen auf Heeresdisziplin und Eroberung.' : ''}
@@ -56,7 +84,7 @@ ${archetype === 'city_scavenger_hunt' ? '- Baue Stationen als Schnitzeljagd mit 
 
 ${req.sourceMaterialText ? `VORGEGEBENES QUELLENMATERIAL / LEHRBUCH-TEXT (Zwingend berücksichtigen):\n"""\n${req.sourceMaterialText}\n"""\n` : ''}
 
-Regeln & Vorgaben:
+Regeln & didaktische Vorgaben:
 1. 4 Mächtesäulen:
    - Säule 1: ${req.pillars[0].label} (${req.pillars[0].description})
    - Säule 2: ${req.pillars[1].label} (${req.pillars[1].description})
@@ -65,82 +93,76 @@ Regeln & Vorgaben:
 2. Spezialressource: ${req.specialResourceName} (${req.specialResourceEmoji}) - Start: 2 Punkte, Option D kostet 3 Punkte.
 3. Fähigkeiten: ${req.skills.skill1}, ${req.skills.skill2}, ${req.skills.skill3}.
 4. Verbindliche Kernthemen aus dem Lehrplan: ${req.coreTopics.join(', ')}.
-5. Dreifache Sprachadaption für JEDE Station und JEDE Option:
-   - unterstufe: Kl. 5-6 (lebendig, narrativ, klare Konsequenzen, einfache Begriffe)
-   - mittelstufe: Kl. 7-9 (Fachbegriffe, ausgewogen, erste Grauzonen)
-   - oberstufe: ab Kl. 10 (anspruchsvoll, staatsphilosophisch, quellennah)
-6. Jede Runde enthält 4 Optionen (A, B, C, und die exklusive Option D, die 3 Spezialressourcen kostet).
-7. Jede Runde enthält ein didaktisches Lexikon ('lexiconEntry') mit Begriff, Erklärung und 'curiosityFact' ("💡 Hast du gewusst?").
-8. Jede Runde enthält genau 3 bildpassende Entdecker-Hotspots ('hotspots') mit präzisen Prozent-Koordinaten (x: 0-100, y: 0-100), die reale Details des Bildes erklären (z.B. Architektur, Werkzeuge, Kleidung, Schriftzeichen, Göttersymbole).
-9. Antwort MUSS zwingend als valides JSON formatiert sein.
+5. Jede Runde enthält 4 Optionen (A, B, C und die exklusive Meister-Option D, die 3 Spezialressourcen kostet).
+6. Jede Runde enthält ein didaktisches Lexikon ('lexiconEntry') mit Begriff, altersgerechter Erklärung für ${currentGrade.classes} und 'curiosityFact' ("💡 Hast du gewusst?").
+7. Jede Runde enthält genau 3 bildpassende Entdecker-Hotspots ('hotspots') mit Prozent-Koordinaten (x: 0-100, y: 0-100), die reale visuelle Details des Bildes erklären (z.B. Architektur, Werkzeuge, Kleidung, Schriftzeichen, Göttersymbole).
+8. Antwort MUSS zwingend als valides JSON formatiert sein.
 `;
 
-    const prompt = `
-Erstelle genau 5 packende, didaktisch hochwertige Stationen (Runde 1 bis 5) für das Spiel:
+    // Helper to generate a slice of rounds (e.g. 1 to 10 or 11 to 20)
+    const generateRoundBatch = async (startRound: number, endRound: number): Promise<any[]> => {
+      const batchCount = endRound - startRound + 1;
+      const prompt = `
+Erstelle genau ${batchCount} didaktisch hochwertige Stationen (Runde ${startRound} bis ${endRound}) für das Spiel:
 Titel: "${req.title}"
 Epoche / Setting: "${req.era}"
 
-WICHTIGSTE REGELN:
-1. Halte Texte prägnant und zielgerichtet (1-2 kurze Sätze je Klassenstufe).
+ZIELGRUPPE: ${currentGrade.name} (${currentGrade.classes})!
+Fokussiere Sprache, Satzkomplexität und Dilemmata ausschließlich auf diese Klassenstufe.
+
+WICHTIGSTE FORMATIERUNGS-REGELN:
+1. Halte Situationsbeschreibungen prägnant und fesselnd (1-2 kurze Sätze).
 2. Keine Formatierungsfehler, keine unmaskierten Anführungszeichen innerhalb von Texten.
 3. Antworte AUSSCHLIESSLICH mit reinem, validem JSON in folgendem Schema:
 {
   "rounds": [
     {
-      "roundNumber": 1,
-      "locationKey": "station_1",
-      "locationName": "Name der Station 1",
-      "milestoneTitle": "Runde 1: Titel",
+      "roundNumber": ${startRound},
+      "locationKey": "station_${startRound}",
+      "locationName": "Name der Station",
+      "milestoneTitle": "Station ${startRound}: Titel",
       "imagePrompt": "${selectedStylePrompt} of [historische Szene], atmospheric lighting, educational game visual, 16:9 aspect ratio",
       "hotspots": [
         { "id": "hs_1", "x": 30, "y": 65, "label": "Detail 1", "description": "Historische Erklärung...", "icon": "🔍" },
         { "id": "hs_2", "x": 60, "y": 45, "label": "Detail 2", "description": "Historische Erklärung...", "icon": "🏛️" },
         { "id": "hs_3", "x": 50, "y": 20, "label": "Detail 3", "description": "Historische Erklärung...", "icon": "✨" }
       ],
-      "situation": {
-        "unterstufe": "Einführender Text für Unterstufe...",
-        "mittelstufe": "Einführender Text für Mittelstufe...",
-        "oberstufe": "Einführender Text für Oberstufe..."
-      },
+      "situation": "Prägnanter historischer Situations-Text für ${currentGrade.classes}...",
       "choices": [
         {
           "id": "A",
           "label": "Kurztitel Option A",
-          "description": "Erklärung Option A",
+          "description": "Erklärung der Entscheidung",
           "statChanges": { "${req.pillars[0].key}": 15, "${req.pillars[1].key}": -10, "ep": 1 },
-          "consequenceText": { "unterstufe": "...", "mittelstufe": "...", "oberstufe": "..." }
+          "consequenceText": "Altersgerechte Konsequenz der Option A..."
         },
         {
           "id": "B",
           "label": "Kurztitel Option B",
-          "description": "Erklärung Option B",
+          "description": "Erklärung der Entscheidung",
           "statChanges": { "${req.pillars[2].key}": 15, "${req.pillars[3].key}": -10, "ep": 1 },
-          "consequenceText": { "unterstufe": "...", "mittelstufe": "...", "oberstufe": "..." }
+          "consequenceText": "Altersgerechte Konsequenz der Option B..."
         },
         {
           "id": "C",
           "label": "Kurztitel Option C",
-          "description": "Erklärung Option C",
+          "description": "Erklärung der Entscheidung",
           "statChanges": { "${req.pillars[3].key}": 15, "${req.pillars[0].key}": -10, "ep": 1 },
-          "consequenceText": { "unterstufe": "...", "mittelstufe": "...", "oberstufe": "..." }
+          "consequenceText": "Altersgerechte Konsequenz der Option C..."
         },
         {
           "id": "D",
           "label": "Meisterlösung D (🔒)",
-          "description": "Erklärung Meisteroption D",
+          "description": "Erklärung der Meisteroption",
           "epCost": 3,
           "statChanges": { "${req.pillars[0].key}": 20, "${req.pillars[1].key}": 15, "${req.pillars[2].key}": 15, "${req.pillars[3].key}": 15, "ep": -1 },
-          "consequenceText": { "unterstufe": "...", "mittelstufe": "...", "oberstufe": "..." }
+          "consequenceText": "Besonders wirkungsvolle historische Konsequenz..."
         }
       ],
       "lexiconEntry": {
-        "title": "Lexikon-Titel",
-        "term": "Historischer Begriff",
-        "explanation": {
-          "unterstufe": "Einfache Erklärung...",
-          "mittelstufe": "Detaillierte Erklärung...",
-          "oberstufe": "Historischer Kontext..."
-        },
+        "title": "Lexikon-Begriff",
+        "term": "Historischer Fachbegriff",
+        "explanation": "Altersgerechte Erklärung exakt für ${currentGrade.classes}...",
         "curiosityFact": "Erstaunlicher Fakt für Schüler..."
       }
     }
@@ -148,81 +170,164 @@ WICHTIGSTE REGELN:
 }
 `;
 
-    const rawJson = await geminiRotationService.generateContentWithRotation(
-      prompt,
-      systemInstruction,
-      true
-    );
+      let promptPayload: any = prompt;
+      if (req.imageAttachment && req.imageAttachment.base64 && startRound === 1) {
+        promptPayload = [
+          { text: prompt },
+          {
+            inlineData: {
+              mimeType: req.imageAttachment.mimeType,
+              data: req.imageAttachment.base64,
+            },
+          },
+        ];
+      }
 
-    let parsedRounds: RoundStory[] = [];
-    try {
-      // 1. Clean markdown code fences if present (```json ... ```)
+      const rawJson = await geminiRotationService.generateContentWithRotation(
+        promptPayload,
+        systemInstruction,
+        true
+      );
+
+      // Clean markdown code fences if present (```json ... ```)
       let cleanJson = rawJson.trim();
       cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
-      
+
       const firstBrace = cleanJson.indexOf('{');
       const lastBrace = cleanJson.lastIndexOf('}');
       if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
         cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
       }
 
-      // 2. Remove trailing commas before } or ]
+      // Remove trailing commas before } or ]
       cleanJson = cleanJson.replace(/,\s*([\]}])/g, '$1');
-      
-      const parsed = JSON.parse(cleanJson);
-      parsedRounds = parsed.rounds || [];
 
-      // Validate at least 1 round exists
-      if (!Array.isArray(parsedRounds) || parsedRounds.length === 0) {
-        throw new Error("Keine Stationen im JSON gefunden.");
+      const parsed = JSON.parse(cleanJson);
+      return parsed.rounds || [];
+    };
+
+    let allRawRounds: any[] = [];
+
+    try {
+      if (totalRounds <= 10) {
+        req.onProgress?.(`Generiere Stationen 1 bis ${totalRounds} für ${currentGrade.name} (${currentGrade.classes})...`);
+        allRawRounds = await generateRoundBatch(1, totalRounds);
+      } else {
+        // Safe 2-batch generation to guarantee all 20 rounds without hitting token limits
+        const firstBatchEnd = Math.min(10, totalRounds);
+        req.onProgress?.(`Generiere Teil 1: Stationen 1 bis ${firstBatchEnd} für ${currentGrade.name}...`);
+        const batch1 = await generateRoundBatch(1, firstBatchEnd);
+
+        req.onProgress?.(`Generiere Teil 2: Stationen ${firstBatchEnd + 1} bis ${totalRounds} für ${currentGrade.name}...`);
+        const batch2 = await generateRoundBatch(firstBatchEnd + 1, totalRounds);
+
+        allRawRounds = [...batch1, ...batch2];
       }
 
-      // Auto-assign matching historical illustrations to every generated round
-      const themeId = detectEraTheme(req.era + ' ' + req.title, req.archetype).id;
-
-      parsedRounds = parsedRounds.map((round, idx) => {
-        // Try to find matching image from asset pool by locationName or era keywords
-        const locLower = (round.locationName || '').toLowerCase();
-        const eraLower = req.era.toLowerCase();
-
-        let matchedImg = '';
-        if (locLower.includes('jagd') || locLower.includes('mammut') || locLower.includes('nomad') || locLower.includes('lager')) {
-          matchedImg = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80';
-        } else if (locLower.includes('dorf') || locLower.includes('langhaus') || locLower.includes('acker') || locLower.includes('siedlung')) {
-          matchedImg = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
-        } else if (eraLower.includes('steinzeit') || eraLower.includes('neolith')) {
-          matchedImg = idx % 2 === 0
-            ? 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80'
-            : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
-        } else if (eraLower.includes('rom')) {
-          matchedImg = idx % 2 === 0
-            ? 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80'
-            : 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80';
-        } else if (eraLower.includes('luther') || eraLower.includes('reformation')) {
-          matchedImg = 'https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1200&q=80';
-        }
-
-        return {
-          ...round,
-          imagePath: round.imagePath || matchedImg || undefined,
-        };
-      });
+      if (!Array.isArray(allRawRounds) || allRawRounds.length === 0) {
+        throw new Error("Keine Stationen im KI-Ergebnis gefunden.");
+      }
     } catch (e: any) {
-      console.error("JSON parsing error during game generation:", e, "Raw output:", rawJson);
+      console.error("JSON parsing error during game generation:", e);
       throw new Error(
-        `Fehler beim Verarbeiten der Spieldaten (${e.message || "Unvollständige KI-Antwort"}). Bitte klicke nochmals auf "Jetzt generieren" – dank Schlüssel-Rotation startet der Versuch direkt mit der nächsten Modell-Instanz.`
+        `Fehler beim Verarbeiten der Spieldaten (${e.message || "Unvollständige KI-Antwort"}). Bitte klicke nochmals auf "Jetzt generieren" – dank Schlüssel-Rotation startet der nächste Versuch direkt mit einer frischen Instanz.`
       );
     }
+
+    // Normalize each round to ensure the engine always receives valid structures
+    const themeId = detectEraTheme(req.era + ' ' + req.title, req.archetype).id;
+
+    const parsedRounds: RoundStory[] = allRawRounds.map((round: any, idx: number) => {
+      // 1. Situation: Extract string or object and normalize across all keys
+      const situationText = typeof round.situation === 'string'
+        ? round.situation
+        : (round.situation?.[selectedGradeLevel] || round.situation?.mittelstufe || round.situation?.unterstufe || '');
+
+      const situationObj = {
+        unterstufe: situationText,
+        mittelstufe: situationText,
+        oberstufe: situationText,
+        ...(typeof round.situation === 'object' ? round.situation : {}),
+      };
+      situationObj[selectedGradeLevel] = situationText;
+
+      // 2. Choices: Normalize consequenceText
+      const choices = (round.choices || []).map((c: any) => {
+        const consText = typeof c.consequenceText === 'string'
+          ? c.consequenceText
+          : (c.consequenceText?.[selectedGradeLevel] || c.consequenceText?.mittelstufe || c.consequenceText?.unterstufe || '');
+
+        return {
+          ...c,
+          consequenceText: {
+            unterstufe: consText,
+            mittelstufe: consText,
+            oberstufe: consText,
+            ...(typeof c.consequenceText === 'object' ? c.consequenceText : {}),
+          },
+        };
+      });
+
+      // 3. Lexicon Entry: Normalize explanation
+      const explText = typeof round.lexiconEntry?.explanation === 'string'
+        ? round.lexiconEntry.explanation
+        : (round.lexiconEntry?.explanation?.[selectedGradeLevel] || round.lexiconEntry?.explanation?.mittelstufe || round.lexiconEntry?.explanation?.unterstufe || '');
+
+      const lexiconEntry = {
+        title: round.lexiconEntry?.title || round.locationName || 'Historisches Wissen',
+        term: round.lexiconEntry?.term || round.locationName || 'Begriff',
+        explanation: {
+          unterstufe: explText,
+          mittelstufe: explText,
+          oberstufe: explText,
+          ...(typeof round.lexiconEntry?.explanation === 'object' ? round.lexiconEntry.explanation : {}),
+        },
+        curiosityFact: round.lexiconEntry?.curiosityFact || 'Spannende historische Tatsache.',
+      };
+      lexiconEntry.explanation[selectedGradeLevel] = explText;
+
+      // 4. Auto-assign matching historical artwork from asset pool
+      const locLower = (round.locationName || '').toLowerCase();
+      const eraLower = req.era.toLowerCase();
+
+      let matchedImg = '';
+      if (locLower.includes('jagd') || locLower.includes('mammut') || locLower.includes('nomad') || locLower.includes('lager')) {
+        matchedImg = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80';
+      } else if (locLower.includes('dorf') || locLower.includes('langhaus') || locLower.includes('acker') || locLower.includes('siedlung')) {
+        matchedImg = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
+      } else if (eraLower.includes('steinzeit') || eraLower.includes('neolith')) {
+        matchedImg = idx % 2 === 0
+          ? 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80'
+          : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
+      } else if (eraLower.includes('rom')) {
+        matchedImg = idx % 2 === 0
+          ? 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80'
+          : 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80';
+      } else if (eraLower.includes('luther') || eraLower.includes('reformation')) {
+        matchedImg = 'https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1200&q=80';
+      } else if (eraLower.includes('griechen') || eraLower.includes('alexander')) {
+        matchedImg = 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=80';
+      }
+
+      return {
+        ...round,
+        roundNumber: idx + 1,
+        situation: situationObj,
+        choices,
+        lexiconEntry,
+        imagePath: round.imagePath || matchedImg || undefined,
+      };
+    });
 
     const gameDefinition: GameDefinition = {
       id: `game_${Date.now()}`,
       title: req.title,
       subtitle: req.era,
       era: req.era,
-      description: `Interaktives Geschichtsspiel zur Epoche ${req.era}.`,
-      gradeLevel: req.gradeLevel || 'mittelstufe',
+      description: `Interaktives Geschichtsspiel zur Epoche ${req.era} (${currentGrade.name}, ${currentGrade.classes}).`,
+      gradeLevel: selectedGradeLevel,
       targetGrades: req.targetGrades,
-      eraThemeId: detectEraTheme(req.era + ' ' + req.title, req.archetype).id,
+      eraThemeId: themeId,
       coreTopics: req.coreTopics,
       pillars: req.pillars,
       specialResourceName: req.specialResourceName,

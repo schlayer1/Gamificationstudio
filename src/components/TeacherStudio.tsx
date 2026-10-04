@@ -187,7 +187,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     setGenerationProgress("Verbinde mit Gemini AI (Schlüssel-Rotation aktiv)...");
 
     try {
-      setGenerationProgress(`Generiere ${roundCount} didaktische Stationen, Dilemmata und Quellenlexikon...`);
+      setGenerationProgress(`Generiere ${roundCount} didaktische Stationen gezielt für ${targetGrades}...`);
       const newGame = await gameGeneratorService.generateFullGame({
         title: customTitle,
         era: customEra,
@@ -204,6 +204,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         specialResourceName,
         specialResourceEmoji,
         skills,
+        onProgress: (status) => setGenerationProgress(status),
       });
 
       setGenerationProgress("Spiel erfolgreich erstellt!");
@@ -639,10 +640,10 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       <div className="papyrus-dark p-6 rounded-2xl border border-amber-700/60 space-y-4 shadow-xl">
         <div className="space-y-1">
           <h2 className="text-base font-bold text-amber-200 font-serif flex items-center gap-2">
-            <span>Schritt 2a:</span> Klassenstufe festlegen (Didaktische Sprache & Tiefe)
+            <span>Schritt 2a:</span> Klassenstufe festlegen (Gezieltes Sprachniveau)
           </h2>
           <p className="text-xs text-stone-300">
-            Schüler müssen ihre Klassenstufe nicht selbst wählen – du bestimmst das Niveau direkt hier im Studio.
+            Die KI generiert Texte, Stationen und historische Erklärungen <strong>ausschließlich und passgenau für deine gewählte Stufe</strong> – ohne unnötige Mehrfachgenerierung anderer Klassenstufen.
           </p>
         </div>
 
