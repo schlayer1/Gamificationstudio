@@ -312,26 +312,56 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       // Remove trailing commas before } or ]
       cleanJson = cleanJson.replace(/,\s*([\]}])/g, '$1');
 
-      const parsed = JSON.parse(cleanJson);
-      return parsed.rounds || [];
+      try {
+        const parsed = JSON.parse(cleanJson);
+        return parsed.rounds || [];
+      } catch (parseErr: any) {
+        // Advanced JSON Repair: If a string was cut off mid-way (Unterminated string), repair it
+        console.warn('Direct JSON parse failed, attempting intelligent repair:', parseErr.message);
+        
+        // Remove truncated unclosed property and close open brackets
+        let repaired = cleanJson;
+        // Fix unescaped control chars / linebreaks in strings
+        repaired = repaired.replace(/[\n\r\t]+/g, ' ');
+
+        // If string was unterminated, try closing the last string and the json structure
+        if (parseErr.message && (parseErr.message.includes('Unterminated') || parseErr.message.includes('Unexpected end'))) {
+          // Find the last completely closed round object "}"
+          const lastRoundEnd = repaired.lastIndexOf('}');
+          if (lastRoundEnd !== -1) {
+            const cutToLastRound = repaired.substring(0, lastRoundEnd + 1);
+            const wrapped = cutToLastRound.trim() + ']}';
+            try {
+              const recovered = JSON.parse(wrapped);
+              if (recovered.rounds && recovered.rounds.length > 0) {
+                console.log(`Successfully recovered ${recovered.rounds.length} rounds from truncated batch!`);
+                return recovered.rounds;
+              }
+            } catch {}
+          }
+        }
+        throw parseErr;
+      }
     };
 
     let allRawRounds: any[] = [];
 
     try {
-      if (totalRounds <= 10) {
-        req.onProgress?.(`Generiere Stationen 1 bis ${totalRounds} für ${currentGrade.name} (${currentGrade.classes})...`);
-        allRawRounds = await generateRoundBatch(1, totalRounds);
-      } else {
-        // Safe 2-batch generation to guarantee all 20 rounds without hitting token limits
-        const firstBatchEnd = Math.min(10, totalRounds);
-        req.onProgress?.(`Generiere Teil 1: Stationen 1 bis ${firstBatchEnd} für ${currentGrade.name}...`);
-        const batch1 = await generateRoundBatch(1, firstBatchEnd);
+      // Chunk generation into safe 5-round micro-batches (e.g. 1-5, 6-10, 11-15, 16-20)
+      // This completely prevents hitting the 8192 token limit and avoids Unterminated string errors!
+      const CHUNK_SIZE = 5;
+      const chunks: { start: number; end: number }[] = [];
+      for (let i = 1; i <= totalRounds; i += CHUNK_SIZE) {
+        chunks.push({ start: i, end: Math.min(i + CHUNK_SIZE - 1, totalRounds) });
+      }
 
-        req.onProgress?.(`Generiere Teil 2: Stationen ${firstBatchEnd + 1} bis ${totalRounds} für ${currentGrade.name}...`);
-        const batch2 = await generateRoundBatch(firstBatchEnd + 1, totalRounds);
-
-        allRawRounds = [...batch1, ...batch2];
+      for (let cIdx = 0; cIdx < chunks.length; cIdx++) {
+        const chunk = chunks[cIdx];
+        req.onProgress?.(
+          `Generiere Stationen ${chunk.start} bis ${chunk.end} von ${totalRounds} (${Math.round(((cIdx + 1) / chunks.length) * 100)}%)...`
+        );
+        const batchRounds = await generateRoundBatch(chunk.start, chunk.end);
+        allRawRounds = [...allRawRounds, ...batchRounds];
       }
 
       if (!Array.isArray(allRawRounds) || allRawRounds.length === 0) {
