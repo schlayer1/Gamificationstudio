@@ -132,6 +132,35 @@ export interface PillarConfig {
   description: string;
 }
 
+export interface WorksheetQuestion {
+  stationRef: string; // e.g. "Station 3"
+  question: string;
+  sampleSolution: string;
+}
+
+export interface WorksheetDilemmaTask {
+  title: string;
+  situationContext: string;
+  taskPrompt: string;
+  sampleSolution: string;
+}
+
+export interface WorksheetGlossaryTerm {
+  term: string;
+  hint: string;
+  solution: string;
+}
+
+export interface GameWorksheet {
+  subtitle: string;
+  learningGoal: string;
+  coreQuestions: WorksheetQuestion[];
+  dilemmaTask: WorksheetDilemmaTask;
+  glossaryTerms: WorksheetGlossaryTerm[];
+  reflectionCheck: string;
+  teacherNotes?: string;
+}
+
 export interface GameDefinition {
   id: string;
   title: string;
@@ -155,6 +184,7 @@ export interface GameDefinition {
   heroImage?: string; // Custom cover/hero banner image
   heroPrompt?: string; // AI image generation prompt for the main game cover/hero
   rounds: RoundStory[]; // Array of 20 rounds or dynamic branch pairs
+  worksheet?: GameWorksheet; // Didactic DIN-A4 student worksheet & teacher solution sheet
 }
 
 export interface GameLogEntry {

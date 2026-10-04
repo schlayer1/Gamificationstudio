@@ -519,6 +519,24 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
     const heroPrompt = eraHeroAsset?.suggestedPrompt || `${selectedStylePrompt} of panoramic grand historical landscape and iconic landmarks of ${req.era} representing "${req.title}", majestic composition, cinematic lighting, 16:9 banner aspect ratio`;
     const defaultHeroImg = eraHeroAsset?.imageUrl || detectEraTheme(req.era + ' ' + req.title, req.archetype).defaultBannerUrl;
 
+    // Generate didactically structured worksheet & solutions
+    let worksheet: import('../types/game').GameWorksheet | undefined = undefined;
+    try {
+      req.onProgress?.('Erstelle didaktischen Begleitbogen & Musterlösung für den Unterricht...');
+      worksheet = await this.generateWorksheetForGame({
+        title: req.title,
+        era: req.era,
+        gradeLevel: selectedGradeLevel,
+        targetGrades: currentGrade.classes,
+        coreTopics: req.coreTopics,
+        rounds: parsedRounds,
+        pillars: req.pillars,
+      });
+    } catch (wsErr) {
+      console.warn('Worksheet generation failed, using fallback template:', wsErr);
+      worksheet = this.createFallbackWorksheet(req.title, req.era, currentGrade.classes, req.coreTopics, parsedRounds);
+    }
+
     const gameDefinition: GameDefinition = {
       id: `game_${Date.now()}`,
       title: req.title,
@@ -536,10 +554,149 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       specialResourceEmoji: req.specialResourceEmoji,
       skillNames: req.skills,
       rounds: parsedRounds,
+      worksheet,
     };
 
     return gameDefinition;
   }
+
+  /**
+   * Generates a pedagogically rigorous DIN-A4 student worksheet and teacher solution sheet
+   */
+  async generateWorksheetForGame(params: {
+    title: string;
+    era: string;
+    gradeLevel: GradeLevel;
+    targetGrades: string;
+    coreTopics: string[];
+    rounds: RoundStory[];
+    pillars: [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
+  }): Promise<import('../types/game').GameWorksheet> {
+    const roundSummary = params.rounds.slice(0, 10).map((r) => 
+      `- Station ${r.roundNumber} (${r.locationName}): ${r.milestoneTitle} | Begriff: ${r.lexiconEntry?.term || ''}`
+    ).join('\n');
+
+    const prompt = `
+Du bist ein Fachleiter für Geschichtsdidaktik (Thüringer Lehrplan Regelschule & Gymnasium).
+Erstelle einen perfekten, analogen Begleit- und Sicherungsbogen (DIN-A4) für Schüler im Unterricht:
+Spiel: "${params.title}" (${params.era})
+Zielgruppe: ${params.targetGrades}
+Kernthemen: ${params.coreTopics.join(', ')}
+
+Stations-Auszug:
+${roundSummary}
+
+VORGABEN FÜR DAS ARBEITSBLATT:
+1. "learningGoal": Klares, handlungsorientiertes Unterrichtsziel in einem prägnanten Satz (z.B. "Die Schülerinnen und Schüler analysieren die Interessenkonflikte... und beurteilen...").
+2. "coreQuestions": Genau 3 didaktische Leitfragen zu den Stationen mit EPA-Operatoren (z.B. "Nenne...", "Erkläre...", "Vergleiche...").
+   Jede Frage muss eine fundierte Musterlösung ("sampleSolution") für die Lehrkraft enthalten!
+3. "dilemmaTask": Eine tiefgründige Reflexions- und Urteilsaufgabe (AFB III) zu einem echten historischen Entscheidungskonflikt des Spiels mit "title", "situationContext", "taskPrompt" und "sampleSolution".
+4. "glossaryTerms": Genau 3 historische Schlüsselbegriffe aus dem Spiel mit Suchhinweis ("hint") und präziser Schüler-Definition ("solution").
+5. "reflectionCheck": Eine zusammenfassende Impulsfrage für das abschließende Unterrichtsgespräch im Plenum.
+
+Antworte AUSSCHLIESSLICH als valides JSON:
+{
+  "subtitle": "Didaktischer Begleit- und Heftersicherungsbogen",
+  "learningGoal": "...",
+  "coreQuestions": [
+    { "stationRef": "Station X", "question": "...", "sampleSolution": "..." },
+    { "stationRef": "Station Y", "question": "...", "sampleSolution": "..." },
+    { "stationRef": "Station Z", "question": "...", "sampleSolution": "..." }
+  ],
+  "dilemmaTask": {
+    "title": "Historisches Urteil & Dilemma",
+    "situationContext": "...",
+    "taskPrompt": "...",
+    "sampleSolution": "..."
+  },
+  "glossaryTerms": [
+    { "term": "...", "hint": "...", "solution": "..." },
+    { "term": "...", "hint": "...", "solution": "..." },
+    { "term": "...", "hint": "...", "solution": "..." }
+  ],
+  "reflectionCheck": "..."
+}
+`;
+
+    const rawJson = await geminiRotationService.generateContentWithRotation(
+      prompt,
+      'Du bist Fachberater für Geschichtsdidaktik. Antworte AUSSCHLIESSLICH mit reinem JSON.',
+      true
+    );
+
+    let cleanJson = rawJson.trim();
+    cleanJson = cleanJson.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '');
+    const firstBrace = cleanJson.indexOf('{');
+    const lastBrace = cleanJson.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      cleanJson = cleanJson.substring(firstBrace, lastBrace + 1);
+    }
+    cleanJson = cleanJson.replace(/,\s*([\]}])/g, '$1');
+
+    return JSON.parse(cleanJson);
+  }
+
+  /**
+   * Safe didactic fallback worksheet when offline or API limit reached
+   */
+  public createFallbackWorksheet(
+    title: string,
+    era: string,
+    classes: string,
+    topics: string[],
+    rounds: RoundStory[]
+  ): import('../types/game').GameWorksheet {
+    const r1 = rounds[0] || { roundNumber: 1, milestoneTitle: 'Auftakt', lexiconEntry: { term: 'Auftakt', explanation: { mittelstufe: 'Beginn' } } };
+    const r2 = rounds[Math.floor(rounds.length / 2)] || r1;
+    const r3 = rounds[rounds.length - 1] || r1;
+
+    return {
+      subtitle: `Didaktischer Begleit- & Sicherungsbogen (${classes})`,
+      learningGoal: `Die Schülerinnen und Schüler untersuchen die Lebenswelt und die Herrschaftsstrukturen in der Epoche ${era} und beurteilen historische Weichenstellungen.`,
+      coreQuestions: [
+        {
+          stationRef: `Station ${r1.roundNumber}`,
+          question: `Beschreibe die Ausgangslage zu Beginn der Expedition: Welche Herausforderungen standen im Vordergrund?`,
+          sampleSolution: `Zu Beginn mussten Ressourcen und Vertrauen aufgebaut sowie erste Richtungsentscheidungen getroffen werden.`
+        },
+        {
+          stationRef: `Station ${r2.roundNumber}`,
+          question: `Erkläre den zentralen Konflikt an ${r2.milestoneTitle}: Welche Interessen der verschiedenen Stände prallten aufeinander?`,
+          sampleSolution: `Hier traten gegensätzliche Interessen der Mächtestände zutage, die einen diplomatischen Kompromiss erforderten.`
+        },
+        {
+          stationRef: `Station ${r3.roundNumber}`,
+          question: `Beurteile die langfristigen Auswirkungen deiner Entscheidungen auf das Überleben und den Erfolg der Gemeinschaft.`,
+          sampleSolution: `Ausgewogene Entscheidungen sicherten den Zusammenhalt und verhinderten Unruhen oder Mangelzustände.`
+        }
+      ],
+      dilemmaTask: {
+        title: "Historisches Dilemma & Perspektivenwechsel",
+        situationContext: `Im Spielverlauf gab es wiederholt Momente, in denen kein Beschluss allen Mächten gerecht werden konnte.`,
+        taskPrompt: `Wähle eine Entscheidung aus deiner Reise. Erläutere, warum es historisch keine 'perfekte' Lösung gab und welche Gruppe den höchsten Preis zahlen musste.`,
+        sampleSolution: `Historische Akteure handelten unter Unsicherheit und Ressourcenknappheit; jeder Gewinn für eine Gruppe bedeutete oft Einschnitte für eine andere.`
+      },
+      glossaryTerms: [
+        {
+          term: r1.lexiconEntry?.term || topics[0] || 'Fachbegriff 1',
+          hint: 'Siehe Lexikon Station 1',
+          solution: (typeof r1.lexiconEntry?.explanation === 'object' ? r1.lexiconEntry.explanation.mittelstufe : r1.lexiconEntry?.explanation) || 'Zentraler historischer Begriff.'
+        },
+        {
+          term: r2.lexiconEntry?.term || topics[1] || 'Fachbegriff 2',
+          hint: 'Siehe Lexikon Hauptstation',
+          solution: (typeof r2.lexiconEntry?.explanation === 'object' ? r2.lexiconEntry.explanation.mittelstufe : r2.lexiconEntry?.explanation) || 'Wichtige geschichtliche Erscheinung.'
+        },
+        {
+          term: r3.lexiconEntry?.term || topics[2] || 'Fachbegriff 3',
+          hint: 'Siehe Lexikon Endstation',
+          solution: (typeof r3.lexiconEntry?.explanation === 'object' ? r3.lexiconEntry.explanation.mittelstufe : r3.lexiconEntry?.explanation) || 'Bedeutsamer Begriff für die Epoche.'
+        }
+      ],
+      reflectionCheck: `Welcher erreichte Stand (Säule) war in deiner Klasse am schwierigsten zu stabilisieren und warum?`
+    };
+  }
 }
 
 export const gameGeneratorService = new GameGeneratorService();
+

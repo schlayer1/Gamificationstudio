@@ -31,10 +31,12 @@ import {
   X,
   Image as ImageIcon,
   FolderOpen,
-  ExternalLink
+  ExternalLink,
+  Printer
 } from 'lucide-react';
 import { StationImagePromptModal } from './StationImagePromptModal';
 import { GameArtworkStudioModal } from './GameArtworkStudioModal';
+import { WorksheetPrintModal } from './WorksheetPrintModal';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
 import { googleDriveSyncService } from '../services/googleDriveSync';
 
@@ -106,6 +108,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [boardModalCode, setBoardModalCode] = useState<{ code: string; title: string } | null>(null);
   const [mobileTab, setMobileTab] = useState<'create' | 'published' | 'keys'>('create');
   const [artworkModalGame, setArtworkModalGame] = useState<GameDefinition | null>(null);
+  const [worksheetModalGame, setWorksheetModalGame] = useState<GameDefinition | null>(null);
 
   // Switch template with automated curriculum grade level preset
   const handleSelectTemplate = (tpl: PredefinedTemplate) => {
@@ -601,6 +604,18 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
               </button>
 
               <button
+                onClick={() => {
+                  soundFX.playClick();
+                  setWorksheetModalGame(createdGamePreview);
+                }}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-500/80 text-amber-200 text-xs font-bold transition-all cursor-pointer shadow-md"
+                title="Didaktischen DIN-A4 Schüler-Laufzettel & Musterlösung anzeigen und drucken"
+              >
+                <FileText className="w-4 h-4 text-amber-400" />
+                <span>Laufzettel (DIN A4)</span>
+              </button>
+
+              <button
                 onClick={() => handleExportJson(createdGamePreview)}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-amber-600/60 text-amber-300 text-xs font-bold transition-all cursor-pointer shadow-md"
                 title="Als .json Spieldatei auf den Computer herunterladen"
@@ -721,6 +736,16 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
                       title="Bilder & Prompts per Drag & Drop bearbeiten"
                     >
                       <Camera className="w-3.5 h-3.5" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        soundFX.playClick();
+                        setWorksheetModalGame(pub.game);
+                      }}
+                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-amber-300 cursor-pointer"
+                      title="Begleit-Laufzettel & Musterlösung drucken (DIN A4)"
+                    >
+                      <FileText className="w-3.5 h-3.5 text-amber-400" />
                     </button>
                     <button
                       onClick={() => handleExportJson(pub.game, pub.shareCode)}
@@ -1443,6 +1468,15 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
           onClose={() => setArtworkModalGame(null)}
           game={artworkModalGame}
           onSaveGame={handleSaveArtworkGame}
+        />
+      )}
+
+      {/* Worksheet Print Modal (DIN-A4 Student Worksheet & Teacher Solutions) */}
+      {worksheetModalGame && (
+        <WorksheetPrintModal
+          isOpen={!!worksheetModalGame}
+          onClose={() => setWorksheetModalGame(null)}
+          game={worksheetModalGame}
         />
       )}
     </div>
