@@ -329,6 +329,7 @@ export const App: React.FC = () => {
           skills={skills}
           theme={currentTheme}
           onRestart={handleRestart}
+          activeGame={activeGameDefinition}
         />
       )}
 
