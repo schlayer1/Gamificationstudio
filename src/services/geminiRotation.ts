@@ -14,24 +14,44 @@ class GeminiRotationService {
     this.loadKeys();
   }
 
-  // Load configured keys from localStorage
+  // Load configured keys from localStorage, Vercel Environment Variables or school fallback
   public loadKeys(): string[] {
+    // 1. Check Vercel / Vite Environment Variables first
+    const envKeys: string[] = [];
+    if (typeof import.meta !== 'undefined' && import.meta.env) {
+      const k1 = import.meta.env.VITE_GEMINI_API_KEY_1 || import.meta.env.VITE_GEMINI_API_KEY;
+      const k2 = import.meta.env.VITE_GEMINI_API_KEY_2;
+      const k3 = import.meta.env.VITE_GEMINI_API_KEY_3;
+      const k4 = import.meta.env.VITE_GEMINI_API_KEY_4;
+
+      if (k1 && k1.trim()) envKeys.push(k1.trim());
+      if (k2 && k2.trim()) envKeys.push(k2.trim());
+      if (k3 && k3.trim()) envKeys.push(k3.trim());
+      if (k4 && k4.trim()) envKeys.push(k4.trim());
+    }
+
+    // 2. Check localStorage for teacher custom overrides
+    let localKeys: string[] = [];
     if (typeof window !== 'undefined') {
       try {
         const saved = localStorage.getItem(this.storageKey);
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            this.keys = parsed.filter((k: string) => k && k.trim().length > 0);
+            localKeys = parsed.filter((k: string) => k && k.trim().length > 0);
           }
         }
       } catch {}
     }
 
-    // If no custom keys, ensure school default key fallback
-    if (this.keys.length === 0 && DEFAULT_SCHOOL_GEMINI_KEY) {
+    if (localKeys.length > 0) {
+      this.keys = localKeys.slice(0, 4);
+    } else if (envKeys.length > 0) {
+      this.keys = envKeys.slice(0, 4);
+    } else if (DEFAULT_SCHOOL_GEMINI_KEY) {
       this.keys = [DEFAULT_SCHOOL_GEMINI_KEY];
     }
+
     return this.keys;
   }
 
