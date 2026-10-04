@@ -60,7 +60,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Altes Ägypten & Hochkulturen",
     title: "Station 3: Horus-Falkentempel von Edfu",
     description: "Monumentaler Pylonenturm, riesige Falkenstatuen aus Granit und zeremonielle Prozessionen.",
-    imageUrl: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Temple_Edfou_Egypte.jpg/1280px-Temple_Edfou_Egypte.jpg",
     tags: ["Edfu", "Horus", "Falke", "Pylon", "Tempel", "Zeremonie"],
     suggestedPrompt: "16-bit pixel art style towering stone pylon gates of Temple of Edfu, colossal black granite statues of falcon god Horus guarding the portal, torchlight flickering, retro RPG temple facade",
     hotspots: [
@@ -88,7 +88,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Altes Ägypten & Hochkulturen",
     title: "Station 5: Tal der Könige & Felsengräber",
     description: "Geheime Grabbauten in der Felsenschlucht von Theben-West, Grabwächter und Totenkult.",
-    imageUrl: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/39/Flickr_-_Gaspa_-_Valle_dei_Re%2C_panorama_%284%29.jpg/1280px-Flickr_-_Gaspa_-_Valle_dei_Re%2C_panorama_%284%29.jpg",
     tags: ["Tal der Könige", "Theben-West", "Felsengrab", "Totengericht", "Hieroglyphen"],
     suggestedPrompt: "16-bit pixel art style Valley of the Kings desert gorge in Egypt, torchlit entrance to deep pharaoh tomb cut into limestone mountain, guardians with khopesh swords, mysterious hieroglyphs illuminated by fire, retro adventure scene",
     hotspots: [
@@ -102,7 +102,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Altes Ägypten & Hochkulturen",
     title: "Station 6: Nilometer & Schreiber-Verwaltung",
     description: "Messung der heiligen Nilflut am Pegelbrunnen, Papyrusrollen und Steuereintreiber.",
-    imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1a/Assuan_Elephantine_Nilometer_03.JPG/1280px-Assuan_Elephantine_Nilometer_03.JPG",
     tags: ["Nilometer", "Nilflut", "Schreiber", "Papyrus", "Ernte", "Steuern"],
     suggestedPrompt: "16-bit pixel art style stone Nilometer water well stairs measuring the rising Nile flood, Egyptian royal scribes sitting cross-legged writing numbers on papyrus scrolls, measuring cubit rods, retro educational game art",
     hotspots: [
@@ -190,7 +190,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 1: Forum Romanum & Römischer Senat (Curia Julia)",
     description: "Politisches Herzstück der Republik: Senatoren in weißen Togen, Redner auf den Rostra und Beschlüsse.",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d7/Forum_romanum_6k_%285760x2097%29.jpg/1280px-Forum_romanum_6k_%285760x2097%29.jpg",
     tags: ["Rom", "Senat", "Forum Romanum", "Curia", "Senatoren", "Toga"],
     suggestedPrompt: "16-bit pixel art style Forum Romanum in ancient Rome, marble basilicas, senators in white togas with purple borders gathered before the Curia, orator on the Rostra speaker platform, SPQR banners, retro RPG dialogue scene",
     hotspots: [
@@ -204,7 +204,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 2: Römisches Legionslager & Waffenübungsplatz (Castra)",
     description: "Marschlager der Legionäre mit Schanzen, Feldzeichen (Aquila) und Übungen mit Pilum und Gladius.",
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/The_Porta_Praetoria_%28Main_Gate%29%2C_Saalburg_Roman_Fort%2C_Limes_Germanicus%2C_Germania_%28Germany%29_%2833873748544%29.jpg/1280px-The_Porta_Praetoria_%28Main_Gate%29%2C_Saalburg_Roman_Fort%2C_Limes_Germanicus%2C_Germania_%28Germany%29_%2833873748544%29.jpg",
     tags: ["Castra", "Legionäre", "Aquila", "Gladius", "Pilum", "Militär"],
     suggestedPrompt: "16-bit pixel art style Roman legionary fortified camp (castra), soldiers in lorica segmentata armor drilling with scutum shields and pilum javelins, wooden watchtowers, golden eagle standard aquila, retro war simulation visual",
     hotspots: [
@@ -218,7 +218,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 3: Meister der Ingenieurskunst – Das Aquädukt (Pont du Gard)",
     description: "Monumentale dreistöckige Steinarkaden bringen kühles Gebirgswasser über weite Täler nach Rom.",
-    imageUrl: "https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/02/Pontdugard.jpg",
     tags: ["Aquädukt", "Ingenieurkunst", "Wasser", "Pont du Gard", "Architektur"],
     suggestedPrompt: "16-bit pixel art style ancient Roman aqueduct soaring across green Mediterranean valley, three tiers of stone arches with crystal clear water channel, Roman surveyors with groma and dioptra tools, retro pixel landscape",
     hotspots: [
@@ -232,7 +232,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 4: Römische Kaiserthermen (Caracalla)",
     description: "Hypokausten-Bodenheizung, Marmorbecken vom Frigidarium bis Caldarium, Politik und Badekultur.",
-    imageUrl: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Baths_of_Caracalla%2C_facing_Caldarium.jpg/1280px-Baths_of_Caracalla%2C_facing_Caldarium.jpg",
     tags: ["Thermen", "Caracalla", "Hypokaustum", "Badekultur", "Marmor"],
     suggestedPrompt: "16-bit pixel art style opulent Roman thermal baths with high vaulted ceilings, steaming caldarium pools, citizens relaxing on marble benches, mosaic floor patterns, glowing furnaces below, retro narrative adventure scene",
     hotspots: [
@@ -246,7 +246,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 5: Circus Maximus & Wagenrennen der vier Faktionen",
     description: "Tobsüchtige Menge, Viergespanne (Quadrigen) rasen um die Spina, rote, weiße, grüne und blaue Faktionen.",
-    imageUrl: "https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/CircusMaximusSO.jpg/1280px-CircusMaximusSO.jpg",
     tags: ["Circus Maximus", "Wagenrennen", "Quadriga", "Faktionen", "Brot und Spiele"],
     suggestedPrompt: "16-bit pixel art style dramatic chariot race inside Circus Maximus, four-horse quadrigas rounding the central spina turning post at breakneck speed, 150,000 roaring spectators waving faction colors, dust clouds, retro racing game feel",
     hotspots: [
@@ -260,7 +260,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 6: Kolosseum – Amphitheatrum Flavium (Panem et Circenses)",
     description: "Gladiatorenkämpfe im flavischen Amphitheater, kaiserliche Loge, Jubel und Daumenurteil.",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Colosseo_2020.jpg/1280px-Colosseo_2020.jpg",
     tags: ["Kolosseum", "Gladiatoren", "Amphitheater", "Panem et Circenses", "Plebejer"],
     suggestedPrompt: "16-bit pixel art style Roman Colosseum arena sand pit, gladiators saluting the Emperor in royal box under giant velarium awning, plebeians cheering wildly with free bread loaves, retro 16-bit arcade combat backdrop",
     hotspots: [
@@ -274,7 +274,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 7: Der germanische Limes & Wachturm am Rhein",
     description: "Grenzwälle, Palisaden und Wachtürme gegen germanische Stämme in nebligen Urwäldern.",
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/06/Limes2.png/1280px-Limes2.png",
     tags: ["Limes", "Germanien", "Grenze", "Wachturm", "Palisade", "Legion"],
     suggestedPrompt: "16-bit pixel art style Roman Limes frontier fortification wall in dense Germanic pine forest, timber watchtower with legionary sentries in iron helmet and wool cloak, palisade ditch, misty autumn dawn, retro RPG frontier post",
     hotspots: [
@@ -288,7 +288,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 8: Via Appia Antica & Römische Reichsstraßen",
     description: "Gepflasterte Heerstraße mit Meilensteinen, Handelsträgern, Reisewagen und Grabmälern der Patrizier.",
-    imageUrl: "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/Via_appia.jpg/1280px-Via_appia.jpg",
     tags: ["Via Appia", "Heerstraße", "Meilenstein", "Handel", "Straßenbau"],
     suggestedPrompt: "16-bit pixel art style stone-paved Via Appia road lined with cypress trees and noble Roman tombs, merchant carts and marching legionary auxiliary cohorts passing stone milestone, bright Mediterranean afternoon, retro road visual",
     hotspots: [
@@ -302,7 +302,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 9: Pantheon & Kuppel aller Götter (Opaion)",
     description: "Monumentale freitragende Betonkuppel mit Sonnenstrahl durch das Opaion-Auge zu Ehren der Götter.",
-    imageUrl: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Pantheon_Rom_1_cropped.jpg/1280px-Pantheon_Rom_1_cropped.jpg",
     tags: ["Pantheon", "Kuppel", "Opaion", "Götter", "Hadrian", "Architektur"],
     suggestedPrompt: "16-bit pixel art style interior of Roman Pantheon temple, magnificent coffered concrete rotunda dome with singular circular oculus opening pouring divine beam of sunlight onto bronze statues of Jupiter and Mars, retro atmospheric interior",
     hotspots: [
@@ -316,7 +316,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Antikes Rom & Weltreich",
     title: "Station 10: Triumphzug zum Kapitol & Titusbogen",
     description: "Kaiserlicher Triumphzug im Purpurgewand, Siegeslorbeer, Beutewagen und Weihrauchopfer vor dem Jupitertempel.",
-    imageUrl: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b9/Arch_Titus%2C_Forum_Romanum%2C_Rome%2C_Italy.jpg/1280px-Arch_Titus%2C_Forum_Romanum%2C_Rome%2C_Italy.jpg",
     tags: ["Triumphzug", "Triumphbogen", "Caesar", "Lorbeer", "Kapitol", "Sieg"],
     suggestedPrompt: "16-bit pixel art style grand Roman Triumph procession through triumphal arch towards Capitoline Jupiter temple, victor standing in four-horse golden chariot wearing purple toga and laurel wreath, captured treasures, cheering citizens, retro grand finale cutscene",
     hotspots: [
@@ -348,7 +348,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 1: Schlosskirche Wittenberg – Anschlag der 95 Thesen (1517)",
     description: "Martin Luther nagelt seinen lateinischen Protest gegen den Ablasshandel an das Nordportal der Schlosskirche.",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Schlosskirche_Wittenberg_Luftbild_2024_Toni_Klemm.jpg/1280px-Schlosskirche_Wittenberg_Luftbild_2024_Toni_Klemm.jpg",
     tags: ["Wittenberg", "95 Thesen", "Schlosskirche", "Ablasshandel", "Luther"],
     suggestedPrompt: "16-bit pixel art style Martin Luther in black monk habit hammering sheet with 95 theses onto heavy oak door of Wittenberg Castle Church in October 1517, curious students and townsfolk watching, cobblestones, autumn leaves, retro pixel scene",
     hotspots: [
@@ -362,7 +362,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 2: Tetzel auf dem Marktplatz – Kasten & Ablassbriefe",
     description: "Dominikanermönch Johann Tetzel predigt Fegefeuer-Ängste: 'Wenn das Geld im Kasten klingt, die Seele in den Himmel springt!'",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Johann-tetzel-1.jpg",
     tags: ["Tetzel", "Ablassbrief", "Ablasskasten", "Marktplatz", "Jüterbog"],
     suggestedPrompt: "16-bit pixel art style bustling crowded town market square with Dominican monk Tetzel standing by iron-bound indulgence chest, selling sealed papal forgiveness parchment letters, frightened peasants trading coins, retro history drama visual",
     hotspots: [
@@ -376,7 +376,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 3: Die Druckerei der Flugschriften & Gutenbergs Presse",
     description: "Spindelpresse, Setzkästen mit beweglichen Bleilettern und die explosive Verbreitung reformatorischer Schriften.",
-    imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a0/Buchdrucker-1568.png",
     tags: ["Druckerpresse", "Flugschriften", "Gutenberg", "Bleilettern", "Wittenberg"],
     suggestedPrompt: "16-bit pixel art style Renaissance printing shop workshop, wooden screw printing press, ink daubers, trays of metal movable type letters, freshly printed German leaflets hanging on lines to dry, apprentices working, retro workshop simulation view",
     hotspots: [
@@ -390,7 +390,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 4: Verhör vor Kardinal Cajetan in Augsburg (1518)",
     description: "Luther weigert sich vor dem päpstlichen Legaten im Fuggerpalast, seine Lehren ohne biblische Beweise zu widerrufen.",
-    imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/05/Thomas_Cajetan_Kupferstich.jpg",
     tags: ["Augsburg", "Cajetan", "Verhör", "Fugger", "Widerruf", "Ketzerei"],
     suggestedPrompt: "16-bit pixel art style dramatic interrogation chamber in Augsburg Fugger palace, cardinal Cajetan in scarlet robes behind mahogany desk pointing accusing finger, monk Luther standing firm with open Bible, candlelight shadows, retro dialogue RPG scene",
     hotspots: [
@@ -404,7 +404,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 5: Verbrennung der päpstlichen Bannbulle am Elstertor",
     description: "Vor den Toren Wittenbergs verbrennt Luther die päpstliche Androhung des Kirchenbanns 'Exsurge Domine' im Lagerfeuer.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5d/BullExurgeDomine.jpg",
     tags: ["Bannbulle", "Bann", "Elstertor", "Feuer", "Exsurge Domine"],
     suggestedPrompt: "16-bit pixel art style December bonfire outside Wittenberg Elster gate, Martin Luther throwing papal bull parchment Exsurge Domine into roaring flames, cheering students and professors chanting in winter snow, retro dramatic cutscene",
     hotspots: [
@@ -418,7 +418,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 6: Reichstag zu Worms 1521 – 'Hier stehe ich!'",
     description: "Vor Kaiser Karl V. und den Reichsfürsten steht Luther für sein Gewissen ein und wird mit der Reichsacht belegt.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Bischofshof_Worms_1_Ausschnitt.tif/lossy-page1-1280px-Bischofshof_Worms_1_Ausschnitt.tif.jpg",
     tags: ["Worms", "Reichstag", "Karl V", "Hier stehe ich", "Reichsacht", "Gewissen"],
     suggestedPrompt: "16-bit pixel art style grand hall of Diet of Worms 1521, young Emperor Charles V on throne in imperial gold mantle, table piled with Luther books, Luther with hand over chest speaking resolute defense, assembled German princes, retro SNES courtroom scene",
     hotspots: [
@@ -432,7 +432,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 7: Schein-Entführung im Thüringer Wald (Altenstein)",
     description: "Reiter Friedrichs des Weisen überfallen Luthers Planwagen bei Nacht, um ihn vor Verfolgern in Sicherheit zu bringen.",
-    imageUrl: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c2/Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg/1280px-Thuringia_Eisenach_asv2020-07_img23_Wartburg_Castle.jpg",
     tags: ["Thüringer Wald", "Altenstein", "Entführung", "Friedrich der Weise", "Reiter"],
     suggestedPrompt: "16-bit pixel art style midnight ambush in dense Thuringian forest near Altenstein, masked knights on armored horses surrounding wooden travel carriage with glowing torches, mist between tall fir trees, retro adventure story cutscene",
     hotspots: [
@@ -446,7 +446,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 8: Junker Jörg auf der Wartburg – Übersetzung des Neuen Testaments",
     description: "Getarnt als Junker Jörg übersetzt Luther in nur 11 Wochen das griechische Neue Testament in volksnahes Deutsch.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Lucas_Cranach_d.%C3%84._%28Werkst.%29_-_Portr%C3%A4t_des_Martin_Luther_%28Lutherhaus_Wittenberg%29.jpg/1280px-Lucas_Cranach_d.%C3%84._%28Werkst.%29_-_Portr%C3%A4t_des_Martin_Luther_%28Lutherhaus_Wittenberg%29.jpg",
     tags: ["Wartburg", "Junker Jörg", "Bibelübersetzung", "Eisenach", "Schreibstube"],
     suggestedPrompt: "16-bit pixel art style cozy stone Lutherstube chamber at Wartburg castle near Eisenach, Luther with beard as Junker Jörg writing with goose quill at wooden table, Greek manuscript, leaded glass window overlooking forested hills, inkwell, retro study room",
     hotspots: [
@@ -460,7 +460,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 9: Die Zwölf Artikel & Thomas Müntzer in Frankenhausen (1525)",
     description: "Bauern fordern Freiheit von Leibeigenschaft und Zehnt; der Aufstand eskaliert in der Schlacht bei Frankenhausen.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/82/Karte_bauernkrieg3.jpg",
     tags: ["Bauernkrieg", "12 Artikel", "Thomas Müntzer", "Frankenhausen", "Regenbogenfahne"],
     suggestedPrompt: "16-bit pixel art style German Peasants War camp on hillside, peasants with scythes, flails and pitchforks gathered around Thomas Müntzer waving rainbow covenant banner, heavy carts forming defensive wagenburg, stormy horizon, retro strategy visual",
     hotspots: [
@@ -474,7 +474,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Reformation & Frühe Neuzeit",
     title: "Station 10: Augsburger Religionsfrieden – 'Cuius regio, eius religio'",
     description: "Reichstag 1555: Rechtliche Anerkennung des Protestantismus – Landesherren bestimmen die Konfession ihrer Untertanen.",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/ABRF1555U.jpg/1280px-ABRF1555U.jpg",
     tags: ["Augsburg", "Religionsfrieden", "1555", "Reichstag", "Toleranz", "Vertrag"],
     suggestedPrompt: "16-bit pixel art style signing of Peace of Augsburg 1555 inside council hall, Catholic and Lutheran princes signing large wax-sealed parchment treaty, balance scales, peace doves, stained glass windows, retro game ending scene",
     hotspots: [
@@ -506,7 +506,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 1: Die Mammutjagd in der Eiszeit-Tundra (Altsteinzeit)",
     description: "Sippenmitglieder treiben ein Wollhaarmammut mit Speeren, Harpunen und Speerschleudern in eine Schlucht.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Victoria.Mammut.P1033804.jpg/1280px-Victoria.Mammut.P1033804.jpg",
     tags: ["Mammut", "Altsteinzeit", "Jagd", "Speerschleuder", "Tundra", "Eiszeit"],
     suggestedPrompt: "16-bit pixel art style dramatic Paleolithic mammoth hunt in snowy windswept tundra, hunters in fur cloaks using atlatl spear-throwers driving massive woolly mammoth near ravine trap, jagged snow peaks, retro action adventure game scene",
     hotspots: [
@@ -520,7 +520,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 2: Höhlenmalerei von Lascaux & Heiliges Feuer",
     description: "Mit Ocker, Holzkohle und Röhrenknochen malen Jäger Wisente, Pferde und Jagdszenen an die Felswand.",
-    imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/07/Lascaux2.jpg",
     tags: ["Lascaux", "Höhlenmalerei", "Ocker", "Felswand", "Schamane", "Kult"],
     suggestedPrompt: "16-bit pixel art style ancient painted cave interior like Lascaux, shaman blowing red ochre powder over hand stencil onto rock wall, vivid paintings of bison and running horses illuminated by flickering torch flame, retro mystery adventure feel",
     hotspots: [
@@ -534,7 +534,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 3: Die Feuerstein-Werkstatt (Silex-Abschläge)",
     description: "Herstellung von Faustkeilen, Klingen, Schabern und Pfeilspitzen durch gezieltes Schlagen auf Feuerstein-Knollen.",
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Biface_Cintegabelle_MHNT_PRE_2009.0.201.1_V2.fond.jpg/1280px-Biface_Cintegabelle_MHNT_PRE_2009.0.201.1_V2.fond.jpg",
     tags: ["Feuerstein", "Faustkeil", "Werkzeug", "Silex", "Schlagstein"],
     suggestedPrompt: "16-bit pixel art style prehistoric craftsman sitting by leather hide mat carefully knapping sharp flint hand axes, flint flakes flying, antlers and hammerstones beside him, pine trees behind, retro crafting screen visual",
     hotspots: [
@@ -548,7 +548,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 4: Sammlerinnen im Beerenhain & Harpunenfischen am Fluss",
     description: "Sammeln von Nüssen, Wurzeln und Heilkräutern, während Fischer mit Knochenharpunen Hechte erbeuten.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Hunter_gatherer%27s_camp_at_Irish_National_Heritage_Park_-_geograph.org.uk_-_1252699.jpg/1280px-Hunter_gatherer%27s_camp_at_Irish_National_Heritage_Park_-_geograph.org.uk_-_1252699.jpg",
     tags: ["Sammlerinnen", "Beeren", "Fluss", "Harpune", "Fischfang", "Ernährung"],
     suggestedPrompt: "16-bit pixel art style Mesolithic riverbank camp, gatherers filling woven birch bark baskets with wild berries and roots, fisher with notched bone harpoon standing on river rocks spearing fish, sparkling stream, retro nature sim look",
     hotspots: [
@@ -562,7 +562,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 5: Das Ende der Eiszeit – Der Wald breitet sich aus",
     description: "Das Eis weicht, dichte Eichenmischwälder entstehen; Großwild wandert ab, Rehe und Hirsche werden neue Beute.",
-    imageUrl: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Mollweide.jpg/1280px-Mollweide.jpg",
     tags: ["Klimawandel", "Nacheiszeit", "Wald", "Hirsch", "Pfeil und Bogen"],
     suggestedPrompt: "16-bit pixel art style lush temperate post-glacial forest with tall oaks and birch trees, hunter aiming recurve wooden bow at red deer through bushes, melting snow patches, green moss carpet, retro survival adventure",
     hotspots: [
@@ -576,7 +576,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 6: Das erste Langhaus – Sesshaftwerdung (Bandkeramik)",
     description: "Bau massiver Holzhäuser aus Spaltbohlen mit Lehmbewurf und Schilfdach für eine ganze Großfamilie.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/31/Orkney_Skara_Brae.jpg",
     tags: ["Langhaus", "Bandkeramik", "Sesshaftwerdung", "Lehm", "Holzbau", "Dorf"],
     suggestedPrompt: "16-bit pixel art style construction of early Neolithic wooden longhouse with wattle-and-daub clay walls and thick thatched roof, villagers carrying timber logs and reeds, clearing forest with polished stone adzes, retro city builder view",
     hotspots: [
@@ -590,7 +590,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 7: Die ersten Ackerbauern – Saat und Ernte von Emmer & Einkorn",
     description: "Rodung des Urwaldes, Furchen mit dem Grabstock ziehen und Ernte mit Feuersteinsicheln.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Usdaemmer1.jpg",
     tags: ["Ackerbau", "Emmer", "Einkorn", "Sichel", "Ernte", "Neolithikum"],
     suggestedPrompt: "16-bit pixel art style primitive Neolithic wheat fields on forest clearing, farmers harvesting golden emmer and einkorn ears with curved flint sickles, wooden grain storage granary raised on stilts, sunny summer sky, retro farming game art",
     hotspots: [
@@ -604,7 +604,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 8: Domestikation der Tiere – Schafe, Ziegen & Rinder",
     description: "Aus wilden Mufflons und Auerochsen werden zahme Haustiere für Milch, Fleisch, Wolle und Zugkraft.",
-    imageUrl: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Murgjo_Sharr_Mountain_Dog_Nedi_Limani.jpg/1280px-Murgjo_Sharr_Mountain_Dog_Nedi_Limani.jpg",
     tags: ["Domestikation", "Haustiere", "Schafe", "Auerochse", "Viehzucht", "Gehege"],
     suggestedPrompt: "16-bit pixel art style Neolithic village animal corral with woven wicker fences, domesticated primitive sheep, goats and oxen, boy milking goat into earthenware pot, dog barking by gate, retro settlement life",
     hotspots: [
@@ -618,7 +618,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 9: Erfindung der Töpferei & Bandkeramik-Brennöfen",
     description: "Formen von Tongefäßen in Wulsttechnik, Einritzen von Bandmustern und Brennen in Feldbrandgruben.",
-    imageUrl: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/TalaveraDisplayFranzMayer.jpg/1280px-TalaveraDisplayFranzMayer.jpg",
     tags: ["Keramik", "Töpfern", "Bandkeramik", "Brennofen", "Vorrat", "Ton"],
     suggestedPrompt: "16-bit pixel art style Neolithic pottery open firing pit with glowing charcoal embers, woman decorating clay pot with coiled ribbon pattern using bone stylus, finished ceramic jars storing grain in background, retro craft visual",
     hotspots: [
@@ -632,7 +632,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 10: Der Megalith-Steinkreis & Hünengräber (Stonehenge-Kult)",
     description: "Gemeinschaftsarbeit transportiert tonnenschwere Kolosssteine auf Rollen zur Sonnenwendfeier.",
-    imageUrl: "https://images.unsplash.com/photo-1508873696983-2df5293cb325?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Stonehenge%2C_Salisbury_retouched.jpg/1280px-Stonehenge%2C_Salisbury_retouched.jpg",
     tags: ["Megalith", "Steinkreis", "Dolmen", "Sonnenwende", "Kult", "Gemeinschaft"],
     suggestedPrompt: "16-bit pixel art style monumental megalithic stone circle standing on green grassy hill at summer solstice sunrise, whole tribe pulling massive sarsen stone block with ropes on rolling tree trunks, sun rays piercing stone trilithon, retro climax cutscene",
     hotspots: [
@@ -664,7 +664,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 1: Palast von Pella & Unterricht bei Aristoteles",
     description: "Der junge Alexander lernt Philosophie, Geometrie und Homers Ilias im Hain von Mieza bei Aristoteles.",
-    imageUrl: "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/08/2011_Dimos_Archeas_Pellas.png",
     tags: ["Pella", "Aristoteles", "Philosophie", "Ilias", "Achill", "Makedonien"],
     suggestedPrompt: "16-bit pixel art style marble colonnade school garden in Mieza, philosopher Aristotle holding scroll instructing young Alexander, marble busts of Greek heroes, olive grove, retro RPG academy interior",
     hotspots: [
@@ -678,7 +678,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 2: Athen & der Korinthische Bund (Akropolis)",
     description: "Versammlung der griechischen Poleis unter makedonischer Führung zur Vorbereitung des Persienfeldzugs.",
-    imageUrl: "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c6/Attica_06-13_Athens_50_View_from_Philopappos_-_Acropolis_Hill.jpg/1280px-Attica_06-13_Athens_50_View_from_Philopappos_-_Acropolis_Hill.jpg",
     tags: ["Athen", "Akropolis", "Korinthischer Bund", "Parthenon", "Demokratie"],
     suggestedPrompt: "16-bit pixel art style Athenian Acropolis with Parthenon temple atop rocky citadel, Greek city-state delegates gathered around Alexander discussing Persian campaign, Aegean sea on horizon, retro classic adventure art",
     hotspots: [
@@ -692,7 +692,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 3: Schlacht am Granikos – Erste Bewährung in Asien",
     description: "Kühner Flussübergang gegen die persischen Satrapen; Alexander führt den Angriff der Hetairoi-Gefährtenreiterei.",
-    imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Charles_Le_Brun%2C_Le_Passage_du_Granique%2C_1665.png/1280px-Charles_Le_Brun%2C_Le_Passage_du_Granique%2C_1665.png",
     tags: ["Granikos", "Schlacht", "Hetairoi", "Kavallerie", "Fluss", "Perser"],
     suggestedPrompt: "16-bit pixel art style battle of the Granicus river, Macedonian companion cavalry charging splashing through rushing mountain river, Alexander in feathered helmet clashing with Persian satrap horsemen, retro tactical game visual",
     hotspots: [
@@ -706,7 +706,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 4: Gordion & der Gordische Knoten",
     description: "Wer den kunstvollen Bastknoten des Königsstreitwagens löst, wird Herrscher über ganz Asien – Alexander schlägt ihn mit dem Schwert entzwei.",
-    imageUrl: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bb/Alexander_cuts_the_Gordian_Knot.jpg/1280px-Alexander_cuts_the_Gordian_Knot.jpg",
     tags: ["Gordion", "Gordischer Knoten", "Schwert", "Prophezeiung", "Streitwagen"],
     suggestedPrompt: "16-bit pixel art style Temple of Zeus in Gordium, Alexander drawing his bronze sword to slice the intricate cornel-bark Gordian knot binding chariot yoke, astonished priests and generals staring, retro puzzle cutscene",
     hotspots: [
@@ -720,7 +720,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 5: Schlacht von Issos – Alexander gegen Großkönig Dareios III.",
     description: "Entscheidungsschlacht in der Küstenebene: Die makedonische Phalanx bricht durch, Dareios flieht im Streitwagen.",
-    imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Alexander_and_Bucephalus_-_Battle_of_Issus_mosaic_-_Museo_Archeologico_Nazionale_-_Naples_BW.jpg/1280px-Alexander_and_Bucephalus_-_Battle_of_Issus_mosaic_-_Museo_Archeologico_Nazionale_-_Naples_BW.jpg",
     tags: ["Issos", "Dareios", "Schlacht", "Phalanx", "Sarissa", "Bukephalos"],
     suggestedPrompt: "16-bit pixel art style Battle of Issus based on Alexander Mosaic, young Alexander on black charger Bucephalus charging towards Persian Great King Darius III fleeing in royal gold chariot, forest of upright sarissas, retro epic clash visual",
     hotspots: [
@@ -734,7 +734,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 6: Belagerung der Inselfestung Tyros",
     description: "Siebenmonatiger Dammbau durchs offene Meer, Katapulte, Belagerungstürme und feindliche Feuerschiffe.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a4/Siege_tryre.gif",
     tags: ["Tyros", "Belagerung", "Dammbau", "Katapult", "Phönizier", "Insel"],
     suggestedPrompt: "16-bit pixel art style massive siege mole causeway built across turquoise sea towards high stone walls of island fortress Tyre, wooden siege towers throwing catapult stones, burning arrows arcing across sky, retro siege simulation",
     hotspots: [
@@ -748,7 +748,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 7: Gründung von Alexandria & Orakel von Siwa",
     description: "Planung der Metropole mit Mehlmarkierungen und Wüstenritt zur Oase Siwa, wo das Amun-Orakel ihn als Gottessohn begrüßt.",
-    imageUrl: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/Lighthouse_-_Thiersch.png/1280px-Lighthouse_-_Thiersch.png",
     tags: ["Alexandria", "Siwa", "Orakel", "Amun", "Gottessohn", "Oase"],
     suggestedPrompt: "16-bit pixel art style Siwa oasis palm tree sanctuary in deep Libyan desert dunes, Greek priest bowing before Alexander clad in linen proclaiming him son of Zeus-Amun, sacred spring pool reflecting palm fronds, retro mystical adventure scene",
     hotspots: [
@@ -762,7 +762,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 8: Schlacht von Gaugamela – Das Ende des Perserreiches",
     description: "Sichelstreitwagen, Kriegselefanten und der entscheidende Schrägangriff der Phalanx in den staubigen Ebenen Mesopotamiens.",
-    imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/77/The_battle_at_Arbela_%28Gaugamela%29_between_Alexander_and_Darius%2C_who_is_in_flight_%281696%29.jpg",
     tags: ["Gaugamela", "Sichelwagen", "Kriegselefanten", "Persien", "Entscheidung"],
     suggestedPrompt: "16-bit pixel art style Battle of Gaugamela in Mesopotamian dust storm, Persian scythed chariots charging against hedgehog wall of Macedonian sarissas, war elephants in background, sunset over vast army ranks, retro war game visual",
     hotspots: [
@@ -776,7 +776,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 9: Persepolis – Palast der Perserkönige",
     description: "Einnahme der reichsten Schatzkammer der Welt, Säulenhalle der 100 Säulen und der verheerende Brand des Palastes.",
-    imageUrl: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4d/%D8%AA%D8%AE%D8%AA_%D8%AC%D9%85%D8%B4%DB%8C%D8%AF_%D8%B4%DA%A9%D9%88%D9%87_%D9%88_%D9%82%D8%AF%D8%B1%D8%AA_%D9%BE%D8%A7%D8%AF%D8%B4%D8%A7%D9%87%DB%8C_%D8%A7%DB%8C%D8%B1%D8%A7%D9%86.jpg/1280px-%D8%AA%D8%AE%D8%AA_%D8%AC%D9%85%D8%B4%DB%8C%D8%AF_%D8%B4%DA%A9%D9%88%D9%87_%D9%88_%D9%82%D8%AF%D8%B1%D8%AA_%D9%BE%D8%A7%D8%AF%D8%B4%D8%A7%D9%87%DB%8C_%D8%A7%DB%8C%D8%B1%D8%A7%D9%86.jpg",
     tags: ["Persepolis", "Schatzkammer", "Palast", "Feuer", "Dareios", "Persien"],
     suggestedPrompt: "16-bit pixel art style grand stone terrace and Gate of All Nations in royal Persepolis, winged bull lamassu statues, soldiers carrying cedar chests overflowing with Persian gold coins, torch smoke rising, retro palace drama",
     hotspots: [
@@ -790,7 +790,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Griechische Antike & Alexander",
     title: "Station 10: Meuterei am Fluss Hyphasis & Rückkehr nach Babylon",
     description: "Am Rande Indiens verweigert das kriegsmüde Heer den Weitermarsch; Rückkehr und Erbe des Weltreichs in Babylon.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1f/Berl%C3%ADn%2C_Museo_de_P%C3%A9rgamo_05.jpg/1280px-Berl%C3%ADn%2C_Museo_de_P%C3%A9rgamo_05.jpg",
     tags: ["Hyphasis", "Indien", "Meuterei", "Babylon", "Weltreich", "Ende"],
     suggestedPrompt: "16-bit pixel art style banks of monsoon swollen Hyphasis river in northern India, exhausted Macedonian veterans lowering shields and begging Alexander to turn back home, twelve towering altars built on riverbank, retro emotional finale visual",
     hotspots: [
@@ -822,7 +822,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 1: Die Ritterburg & der Lehnseid des Vasallen",
     description: "Bergfried, Zugbrücke, Wehrgänge: Im Rittersaal leistet der Vasall den Treueeid mit gefalteten Händen vor seinem Lehnsherrn.",
-    imageUrl: "https://images.unsplash.com/photo-1533158307587-828f0a76ef96?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/33/Burg_Eltz_-_Mai_2021.jpg/1280px-Burg_Eltz_-_Mai_2021.jpg",
     tags: ["Ritterburg", "Lehnswesen", "Vasall", "Lehnseid", "Bergfried", "Adel"],
     suggestedPrompt: "16-bit pixel art style great stone hall of medieval castle, knight kneeling with folded hands swearing feudal oath of fealty to seated Duke holding sword, heraldic shields on stone walls, roaring fireplace, retro RPG castle scene",
     hotspots: [
@@ -836,7 +836,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 2: Das Bauerndorf – Frondienst & Dreifelderwirtschaft",
     description: "Sommerfrucht, Winterfrucht, Brache: Bauern pflügen den schweren Lehmboden mit dem Räderpflug und liefern den Zehnt ab.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Dreifelderwirtschaft.svg/1280px-Dreifelderwirtschaft.svg.png",
     tags: ["Bauern", "Dreifelderwirtschaft", "Frondienst", "Zehnt", "Räderpflug", "Dorf"],
     suggestedPrompt: "16-bit pixel art style medieval peasant village with thatched wattle huts, serfs guiding heavy wheeled moldboard plow pulled by team of oxen across open three-field strips, tithe barn in background, retro medieval life simulation",
     hotspots: [
@@ -850,7 +850,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 3: Kloster & Skriptorium – 'Ora et labora'",
     description: "Benediktinermönche beim mühevollen Abschreiben kostbarer Pergamentcodices mit Blattgold und Federkiel.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/00/Escribano.jpg",
     tags: ["Kloster", "Skriptorium", "Mönche", "Pergament", "Ora et labora", "Bücher"],
     suggestedPrompt: "16-bit pixel art style peaceful Benedictine monastery scriptorium room, monks in hooded habits illuminating manuscript pages with gold leaf and quill by tall arched windows, cloister garden outside with herbs, retro narrative room visual",
     hotspots: [
@@ -864,7 +864,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 4: Wassermühle & Dorfschmiede am Mühlenbach",
     description: "Nutzung der Wasserkraft für Mahlgänge und Schmiedehämmer; Reparatur von Pflugscharen und Waffen.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cc/Cordinger_M%C3%BChle-05-2011.jpg/1280px-Cordinger_M%C3%BChle-05-2011.jpg",
     tags: ["Wassermühle", "Schmiede", "Amboss", "Wasserkraft", "Handwerk"],
     suggestedPrompt: "16-bit pixel art style medieval watermill with turning wooden paddle wheel splashing in stream, adjacent blacksmith forge glowing with orange embers, smith hammering glowing iron horseshoe on anvil, retro pixel village backdrop",
     hotspots: [
@@ -878,7 +878,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 5: Das Ritterturnier – Tjost & ritterliche Tugenden",
     description: "Lanzenstechen in voller Rüstung auf der Turnierschranke, Damengunst, Minne und ritterlicher Ehrenkodex.",
-    imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5d/De_hertogen_van_Bourbon_en_Bretagne_in_tweegevecht_tijdens_een_toernooi.jpg",
     tags: ["Turnier", "Tjost", "Ritter", "Lanze", "Ehrenkodex", "Wappen"],
     suggestedPrompt: "16-bit pixel art style colorful medieval jousting tournament list, two armored knights in plate armor galloping along tilt barrier with lowered lances, fluttering banners of lions and eagles, royal spectator grandstand, retro action visual",
     hotspots: [
@@ -892,7 +892,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 6: 'Stadtluft macht frei' – Markt & Zünfte",
     description: "Fachwerkhäuser, Zunftwappen, Kaufmannsstände auf dem Pflastermarkt und Stadttor mit Wachen.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/57/The_Moorish_Bazaar.jpg",
     tags: ["Stadt", "Zunft", "Marktplatz", "Handel", "Stadtluft macht frei", "Fachwerk"],
     suggestedPrompt: "16-bit pixel art style bustling fortified medieval free city market square, timber-framed gabled houses, guild signboards for bakers and weavers, merchant carts trading wool and spices, stone city gatehouse, retro city adventure scene",
     hotspots: [
@@ -906,7 +906,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 7: Die gotische Kathedrale & Dombauhütte",
     description: "Spitzbögen, Kreuzrippengewölbe, Tretradkräne und bunte Glasfenster zu Ehren Gottes.",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/Beauvais_Cathedral_Exterior_1%2C_Picardy%2C_France_-_Diliff.jpg/1280px-Beauvais_Cathedral_Exterior_1%2C_Picardy%2C_France_-_Diliff.jpg",
     tags: ["Kathedrale", "Gotik", "Dombauhütte", "Spitzbogen", "Kran", "Steinmetz"],
     suggestedPrompt: "16-bit pixel art style construction site of soaring Gothic cathedral, wooden human-powered squirrel-cage treadwheel crane lifting carved gargoyle block onto flying buttress, colorful stained glass windows catching sunlight, retro architectural visual",
     hotspots: [
@@ -920,7 +920,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 8: Der Hansekoggen-Hafen & Fernhandel",
     description: "Handelsbund der Hanse: Seetüchtige Koggen entladen Pelze, Heringe, Wachs und Flandrisches Tuch an den Kaianlagen.",
-    imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/86/Ausbreitung_der_Hanse_um_das_Jahr_1400-Droysens_28.jpg/1280px-Ausbreitung_der_Hanse_um_das_Jahr_1400-Droysens_28.jpg",
     tags: ["Hanse", "Kogge", "Hafen", "Fernhandel", "Kaufleute", "Ostsee"],
     suggestedPrompt: "16-bit pixel art style Hanseatic League harbor port at sunset, sturdy clinker-built wooden cog ships tied to wooden quays with barrels of herring and cloth bolts, brick Gothic harbor warehouse with stepped gables, retro maritime trade look",
     hotspots: [
@@ -934,7 +934,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 9: Die Burgbelagerung – Blide (Trebuchet) & Rammbock",
     description: "Kriegsmaschinerie vor den Burgmauern: Gegengewichts-Katapulte schleudern Felsblöcke gegen Wehrtürme.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Trebuchet_Castelnaud.jpg/1280px-Trebuchet_Castelnaud.jpg",
     tags: ["Belagerung", "Trebuchet", "Blide", "Rammbock", "Katapult", "Krieg"],
     suggestedPrompt: "16-bit pixel art style medieval siege camp outside moat of massive concentric castle, giant wooden trebuchet siege engine with stone counterweight slinging burning boulder into sky, pavise mantlets shielding crossbowmen, retro battle scene",
     hotspots: [
@@ -948,7 +948,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Mittelalter & Feudalismus",
     title: "Station 10: Die Kaiserkrönung im Dom zu Aachen",
     description: "Salbung auf dem Thron Karls des Großen mit Reichskrone, Reichsapfel und Zepter vor den Kurfürsten.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Weltliche_Schatzkammer_Wien_%28169%29pano2.jpg",
     tags: ["Kaiserkrönung", "Reichskrone", "Aachen", "Kurfürsten", "Karl der Große", "Kaiser"],
     suggestedPrompt: "16-bit pixel art style imperial coronation inside Aachen Cathedral octagonal palatine chapel, new Holy Roman Emperor seated on white marble throne receiving jewel-encrusted octagonal Imperial Crown, Reichsapfel globus cruciger, seven Prince-Electors cheering, retro royal ending cutscene",
     hotspots: [
@@ -980,7 +980,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 1: Taufe Chlodwigs & Einheit des Frankenreichs",
     description: "König Chlodwig empfängt die christliche Taufe im Dom zu Reims und begründet das Bündnis zwischen Franken und Papsttum.",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/c7/Baptism_of_Clovis.jpg",
     tags: ["Chlodwig", "Reims", "Taufe", "Merowinger", "Bischof", "Franken"],
     suggestedPrompt: "16-bit pixel art style Frankish King Clovis kneeling in stone cathedral of Reims receiving baptism from Bishop Remigius with holy oil ampulla, Frankish warriors in ringmail with battle-axes cheering, torchlight, retro historical cutscene",
     hotspots: [
@@ -994,7 +994,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 2: Bonifatius fällt die Donareiche in Geismar",
     description: "Missionsreise durch Thüringen und Hessen: Bonifatius fällt den heiligen Baum des Donar und errichtet die erste Holzkirche.",
-    imageUrl: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/32/Donareiche2.jpg",
     tags: ["Bonifatius", "Donareiche", "Thüringen", "Missionierung", "Geismar", "Kloster"],
     suggestedPrompt: "16-bit pixel art style Anglo-Saxon missionary Bonifatius raising iron axe against towering ancient oak tree of Thor in foggy Germanic forest, astonished pagan tribesmen dropping spears, ray of light breaking through canopy, retro adventure scene",
     hotspots: [
@@ -1008,7 +1008,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 3: Das Reisekönigtum & Königsboten (Missi Dominici)",
     description: "Der Hof zieht von Pfalz zu Pfalz; Königsboten reiten mit Siegelurkunden aus, um Gesetze und Steuern zu kontrollieren.",
-    imageUrl: "https://images.unsplash.com/photo-1533158307587-828f0a76ef96?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Palais_d%27Aix-la-Chapelle.svg/1280px-Palais_d%27Aix-la-Chapelle.svg.png",
     tags: ["Reisekönigtum", "Pfalz", "Missi Dominici", "Königsboten", "Reich"],
     suggestedPrompt: "16-bit pixel art style Frankish royal travel procession arriving at hilltop stone pfalz manor, king Charlemagne on white stallion with crown, mounted royal envoys missi dominici departing with sealed parchment scrolls, retro management visual",
     hotspots: [
@@ -1022,7 +1022,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 4: Schreibstube & Karolingische Minuskel (Alkuin von York)",
     description: "Erfindung der klaren Kleinbuchstaben (Minuskel) und Wiederbelebung der antiken Wissenschaften an der Hofschule Aachen.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Carolineminuscel.svg/1280px-Carolineminuscel.svg.png",
     tags: ["Schrift", "Minuskel", "Alkuin", "Aachen", "Schule", "Bildung"],
     suggestedPrompt: "16-bit pixel art style royal palace school scriptorium in Aachen, scholar Alcuin of York teaching young Frankish students to write beautiful Carolingian minuscule letters on sheepskin parchment with quill pens, retro educational visual",
     hotspots: [
@@ -1036,7 +1036,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 5: Die Sachsenkriege & Widukind",
     description: "Dreißigjähriger Kampf gegen die heidnischen Sachsen; Widukind leistet Widerstand, bis er den Taufeid schwört.",
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Frankish_Empire_481_to_814-en.svg/1280px-Frankish_Empire_481_to_814-en.svg.png",
     tags: ["Sachsenkriege", "Widukind", "Panzerreiter", "Schlacht", "Karl"],
     suggestedPrompt: "16-bit pixel art style armored Carolingian heavy cavalry with spangenhelm helmets and round shields facing Saxon warband with bearded axes in northern oak woods, banners of the golden eagle, retro battlefield simulation",
     hotspots: [
@@ -1050,7 +1050,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 6: Landgüterverordnung (Capitulare de villis)",
     description: "Präzise Wirtschaftsregeln für königliche Domänen: Obstgärten, Bienenzucht, Pferdeställe und Vorratsspeicher.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/9th_century_Beinecke_MS_413_fol._165.jpg/1280px-9th_century_Beinecke_MS_413_fol._165.jpg",
     tags: ["Capitulare de villis", "Landgut", "Ackerbau", "Wirtschaft", "Kronschatz"],
     suggestedPrompt: "16-bit pixel art style royal Frankish estate manor villa with herb gardens, beehives, grain barn and fish pond, estate steward checking inventory records on parchment wax tablet, retro simulation game background",
     hotspots: [
@@ -1064,7 +1064,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 7: Die Pfalzkapelle zu Aachen & Baumeister Odo",
     description: "Monumentaler oktogonaler Kuppelbau aus römischem Marmor und Bronzegittern als Zentrum des Reiches.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Aachen_Germany_Imperial-Cathedral-01.jpg/1280px-Aachen_Germany_Imperial-Cathedral-01.jpg",
     tags: ["Aachen", "Pfalzkapelle", "Oktogon", "Architektur", "Marmor"],
     suggestedPrompt: "16-bit pixel art style interior of Aachen Palatine Chapel, octagonal dome with gold mosaic of Christ Pantocrator, massive bronze chandeliers and archways supported by antique columns, torchlight ambiance, retro isometric architectural cutscene",
     hotspots: [
@@ -1078,7 +1078,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 8: Kaiserkrönung in Alt-St. Peter zu Rom (Weihnachten 800)",
     description: "Papst Leo III. krönt Karl überraschend zum Kaiser der Römer unter den Rufen des römischen Volkes.",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Charlemagne_denier_Mayence_812_814.jpg/1280px-Charlemagne_denier_Mayence_812_814.jpg",
     tags: ["Kaiserkrönung", "Rom", "Papst Leo III", "800", "St. Peter", "Kaiser"],
     suggestedPrompt: "16-bit pixel art style Christmas Day 800 inside Old St. Peter's Basilica in Rome, Pope Leo III placing golden imperial crown upon kneeling Charlemagne's head before high altar, senators and Frankish lords chanting acclamations, retro royal climax",
     hotspots: [
@@ -1092,7 +1092,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 9: Der weiße Elefant Abul Abbas & Kalif Harun al-Raschid",
     description: "Diplomatie zwischen Aachen und Bagdad: Gesandte des Kalifen überbringen Prunkuhren, Seide und den legendären Elefanten.",
-    imageUrl: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/2c/Gold_dinar_of_Harun_al-Rashid%2C_AH_170-193.jpg",
     tags: ["Abul Abbas", "Elefant", "Harun al-Raschid", "Bagdad", "Diplomatie"],
     suggestedPrompt: "16-bit pixel art style Aachen palace courtyard, Arabian ambassadors in silk turbans presenting giant albino elephant Abul Abbas and mechanical water clock to Emperor Charlemagne, courtiers in awe, retro story encounter",
     hotspots: [
@@ -1106,7 +1106,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Frankenreich & Frühmittelalter",
     title: "Station 10: Reichsteilung von Verdun (843) – Wurzeln Europas",
     description: "Die drei Enkel Karls teilen das Großreich in West-, Mittel- und Ostfrankenreich (Entstehung von Frankreich und Deutschland).",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2c/Vertrag_von_Verdun.svg/1280px-Vertrag_von_Verdun.svg.png",
     tags: ["Verdun", "Reichsteilung", "843", "Lothar", "Ludwig der Deutsche", "Karl der Kahle"],
     suggestedPrompt: "16-bit pixel art style Treaty of Verdun 843 council tent, three royal grandsons examining large painted parchment map of Europe dividing Frankish empire into three kingdoms, wax seals on table, retro grand strategy game ending",
     hotspots: [
@@ -1138,7 +1138,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 1: Krise des Absolutismus & Einberufung der Generalstände",
     description: "Staatsbankrott in Versailles: Klerus und Adel verweigern Steuern, der Dritte Stand fordert Abstimmung nach Köpfen.",
-    imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/91/Estatesgeneral.jpg/1280px-Estatesgeneral.jpg",
     tags: ["Generalstände", "Versailles", "Dritter Stand", "Ludwig XVI", "Steuern"],
     suggestedPrompt: "16-bit pixel art style grand hall of Estates-General at Versailles 1789, King Louis XVI under velvet canopy, third estate deputies in black coats standing up arguing with privileged clergy and nobility, retro courtroom RPG scene",
     hotspots: [
@@ -1152,7 +1152,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 2: Der Ballhausschwur – Geburt der Nationalversammlung",
     description: "Im Salle du Jeu de Paume schwören die Abgeordneten, sich niemals zu trennen, bis Frankreich eine Verfassung hat.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/7/75/Berthault_-_Le_serment_de_Jeu_de_Paume.jpg",
     tags: ["Ballhausschwur", "Nationalversammlung", "Verfassung", "Bailly", "Schwur"],
     suggestedPrompt: "16-bit pixel art style indoor royal tennis court Ballhaus in Versailles, dozens of third estate representatives with raised hands swearing solemn oath around central table, wind blowing through windows, retro dramatic historical moment",
     hotspots: [
@@ -1166,7 +1166,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 3: Sturm auf die Bastille (14. Juli 1789)",
     description: "Das Volk von Paris erstürmt die verhasste königliche Zwingburg und erbeutet Schießpulver – das Symbol der Willkür fällt.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/Prise_de_la_Bastille.jpg/1280px-Prise_de_la_Bastille.jpg",
     tags: ["Bastille", "14. Juli", "Sturm", "Kanonen", "Paris", "Freiheit"],
     suggestedPrompt: "16-bit pixel art style storming of the Bastille stone fortress in Paris July 14 1789, citizens and Garde Française firing cannons at drawbridge, smoke billows, Tricolore cockades on tricorn hats, retro action game scene",
     hotspots: [
@@ -1180,7 +1180,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 4: Erklärung der Menschen- und Bürgerrechte",
     description: "'Die Menschen werden frei und gleich an Rechten geboren': Die Nationalversammlung verkündet die ewigen Grundrechte.",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Declaration_of_the_Rights_of_Man_and_of_the_Citizen_in_1789.jpg/1280px-Declaration_of_the_Rights_of_Man_and_of_the_Citizen_in_1789.jpg",
     tags: ["Menschenrechte", "Bürgerrechte", "1789", "Freiheit", "Gleichheit", "Verfassung"],
     suggestedPrompt: "16-bit pixel art style Declaration of the Rights of Man carved stone tablet on assembly wall with glowing eye of reason symbol, deputies reading freedom parchment to cheering crowd outside, retro political visual",
     hotspots: [
@@ -1194,7 +1194,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 5: Der Zug der Marktfrauen nach Versailles",
     description: "Tausende Pariser Bürgerinnen marschieren bei Regen nach Versailles, fordern Brot und zwingen den König nach Paris.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/57/A_Versailles%2C_%C3%A0_Versailles_5_octobre_1789_-_Restoration.jpg/1280px-A_Versailles%2C_%C3%A0_Versailles_5_octobre_1789_-_Restoration.jpg",
     tags: ["Marktfrauen", "Versailles", "Brot", "Tuilerien", "Paris"],
     suggestedPrompt: "16-bit pixel art style rainy march of Parisian market women armed with pikes and kitchen knives pulling a royal cannon along muddy road to Versailles palace gates, bread loaves on spears, retro narrative visual",
     hotspots: [
@@ -1208,7 +1208,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 6: Flucht nach Varennes & Ende der Monarchie",
     description: "Der geheime Fluchtversuch der königlichen Familie scheitert an der Poststation Varennes; Ludwig XVI. verliert alles Vertrauen.",
-    imageUrl: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/23/Arrestation_de_Louis_Capet_%C3%A0_Varennes%2C_22_juin_1791%2C_Mus%C3%A9e_de_la_R%C3%A9volution_fran%C3%A7aise_-_Vizille.jpg",
     tags: ["Varennes", "Flucht", "König", "Poststation", "Republik"],
     suggestedPrompt: "16-bit pixel art style midnight stop of heavy royal carriage in small village of Varennes, local postmaster with lantern recognizing king's face against gold coin portrait, national guards blocking bridge, retro suspense scene",
     hotspots: [
@@ -1222,7 +1222,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 7: Jakobinerdiktatur, Robespierre & die Guillotine (1793/94)",
     description: "Terror als Regierungsmittel des Wohlfahrtsausschusses: Verfolgung politischer Gegner im Namen der Republik.",
-    imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/Sceau_du_Comit%C3%A9_de_salut_public.svg/1280px-Sceau_du_Comit%C3%A9_de_salut_public.svg.png",
     tags: ["Jakobiner", "Robespierre", "Guillotine", "Wohlfahrtsausschuss", "Terror"],
     suggestedPrompt: "16-bit pixel art style Place de la Révolution in Paris, wooden scaffold with tall guillotine blade under dark overcast sky, Revolutionary Tribunal guards in red phrygian caps, somber crowd watching, retro dramatic scene",
     hotspots: [
@@ -1236,7 +1236,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 8: Aufstieg Napoleons & Staatsstreich des 18. Brumaire",
     description: "Der junge General beendet das Chaos des Direktoriums, bringt Ordnung und krönt sich 1804 selbst zum Kaiser.",
-    imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Imperial_Coat_of_Arms_of_France_%281804-1815%29.svg/1280px-Imperial_Coat_of_Arms_of_France_%281804-1815%29.svg.png",
     tags: ["Napoleon", "Brumaire", "Kaiserkrönung", "Code Civil", "General"],
     suggestedPrompt: "16-bit pixel art style General Napoleon Bonaparte in tricorn hat leading grenadiers with fixed bayonets through glass doors into council chamber of deputies, dispersing corrupt politicians, retro action strategy visual",
     hotspots: [
@@ -1250,7 +1250,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 9: Völkerschlacht bei Leipzig & Preußische Reformen (1813)",
     description: "Befreiungskriege: Russland, Preußen, Österreich und Schweden besiegen Napoleons Grand Armée in Sachsen.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7d/Leipzig_-_An_der_Tabaksm%C3%BChle_-_V%C3%B6lkerschlachtdenkmal_07_ies.jpg/1280px-Leipzig_-_An_der_Tabaksm%C3%BChle_-_V%C3%B6lkerschlachtdenkmal_07_ies.jpg",
     tags: ["Völkerschlacht", "Leipzig", "Befreiungskriege", "Napoleon", "Preußen"],
     suggestedPrompt: "16-bit pixel art style Battle of the Nations near Leipzig October 1813, allied Prussian and Russian infantry firing musket volleys through smoke against French imperial guard, burning village in background, retro war game scene",
     hotspots: [
@@ -1264,7 +1264,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Französische Revolution & Neuzeit",
     title: "Station 10: Der Wiener Kongress 1815 – Restauration & Deutscher Bund",
     description: "Metternich und die europäischen Fürsten verhandeln über Grenzen, Fürstensolidarität und die Unterdrückung nationaler Ideen.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Congress_of_Vienna.PNG/1280px-Congress_of_Vienna.PNG",
     tags: ["Wiener Kongress", "Metternich", "Restauration", "Deutscher Bund", "1815"],
     suggestedPrompt: "16-bit pixel art style magnificent Hofburg ballroom in Vienna 1815, prince Metternich and European diplomats gathering around large European map table, crystal chandeliers, waltz dancers in background, retro peace conference cutscene",
     hotspots: [
@@ -1296,7 +1296,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 1: James Watts Dampfmaschine & die mechanische Weberei",
     description: "Befreiung von menschlicher und tierischer Muskelkraft: Die Dampfmaschine treibt Webstühle und Pumpen an.",
-    imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/62/Steam_engine_in_action_%28two-thirds_speed%29.gif",
     tags: ["Dampfmaschine", "James Watt", "Spinning Jenny", "Webstuhl", "Erfindung"],
     suggestedPrompt: "16-bit pixel art style inventor workshop with James Watt steam engine, giant iron flywheel spinning, leather belts driving mechanical cotton spinning looms, brass dials and steam valve hissing, retro engineering visual",
     hotspots: [
@@ -1310,7 +1310,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 2: Das Kohlebergwerk – Schweiß & Grubengas unter Tage",
     description: "Kumpel hauen Kohle mit Spitzhacken in engen Stollen, um den unersättlichen Brennstoffhunger der Fabriken zu stillen.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Aerial_image_of_shaft_12_of_the_Zollverein_Coal_Mine_Industrial_Complex_in_Essen_%28view_from_the_east%29.jpg/1280px-Aerial_image_of_shaft_12_of_the_Zollverein_Coal_Mine_Industrial_Complex_in_Essen_%28view_from_the_east%29.jpg",
     tags: ["Kohle", "Bergwerk", "Unter Tage", "Kumpel", "Fördergerüst"],
     suggestedPrompt: "16-bit pixel art style underground coal mine drift, soot-covered miners with Davy safety lamps picking anthracite coal seam, wooden pit props supporting ceiling, iron rail cart, retro subterranean visual",
     hotspots: [
@@ -1324,7 +1324,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 3: Die erste Eisenbahn – Fahrt des 'Adler' 1835",
     description: "Zwischen Nürnberg und Fürth donnert die erste deutsche Eisenbahn: Mobilitätsrevolution und Raumschrumpfung.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e7/41018_Schiefe_Ebene_Nov_5_2016.png",
     tags: ["Eisenbahn", "Adler", "1835", "Nürnberg", "Dampflok", "Mobilität"],
     suggestedPrompt: "16-bit pixel art style historic Adler steam train chugging along iron rails between Nuremberg and Fürth 1835, black chimney puffing white clouds, passengers in top hats waving from open wooden train carriages, retro transport game scene",
     hotspots: [
@@ -1338,7 +1338,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 4: Verstädterung & Berliner Mietskasernen",
     description: "Landflucht in die Boomstädte: Arbeiterfamilien hausen in dunklen Hinterhof-Kasernen ohne fließendes Wasser.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/fe/Bundesarchiv_Bild_183-15091-0008%2C_Berlin%2C_Hinterhof%2C_spielende_Kinder.jpg",
     tags: ["Mietskaserne", "Landflucht", "Hinterhof", "Armut", "Verstädterung"],
     suggestedPrompt: "16-bit pixel art style cramped cobblestone tenement courtyard in Berlin 1880s, five-story gray brick buildings with laundry lines hanging between windows, children playing by hand water pump, retro gritty city atmosphere",
     hotspots: [
@@ -1352,7 +1352,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 5: Kinderarbeit in Webereien & Kohlegruben",
     description: "14-Stunden-Arbeitstag für Kinder an gefährlichen Spinnmaschinen; Hungerlöhne sichern das Überleben der Familien.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/55/February_23rd_1908_Boys_Selling_Newspapers_on_Brooklyn_Bridge.jpg/1280px-February_23rd_1908_Boys_Selling_Newspapers_on_Brooklyn_Bridge.jpg",
     tags: ["Kinderarbeit", "Weberei", "Fabrikalltag", "Soziale Frage", "Schutzgesetze"],
     suggestedPrompt: "16-bit pixel art style textile mill factory interior, young barefoot children crawling beneath spinning mule machinery to tie broken cotton threads, stern overseer holding pocket watch, factory dust in light beams, retro emotional scene",
     hotspots: [
@@ -1366,7 +1366,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 6: Krupp-Gussstahl & das Ruhrgebiet",
     description: "Feuer, Eisen, Riesenkräne: Im Ruhrgebiet entsteht die Waffenschmiede und der Maschinenbau des Deutschen Kaiserreiches.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/15/Gemeinde_St_Josef_Essen_V2.png",
     tags: ["Stahlwerk", "Krupp", "Bessemer", "Gussstahl", "Ruhrgebiet", "Hochofen"],
     suggestedPrompt: "16-bit pixel art style molten steel blast furnace inside giant Krupp steel foundry, orange liquid metal pouring into casting molds, workers with long iron rods wearing protective aprons and goggles, sparks flying, retro factory forge visual",
     hotspots: [
@@ -1380,7 +1380,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 7: Der Streik der Arbeiter & Gründung von Gewerkschaften",
     description: "Arbeiter solidarisieren sich: Kampf für den 8-Stunden-Tag, faire Löhne, Arbeitsschutz und Streikrecht.",
-    imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Stamps_of_Germany_%28BRD%29_1968%2C_MiNr_570.jpg",
     tags: ["Gewerkschaft", "Streik", "8-Stunden-Tag", "Solidarität", "Arbeiterbewegung"],
     suggestedPrompt: "16-bit pixel art style striking factory workers gathered outside closed iron factory gates, holding red banners demanding 8 hour work day and safety laws, factory police standing guard, retro social movement scene",
     hotspots: [
@@ -1394,7 +1394,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 8: Das Kommunistische Manifest & Karl Marx",
     description: "Theoretische Antworten auf die Soziale Frage: Kapital vs. Proletariat, Kritik an Ausbeutung und Klassenkampf.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Karl_Marx_by_John_Jabez_Edwin_Mayall_1875_-_Restored.png/1280px-Karl_Marx_by_John_Jabez_Edwin_Mayall_1875_-_Restored.png",
     tags: ["Karl Marx", "Manifest", "Proletariat", "Klassenkampf", "Theorie"],
     suggestedPrompt: "16-bit pixel art style London reading room of British Museum, bearded Karl Marx writing with ink pen surrounded by towering stacks of economic books and statistics, reading lamp, retro intellectual study visual",
     hotspots: [
@@ -1408,7 +1408,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 9: Bismarcks Sozialgesetze – Kranken-, Unfall- & Rentenversicherung",
     description: "Der Reichskanzler führt weltweit erste staatliche Sozialversicherungen ein, um den Sozialisten den Wind aus den Segeln zu nehmen.",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Bismarck_am_Schreibtisch2.jpg",
     tags: ["Bismarck", "Sozialgesetze", "Krankenversicherung", "Rente", "Kaiserreich"],
     suggestedPrompt: "16-bit pixel art style Reichstag debate chamber in Berlin 1883, Chancellor Otto von Bismarck speaking at podium presenting imperial social insurance laws, deputies debating, imperial eagle crest, retro parliament scene",
     hotspots: [
@@ -1422,7 +1422,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Industrielle Revolution & 19. Jh.",
     title: "Station 10: Die zweite Industrielle Revolution – Chemie & Elektrizität",
     description: "Dynamomaschine (Siemens), Glühbirne und Verbrennungsmotor leiten den Schritt in die moderne Hochtechnologie ein.",
-    imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/08/Wvs_1885.jpg",
     tags: ["Siemens", "Elektrizität", "Dynamo", "Chemie", "Moderne"],
     suggestedPrompt: "16-bit pixel art style late 19th century electrical workshop, Werner von Siemens demonstrating glowing electric dynamo with copper coils, first electric street lamps lighting outside cobblestone street, retro tech invention cutscene",
     hotspots: [
@@ -1454,7 +1454,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 1: Novemberrevolution 1918 & Ausrufung der Republik",
     description: "Matrosenaufstand in Kiel, Abdankung des Kaisers: Philipp Scheidemann ruft vom Reichstagsfenster die deutsche Republik aus.",
-    imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/8/8b/Bundesarchiv_Bild_183-B0527-0001-810%2C_Berlin%2C_Brandenburger_Tor%2C_Novemberrevolution.jpg",
     tags: ["Novemberrevolution", "Scheidemann", "Reichstag", "Republik", "Kiel"],
     suggestedPrompt: "16-bit pixel art style Berlin Reichstag window November 9 1918, politician Philipp Scheidemann shouting proclamation of the Republic to sea of cheering workers and soldiers below, red flags, retro historical event cutscene",
     hotspots: [
@@ -1468,7 +1468,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 2: Nationalversammlung im Theater zu Weimar (1919)",
     description: "Flucht vor den Berliner Unruhen nach Thüringen: Beschluss der fortschrittlichsten demokratischen Verfassung mit Frauenwahlrecht.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/c/ce/DR_1919_108_Nationalversammlung.jpg",
     tags: ["Weimar", "Nationaltheater", "Verfassung", "Frauenwahlrecht", "Ebert"],
     suggestedPrompt: "16-bit pixel art style interior of Weimar Deutsches Nationaltheater 1919 converted into parliament, delegates in theater stalls debating the democratic constitution, Friedrich Ebert presiding on stage, retro political RPG visual",
     hotspots: [
@@ -1482,7 +1482,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 3: Der Versailler Vertrag & die schwere Bürde",
     description: "Friedensvertrag im Spiegelsaal: Gebietsabtretungen, Reparationen und die Kriegsschuldfrage belasten die junge Republik.",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/William_Orpen_-_The_Signing_of_Peace_in_the_Hall_of_Mirrors.jpg/1280px-William_Orpen_-_The_Signing_of_Peace_in_the_Hall_of_Mirrors.jpg",
     tags: ["Versailles", "Reparationen", "Kriegsschuld", "Spiegelsaal", "Frieden"],
     suggestedPrompt: "16-bit pixel art style Hall of Mirrors at Versailles palace, signing of 1919 peace treaty, German diplomats signing heavy parchment treaty under cold gaze of victorious allied generals, retro solemn cutscene",
     hotspots: [
@@ -1496,7 +1496,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 4: Das Krisenjahr 1920 – Kapp-Putsch & Generalstreik",
     description: "Freikorps marschieren durch das Brandenburger Tor; die Regierung flieht, doch der größte Generalstreik der Geschichte rettet die Republik.",
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/47/Bundesarchiv_Bild_183-J0305-0600-003%2C_Berlin%2C_Kapp-Putsch%2C_Putschisten.jpg",
     tags: ["Kapp-Putsch", "Generalstreik", "Freikorps", "Berlin", "Brandenburger Tor"],
     suggestedPrompt: "16-bit pixel art style Berlin Unter den Linden during Kapp Putsch 1920, Freikorps soldiers with skull helmets marching by armored trucks, quiet streets with closed shops, workers organizing general strike, retro crisis visual",
     hotspots: [
@@ -1510,7 +1510,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 5: Die Hyperinflation 1923 – Milliarden für ein Brot",
     description: "Ruhrbesetzung und Gelddrucken: Geld verliert stündlich an Wert, Kinder spielen mit Geldscheinbündeln auf der Straße.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/f/ff/Bundesarchiv_Bild_102-00104%2C_Inflation%2C_Tapezieren_mit_Geldscheinen.jpg",
     tags: ["Hyperinflation", "1923", "Milliarden", "Brot", "Geldentwertung", "Ruhrkampf"],
     suggestedPrompt: "16-bit pixel art style Berlin bakery shop line in autumn 1923, customer paying laundry basket filled to brim with billion-Mark paper banknotes for single rye bread loaf, baker counting bundles with despair, retro economic crisis visual",
     hotspots: [
@@ -1524,7 +1524,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 6: Das Staatliche Bauhaus Weimar (Gropius, Klee & Kandinsky)",
     description: "Radikale Neugestaltung von Architektur, Design und Kunst in Thüringen: 'Form follows function'.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Bauhaus-Signet.svg/1280px-Bauhaus-Signet.svg.png",
     tags: ["Bauhaus", "Weimar", "Walter Gropius", "Design", "Architektur", "Kunst"],
     suggestedPrompt: "16-bit pixel art style Staatliches Bauhaus Weimar design workshop, Walter Gropius and art students testing tubular steel chairs and geometric colorful lamps, clean modernist white building lines, retro avant-garde aesthetic",
     hotspots: [
@@ -1538,7 +1538,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 7: Die Goldenen Zwanziger – Charleston, Radio & Kino",
     description: "Wirtschaftliche Stabilisierung durch die Rentenmark: Jazzclubs, Stummfilm-Kinos (Metropolis) und das neue Selbstbewusstsein der Frauen.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Bundesarchiv_Bild_183-K0623-0502-001%2C_Berlin%2C_Tanztee_im_%22Esplanade%22.jpg",
     tags: ["Goldene Zwanziger", "Charleston", "Jazz", "Kino", "Radio", "Kultur"],
     suggestedPrompt: "16-bit pixel art style glamorous 1920s Berlin dance hall ballroom, women with bob haircuts dancing Charleston in flapper dresses, jazz saxophone band playing on stage, glowing incandescent bulb chandeliers, retro nightlife visual",
     hotspots: [
@@ -1552,7 +1552,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 8: Gustav Stresemann & Vertrag von Locarno (1925)",
     description: "Rückkehr auf die Weltbühne: Friedensnobelpreis für Stresemann, Entspannung mit Frankreich und Beitritt zum Völkerbund.",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/42/Bundesarchiv_Bild_183-R03618%2C_Locarno%2C_Gustav_Stresemann%2C_Chamberlain%2C_Briand.jpg",
     tags: ["Stresemann", "Locarno", "Völkerbund", "Diplomatie", "Friedensnobelpreis"],
     suggestedPrompt: "16-bit pixel art style lakeside terrace in Locarno 1925, foreign ministers Gustav Stresemann and Aristide Briand shaking hands overlooking blue Lake Maggiore, fountain pens on table, retro diplomatic victory visual",
     hotspots: [
@@ -1566,7 +1566,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 9: Schwarzer Freitag 1929 & Weltwirtschaftskrise",
     description: "Wall-Street-Börsencrash zieht Deutschland mit sich: Bankenpleiten, Massenarbeitslosigkeit (6 Millionen) und Elend.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a4/1930-67B.png",
     tags: ["1929", "Börsencrash", "Wall Street", "Arbeitslosigkeit", "Krise"],
     suggestedPrompt: "16-bit pixel art style crowded Berlin employment office hall in winter 1930, thousands of downcast unemployed workers standing in lines with stamped cards, cold steam breath, stark black and white posters, retro historical downturn",
     hotspots: [
@@ -1580,7 +1580,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Weimarer Republik (1918–1933)",
     title: "Station 10: Notverordnungen, Radikalisierung & Scheitern der Republik",
     description: "Regieren am Parlament vorbei mit Artikel 48 (Hindenburg); Straßenkämpfe extremer Parteien besiegeln das Schicksal der ersten Demokratie.",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/6/62/Bundesarchiv_Bild_183-R17289%2C_Paul_v._Hindenburg.jpg",
     tags: ["Notverordnung", "Artikel 48", "Hindenburg", "Radikalisierung", "Ende"],
     suggestedPrompt: "16-bit pixel art style stormy evening outside Reichstag in Berlin 1932, clash of election demonstration marchers on street, old President Hindenburg signing emergency decree Article 48 at dark mahogany desk, retro dramatic finale cutscene",
     hotspots: [
@@ -1612,7 +1612,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 1: Die Julikrise 1914 & Mobilmachung der Großmächte",
     description: "Attentat von Sarajevo, Kettenreaktion der Bündnisse und der Ausmarsch der Truppen unter euphorischem Abschied am Bahnhof.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6d/Alianzen_in_Europa_1914.svg/1280px-Alianzen_in_Europa_1914.svg.png",
     tags: ["Julikrise", "Mobilmachung", "1914", "Bahnhof", "Sarajevo", "Bündnisse"],
     suggestedPrompt: "16-bit pixel art style crowded railway station platform in August 1914, steam train decorated with chalk slogans, young soldiers leaning out of train windows kissing sweethearts farewell, brass band playing, retro emotional departure scene",
     hotspots: [
@@ -1626,7 +1626,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 2: Das Wunder an der Marne & Erstarren der Fronten",
     description: "Der Schlieffen-Plan scheitert: Französische Truppen eilen mit Pariser Taxis an die Marne; der Bewegungskrieg erstarrt im Stellungskrieg.",
-    imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Schlieffen_Plan_de_1905.svg/1280px-Schlieffen_Plan_de_1905.svg.png",
     tags: ["Marne", "Stellungskrieg", "Taxis", "Schlieffen-Plan", "Frankreich", "1914"],
     suggestedPrompt: "16-bit pixel art style autumn 1914 near the river Marne, column of vintage Parisian Renault taxicabs rushing French infantry in horizon-blue coats to the front, soldiers digging first shallow dirt trenches with entrenching tools, retro military maneuver scene",
     hotspots: [
@@ -1640,7 +1640,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 3: Alltag im Schützengraben – Schlamm, Ratten & Kälte",
     description: "Unterstande, Laufgräben, Holzstege über zähem Morast: Das Überleben gegen Läuse, Durst und ständigen Scharfschützenbeschuss.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6a/Tranchee.svg/1280px-Tranchee.svg.png",
     tags: ["Schützengraben", "Grabenalltag", "Schlamm", "Unterstand", "Landser", "Poilu"],
     suggestedPrompt: "16-bit pixel art style deep muddy trench dugout, weary soldiers wrapped in sodden blankets drinking tea from tin canteen cups by candle, sandbag parapet with wooden periscope looking over barbed wire, rain pouring down, retro gritty survival visual",
     hotspots: [
@@ -1654,7 +1654,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 4: Die Materialschlacht – Trommelfeuer, Maschinengewehr & Giftgas",
     description: "Industrieller Massentod: Tagelanges Artillerietrommelfeuer und der erste verheerende Chlorgaseinsatz bei Ypern 1915.",
-    imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Bundesarchiv_Bild_146-1976-007-32%2C_Champagne%2C_russische_Soldaten_mit_Gasmaske.jpg",
     tags: ["Giftgas", "Ypern", "Trommelfeuer", "Maschinengewehr", "Gasmaske", "Artillerie"],
     suggestedPrompt: "16-bit pixel art style eerie battlefield shrouded in greenish-yellow poison gas clouds, soldiers with round snout gas masks peering from machine gun nest, heavy artillery shells exploding on horizon sending columns of black dirt into sky, retro dramatic war visual",
     hotspots: [
@@ -1668,7 +1668,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 5: Die Hölle von Verdun 1916 (Fort Douaumont & Voie Sacrée)",
     description: "Verdun: Zehn Monate Blutmühle um Fort Douaumont; 700.000 Gefallene und Verwundete auf engstem Raum.",
-    imageUrl: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/La_reprise_de_Douaumont%2C_le_24_octobre_1916.PNG/1280px-La_reprise_de_Douaumont%2C_le_24_octobre_1916.PNG",
     tags: ["Verdun", "Fort Douaumont", "1916", "Voie Sacrée", "Poilu", "Materialschlacht"],
     suggestedPrompt: "16-bit pixel art style devastated concrete armored dome fortress Fort Douaumont on Verdun heights, French poilu soldiers holding position behind shattered parapet, heavy supply trucks rumbling along muddy Voie Sacrée road, retro tragic battlefield visual",
     hotspots: [
@@ -1682,7 +1682,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 6: Die Ostfront & der russische Schicksalswinter (Karpaten)",
     description: "Eisige Weiten Polens und der Karpaten: Schlechte Versorgung, Munitionsmangel und Kriegsmüdigkeit der russischen Zarenarmee.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/b1/Eastern_Front%2C_1914.jpg",
     tags: ["Ostfront", "Russland", "Karpaten", "Zarenarmee", "Winter", "Hunger"],
     suggestedPrompt: "16-bit pixel art style snowy frozen Russian front in Carpathian mountains, Russian infantrymen in heavy wool greatcoats and papakha fur hats sharing scarce black bread around fire in snow trench, frozen pines, retro eastern front atmosphere",
     hotspots: [
@@ -1696,7 +1696,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 7: Die Heimatfront – Feldpostbriefe & Steckrübenwinter 1916/17",
     description: "Hungerblockade der Entente: Frauen in Rüstungsfabriken, Brotkarten, Kohlrüben und die zitternde Hoffnung auf Post von der Front.",
-    imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/%22YOU_CAN%27T_WIN_THIS_WAR_WITHOUT_SACRIFICE_ON_THE_HOME_FRONT_TOO%22_-_NARA_-_516217.jpg/1280px-%22YOU_CAN%27T_WIN_THIS_WAR_WITHOUT_SACRIFICE_ON_THE_HOME_FRONT_TOO%22_-_NARA_-_516217.jpg",
     tags: ["Heimatfront", "Feldpost", "Steckrübenwinter", "Munitionsfabrik", "Hunger"],
     suggestedPrompt: "16-bit pixel art style home front Berlin street scene during turnip winter 1917, long queue of shivering women and children outside municipal rationing store with ration tickets, woman reading handwritten field post letter by gas lamp, retro social history visual",
     hotspots: [
@@ -1710,7 +1710,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 8: Das Epochenjahr 1917 – Russische Revolution & USA-Kriegseintritt",
     description: "Zarensturz in Petrograd und Kriegseintritt der USA unter Präsident Wilson; uneingeschränkter U-Boot-Krieg.",
-    imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7c/%D0%9C%D0%B8%D1%82%D0%B8%D0%BD%D0%B3_%D0%BD%D0%B0_%D0%9D%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%BC_%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B5_%281917%29.jpg/1280px-%D0%9C%D0%B8%D1%82%D0%B8%D0%BD%D0%B3_%D0%BD%D0%B0_%D0%9D%D0%B5%D0%B2%D1%81%D0%BA%D0%BE%D0%BC_%D0%BF%D1%80%D0%BE%D1%81%D0%BF%D0%B5%D0%BA%D1%82%D0%B5_%281917%29.jpg",
     tags: ["1917", "Russische Revolution", "USA", "Woodrow Wilson", "U-Boot", "Lenin"],
     suggestedPrompt: "16-bit pixel art style stormy Petrograd Square 1917, Russian sailors and soldiers carrying red banners demanding peace and bread outside Winter Palace, while US transport ships cross ocean on horizon, retro 1917 turning point visual",
     hotspots: [
@@ -1724,7 +1724,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 9: Tanks an der Somme & die Frühjahrsoffensive 1918",
     description: "Erster Einsatz britischer Mark-I-Panzer und letzte verzweifelte deutsche Offensiven, bevor das Heer zusammenbricht.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/31/Renault-FT17-Saumur.0004gw9y.jpg",
     tags: ["Panzer", "Tank", "Somme", "1918", "Offensive", "Technik"],
     suggestedPrompt: "16-bit pixel art style early British rhomboid Mark IV tank crushing through barbed wire entanglement across trench ditch, infantry following behind armored tracks, artillery smoke on scarred plain, retro armored warfare visual",
     hotspots: [
@@ -1738,7 +1738,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Erster Weltkrieg & Industriezeitalter",
     title: "Station 10: Der Waffenstillstand von Compiègne (11.11.1918, 11 Uhr)",
     description: "Im Eisenbahnwaggon im Wald von Compiègne schweigen die Waffen: Das Ende des Gemetzels und der Beginn eines schwierigen Friedens.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cd/Waffenstillstand_gr.jpg/1280px-Waffenstillstand_gr.jpg",
     tags: ["Compiègne", "Waffenstillstand", "11. November", "Frieden", "Eisenbahnwagen"],
     suggestedPrompt: "16-bit pixel art style forest clearing in Compiègne on misty morning November 11 1918, interior of wooden railway salon carriage, French Marshal Foch and German delegation signing armistice treaty on table, clock showing exactly 11:00, retro historic ending visual",
     hotspots: [
@@ -1770,7 +1770,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 1: 30. Januar 1933 – Ernennung Hitlers & Fackelzug durchs Brandenburger Tor",
     description: "Hindenburg ernennt Adolf Hitler zum Reichskanzler; SA und SS inszenieren einen gigantischen Fackelzug als Demonstration der Macht.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/a/ab/Bundesarchiv_Bild_183-H1216-0500-002%2C_Adolf_Hitler.jpg",
     tags: ["30. Januar", "1933", "Machtübernahme", "Fackelzug", "Brandenburger Tor", "Hindenburg"],
     suggestedPrompt: "16-bit pixel art style night vista of Brandenburg Gate in Berlin January 30 1933, thousands of SA stormtroopers in brown shirts marching with glowing torches past cheering crowds, ominous shadows cast on neoclassical columns, retro historical moment visual",
     hotspots: [
@@ -1784,7 +1784,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 2: Reichstagsbrand & Außerkraftsetzung der Grundrechte",
     description: "Februar 1933: Die Reichstagsbrandverordnung setzt persönliche Freiheit, Presse-, Versammlungs- und Briefgeheimnis dauerhaft außer Kraft.",
-    imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Reichstagsbrand.jpg/1280px-Reichstagsbrand.jpg",
     tags: ["Reichstagsbrand", "Grundrechte", "Notverordnung", "Berlin", "Rechtsstaat"],
     suggestedPrompt: "16-bit pixel art style Berlin Reichstag building dome engulfed in flames at night, fire engines rushing across square, police arresting communist and social democrat deputies on street, newspaper headline 'Grundrechte außer Kraft', retro crisis visual",
     hotspots: [
@@ -1798,7 +1798,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 3: Die Krolloper & das Ermächtigungsgesetz (März 1933)",
     description: "Otto Wels hält die mutige letzte freie Rede für die SPD; das Gesetz entmachtet das Parlament und besiegelt die Diktatur.",
-    imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/de/Erm%C3%A4chtigungsgesetz_1933-03-24_Blatt_1.jpg",
     tags: ["Krolloper", "Ermächtigungsgesetz", "Otto Wels", "SPD", "Diktatur", "1933"],
     suggestedPrompt: "16-bit pixel art style tense assembly hall of Kroll Opera in Berlin March 1933, SPD politician Otto Wels standing bravely at podium speaking against the Enabling Act surrounded by threatening armed SA guards in aisles, retro political drama scene",
     hotspots: [
@@ -1812,7 +1812,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 4: Bücherverbrennung auf dem Berliner Opernplatz (Mai 1933)",
     description: "Studenten verbrennen Bücher von Tucholsky, Kästner, Marx und Einstein: Zerstörung des freien Geistes und Gleichschaltung der Kultur.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Bundesarchiv_Bild_102-14597%2C_Berlin%2C_Opernplatz%2C_B%C3%BCcherverbrennung.jpg/1280px-Bundesarchiv_Bild_102-14597%2C_Berlin%2C_Opernplatz%2C_B%C3%BCcherverbrennung.jpg",
     tags: ["Bücherverbrennung", "Opernplatz", "Kultur", "Gleichschaltung", "Kästner", "Geist"],
     suggestedPrompt: "16-bit pixel art style rainy night on Berlin Opernplatz May 10 1933, large roaring bonfire where uniformed students dump armfuls of banned books into flames, crowd chanting slogans in torchlight, historic St. Hedwig church behind, retro solemn visual",
     hotspots: [
@@ -1826,7 +1826,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 5: Propaganda, Volksempfänger & Göbbels' Medienmonopol",
     description: "Der billige Radio-Apparat 'VE 301' in jedem Wohnzimmer: Totalitäre Beschallung, Zensur und Verbot des Hörens von Feindsendern.",
-    imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/d/de/Ve301w.jpg",
     tags: ["Volksempfänger", "Propaganda", "Goebbels", "Radio", "Zensur", "Wohnzimmer"],
     suggestedPrompt: "16-bit pixel art style cozy 1930s German living room, bakelite Volksempfänger radio on side table glowing orange tuning dial, family listening around kitchen table with mixed expressions, shadow of propaganda poster through window, retro domestic scene",
     hotspots: [
@@ -1840,7 +1840,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 6: Erziehung im Gleichschritt – Hitlerjugend & BDM vs. Swing-Jugend",
     description: "Militärischer Drill, Zeltlager und Marschieren: Jugend im totalitären Zugriff; heimliche Gegenkultur der Swing-Jugend und Edelweißpiraten.",
-    imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/HJ_Uniform.jpg/1280px-HJ_Uniform.jpg",
     tags: ["Hitlerjugend", "BDM", "Swing-Jugend", "Edelweißpiraten", "Erziehung", "Jugend"],
     suggestedPrompt: "16-bit pixel art style village outskirts, uniform Hitler Youth boy scouts marching with trumpet and drum along dirt road, while in basement club nearby rebel Swing Youth teenagers in checked jackets secretly listen to banned jazz records, retro split-perspective scene",
     hotspots: [
@@ -1854,7 +1854,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 7: Nürnberger Gesetze 1935 & Entrechtung der jüdischen Bürger",
     description: "Reichsparteitag in Nürnberg: Gesetzliche Degradierung zu Bürgern zweiter Klasse, Rassenideologie und gesellschaftliche Ausgrenzung.",
-    imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/9/93/L%C3%B6sener-Knost_Die_N%C3%BCrnberger_Gesetze_1936_Einband.jpg",
     tags: ["Nürnberger Gesetze", "1935", "Entrechtung", "Rassenideologie", "Antisemitismus"],
     suggestedPrompt: "16-bit pixel art style quiet neighborhood street corner 1935, yellow municipal sign 'Juden nicht erwünscht' posted outside public park bench, elderly Jewish gentleman with coat looking on in sorrow, passerby averting eyes, retro poignant social visual",
     hotspots: [
@@ -1868,7 +1868,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 8: Olympische Spiele Berlin 1936 – Die trügerische Scheinfassade",
     description: "Propagandafest der Weltöffentlichkeit: Antisemitische Schilder verschwinden kurzzeitig, während Jesse Owens vier Goldmedaillen holt.",
-    imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Olympic_Gold_Medal_1936.png/1280px-Olympic_Gold_Medal_1936.png",
     tags: ["Olympia", "1936", "Berlin", "Jesse Owens", "Scheinfassade", "Sport"],
     suggestedPrompt: "16-bit pixel art style grand Berlin Olympic Stadium 1936, massive stone colonnades and Olympic rings, black American athlete Jesse Owens sprinting on red cinder track under roar of 100,000 spectators, international flags, retro sports drama visual",
     hotspots: [
@@ -1882,7 +1882,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 9: Die Pogromnacht 9. November 1938 – Scherben & Flammen",
     description: "Organisierter Staatsterror: Brennende Synagogen in ganz Deutschland, Zerstörung jüdischer Geschäfte und erste Deportationen in KZ.",
-    imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/1/17/Bundesarchiv_Bild_146-1970-041-46%2C_M%C3%BCnchen%2C_zerst%C3%B6rte_Ohel-Jakob-Synagoge.jpg",
     tags: ["Pogromnacht", "9. November", "1938", "Synagoge", "Scherben", "Terror"],
     suggestedPrompt: "16-bit pixel art style Berlin street morning of November 10 1938, shattered shop window glass glittering on cobblestones outside family store, smoke rising from damaged synagogue dome in background, brave neighbor offering comfort in secret, retro tragedy visual",
     hotspots: [
@@ -1896,7 +1896,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Nationalsozialismus & Diktatur (1933–1939)",
     title: "Station 10: 1. September 1939 – Kriegsausbruch & Zivilcourage im Schatten",
     description: "'Seit 5:45 Uhr wird zurückgeschossen': Überfall auf Polen; der Beginn des Weltenbrandes und die Bewährungsprobe des Gewissens.",
-    imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Sender_gliwice.jpg",
     tags: ["1. September 1939", "Kriegsausbruch", "Polen", "Zivilcourage", "Widerstand", "Gewissen"],
     suggestedPrompt: "16-bit pixel art style somber dawn September 1 1939, military trucks with camouflaged canvas tarps rolling out of city barracks towards eastern border, radio broadcast echoing in empty town square, citizen holding diary vowing to document truth, retro climactic finale scene",
     hotspots: [
