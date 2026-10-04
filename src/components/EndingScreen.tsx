@@ -35,16 +35,74 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
   }, []);
 
   const eraLower = (activeGame?.era || '').toLowerCase();
-  const isRome = eraLower.includes('rom') || theme?.id === 'rome_imperial';
-  const isLuther = eraLower.includes('luther') || eraLower.includes('reformation') || theme?.id === 'luther_ink';
-  const isStoneage = eraLower.includes('steinzeit') || theme?.id === 'stoneage_earth';
-  const isGreece = eraLower.includes('griechen') || eraLower.includes('alexander') || theme?.id === 'greece_aegean';
+  const titleLower = (activeGame?.title || '').toLowerCase();
+  const combinedEra = `${eraLower} ${titleLower}`;
+
+  const isRome = combinedEra.includes('rom') || theme?.id === 'rome_imperial';
+  const isLuther = combinedEra.includes('luther') || combinedEra.includes('reformation') || theme?.id === 'luther_ink';
+  const isStoneage = combinedEra.includes('steinzeit') || theme?.id === 'stoneage_earth';
+  const isGreece = combinedEra.includes('griechen') || combinedEra.includes('alexander') || theme?.id === 'greece_aegean';
+  const isIndustrial = combinedEra.includes('industrie') || combinedEra.includes('dampf') || combinedEra.includes('revolution 1848') || theme?.id === 'industrial_steam';
+  const isWeimar = combinedEra.includes('weimar') || combinedEra.includes('demokratie') || theme?.id === 'weimar_cabaret';
+  const isWW1 = combinedEra.includes('weltkrieg') || combinedEra.includes('1914') || combinedEra.includes('graben') || theme?.id === 'ww1_trenches';
+  const isNS = combinedEra.includes('ns-') || combinedEra.includes('nationalsozialismus') || combinedEra.includes('widerstand') || combinedEra.includes('weiße rose') || combinedEra.includes('weisse rose') || theme?.id === 'nsdap_resistance';
+  const isFrenchRev = combinedEra.includes('französisch') || combinedEra.includes('franzosisch') || combinedEra.includes('bastille') || theme?.id === 'revolution_tricolore';
+  const isFranks = combinedEra.includes('frank') || combinedEra.includes('karl der gro') || theme?.id === 'franks_charlemagne';
+  const isMedieval = combinedEra.includes('mittelalter') || combinedEra.includes('ritter');
 
   // Compute final title evaluation
   const getCoronationVerdict = () => {
     const avg = (stats.goetter + stats.priester + stats.adel + stats.volk) / 4;
     
     if (avg >= 70 && stats.volk >= 60 && stats.goetter >= 60) {
+      if (isIndustrial) {
+        return {
+          title: "Pionier des Sozialen Fortschritts & Technischer Meister",
+          description: "Du hast Fabriken modernisiert und zugleich Arbeiterrechte und Wohlstand geschaffen. Technische Innovation und Menschlichkeit brachten deine Ära zum Erblühen!",
+          rank: "S-Rang (Industrieller Meister-Reformer)",
+          color: "from-amber-400 to-yellow-500",
+        };
+      }
+      if (isWeimar) {
+        return {
+          title: "Verfassungsvater & Unerschütterlicher Hüter der Republik",
+          description: "Gegen Extremismus und Krisen hast du die junge Demokratie beschützt und geeint. Freiheit, soziale Sicherheit und Vernunft haben triumphiert!",
+          rank: "S-Rang (Großer Staatsmann der Demokratie)",
+          color: "from-amber-400 to-yellow-500",
+        };
+      }
+      if (isWW1) {
+        return {
+          title: "Träger der Humanität & Standhafter Friedenswahrer",
+          description: "Inmitten von Materialschlachten hast du Menschenleben gerettet, Moral bewahrt und den Weg aus dem Wahnsinn des Schützengrabens gewiesen.",
+          rank: "S-Rang (Held der Menschlichkeit)",
+          color: "from-amber-400 to-yellow-500",
+        };
+      }
+      if (isNS) {
+        return {
+          title: "Lichtgestalt des Gewissens & Unbeugsamer Freiheitskämpfer",
+          description: "Mit beispiellosem Mut hast du der Diktatur getrotzt, Wahrheit verbreitet und Verfolgte gerettet. Dein Vermächtnis schenkt kommenden Generationen Mut!",
+          rank: "S-Rang (Historisches Vorbild der Zivilcourage)",
+          color: "from-amber-400 to-yellow-500",
+        };
+      }
+      if (isFrenchRev) {
+        return {
+          title: "Architekt der Freiheit & Bürgerlicher Gesetzgeber",
+          description: "Freiheit, Gleichheit und Brüderlichkeit sind durch deine Klugheit nicht im Terror versunken, sondern zur lebendigen Verfassung geworden!",
+          rank: "S-Rang (Aufklärer & Freiheitsheld)",
+          color: "from-amber-400 to-yellow-500",
+        };
+      }
+      if (isFranks || isMedieval) {
+        return {
+          title: "Großer Kaiser & Friedensbringer der Reiche",
+          description: "Unter deiner weisen Krone vereinst du Bildung, Gerechtigkeit und Wohlstand. Chronisten preisen dein Zeitalter als goldenen Aufbruch!",
+          rank: "S-Rang (Kaiserlicher Einiger)",
+          color: "from-amber-400 to-yellow-500",
+        };
+      }
       if (isRome) {
         return {
           title: "Imperator Caesar & Vater des Vaterlandes",
@@ -84,31 +142,95 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
         color: "from-amber-400 to-yellow-500",
       };
     } else if (stats.volk >= 65) {
+      const popularTitle = isIndustrial 
+        ? "Freund der Arbeiter & Wohlfahrts-Pionier"
+        : isWeimar 
+        ? "Tribun der Arbeiterschaft & Volksbeauftragter"
+        : isWW1
+        ? "Schutzengel der Kameraden & Grabenretter"
+        : isNS
+        ? "Stimme der Entrechteten & Retter im Geheimen"
+        : isFrenchRev
+        ? "Verteidiger der Sansculotten & Bürgerfreund"
+        : isRome 
+        ? "Tribun der Plebejer & Liebling des Volkes" 
+        : isLuther 
+        ? "Gütiger Hirte der Gemeinde" 
+        : isStoneage 
+        ? "Großherziger Versorger & Hüter des Feuers" 
+        : "Der Gütige Vater / Die Große Mutter des Volkes";
+
       return {
-        title: isRome ? "Tribun der Plebejer & Liebling des Volkes" : isLuther ? "Gütiger Hirte der Gemeinde" : isStoneage ? "Großherziger Versorger & Hüter des Feuers" : "Der Gütige Vater / Die Große Mutter des Volkes",
-        description: "Die einfachen Menschen weinen vor Dankbarkeit. Deine Speisungen und Fürsorge machten das Land reich und zufrieden. Ein Zeitalter des inneren Friedens bricht an.",
+        title: popularTitle,
+        description: "Die einfachen Menschen schöpfen durch dich Hoffnung und Kraft. Deine Fürsorge und Solidarität machten die Gemeinschaft stark und krisenfest.",
         rank: "A-Rang (Großer Reformer & Freund des Volkes)",
         color: "from-emerald-400 to-teal-500",
       };
     } else if (stats.adel >= 65 || skills.militaerischeStaerke >= 6) {
+      const strengthTitle = isIndustrial
+        ? "Großindustrieller Stratege & Schienen-Magnat"
+        : isWeimar
+        ? "Eiserner Verfechter von Gesetz und Ordnung"
+        : isWW1
+        ? "Generalstabsoffizier & Meister der Taktik"
+        : isNS
+        ? "Todesmutiger Widerstands-Koordinator"
+        : isFrenchRev
+        ? "General der Revolutionsarmeen"
+        : isRome 
+        ? "Der Unbesiegbare Imperator der Legionen" 
+        : isLuther 
+        ? "Eiserner Ritter & Schützer der Burgen" 
+        : isStoneage 
+        ? "Tapferster Jäger & Sippenverteidiger" 
+        : "Der Unbesiegbare Feldherr & Triumphator";
+
       return {
-        title: isRome ? "Der Unbesiegbare Imperator der Legionen" : isLuther ? "Eiserner Ritter & Schützer der Burgen" : isStoneage ? "Tapferster Jäger & Sippenverteidiger" : "Der Unbesiegbare Feldherr & Triumphator",
-        description: "Deine Truppen und Verbände sind weithin gefürchtet. Unter deiner eisernen Hand sind die Reichsgrenzen unbezwingbar und die Ordnung gesichert.",
-        rank: "A-Rang (Militärischer Sieger)",
+        title: strengthTitle,
+        description: "Deine Entschlossenheit und Führungsstärke sind weithin respektiert. Unter deiner klaren Hand wurden Krisen abgewendet und Sicherheit garantiert.",
+        rank: "A-Rang (Strategischer Anführer)",
         color: "from-rose-500 to-red-600",
       };
     } else if (stats.goetter >= 65 || stats.priester >= 65) {
+      const spiritTitle = isIndustrial
+        ? "Visionärer Denker des Dampf- und Fortschrittszeitalters"
+        : isWeimar
+        ? "Hüter der Weimarer Verfassung & Geistiger Freigeist"
+        : isWW1
+        ? "Stiller Seelsorger & Stimme des Friedens"
+        : isNS
+        ? "Unbeugsames Gewissen & Flugblatt-Verfasser"
+        : isFrenchRev
+        ? "Philosoph der Aufklärung & Menschenrechte"
+        : isRome 
+        ? "Pontifex Maximus & Seher der Ewigen Götter" 
+        : isLuther 
+        ? "Meister der Schriften & Doktor der Theologie" 
+        : isStoneage 
+        ? "Großer Schamane & Hüter der Ahnengeister" 
+        : "Der Heilige Hüter der Tempel & Mysterien";
+
       return {
-        title: isRome ? "Pontifex Maximus & Seher der Ewigen Götter" : isLuther ? "Meister der Schriften & Doktor der Theologie" : isStoneage ? "Großer Schamane & Hüter der Ahnengeister" : "Der Heilige Hüter der Tempel & Mysterien",
-        description: "Die Heiligtümer glänzen und die Weisheit leitet jeden deiner Schritte. Die Priester lobpreisen deine Tugend und Frömmigkeit.",
-        rank: "A-Rang (Sakraler Mystiker & Philosoph)",
+        title: spiritTitle,
+        description: "Werte, Moral und geistige Klarheit leiten jeden deiner Schritte. Deine Prinzipientreue inspiriert Mitstreiter weit über den Moment hinaus.",
+        rank: "A-Rang (Geistiger Wegweiser & Denker)",
         color: "from-purple-400 to-indigo-500",
       };
     } else {
+      const survivorTitle = isIndustrial 
+        ? "Gestalter des Industrie-Umbruchs"
+        : isWeimar
+        ? "Krisenmanager der Republik"
+        : isWW1
+        ? "Überlebender der Großen Krise"
+        : isNS
+        ? "Mutiger Überlebender im Untergrund"
+        : "Erprobter Wegbereiter der Epoche";
+
       return {
-        title: "Regent der Harten Prüfungen",
-        description: "Du hast die gefährliche Reise gemeistert und das Ziel erreicht. Trotz schwerer Krisen und historischer Wirren sitzt du fest auf dem Thron.",
-        rank: "B-Rang (Erfahrener Regent)",
+        title: survivorTitle,
+        description: "Du hast die gefährliche Reise gemeistert und das Ziel erreicht. Trotz schwerer Krisen und historischer Wirren hast du Kurs gehalten.",
+        rank: "B-Rang (Erfahrener Wegbereiter)",
         color: "from-amber-500 to-orange-600",
       };
     }
@@ -200,21 +322,39 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
       <div className="mt-6 pt-4 flex items-center justify-between border-t border-stone-300 text-xs text-stone-600 font-sans">
         <div className="text-center w-36 sm:w-44">
           <div className="h-8 border-b border-stone-400 mb-1 flex items-end justify-center font-serif italic text-xs text-stone-800">
-            {isRome ? 'Senatus Populusque' : isLuther ? 'Wartburg & Gemeinde' : isStoneage ? 'Rat der Sippenältesten' : "Ma'at • Amun-Re"}
+            {isIndustrial
+              ? 'Gewerbeaufsicht & Fabrikrat'
+              : isWeimar
+              ? 'Nationalversammlung Weimar'
+              : isWW1
+              ? 'Militärkommando & Lazarett'
+              : isNS
+              ? 'Widerstand & Zeitzeugen'
+              : isFrenchRev
+              ? 'Nationalversammlung Paris'
+              : isFranks || isMedieval
+              ? 'Kanzlei des Reiches'
+              : isRome
+              ? 'Senatus Populusque Romanus'
+              : isLuther
+              ? 'Wartburg & Gemeinde'
+              : isStoneage
+              ? 'Rat der Sippenältesten'
+              : "Ma'at • Amun-Re"}
           </div>
           <span className="text-[10px]">Siegel der Autorität</span>
         </div>
 
         <div className="w-14 h-14 rounded-full border-2 border-[#b45309] text-[#b45309] flex flex-col items-center justify-center font-bold text-[8px] uppercase tracking-tighter shrink-0 mx-2">
           <span>★ OFFIZIELL ★</span>
-          <span className="text-[7px]">REGENT</span>
+          <span className="text-[7px]">{isIndustrial || isWeimar || isNS ? 'DIPLOM' : 'REGENT'}</span>
         </div>
 
         <div className="text-center w-36 sm:w-44">
           <div className="h-8 border-b border-stone-400 mb-1 flex items-end justify-center font-serif italic text-xs text-stone-800">
             {new Date().toLocaleDateString('de-DE')}
           </div>
-          <span className="text-[10px]">Datum der Ernennung</span>
+          <span className="text-[10px]">Datum des Abschlusses</span>
         </div>
       </div>
     </div>
@@ -280,17 +420,17 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
       {/* 3. SCREEN UI (Wird am Bildschirm angezeigt)                    */}
       {/* ============================================================== */}
       <div className="no-print w-full max-w-4xl mx-auto px-4 py-6 sm:py-10 flex flex-col items-center">
-        {/* Coronation Artwork Banner */}
+        {/* Coronation / Destination Artwork Banner */}
         <div className="w-full relative rounded-2xl overflow-hidden border-2 border-amber-500 shadow-2xl mb-6">
           <img
-            src="/assets/coronation.jpg"
-            alt="Die Große Krönung"
+            src={activeGame?.heroImage || theme?.defaultBannerUrl || '/assets/coronation.jpg'}
+            alt="Abschluss der Expedition"
             className="w-full h-56 sm:h-80 object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-transparent flex items-end p-4 sm:p-6">
             <div className="space-y-1">
               <span className="text-xs font-mono font-bold tracking-widest text-amber-300 uppercase bg-stone-950/80 px-2.5 py-1 rounded border border-amber-500/50 inline-block">
-                Zeremonie vollendet • {destinationText}
+                Expedition vollendet • {destinationText}
               </span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-amber-200 font-serif m-0 drop-shadow-md">
                 {activeGame ? activeGame.title : 'Der Thron beider Länder'}
@@ -299,14 +439,14 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
           </div>
         </div>
 
-        {/* Coronation Badge */}
+        {/* Completion Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-500/20 border border-amber-500/60 text-amber-300 text-sm font-semibold mb-4">
           <Crown className="w-5 h-5 text-yellow-400" />
-          <span>20 Stationen gemeistert • Expedition erfolgreich vollendet</span>
+          <span>20 Stationen gemeistert • Historische Expedition vollendet</span>
         </div>
 
         <h1 className="text-3xl sm:text-5xl font-black text-center text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 font-serif mb-2">
-          Heil {profile.throneName}!
+          {isIndustrial || isWeimar || isWW1 || isNS || isFrenchRev ? `Glückwunsch, ${profile.throneName}!` : `Heil ${profile.throneName}!`}
         </h1>
 
         <p className="text-stone-300 text-center max-w-xl text-sm sm:text-base mb-6">
@@ -362,9 +502,9 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
           {/* Skills Summary */}
           <div className="p-4 rounded-xl bg-stone-950/70 border border-stone-800 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-stone-300">
             <span>🧠 Verbliebene EP: <strong className="text-amber-400">{stats.ep}</strong></span>
-            <span>🌟 Stärke / Weisheit: <strong className="text-yellow-400">{skills.goettlicheAuserwaehltheit}</strong></span>
-            <span>🗣️ Politik / Charisma: <strong className="text-cyan-400">{skills.politischeGeschicklichkeit}</strong></span>
-            <span>⚔️ Militär / Führung: <strong className="text-rose-400">{skills.militaerischeStaerke}</strong></span>
+            <span>🌟 {activeGame?.skillNames?.skill1 || 'Stärke / Weisheit'}: <strong className="text-yellow-400">{skills.goettlicheAuserwaehltheit}</strong></span>
+            <span>🗣️ {activeGame?.skillNames?.skill2 || 'Politik / Charisma'}: <strong className="text-cyan-400">{skills.politischeGeschicklichkeit}</strong></span>
+            <span>⚔️ {activeGame?.skillNames?.skill3 || 'Militär / Führung'}: <strong className="text-rose-400">{skills.militaerischeStaerke}</strong></span>
           </div>
 
           {/* Action Buttons: Preview Certificate, Print & Restart */}
