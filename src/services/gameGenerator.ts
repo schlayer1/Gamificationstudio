@@ -1,5 +1,5 @@
 import { geminiRotationService } from './geminiRotation';
-import { GameDefinition, PillarConfig, RoundStory, GradeLevel } from '../types/game';
+import { GameDefinition, PillarConfig, RoundStory, GradeLevel, StationHotspot } from '../types/game';
 import { detectEraTheme } from '../utils/themeManager';
 import { PREDEFINED_HISTORY_ASSETS } from '../data/historyAssetPool';
 
@@ -296,6 +296,12 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         const t = a.topic.toLowerCase();
         const tags = a.tags.join(' ').toLowerCase();
 
+        if (eraFull.includes('nsdap') || eraFull.includes('nationalsozialismus') || eraFull.includes('hitler') || eraFull.includes('diktatur') || eraFull.includes('1933')) {
+          return t.includes('nationalsozialismus') || tags.includes('ns-diktatur') || tags.includes('1933');
+        }
+        if (eraFull.includes('weltkrieg') || eraFull.includes('ww1') || eraFull.includes('graben') || eraFull.includes('verdun') || eraFull.includes('1914')) {
+          return t.includes('erster weltkrieg') || tags.includes('erster weltkrieg') || tags.includes('westfront');
+        }
         if (eraFull.includes('weimar') || eraFull.includes('goldene zwanziger') || eraFull.includes('bauhaus') || eraFull.includes('1920')) {
           return t.includes('weimar') || tags.includes('weimar');
         }
@@ -337,17 +343,26 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       });
 
       let matchedImg = '';
+      let matchedHotspots: StationHotspot[] | undefined = undefined;
+
       if (specificMatch) {
         matchedImg = specificMatch.imageUrl;
+        matchedHotspots = specificMatch.hotspots;
       } else if (fallbackStationAssets.length > 0) {
         // Didactic pairing: across 20 rounds, the location changes every 2 rounds (0-1: Loc 1, 2-3: Loc 2, etc.)
         const locIndex = Math.floor(idx / 2) % fallbackStationAssets.length;
         matchedImg = fallbackStationAssets[locIndex].imageUrl;
+        matchedHotspots = fallbackStationAssets[locIndex].hotspots;
       } else {
         // Fallback to detected era theme banner
         const themeConfig = detectEraTheme(req.era + ' ' + req.title, req.archetype);
         matchedImg = themeConfig.defaultBannerUrl || '/assets/nile_banner.jpg';
       }
+
+      // Preserve AI-generated hotspots if present and informative, or apply bespoke curated ones
+      const finalHotspots = (round.hotspots && Array.isArray(round.hotspots) && round.hotspots.length > 0)
+        ? round.hotspots
+        : matchedHotspots;
 
       return {
         ...round,
@@ -356,6 +371,7 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         choices,
         lexiconEntry,
         imagePath: round.imagePath || matchedImg,
+        hotspots: finalHotspots,
       };
     });
 
@@ -365,6 +381,12 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       const isHero = a.tags.includes('Hero');
       if (!isHero) return false;
       const t = a.topic.toLowerCase();
+      if (eraFull.includes('nsdap') || eraFull.includes('nationalsozialismus') || eraFull.includes('hitler') || eraFull.includes('diktatur') || eraFull.includes('1933')) {
+        return t.includes('nationalsozialismus');
+      }
+      if (eraFull.includes('weltkrieg') || eraFull.includes('ww1') || eraFull.includes('graben') || eraFull.includes('verdun') || eraFull.includes('1914')) {
+        return t.includes('erster weltkrieg');
+      }
       if (eraFull.includes('weimar') || eraFull.includes('goldene zwanziger') || eraFull.includes('bauhaus') || eraFull.includes('1920')) {
         return t.includes('weimar');
       }

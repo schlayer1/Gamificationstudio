@@ -6,6 +6,7 @@ export interface PredefinedAsset {
   imageUrl: string;
   tags: string[];
   suggestedPrompt: string;
+  hotspots?: import('../types/game').StationHotspot[];
 }
 
 export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
@@ -20,6 +21,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "/assets/nile_banner.jpg",
     tags: ["Hero", "Banner", "Nil", "Ägypten", "Pharao", "Panorama"],
     suggestedPrompt: "16-bit pixel art style panoramic majestic view of the river Nile in ancient Egypt at sunrise, feluccas sailing with white sails, green papyrus banks, limestone pyramids silhouetted on distant golden desert horizon, vibrant retro SNES adventure game title screen",
+    hotspots: [
+      { id: "hs_egypt_hero_nil", x: 50, y: 70, label: "Der Lebensstrom Nil", description: "Die jährliche Nilflut (Inundation) brachte fruchtbaren schwarzen Schlamm (Kemet) und sicherte das Überleben Ägyptens.", icon: "🌊" },
+      { id: "hs_egypt_hero_pyramiden", x: 80, y: 35, label: "Monumente der Ewigkeit", description: "Die Pyramiden am Horizont spiegeln die Strahlen des Sonnengottes Re und wachen über das Totenreich im Westen.", icon: "🏛️" },
+      { id: "hs_egypt_hero_barke", x: 25, y: 62, label: "Nilfeluke & Lastkahn", description: "Traditionelle Holzsegelschiffe transportierten Getreide, Rinder und schwere Granitquader stromabwärts.", icon: "⛵" },
+    ],
   },
   {
     id: "egypt_aswan",
@@ -29,6 +35,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "/assets/aswan_quarry.jpg",
     tags: ["Assuan", "Steinmetze", "Nil", "Katarakt", "Pyramidenbau", "Steinbruch"],
     suggestedPrompt: "16-bit pixel art style ancient Egyptian stone quarry in Aswan near the Nile cataract, workers carving massive rose granite blocks, felucca cargo boats, retro adventure game aesthetic, warm desert sunset lighting",
+    hotspots: [
+      { id: "hs_aswan_keile", x: 32, y: 68, label: "Holzkeil-Spalttechnik", description: "Steinmetze treiben trockene Holzkeile in Bohrlöcher und tränken sie mit Wasser. Das quellende Holz sprengt Rosengranitblöcke ab.", icon: "⛏️" },
+      { id: "hs_aswan_felswand", x: 64, y: 38, label: "Granit-Abbaustelle", description: "Aus diesen massiven Felswänden wurden Kolossalstatuen und Obelisken für Karnak und Gizeh herausgehauen.", icon: "🏛️" },
+      { id: "hs_aswan_katarakt", x: 78, y: 75, label: "Erster Nilkatarakt", description: "Gefährliche Stromschnellen bildeten die natürliche Südgrenze Ägyptens zum nubischen Reich.", icon: "🌊" },
+    ],
   },
   {
     id: "egypt_kom_ombo",
@@ -38,6 +49,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "/assets/kom_ombo.jpg",
     tags: ["Kom Ombo", "Sobek", "Nilkrokodile", "Priester", "Opfer", "Tempel"],
     suggestedPrompt: "16-bit pixel art style ancient Egyptian river temple of Kom Ombo, sacred crocodiles swimming at riverbank, priests holding offerings, papyrus reeds, retro adventure game aesthetic",
+    hotspots: [
+      { id: "hs_kom_krokodil", x: 48, y: 65, label: "Heilige Nilkrokodile", description: "Die Reptilien sonnen sich auf Sandbänken. Das Volk fürchtet und verehrt sie als irdische Verkörperung des Gottes Sobek.", icon: "🐊" },
+      { id: "hs_kom_doppeltempel", x: 25, y: 42, label: "Doppelheiligtum", description: "Der Tempel besitzt zwei symmetrische Eingänge und Höfe: links für Sobek, rechts für den falkenköpfigen Haroeris.", icon: "🏛️" },
+      { id: "hs_kom_nilometer", x: 75, y: 55, label: "Brunnen-Nilometer", description: "Tiefer Treppenschacht zur exakten Pegelmessung der jährlichen Nilschwemme zur Steuerberechnung.", icon: "📏" },
+    ],
   },
   {
     id: "egypt_edfu",
@@ -47,6 +63,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1200&q=80",
     tags: ["Edfu", "Horus", "Falke", "Pylon", "Tempel", "Zeremonie"],
     suggestedPrompt: "16-bit pixel art style towering stone pylon gates of Temple of Edfu, colossal black granite statues of falcon god Horus guarding the portal, torchlight flickering, retro RPG temple facade",
+    hotspots: [
+      { id: "hs_edfu_pylon", x: 52, y: 40, label: "Monumentaler Tempelpylon", description: "Riesige Reliefs zeigen den Pharao beim rituellen Opfern vor dem Himmelsfalken Horus.", icon: "🏛️" },
+      { id: "hs_edfu_falke", x: 30, y: 62, label: "Horus-Granitstatue", description: "Kolossale Falke-Skulptur aus schwarzem Granit mit Doppelkrone bewacht den Eingang des Heiligtums.", icon: "🦅" },
+      { id: "hs_edfu_kornkammer", x: 76, y: 60, label: "Tempel-Kornkammern", description: "Unterirdische Getreidesilos, aus denen die Priester Notzeiten überbrückten und Prozessionsbrote backten.", icon: "🌾" },
+    ],
   },
   {
     id: "egypt_theben_karnak",
@@ -56,6 +77,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "/assets/thebes_karnak.jpg",
     tags: ["Theben", "Karnak", "Amun", "Säulen", "Priesterschaft", "Luxor"],
     suggestedPrompt: "16-bit pixel art style magnificent Great Hypostyle Hall of Karnak temple in Thebes, towering painted stone columns, sunlight rays through clerestory, priests carrying golden barque, retro RPG perspective",
+    hotspots: [
+      { id: "hs_karnak_amun", x: 50, y: 42, label: "Das Allerheiligste von Amun-Re", description: "Nur der Pharao und der Hohepriester durften den goldenen Schrein des Reichsgottes Amun betreten.", icon: "✨" },
+      { id: "hs_karnak_saeulen", x: 28, y: 58, label: "Große Säulenhalle (Hypostyl)", description: "134 gewaltige Sandsteinsäulen, die wie ein versteinerter Papyruswald den Urhügel der Schöpfung nachbilden.", icon: "🏛️" },
+      { id: "hs_karnak_obelisk", x: 75, y: 32, label: "Obelisk der Hatschepsut", description: "Ein monolithischer Granitfinger, dessen vergoldete Spitze die ersten Sonnenstrahlen des Morgens einfing.", icon: "☀️" },
+    ],
   },
   {
     id: "egypt_tal_der_koenige",
@@ -65,6 +91,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1200&q=80",
     tags: ["Tal der Könige", "Theben-West", "Felsengrab", "Totengericht", "Hieroglyphen"],
     suggestedPrompt: "16-bit pixel art style Valley of the Kings desert gorge in Egypt, torchlit entrance to deep pharaoh tomb cut into limestone mountain, guardians with khopesh swords, mysterious hieroglyphs illuminated by fire, retro adventure scene",
+    hotspots: [
+      { id: "hs_vok_pforte", x: 42, y: 52, label: "Versiegelte Grabpforte", description: "Tonnenschwere Felsstürze mit den Siegeln der Nekropolenwächter (Schakal des Anubis) schützten die Pharaonenruhe.", icon: "🔒" },
+      { id: "hs_vok_wandmalerei", x: 72, y: 45, label: "Das Amduat-Buch", description: "Mystische Wandmalereien schildern die zwölfstündige Reise des Sonnengottes durch die Unterwelt.", icon: "📜" },
+      { id: "hs_vok_waechter", x: 22, y: 68, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
+    ],
   },
   {
     id: "egypt_amarna_nilometer",
@@ -74,6 +105,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80",
     tags: ["Nilometer", "Nilflut", "Schreiber", "Papyrus", "Ernte", "Steuern"],
     suggestedPrompt: "16-bit pixel art style stone Nilometer water well stairs measuring the rising Nile flood, Egyptian royal scribes sitting cross-legged writing numbers on papyrus scrolls, measuring cubit rods, retro educational game art",
+    hotspots: [
+      { id: "hs_amarna_schreiber", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
+      { id: "hs_amarna_pegel", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
+      { id: "hs_amarna_siegel", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+    ],
   },
   {
     id: "egypt_saqqara",
@@ -83,6 +119,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "/assets/saqqara.jpg",
     tags: ["Sakkara", "Djoser", "Imhotep", "Stufenpyramide", "Architektur", "Memphis"],
     suggestedPrompt: "16-bit pixel art style Step Pyramid of Djoser in Saqqara desert plateau, architect Imhotep reviewing papyrus plans, limestone ramps, retro video game landscape, warm golden hour palette",
+    hotspots: [
+      { id: "hs_saqqara_stufen", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
+      { id: "hs_saqqara_imhotep", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
+      { id: "hs_saqqara_kalkstein", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+    ],
   },
   {
     id: "egypt_giza",
@@ -92,6 +133,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "/assets/giza_site.jpg",
     tags: ["Gizeh", "Cheops", "Pyramiden", "Baustelle", "Schlitten", "Rampen"],
     suggestedPrompt: "16-bit pixel art style panoramic view of Great Pyramids of Giza under construction, workers dragging stone blocks on wooden sleds with water sled lubricants, Nile flood in distance, retro graphic adventure style",
+    hotspots: [
+      { id: "hs_giza_rampe", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_giza_schlitten", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_giza_pyramide", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
   },
   {
     id: "egypt_sphinx",
@@ -101,6 +147,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "/assets/sphinx.jpg",
     tags: ["Sphinx", "Gizeh", "Khafre", "Wächter", "Wüste", "Rätsel"],
     suggestedPrompt: "16-bit pixel art style Great Sphinx of Giza with vibrant ceremonial nemes headdress colors, desert sand dunes, limestone temple foreground, retro adventure game art, dramatic evening sky",
+    hotspots: [
+      { id: "hs_sphinx_gesicht", x: 48, y: 38, label: "Antlitz des Königs (Khafre)", description: "Der Kopf der Sphinx trägt das Nemes-Kopftuch mit Uräusschlange als Zeichen absoluter Schutzmacht.", icon: "👑" },
+      { id: "hs_sphinx_pranken", x: 35, y: 68, label: "Löwenpranken aus Monolithfels", description: "Aus einem einzigen natürlichen Kalksteinrücken herausgehauen, symbolisiert er Stärke und Wachsamkeit.", icon: "🦁" },
+      { id: "hs_sphinx_stele", x: 62, y: 62, label: "Traumstele Thutmosis' IV.", description: "Zwischen den Pranken berichtet eine Granitstele vom Traum des Prinzen, der die Sphinx vom Wüstensand befreite.", icon: "📜" },
+    ],
   },
   {
     id: "egypt_coronation",
@@ -110,6 +161,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "/assets/coronation.jpg",
     tags: ["Krönung", "Doppelkrone", "Memphis", "Pschent", "Thron", "Palast"],
     suggestedPrompt: "16-bit pixel art style grand coronation ceremony of new Pharaoh, wearing pschent double crown of Upper and Lower Egypt, golden flail and crook, cheering courtiers, retro 16-bit SNES game cutscene",
+    hotspots: [
+      { id: "hs_coronation_krone", x: 50, y: 36, label: "Die Doppelkrone (Pschent)", description: "Vereinigung der weißen oberägyptischen Hedjet-Krone mit der roten unterägyptischen Descheret-Krone.", icon: "👑" },
+      { id: "hs_coronation_insignien", x: 35, y: 58, label: "Krummstab (Heka) & Geißel", description: "Zeichen der Herrschergewalt: Der Hirtstab zum Schutz des Volkes, die Geißel zur Zucht und Wehr.", icon: "🦯" },
+      { id: "hs_coronation_priester", x: 72, y: 62, label: "Hohepriester & Salbungsöl", description: "Rituelle Reinigung mit Weihwasser und Salbung mit heiliger Myrrhe im Namen des Reichsgottes Ptah.", icon: "🏺" },
+    ],
   },
 
   // =========================================================================
@@ -123,6 +179,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Rom", "SPQR", "Kapitol", "Marmor"],
     suggestedPrompt: "16-bit pixel art style grand panoramic vista of imperial ancient Rome at golden hour, marble temples on Capitoline Hill, red banners with golden eagle SPQR insignia fluttering, aqueduct in background, retro 16-bit strategy game title screen",
+    hotspots: [
+      { id: "hs_rome_hero_kapitol", x: 48, y: 38, label: "Kapitolinischer Hügel", description: "Heiliges Zentrum mit dem Tempel des Jupiter Optimus Maximus, Ziel aller siegreichen Triumphzüge.", icon: "🏛️" },
+      { id: "hs_rome_hero_spqr", x: 22, y: 52, label: "Adlerstandarte (SPQR)", description: "'Senatus Populusque Romanus' – Senat und Volk von Rom als Fundament der römischen Staatsordnung.", icon: "🦅" },
+      { id: "hs_rome_hero_forum", x: 75, y: 65, label: "Forum Romanum", description: "Markt- und Gerichtsplatz, Rednertribünen (Rostra) und Versammlungsort für Bürger und Politiker.", icon: "🏛️" },
+    ],
   },
   {
     id: "rome_forum",
@@ -132,6 +193,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
     tags: ["Rom", "Senat", "Forum Romanum", "Curia", "Senatoren", "Toga"],
     suggestedPrompt: "16-bit pixel art style Forum Romanum in ancient Rome, marble basilicas, senators in white togas with purple borders gathered before the Curia, orator on the Rostra speaker platform, SPQR banners, retro RPG dialogue scene",
+    hotspots: [
+      { id: "hs_rome_forum_curia", x: 32, y: 42, label: "Curia Julia (Senat)", description: "Tagungsort der 300 Senatoren, die über Krieg, Frieden, Steuern und Provinzen entschieden.", icon: "🏛️" },
+      { id: "hs_rome_forum_rostra", x: 55, y: 62, label: "Rostra (Rednerbühne)", description: "Verziert mit Rammspornen erbeuteter Kriegsschiffe; hier hielten Cicero und Caesar feurige Reden.", icon: "🗣️" },
+      { id: "hs_rome_forum_vesta", x: 78, y: 50, label: "Tempel der Vesta", description: "Hier hüteten die sechs keuschen Vestalinnen das ewige heilige Staatsfeuer Roms.", icon: "🔥" },
+    ],
   },
   {
     id: "rome_castra",
@@ -141,6 +207,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
     tags: ["Castra", "Legionäre", "Aquila", "Gladius", "Pilum", "Militär"],
     suggestedPrompt: "16-bit pixel art style Roman legionary fortified camp (castra), soldiers in lorica segmentata armor drilling with scutum shields and pilum javelins, wooden watchtowers, golden eagle standard aquila, retro war simulation visual",
+    hotspots: [
+      { id: "hs_rome_castra_aquila", x: 48, y: 40, label: "Legionsadler (Aquila)", description: "Das heiligste Feldzeichen der Legion; sein Verlust an Feinde galt als unerträgliche Schande.", icon: "🦅" },
+      { id: "hs_rome_castra_pilum", x: 28, y: 65, label: "Pilum-Wurflanze", description: "Schwerer Wurfspeer mit weicher Eisenspitze, der sich im feindlichen Schild verbog und ihn unbrauchbar machte.", icon: "🗡️" },
+      { id: "hs_rome_castra_wall", x: 75, y: 58, label: "Erdwall & Palisade (Vallum)", description: "Jedes Nachtlager wurde von Legionären in wenigen Stunden mit Graben und Holzpalisade befestigt.", icon: "🪵" },
+    ],
   },
   {
     id: "rome_aqueduct",
@@ -150,6 +221,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1568084680786-a84f91d1153c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Aquädukt", "Ingenieurkunst", "Wasser", "Pont du Gard", "Architektur"],
     suggestedPrompt: "16-bit pixel art style ancient Roman aqueduct soaring across green Mediterranean valley, three tiers of stone arches with crystal clear water channel, Roman surveyors with groma and dioptra tools, retro pixel landscape",
+    hotspots: [
+      { id: "hs_rome_aque_bogen", x: 52, y: 38, label: "Dreistöckige Bogenarkaden", description: "Geniale Bogenkonstruktion ohne Mörtel, die Erdbeben widerstand und gigantische Lasten trug.", icon: "🏛️" },
+      { id: "hs_rome_aque_rinne", x: 48, y: 18, label: "Specus (Wasserrinne)", description: "Abgedeckter Kanal mit hydraulischem Mörtel, der frisches Quellwasser mit minimalem Gefälle transportierte.", icon: "💧" },
+      { id: "hs_rome_aque_groma", x: 25, y: 72, label: "Vermessungsinstrument (Groma)", description: "Mit Lotbleien und Fadenkreuzen vermaßen römische Ingenieure ein präzises Gefälle von nur wenigen Zentimetern pro Kilometer.", icon: "📐" },
+    ],
   },
   {
     id: "rome_thermae",
@@ -159,6 +235,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=80",
     tags: ["Thermen", "Caracalla", "Hypokaustum", "Badekultur", "Marmor"],
     suggestedPrompt: "16-bit pixel art style opulent Roman thermal baths with high vaulted ceilings, steaming caldarium pools, citizens relaxing on marble benches, mosaic floor patterns, glowing furnaces below, retro narrative adventure scene",
+    hotspots: [
+      { id: "hs_rome_therm_caldarium", x: 42, y: 45, label: "Heißwasserbad (Caldarium)", description: "Dampfendes Becken mit Mosaiken, in dem Bürger schwitzten und politische Ränke schmiedeten.", icon: "♨️" },
+      { id: "hs_rome_therm_hypo", x: 68, y: 75, label: "Hypokaustum-Unterbodenheizung", description: "Hohlziegelsäulen unter dem Marmorboden, durch die heiße Luft aus unterirdischen Holzöfen zirkulierte.", icon: "🔥" },
+      { id: "hs_rome_therm_strigilis", x: 22, y: 62, label: "Strigilis & Olivenöl", description: "Da Seife fehlte, rieben sich Römer mit Öl ein und schabten Schmutz mit einer bronzenen Klinge ab.", icon: "🏺" },
+    ],
   },
   {
     id: "rome_circus",
@@ -168,6 +249,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1599707367072-cd6ada2bc375?auto=format&fit=crop&w=1000&q=80",
     tags: ["Circus Maximus", "Wagenrennen", "Quadriga", "Faktionen", "Brot und Spiele"],
     suggestedPrompt: "16-bit pixel art style dramatic chariot race inside Circus Maximus, four-horse quadrigas rounding the central spina turning post at breakneck speed, 150,000 roaring spectators waving faction colors, dust clouds, retro racing game feel",
+    hotspots: [
+      { id: "hs_rome_circ_spina", x: 52, y: 58, label: "Die Spina & Wendemale (Metae)", description: "Zentrale Mittelrippe der Rennbahn mit Obelisken; das engste Umkurven der Wendemale entschied über Sieg oder tödlichen Sturz.", icon: "🏁" },
+      { id: "hs_rome_circ_quadriga", x: 30, y: 68, label: "Viergespann (Quadriga)", description: "Leichte Streitwagen aus Korb und Holz, gelenkt von Star-Wagenlenkern, die Millionen Sesterzen verdienten.", icon: "🐎" },
+      { id: "hs_rome_circ_faktionen", x: 78, y: 42, label: "Rennfaktionen (Grün, Blau, Rot, Weiß)", description: "250.000 Zuschauer feuerten ihre Rennställe an – politische Spannungen entluden sich oft auf den Rängen.", icon: "👥" },
+    ],
   },
   {
     id: "rome_colosseum",
@@ -177,6 +263,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
     tags: ["Kolosseum", "Gladiatoren", "Amphitheater", "Panem et Circenses", "Plebejer"],
     suggestedPrompt: "16-bit pixel art style Roman Colosseum arena sand pit, gladiators saluting the Emperor in royal box under giant velarium awning, plebeians cheering wildly with free bread loaves, retro 16-bit arcade combat backdrop",
+    hotspots: [
+      { id: "hs_rome_colo_arena", x: 48, y: 65, label: "Arenaboden & Blutsand", description: "Holzplanken bedeckt mit Sand ('Harena'), der das Blut der Fechter aufsaugte.", icon: "⚔️" },
+      { id: "hs_rome_colo_hypogaeum", x: 68, y: 78, label: "Unterirdische Aufzüge (Hypogäum)", description: "Raffiniertes System aus Seilwinden und Klappfallen, um Raubtiere und Bühnenbilder blitzartig in die Arena zu heben.", icon: "⚙️" },
+      { id: "hs_rome_colo_loge", x: 35, y: 40, label: "Kaiserloge (Pulvinar)", description: "Hier saß der Imperator und entschied mit Handzeichen (Pollice verso) über Begnadigung oder Tod der Gladiatoren.", icon: "👑" },
+    ],
   },
   {
     id: "rome_limes",
@@ -186,6 +277,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
     tags: ["Limes", "Germanien", "Grenze", "Wachturm", "Palisade", "Legion"],
     suggestedPrompt: "16-bit pixel art style Roman Limes frontier fortification wall in dense Germanic pine forest, timber watchtower with legionary sentries in iron helmet and wool cloak, palisade ditch, misty autumn dawn, retro RPG frontier post",
+    hotspots: [
+      { id: "hs_rome_limes_turm", x: 52, y: 42, label: "Holzwachturm der Grenzwacht", description: "Mit Fackelsignalen bei Nacht und Rauch bei Tag wurden Alarmmeldungen in Minutenschnelle weitergeleitet.", icon: "🗼" },
+      { id: "hs_rome_limes_palisade", x: 28, y: 64, label: "Eichenholz-Palisadenzaun", description: "Dicht gerammte Pfähle und tiefe Gräben markierten die Grenze zwischen Imperium und freiem Germanien.", icon: "🪵" },
+      { id: "hs_rome_limes_spaeher", x: 75, y: 68, label: "Auxiliartruppen (Hilfssoldaten)", description: "Einheimische Krieger, die nach 25 Jahren treuem Dienst das begehrte römische Bürgerrecht erhielten.", icon: "🛡️" },
+    ],
   },
   {
     id: "rome_via_appia",
@@ -195,6 +291,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=1000&q=80",
     tags: ["Via Appia", "Heerstraße", "Meilenstein", "Handel", "Straßenbau"],
     suggestedPrompt: "16-bit pixel art style stone-paved Via Appia road lined with cypress trees and noble Roman tombs, merchant carts and marching legionary auxiliary cohorts passing stone milestone, bright Mediterranean afternoon, retro road visual",
+    hotspots: [
+      { id: "hs_rome_via_pflaster", x: 48, y: 72, label: "Basaltstein-Pflasterung", description: "Mehrschichtiger Straßenaufbau mit Kiesbett und gewölbter Basaltdecke für schnellen Wasserabfluss.", icon: "🧱" },
+      { id: "hs_rome_via_meile", x: 25, y: 58, label: "Römischer Meilenstein (Miliarium)", description: "Säulen gaben die Entfernung zum 'Milliarium Aureum' (Goldener Meilenstein) auf dem Forum in Rom an.", icon: "🪨" },
+      { id: "hs_rome_via_graeber", x: 78, y: 45, label: "Adelsgrabmäler & Zypressen", description: "Patrizierfamilien ließen prunkvolle Mausoleen entlang der Ausfallstraßen errichten, um unvergessen zu bleiben.", icon: "🏛️" },
+    ],
   },
   {
     id: "rome_pantheon",
@@ -204,6 +305,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1531572753322-ad063cecc140?auto=format&fit=crop&w=1000&q=80",
     tags: ["Pantheon", "Kuppel", "Opaion", "Götter", "Hadrian", "Architektur"],
     suggestedPrompt: "16-bit pixel art style interior of Roman Pantheon temple, magnificent coffered concrete rotunda dome with singular circular oculus opening pouring divine beam of sunlight onto bronze statues of Jupiter and Mars, retro atmospheric interior",
+    hotspots: [
+      { id: "hs_rome_panth_opaion", x: 50, y: 25, label: "Das Opaion (Auge des Himmels)", description: "Eine neun Meter breite kreisrunde Öffnung im Scheitelpunkt; die einzige Lichtquelle des Heiligtums.", icon: "☀️" },
+      { id: "hs_rome_panth_kuppel", x: 30, y: 45, label: "Römischer Gussbeton (Opus Caementicium)", description: "Größte unbewehrte Betonkuppel der Weltgeschichte, nach oben hin mit leichtem Bimsstein gegossen.", icon: "🏛️" },
+      { id: "hs_rome_panth_goetter", x: 72, y: 65, label: "Nischen für alle Götter", description: "'Pan-theion' – gewidmet sämtlichen Planeten- und Staatsgöttern wie Jupiter, Mars, Venus und Merkur.", icon: "✨" },
+    ],
   },
   {
     id: "rome_triumph",
@@ -213,6 +319,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=80",
     tags: ["Triumphzug", "Triumphbogen", "Caesar", "Lorbeer", "Kapitol", "Sieg"],
     suggestedPrompt: "16-bit pixel art style grand Roman Triumph procession through triumphal arch towards Capitoline Jupiter temple, victor standing in four-horse golden chariot wearing purple toga and laurel wreath, captured treasures, cheering citizens, retro grand finale cutscene",
+    hotspots: [
+      { id: "hs_rome_tri_bogen", x: 48, y: 38, label: "Titus-Triumphbogen", description: "Aus weißem Pentelischem Marmor, verziert mit Reliefs der erbeuteten goldenen Tempelschätze.", icon: "🏛️" },
+      { id: "hs_rome_tri_wagen", x: 30, y: 65, label: "Goldener Triumphwagen", description: "Der Feldherr im Purpurgewand, hinter ihm ein Staatssklave, der mahnte: 'Bedenke, dass du sterblich bist!'", icon: "👑" },
+      { id: "hs_rome_tri_beute", x: 75, y: 62, label: "Kriegsbeute & Gefangene", description: "Schauparade von Gold, Waffen und gefangenen feindlichen Fürsten vor der Opferung auf dem Kapitol.", icon: "💰" },
+    ],
   },
 
   // =========================================================================
@@ -226,6 +337,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Reformation", "Luther", "Wittenberg", "Elbe"],
     suggestedPrompt: "16-bit pixel art style panoramic view of medieval Wittenberg town skyline along the Elbe river at autumn sunrise, Castle church tower, timbered houses with smoking chimneys, flying printed pamphlets in wind, retro historical adventure title banner",
+    hotspots: [
+      { id: "hs_luth_hero_schloss", x: 48, y: 40, label: "Schlosskirche Wittenberg", description: "Ausgangspunkt der Reformation; hier schlug Luther 1517 seine lateinischen Disputationsthesen an.", icon: "⛪" },
+      { id: "hs_luth_hero_elbe", x: 22, y: 65, label: "Elbschifffahrt & Fernhandel", description: "Die Elbe ermöglichte den rasanten Transport von Holz, Papier und neu gedruckten Flugschriften.", icon: "⛵" },
+      { id: "hs_luth_hero_druck", x: 75, y: 60, label: "Flugschriften im Wind", description: "Durch den Buchdruck verbreiteten sich reformatorische Ideen innerhalb von Wochen in ganz Europa.", icon: "📜" },
+    ],
   },
   {
     id: "luther_wittenberg_thesen",
@@ -235,6 +351,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Wittenberg", "95 Thesen", "Schlosskirche", "Ablasshandel", "Luther"],
     suggestedPrompt: "16-bit pixel art style Martin Luther in black monk habit hammering sheet with 95 theses onto heavy oak door of Wittenberg Castle Church in October 1517, curious students and townsfolk watching, cobblestones, autumn leaves, retro pixel scene",
+    hotspots: [
+      { id: "hs_luth_thes_tuer", x: 48, y: 55, label: "Thesentür am Nordportal", description: "Das Portal der Schlosskirche diente der Universität als Schwarzes Brett für akademische Streitgespräche.", icon: "🚪" },
+      { id: "hs_luth_thes_pergament", x: 35, y: 48, label: "Die 95 Thesen", description: "Kritik an der Illusion, man könne Sündenstrafen mit barem Geld tilgen statt wahrhaft Buße zu tun.", icon: "📜" },
+      { id: "hs_luth_thes_moench", x: 68, y: 65, label: "Augustiner-Chorherr Luther", description: "Doktor der Theologie in schwarzer Mönchskutte, angetrieben von persönlicher Gewissensnot um Gottes Gnade.", icon: "🙏" },
+    ],
   },
   {
     id: "luther_tetzel_ablass",
@@ -244,6 +365,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Tetzel", "Ablassbrief", "Ablasskasten", "Marktplatz", "Jüterbog"],
     suggestedPrompt: "16-bit pixel art style bustling crowded town market square with Dominican monk Tetzel standing by iron-bound indulgence chest, selling sealed papal forgiveness parchment letters, frightened peasants trading coins, retro history drama visual",
+    hotspots: [
+      { id: "hs_luth_tetz_kasten", x: 48, y: 68, label: "Tetzels Ablasskasten", description: "'Sobald das Geld im Kasten klingt, die Seele in den Himmel springt!' Eisenbeschlagene Truhe für Münzen.", icon: "🪙" },
+      { id: "hs_luth_tetz_brief", x: 32, y: 50, label: "Gedruckter Ablassbrief", description: "Päpstliche Bescheinigung über Sündenerlass, mit der u.a. der Neubau des Petersdoms in Rom finanziert wurde.", icon: "📜" },
+      { id: "hs_luth_tetz_menge", x: 72, y: 62, label: "Verängstigte Bauern & Bürger", description: "Tiefe Furcht vor den Qualen des Fegefeuers trieb die Menschen dazu, ihr letztes Erspartes hinzugeben.", icon: "👥" },
+    ],
   },
   {
     id: "luther_gutenberg_druckerei",
@@ -253,6 +379,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1000&q=80",
     tags: ["Druckerpresse", "Flugschriften", "Gutenberg", "Bleilettern", "Wittenberg"],
     suggestedPrompt: "16-bit pixel art style Renaissance printing shop workshop, wooden screw printing press, ink daubers, trays of metal movable type letters, freshly printed German leaflets hanging on lines to dry, apprentices working, retro workshop simulation view",
+    hotspots: [
+      { id: "hs_luth_druck_presse", x: 48, y: 52, label: "Spindelpresse aus Eichenholz", description: "Mechanische Druckerpresse mit Hebelarm, die hunderte Seiten pro Tag mit gleichmäßigem Druck vervielfältigte.", icon: "🖨️" },
+      { id: "hs_luth_druck_lettern", x: 28, y: 65, label: "Bleilettern im Setzkasten", description: "Bewegliche, wiederverwendbare Metallbuchstaben aus Blei, Zinn und Antimon, gesetzt von Schriftsetzern.", icon: "🔡" },
+      { id: "hs_luth_druck_holz", x: 75, y: 42, label: "Propaganda-Holzschnitte", description: "Anschauliche Bilder (von Lucas Cranach) erklärten die Reformation auch jenen, die nicht lesen konnten.", icon: "🖼️" },
+    ],
   },
   {
     id: "luther_augsburg_verhoer",
@@ -262,6 +393,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
     tags: ["Augsburg", "Cajetan", "Verhör", "Fugger", "Widerruf", "Ketzerei"],
     suggestedPrompt: "16-bit pixel art style dramatic interrogation chamber in Augsburg Fugger palace, cardinal Cajetan in scarlet robes behind mahogany desk pointing accusing finger, monk Luther standing firm with open Bible, candlelight shadows, retro dialogue RPG scene",
+    hotspots: [
+      { id: "hs_luth_caj_kardinal", x: 35, y: 48, label: "Kardinallegat Cajetan", description: "Gesandter des Papstes; er verlangte schlichtes 'Revoco' (Ich widerrufe) ohne theologische Debatte.", icon: "👑" },
+      { id: "hs_luth_caj_luther", x: 65, y: 62, label: "Luther vor der Kurie", description: "Luther verweigerte den Widerruf, solange man ihn nicht mit Schriftzeugnissen der Bibel widerlege.", icon: "📖" },
+      { id: "hs_luth_caj_flucht", x: 82, y: 75, label: "Nächtliche Fluchtpforte", description: "Aus Furcht vor Verhaftung und Ketzerprozess floh Luther nachts durch eine geheime Bresche in Augsburgs Stadtmauer.", icon: "🏃" },
+    ],
   },
   {
     id: "luther_bannbulle_verbrennung",
@@ -271,6 +407,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["Bannbulle", "Bann", "Elstertor", "Feuer", "Exsurge Domine"],
     suggestedPrompt: "16-bit pixel art style December bonfire outside Wittenberg Elster gate, Martin Luther throwing papal bull parchment Exsurge Domine into roaring flames, cheering students and professors chanting in winter snow, retro dramatic cutscene",
+    hotspots: [
+      { id: "hs_luth_bann_feuer", x: 48, y: 68, label: "Scheiterhaufen am Elstertor", description: "Im Dezember 1520 verbrennt Luther öffentlich Kirchenrechtsbücher und die päpstliche Androhungsbulle.", icon: "🔥" },
+      { id: "hs_luth_bann_bulle", x: 32, y: 55, label: "Bulle 'Exsurge Domine'", description: "Papst Leo X. drohte Luther den Kirchenbann an und nannte ihn ein 'Wildschwein im Weinberg des Herrn'.", icon: "📜" },
+      { id: "hs_luth_bann_studenten", x: 75, y: 58, label: "Jubelnde Wittenberger Studenten", description: "Die akademische Jugend feierte den Bruch mit Rom als Befreiung von geistlicher Vormundschaft.", icon: "🎓" },
+    ],
   },
   {
     id: "luther_reichstag_worms",
@@ -280,6 +421,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Worms", "Reichstag", "Karl V", "Hier stehe ich", "Reichsacht", "Gewissen"],
     suggestedPrompt: "16-bit pixel art style grand hall of Diet of Worms 1521, young Emperor Charles V on throne in imperial gold mantle, table piled with Luther books, Luther with hand over chest speaking resolute defense, assembled German princes, retro SNES courtroom scene",
+    hotspots: [
+      { id: "hs_luth_worms_kaiser", x: 30, y: 42, label: "Kaiser Karl V. (Habsburg)", description: "Der junge Herrscher über das Weltreich verteidigte den altgläubigen Katholizismus als Klammer seines Reiches.", icon: "👑" },
+      { id: "hs_luth_worms_rede", x: 58, y: 62, label: "'Hier stehe ich, ich kann nicht anders'", description: "Luthers Bekenntnis: 'Mein Gewissen ist gefangen in Gottes Wort. Widerrufen kann und will ich nichts.'", icon: "🗣️" },
+      { id: "hs_luth_worms_buecher", x: 78, y: 72, label: "Luthers Schriften auf der Tafel", description: "Kaiserliche Notare forderten die namentliche Bestätigung seiner Autorschaft aller vorliegenden Traktate.", icon: "📚" },
+    ],
   },
   {
     id: "luther_entfuehrung_wald",
@@ -289,6 +435,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Thüringer Wald", "Altenstein", "Entführung", "Friedrich der Weise", "Reiter"],
     suggestedPrompt: "16-bit pixel art style midnight ambush in dense Thuringian forest near Altenstein, masked knights on armored horses surrounding wooden travel carriage with glowing torches, mist between tall fir trees, retro adventure story cutscene",
+    hotspots: [
+      { id: "hs_luth_wald_ritter", x: 45, y: 55, label: "Reiter Friedrichs des Weisen", description: "Kurfürstliche Ritter überfielen Luthers Reisewagen zum Schein, um sein Leben vor dem Wormser Edikt zu retten.", icon: "⚔️" },
+      { id: "hs_luth_wald_kutsche", x: 25, y: 68, label: "Reisewagen im Hohlweg", description: "Im dunklen Thüringer Wald bei Schloss Altenstein wurde Luther heimlich aus dem Wagen entführt.", icon: "🌲" },
+      { id: "hs_luth_wald_wartburg", x: 78, y: 32, label: "Die Wartburg am Horizont", description: "Sichere Trutzburg hoch über Eisenach, wo Luther als 'Junker Jörg' untertauchen sollte.", icon: "🏰" },
+    ],
   },
   {
     id: "luther_wartburg_stube",
@@ -298,6 +449,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Wartburg", "Junker Jörg", "Bibelübersetzung", "Eisenach", "Schreibstube"],
     suggestedPrompt: "16-bit pixel art style cozy stone Lutherstube chamber at Wartburg castle near Eisenach, Luther with beard as Junker Jörg writing with goose quill at wooden table, Greek manuscript, leaded glass window overlooking forested hills, inkwell, retro study room",
+    hotspots: [
+      { id: "hs_luth_wart_tisch", x: 48, y: 58, label: "Luthers Schreibpult", description: "In nur 11 Wochen übersetzte Luther das griechische Neue Testament ins allgemein verständliche Frühneuhochdeutsche.", icon: "✍️" },
+      { id: "hs_luth_wart_tintenfleck", x: 68, y: 65, label: "Der legendäre Tintenfleck", description: "Der Legende nach warf Luther sein Tintenfass nach dem Teufel, der ihn bei der Bibelübersetzung anfechten wollte.", icon: "🪶" },
+      { id: "hs_luth_wart_junker", x: 28, y: 45, label: "Gewand des Junker Jörg", description: "Mit Rauschebart, Schwert und Ritterkleidung getarnt, war der meistgesuchte Mann des Reiches unerkannt.", icon: "🗡️" },
+    ],
   },
   {
     id: "luther_bauernkrieg_muentzer",
@@ -307,6 +463,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Bauernkrieg", "12 Artikel", "Thomas Müntzer", "Frankenhausen", "Regenbogenfahne"],
     suggestedPrompt: "16-bit pixel art style German Peasants War camp on hillside, peasants with scythes, flails and pitchforks gathered around Thomas Müntzer waving rainbow covenant banner, heavy carts forming defensive wagenburg, stormy horizon, retro strategy visual",
+    hotspots: [
+      { id: "hs_luth_bau_fahne", x: 42, y: 38, label: "Regenbogenfahne der Bauern", description: "Symbol des ewigen Gottesbundes unter Führung des radikalen Predigers Thomas Müntzer bei Frankenhausen.", icon: "🏳️" },
+      { id: "hs_luth_bau_artikel", x: 25, y: 62, label: "Die Zwölf Artikel von 1625", description: "Erste Formulierung von Menschen- und Freiheitsrechten: Abschaffung der Leibeigenschaft, freie Pfarrerwahl.", icon: "📜" },
+      { id: "hs_luth_bau_heer", x: 75, y: 60, label: "Fürstliche Artillerie & Ritter", description: "Schlecht bewaffnete Bauernaufgebote wurden von den Panzerreitern des Fürstenbundes blutig zerschlagen.", icon: "⚔️" },
+    ],
   },
   {
     id: "luther_augsburger_religionsfrieden",
@@ -316,6 +477,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Augsburg", "Religionsfrieden", "1555", "Reichstag", "Toleranz", "Vertrag"],
     suggestedPrompt: "16-bit pixel art style signing of Peace of Augsburg 1555 inside council hall, Catholic and Lutheran princes signing large wax-sealed parchment treaty, balance scales, peace doves, stained glass windows, retro game ending scene",
+    hotspots: [
+      { id: "hs_luth_aug_frieden", x: 50, y: 48, label: "Reichsgesetz von 1555", description: "'Cuius regio, eius religio' (Wessen das Land, dessen der Glaube) – Landesherren bestimmen die Konfession.", icon: "📜" },
+      { id: "hs_luth_aug_landesherr", x: 28, y: 55, label: "Evangelische Landesfürsten", description: "Gleichberechtigung der lutherischen Konfession neben der katholischen Kirche im Heiligen Römischen Reich.", icon: "👑" },
+      { id: "hs_luth_aug_auswanderung", x: 75, y: 65, label: "Ius Emigrandi (Abzugsrecht)", description: "Untertanen anderer Konfession erhielten das Recht, ihr Hab und Gut zu verkaufen und auszuwandern.", icon: "🚶" },
+    ],
   },
 
   // =========================================================================
@@ -329,6 +495,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Steinzeit", "Mammut", "Sesshaftwerdung", "Urzeit"],
     suggestedPrompt: "16-bit pixel art style epic split panorama of Stone Age transition, left side icy paleolithic tundra with mammoth herd, right side warm neolithic river valley with early thatched longhouses and golden wheat fields, retro SNES title screen banner",
+    hotspots: [
+      { id: "hs_stone_hero_jagd", x: 35, y: 58, label: "Mammut-Jagdgruppe", description: "Altsteinzeitliche Sippen jagten kooperativ mit Speerschleudern und Fallgruben in der Eiszeittundra.", icon: "🦣" },
+      { id: "hs_stone_hero_dorf", x: 75, y: 65, label: "Erste Dorfsiedlung", description: "Der Übergang zur Sesshaftwerdung (Neolithische Revolution) veränderte das menschliche Zusammenleben grundlegend.", icon: "🏕️" },
+      { id: "hs_stone_hero_feuer", x: 52, y: 72, label: "Lagerfeuer & Sippentreff", description: "Wärmequelle, Schutz vor Raubtieren und Zentrum für Erzählungen und Werkzeugherstellung.", icon: "🔥" },
+    ],
   },
   {
     id: "stoneage_mammut_jagd",
@@ -338,6 +509,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["Mammut", "Altsteinzeit", "Jagd", "Speerschleuder", "Tundra", "Eiszeit"],
     suggestedPrompt: "16-bit pixel art style dramatic Paleolithic mammoth hunt in snowy windswept tundra, hunters in fur cloaks using atlatl spear-throwers driving massive woolly mammoth near ravine trap, jagged snow peaks, retro action adventure game scene",
+    hotspots: [
+      { id: "hs_stone_mam_stoss", x: 48, y: 45, label: "Mammut-Stoßzähne", description: "Elfenbein diente als wertvoller Rohstoff für Speerspitzen, Nähnadeln und geschnitzte Fruchtbarkeitsfiguren.", icon: "🦣" },
+      { id: "hs_stone_mam_schleuder", x: 25, y: 65, label: "Speerschleuder (Atlatl)", description: "Geniale Hebelwaffe, die die Wurfweite und Durchschlagskraft von Jagdspeeren vervielfachte.", icon: "🏹" },
+      { id: "hs_stone_mam_fell", x: 78, y: 68, label: "Fellkleidung mit Knochennadeln", description: "Aus Rentier- und Mammuthäuten genähte warme Schutzkleidung gegen die arktische Kälte der letzten Eiszeit.", icon: "🧥" },
+    ],
   },
   {
     id: "stoneage_lascaux_hoehle",
@@ -347,6 +523,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
     tags: ["Lascaux", "Höhlenmalerei", "Ocker", "Felswand", "Schamane", "Kult"],
     suggestedPrompt: "16-bit pixel art style ancient painted cave interior like Lascaux, shaman blowing red ochre powder over hand stencil onto rock wall, vivid paintings of bison and running horses illuminated by flickering torch flame, retro mystery adventure feel",
+    hotspots: [
+      { id: "hs_stone_lasc_stier", x: 52, y: 38, label: "Der Große Ur-Auerochse", description: "Monumentale Felsmalereien im 'Saal der Stiere', geschaffen vor rund 17.000 Jahren mit Ocker und Holzkohle.", icon: "🐂" },
+      { id: "hs_stone_lasc_lampe", x: 28, y: 68, label: "Fettlampe aus Sandstein", description: "Ausgehöhlter Stein, gefüllt mit Tierfett und Moosdocht; ermöglichte tagelange Arbeit in finsteren Höhlengängen.", icon: "🪔" },
+      { id: "hs_stone_lasc_hand", x: 75, y: 48, label: "Handschablonen-Signatur", description: "Mit Röhrchen aufgesprühte Farbpigmente um die gespreizte Hand – das älteste persönliche Zeichen des Menschen.", icon: "✋" },
+    ],
   },
   {
     id: "stoneage_feuerstein_werkzeuge",
@@ -356,6 +537,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
     tags: ["Feuerstein", "Faustkeil", "Werkzeug", "Silex", "Schlagstein"],
     suggestedPrompt: "16-bit pixel art style prehistoric craftsman sitting by leather hide mat carefully knapping sharp flint hand axes, flint flakes flying, antlers and hammerstones beside him, pine trees behind, retro crafting screen visual",
+    hotspots: [
+      { id: "hs_stone_flint_kern", x: 48, y: 60, label: "Feuerstein-Knollen (Silex)", description: "Das 'Eisen der Steinzeit': Extrem harter Quarzstein mit messerscharfen, muscheligen Bruchflächen.", icon: "💎" },
+      { id: "hs_stone_flint_faust", x: 32, y: 50, label: "Faustkeil (Universalwerkzeug)", description: "Symmetrisch behauener Zweiseiter, genutzt als Axt, Messer, Schaber und Waffe zugleich.", icon: "⛏️" },
+      { id: "hs_stone_flint_schlaeger", x: 72, y: 65, label: "Schlagstein & Geweihschlägel", description: "Mit Schlagsteinen wurden grobe Abschläge gelöst, mit Hirschgeweih feinste Klingen retuschiert.", icon: "🔨" },
+    ],
   },
   {
     id: "stoneage_sammler_fluss",
@@ -365,6 +551,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Sammlerinnen", "Beeren", "Fluss", "Harpune", "Fischfang", "Ernährung"],
     suggestedPrompt: "16-bit pixel art style Mesolithic riverbank camp, gatherers filling woven birch bark baskets with wild berries and roots, fisher with notched bone harpoon standing on river rocks spearing fish, sparkling stream, retro nature sim look",
+    hotspots: [
+      { id: "hs_stone_sam_weide", x: 38, y: 62, label: "Sammelkorb aus Weidenruten", description: "Frauen und Kinder sammelten Wurzeln, Beeren, Nüsse und Pilze, die bis zu 70 % der Nahrung sicherten.", icon: "🧺" },
+      { id: "hs_stone_sam_harpune", x: 68, y: 58, label: "Geweihharpune mit Widerhaken", description: "Widerhakenspitzen aus Knochen für den Lachs- und Hechtfang in fischreichen Schmelzwasserflüssen.", icon: "🐟" },
+      { id: "hs_stone_sam_einbaum", x: 22, y: 75, label: "Ausgehöhlter Einbaum", description: "Mit Feuer und Steinaxt ausgehöhlter Eichenstamm für die Fortbewegung auf Seen und Flüssen.", icon: "🛶" },
+    ],
   },
   {
     id: "stoneage_klimawandel_wald",
@@ -374,6 +565,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Klimawandel", "Nacheiszeit", "Wald", "Hirsch", "Pfeil und Bogen"],
     suggestedPrompt: "16-bit pixel art style lush temperate post-glacial forest with tall oaks and birch trees, hunter aiming recurve wooden bow at red deer through bushes, melting snow patches, green moss carpet, retro survival adventure",
+    hotspots: [
+      { id: "hs_stone_klim_wald", x: 55, y: 42, label: "Dichte Eichen- & Birkenwälder", description: "Die Erwärmung vor 11.500 Jahren verdrängte die Steppe; dichte Mischwälder bedeckten Mitteleuropa.", icon: "🌲" },
+      { id: "hs_stone_klim_hirsch", x: 25, y: 65, label: "Rothirsch & Wildschwein", description: "Mammuts starben aus; die Jäger mussten schnellere Waldtiere mit Pfeil und Bogen erlegen.", icon: "🦌" },
+      { id: "hs_stone_klim_microlith", x: 78, y: 60, label: "Mikrolithen (Pfeilspitzen)", description: "Winzige, geometrisch geschliffene Silex-Klingen, mit Birkenpech in Pfeilschäfte eingeklebt.", icon: "🏹" },
+    ],
   },
   {
     id: "stoneage_sesshaftwerdung_langhaus",
@@ -383,6 +579,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Langhaus", "Bandkeramik", "Sesshaftwerdung", "Lehm", "Holzbau", "Dorf"],
     suggestedPrompt: "16-bit pixel art style construction of early Neolithic wooden longhouse with wattle-and-daub clay walls and thick thatched roof, villagers carrying timber logs and reeds, clearing forest with polished stone adzes, retro city builder view",
+    hotspots: [
+      { id: "hs_stone_sess_haus", x: 52, y: 48, label: "Pfostengebautes Langhaus", description: "Bis zu 40 Meter lange Holzhäuser boten Platz für mehrere Großfamilien, Vorräte und Vieh unter einem Dach.", icon: "🏠" },
+      { id: "hs_stone_sess_lehm", x: 25, y: 65, label: "Flechtwerk mit Lehmputz", description: "Weidengeflecht, bestrichen mit einer Mischung aus Lehm, Stroh und Mist als winddichte Wandisolierung.", icon: "🧱" },
+      { id: "hs_stone_sess_silo", x: 78, y: 70, label: "Vorratsspeicher & Mahlstein", description: "Getreidekörner wurden trocken gelagert und täglich auf schweren Granitsattelmühlen von Hand zu Mehl zerrieben.", icon: "🌾" },
+    ],
   },
   {
     id: "stoneage_ackerbau_emmer",
@@ -392,6 +593,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Ackerbau", "Emmer", "Einkorn", "Sichel", "Ernte", "Neolithikum"],
     suggestedPrompt: "16-bit pixel art style primitive Neolithic wheat fields on forest clearing, farmers harvesting golden emmer and einkorn ears with curved flint sickles, wooden grain storage granary raised on stilts, sunny summer sky, retro farming game art",
+    hotspots: [
+      { id: "hs_stone_ack_sichel", x: 35, y: 62, label: "Holzsichel mit Silexzähnen", description: "Gebogenes Holzstück, in das geschärfte Feuersteinklingen mit Birkenpech eingelassen wurden.", icon: "🌾" },
+      { id: "hs_stone_ack_emmer", x: 65, y: 55, label: "Ur-Getreide Emmer & Einkorn", description: "Die ersten kultivierten Weizenarten aus dem Fruchtbaren Halbmond, robust gegen Schädlinge und Kälte.", icon: "🌱" },
+      { id: "hs_stone_ack_grabstock", x: 22, y: 72, label: "Grabstock mit Steingewicht", description: "Vorläufer des Pflugs: Gehärteter Ast mit durchbohrtem Steinring zur Erleichterung der Bodenauflockerung.", icon: "⛏️" },
+    ],
   },
   {
     id: "stoneage_domestikation_tiere",
@@ -401,6 +607,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=1000&q=80",
     tags: ["Domestikation", "Haustiere", "Schafe", "Auerochse", "Viehzucht", "Gehege"],
     suggestedPrompt: "16-bit pixel art style Neolithic village animal corral with woven wicker fences, domesticated primitive sheep, goats and oxen, boy milking goat into earthenware pot, dog barking by gate, retro settlement life",
+    hotspots: [
+      { id: "hs_stone_dom_pferch", x: 50, y: 55, label: "Dornengestrüpp-Pferch", description: "Hölzerne Umzäunung zum Schutz der ersten domestizierten Ziegen und Schafe vor Wölfen.", icon: "🐑" },
+      { id: "hs_stone_dom_rind", x: 28, y: 65, label: "Zahmung des Auerochsen", description: "Aus dem wehrhaften Ur entstand das Hausrind – als Milch-, Fleisch-, Leder- und Zugtier unentbehrlich.", icon: "🐂" },
+      { id: "hs_stone_dom_hund", x: 75, y: 70, label: "Der domestizierte Hund", description: "Erster treuer Begleiter des Menschen: Wächter des Lagers, Jagdhilfe und Spielgefährte der Kinder.", icon: "🐕" },
+    ],
   },
   {
     id: "stoneage_keramik_feuer",
@@ -410,6 +621,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=1000&q=80",
     tags: ["Keramik", "Töpfern", "Bandkeramik", "Brennofen", "Vorrat", "Ton"],
     suggestedPrompt: "16-bit pixel art style Neolithic pottery open firing pit with glowing charcoal embers, woman decorating clay pot with coiled ribbon pattern using bone stylus, finished ceramic jars storing grain in background, retro craft visual",
+    hotspots: [
+      { id: "hs_stone_ker_band", x: 48, y: 58, label: "Bandkeramik-Gefäß", description: "Tongefäße verziert mit charakteristischen eingeritzten Band- und Wellenmustern gaben der Kultur ihren Namen.", icon: "🏺" },
+      { id: "hs_stone_ker_ofen", x: 25, y: 62, label: "Feldbrand-Brenngrube", description: "In Erdgruben mit Glut und Reisig wurde Rohkeramik bei rund 700 Grad gebrannt, um sie wasserfest zu machen.", icon: "🔥" },
+      { id: "hs_stone_ker_kochen", x: 75, y: 52, label: "Getreidebrei & Suppen", description: "Erst feuerfeste Keramiktöpfe ermöglichten das Kochen von bekömmlichen Eintöpfen, Brei und Milchspeisen.", icon: "🍲" },
+    ],
   },
   {
     id: "stoneage_megalith_steinkreis",
@@ -419,6 +635,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1508873696983-2df5293cb325?auto=format&fit=crop&w=1000&q=80",
     tags: ["Megalith", "Steinkreis", "Dolmen", "Sonnenwende", "Kult", "Gemeinschaft"],
     suggestedPrompt: "16-bit pixel art style monumental megalithic stone circle standing on green grassy hill at summer solstice sunrise, whole tribe pulling massive sarsen stone block with ropes on rolling tree trunks, sun rays piercing stone trilithon, retro climax cutscene",
+    hotspots: [
+      { id: "hs_stone_mega_stein", x: 50, y: 42, label: "Megalith-Monolith (Hinkelstein)", description: "Zehntausende Tonnen schwere Findlinge, auf Holzrollen über Kilometer herantransportiert.", icon: "🪨" },
+      { id: "hs_stone_mega_kreis", x: 25, y: 55, label: "Astronomischer Steinkreis", description: "Exakt nach Sonnenwenden und Mondphasen ausgerichtet – der erste Kalender für Saat- und Erntezeiten.", icon: "☀️" },
+      { id: "hs_stone_mega_grab", x: 78, y: 60, label: "Dolmen (Hünengrab)", description: "Monumentale Steintische als Grabkammern für Stammesführer und Schamanen der Jungsteinzeit.", icon: "⚰️" },
+    ],
   },
 
   // =========================================================================
@@ -432,6 +653,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Alexander", "Makedonien", "Griechenland", "Eroberung"],
     suggestedPrompt: "16-bit pixel art style grand panorama of Alexander the Great army crossing Hellespont strait into Asia, royal purple banners with Vergina sun, endless ranks of sarissa pikes glinting under Aegean sun, retro 16-bit military strategy banner",
+    hotspots: [
+      { id: "hs_gr_hero_alexander", x: 35, y: 52, label: "Alexander auf Bukephalos", description: "Der unbezähmbare thessalische Rappe Bukephalos trug den makedonischen König bis an den Indus.", icon: "🐎" },
+      { id: "hs_gr_hero_phalanx", x: 68, y: 62, label: "Makedonische Phalanx", description: "Dichte Infanterieformation bewaffnet mit der bis zu 6 Meter langen Stoßlanze (Sarissa).", icon: "🛡️" },
+      { id: "hs_gr_hero_sonne", x: 50, y: 25, label: "Vergina-Sonne", description: "Das sechzehnstrahlige Sonnensymbol der makedonischen Argeaden-Dynastie auf Schilden und Fahnen.", icon: "☀️" },
+    ],
   },
   {
     id: "alexander_pella",
@@ -441,6 +667,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1000&q=80",
     tags: ["Pella", "Aristoteles", "Philosophie", "Ilias", "Achill", "Makedonien"],
     suggestedPrompt: "16-bit pixel art style marble colonnade school garden in Mieza, philosopher Aristotle holding scroll instructing young Alexander, marble busts of Greek heroes, olive grove, retro RPG academy interior",
+    hotspots: [
+      { id: "hs_alex_pella_lehrer", x: 42, y: 48, label: "Aristoteles von Stageira", description: "Der Philosoph unterrichtete Alexander in Homer, Medizin, Naturkunde, Ethik und Staatskunst.", icon: "📜" },
+      { id: "hs_alex_pella_ilias", x: 68, y: 60, label: "Homers Ilias mit Notizen", description: "Alexanders Lieblingsbuch: Er legte die Schriftrolle samt Dolch jede Nacht unter sein Kopfkissen.", icon: "📖" },
+      { id: "hs_alex_pella_bukephalos", x: 22, y: 65, label: "Bärentöter Bukephalos", description: "Alexander erkannte, dass das wilde Pferd Angst vor seinem eigenen Schatten hatte, und zähmte es.", icon: "🐎" },
+    ],
   },
   {
     id: "alexander_akropolis",
@@ -450,6 +681,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1000&q=80",
     tags: ["Athen", "Akropolis", "Korinthischer Bund", "Parthenon", "Demokratie"],
     suggestedPrompt: "16-bit pixel art style Athenian Acropolis with Parthenon temple atop rocky citadel, Greek city-state delegates gathered around Alexander discussing Persian campaign, Aegean sea on horizon, retro classic adventure art",
+    hotspots: [
+      { id: "hs_alex_akro_parthenon", x: 52, y: 38, label: "Parthenon-Marmortempel", description: "Meisterwerk athenischer Klassik zu Ehren der Göttin Athene auf dem Felsen der Akropolis.", icon: "🏛️" },
+      { id: "hs_alex_akro_bund", x: 28, y: 62, label: "Korinthischer Bund", description: "Zusammenschluss aller griechischen Poleis unter makedonischer Hegemonie zum Rachefeldzug gegen Persien.", icon: "🤝" },
+      { id: "hs_alex_akro_redner", x: 75, y: 68, label: "Athenische Demokraten", description: "Demosthenes warnte vergeblich in seinen 'Philippischen Reden' vor dem Verlust der städtischen Freiheit.", icon: "🗣️" },
+    ],
   },
   {
     id: "alexander_granikos",
@@ -459,6 +695,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
     tags: ["Granikos", "Schlacht", "Hetairoi", "Kavallerie", "Fluss", "Perser"],
     suggestedPrompt: "16-bit pixel art style battle of the Granicus river, Macedonian companion cavalry charging splashing through rushing mountain river, Alexander in feathered helmet clashing with Persian satrap horsemen, retro tactical game visual",
+    hotspots: [
+      { id: "hs_alex_gran_fluss", x: 50, y: 65, label: "Furt des Flusses Granikos", description: "Gewagter Angriff durch die steilen schlammigen Flussufer gegen die aufgestellte persische Reiterei.", icon: "🌊" },
+      { id: "hs_alex_gran_helm", x: 32, y: 45, label: "Alexanders weißer Federhelm", description: "Aus meilenweiter Entfernung erkennbar, ritt der König stets in vorderster Frontlinie.", icon: "👑" },
+      { id: "hs_alex_gran_rettung", x: 72, y: 55, label: "Kleitos der Schwarze", description: "Schlug dem persischen Adligen Spithridates das Schwert aus der Hand und rettete Alexander das Leben.", icon: "⚔️" },
+    ],
   },
   {
     id: "alexander_gordischer_knoten",
@@ -468,6 +709,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=80",
     tags: ["Gordion", "Gordischer Knoten", "Schwert", "Prophezeiung", "Streitwagen"],
     suggestedPrompt: "16-bit pixel art style Temple of Zeus in Gordium, Alexander drawing his bronze sword to slice the intricate cornel-bark Gordian knot binding chariot yoke, astonished priests and generals staring, retro puzzle cutscene",
+    hotspots: [
+      { id: "hs_alex_gord_knoten", x: 48, y: 55, label: "Der Gordische Bastknoten", description: "Ein unentwirrbarer Knoten aus Kornelkirschenbast am Streitwagen des Königs Gordios.", icon: "🪢" },
+      { id: "hs_alex_gord_schwert", x: 32, y: 42, label: "Der Schwerthieb Alexanders", description: "Alexander zerhieb den Knoten entschlossen mit der Klinge – und erfüllte die Prophezeiung der Weltherrschaft.", icon: "🗡️" },
+      { id: "hs_alex_gord_prophezeiung", x: 72, y: 62, label: "Orakel des Zeus Sabazios", description: "Wer immer diesen Knoten löse, dem solle die uneingeschränkte Herrschaft über ganz Asien gehören.", icon: "✨" },
+    ],
   },
   {
     id: "alexander_issos",
@@ -477,6 +723,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
     tags: ["Issos", "Dareios", "Schlacht", "Phalanx", "Sarissa", "Bukephalos"],
     suggestedPrompt: "16-bit pixel art style Battle of Issus based on Alexander Mosaic, young Alexander on black charger Bucephalus charging towards Persian Great King Darius III fleeing in royal gold chariot, forest of upright sarissas, retro epic clash visual",
+    hotspots: [
+      { id: "hs_alex_issos_dareios", x: 68, y: 45, label: "Großkönig Dareios III.", description: "Auf seinem prunkvollen Streitwagen ergriff der persische Herrscher die Flucht vor Alexanders Reiterattacke.", icon: "👑" },
+      { id: "hs_alex_issos_reiterei", x: 35, y: 58, label: "Hetairoi (Gefährten-Reiterei)", description: "Makedonische Adelige führten keilförmige Stoßangriffe direkt ins persische Zentrum aus.", icon: "🐎" },
+      { id: "hs_alex_issos_mosaik", x: 52, y: 72, label: "Engpass zwischen Meer & Bergen", description: "Die schmale Küstenebene hinderte die Perser daran, ihre riesige zahlenmäßige Überlegenheit auszuspielen.", icon: "🗺️" },
+    ],
   },
   {
     id: "alexander_tyros",
@@ -486,6 +737,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Tyros", "Belagerung", "Dammbau", "Katapult", "Phönizier", "Insel"],
     suggestedPrompt: "16-bit pixel art style massive siege mole causeway built across turquoise sea towards high stone walls of island fortress Tyre, wooden siege towers throwing catapult stones, burning arrows arcing across sky, retro siege simulation",
+    hotspots: [
+      { id: "hs_alex_tyr_damm", x: 48, y: 62, label: "Der 1-Kilometer-Belagerungsdamm", description: "Soldaten schütteten Felsen und Holzstämme ins offene Meer, um die Inselfestung mit dem Festland zu verbinden.", icon: "🪵" },
+      { id: "hs_alex_tyr_turm", x: 28, y: 42, label: "Fahrbare Belagerungstürme", description: "Mit Rinderhäuten gegen Feuerpfeile geschützte Holzkolosse trugen Katapulte und Rammböcke.", icon: "🗼" },
+      { id: "hs_alex_tyr_mauer", x: 75, y: 48, label: "Phönizische Festungsmauern", description: "45 Meter hohe Mauern direkt am Wasser machten Tyros über Jahrhunderte uneinnehmbar.", icon: "🏰" },
+    ],
   },
   {
     id: "alexander_alexandria_siwa",
@@ -495,6 +751,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1000&q=80",
     tags: ["Alexandria", "Siwa", "Orakel", "Amun", "Gottessohn", "Oase"],
     suggestedPrompt: "16-bit pixel art style Siwa oasis palm tree sanctuary in deep Libyan desert dunes, Greek priest bowing before Alexander clad in linen proclaiming him son of Zeus-Amun, sacred spring pool reflecting palm fronds, retro mystical adventure scene",
+    hotspots: [
+      { id: "hs_alex_alex_leuchtturm", x: 42, y: 42, label: "Pharos von Alexandria", description: "Gründung der neuen Metropole an der Nilmündung – Schmelztiegel aus griechischer und ägyptischer Kultur.", icon: "🏛️" },
+      { id: "hs_alex_alex_amun", x: 72, y: 55, label: "Orakel von Siwa", description: "Tief in der Libyschen Wüste begrüßte der Oberpriester Alexander als leiblichen 'Sohn des Gottes Amun'.", icon: "☀️" },
+      { id: "hs_alex_alex_plan", x: 25, y: 68, label: "Schachbrett-Stadtplan", description: "Architekt Deinokrates entwarf breite rechtwinklige Prachtboulevards für Gelehrte, Händler und Seefahrer.", icon: "📐" },
+    ],
   },
   {
     id: "alexander_gaugamela",
@@ -504,6 +765,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
     tags: ["Gaugamela", "Sichelwagen", "Kriegselefanten", "Persien", "Entscheidung"],
     suggestedPrompt: "16-bit pixel art style Battle of Gaugamela in Mesopotamian dust storm, Persian scythed chariots charging against hedgehog wall of Macedonian sarissas, war elephants in background, sunset over vast army ranks, retro war game visual",
+    hotspots: [
+      { id: "hs_alex_gaug_sichel", x: 68, y: 62, label: "Persische Sichelwagen", description: "Streitwagen mit scharfen Klingen an den Radnaben; Alexanders Phalanx öffnete gezielt Gassen und ließ sie ins Leere laufen.", icon: "🛞" },
+      { id: "hs_alex_gaug_keil", x: 38, y: 52, label: "Der entscheidende Keilangriff", description: "Alexander stieß schräg in die Lücke zwischen persischem Zentrum und Flügel vor – das Ende des Achämenidenreichs.", icon: "⚔️" },
+      { id: "hs_alex_gaug_staub", x: 50, y: 30, label: "Ebene von Gaugamela", description: "Gewaltige Staubwolken über der staubigen Ebene machten die Orientierung im Getümmel zur Zerreißprobe.", icon: "🌪️" },
+    ],
   },
   {
     id: "alexander_persepolis",
@@ -513,6 +779,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1568322445389-f64ac2515020?auto=format&fit=crop&w=1000&q=80",
     tags: ["Persepolis", "Schatzkammer", "Palast", "Feuer", "Dareios", "Persien"],
     suggestedPrompt: "16-bit pixel art style grand stone terrace and Gate of All Nations in royal Persepolis, winged bull lamassu statues, soldiers carrying cedar chests overflowing with Persian gold coins, torch smoke rising, retro palace drama",
+    hotspots: [
+      { id: "hs_alex_pers_apadana", x: 48, y: 42, label: "Apadana-Säulenhalle", description: "Prunksaal der persischen Großkönige mit Stierkapitellen und Reliefs aller 23 tributpflichtigen Völker.", icon: "🏛️" },
+      { id: "hs_alex_pers_feuer", x: 70, y: 55, label: "Der Brand von Persepolis", description: "Vergeltung für die Zerstörung Athens vor 150 Jahren: Zedernholzdecken der Paläste gingen in Flammen auf.", icon: "🔥" },
+      { id: "hs_alex_pers_gold", x: 25, y: 68, label: "Die persischen Reichsschätze", description: "20.000 Maultiere und 5.000 Kamele transportierten Tonnen von Goldmünzen und Edelsteinen ab.", icon: "💰" },
+    ],
   },
   {
     id: "alexander_hyphasis_babylon",
@@ -522,6 +793,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Hyphasis", "Indien", "Meuterei", "Babylon", "Weltreich", "Ende"],
     suggestedPrompt: "16-bit pixel art style banks of monsoon swollen Hyphasis river in northern India, exhausted Macedonian veterans lowering shields and begging Alexander to turn back home, twelve towering altars built on riverbank, retro emotional finale visual",
+    hotspots: [
+      { id: "hs_alex_hyph_meuterei", x: 38, y: 58, label: "Meuterei am Hyphasis", description: "Nach 8 Jahren und 18.000 Kilometern weigerten sich die Soldaten im Monsunregen, weiter nach Indien zu ziehen.", icon: "🛑" },
+      { id: "hs_alex_hyph_babylon", x: 72, y: 45, label: "Rückkehr nach Babylon", description: "Neue Welthauptstadt Alexanders, wo er mit nur 32 Jahren an schwerem Fieber verstarb.", icon: "🏛️" },
+      { id: "hs_alex_hyph_altar", x: 18, y: 65, label: "Die 12 Grenzaltäre", description: "Am östlichsten Punkt seines Reiches ließ Alexander zwölf riesige Altäre als Denkmal für die Götter errichten.", icon: "✨" },
+    ],
   },
 
   // =========================================================================
@@ -535,6 +811,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1533158307587-828f0a76ef96?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Mittelalter", "Ritterburg", "Feudalismus", "Burg"],
     suggestedPrompt: "16-bit pixel art style majestic medieval panorama, high stone castle perched on rocky crag overlooking winding river, patchwork quilt of three-field farm crops, fortified market town in valley, retro SNES fantasy kingdom title banner",
+    hotspots: [
+      { id: "hs_med_hero_burg", x: 35, y: 42, label: "Höhenburg des Adels", description: "Sitz des Lehnsherrn, Zufluchtsort im Krieg und weithin sichtbares Symbol weltlicher Herrschaft.", icon: "🏰" },
+      { id: "hs_med_hero_kloster", x: 68, y: 55, label: "Benediktiner-Kloster", description: "'Ora et labora' (Bete und arbeite) – geistliche Zentren für Gebet, Buchkunst und Heilkräuter.", icon: "⛪" },
+      { id: "hs_med_hero_bauer", x: 50, y: 72, label: "Bäuerliche Scholle", description: "Der Nährstand: Über 90 % der Bevölkerung ernährten mit schwerer Fronarbeit Adel und Klerus.", icon: "🌾" },
+    ],
   },
   {
     id: "medieval_burg_lehnswesen",
@@ -544,6 +825,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1533158307587-828f0a76ef96?auto=format&fit=crop&w=1000&q=80",
     tags: ["Ritterburg", "Lehnswesen", "Vasall", "Lehnseid", "Bergfried", "Adel"],
     suggestedPrompt: "16-bit pixel art style great stone hall of medieval castle, knight kneeling with folded hands swearing feudal oath of fealty to seated Duke holding sword, heraldic shields on stone walls, roaring fireplace, retro RPG castle scene",
+    hotspots: [
+      { id: "hs_med_burg_bergfried", x: 48, y: 32, label: "Bergfried (Hauptturm)", description: "Wehrhafter Rückzugsort ohne ebenerdigen Eingang; nur über eine hochgelegene Zugbrücke erreichbar.", icon: "🏰" },
+      { id: "hs_med_burg_lehneid", x: 32, y: 60, label: "Der Lehnseid (Homagium)", description: "Der Vasall faltet seine Hände in die des Lehnsherrn und schwört Treue im Tausch gegen Schutz und Land.", icon: "🤝" },
+      { id: "hs_med_burg_kemenate", x: 72, y: 52, label: "Die beheizbare Kemenate", description: "Einziger beheizter Wohnraum der Burgdamen mit Kamin und Buntglasfenstern.", icon: "🔥" },
+    ],
   },
   {
     id: "medieval_dreifelderwirtschaft",
@@ -553,6 +839,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Bauern", "Dreifelderwirtschaft", "Frondienst", "Zehnt", "Räderpflug", "Dorf"],
     suggestedPrompt: "16-bit pixel art style medieval peasant village with thatched wattle huts, serfs guiding heavy wheeled moldboard plow pulled by team of oxen across open three-field strips, tithe barn in background, retro medieval life simulation",
+    hotspots: [
+      { id: "hs_med_drei_feld", x: 52, y: 55, label: "Dreifelder-Rhythmus", description: "Aufteilung in Wintergetreide (Roggen), Sommergetreide (Hafer/Gerste) und Brache zur Erholung des Bodens.", icon: "🌾" },
+      { id: "hs_med_drei_pflug", x: 28, y: 68, label: "Schwerer Räderpflug mit Sech", description: "Wendete die schweren Lehmböden Mitteleuropas und steigerte die Ernteerträge erheblich.", icon: "🚜" },
+      { id: "hs_med_drei_fron", x: 75, y: 62, label: "Frondienst & Zehntabgabe", description: "Bauern mussten unbezahlt auf den Feldern des Grundherrn schuften und den zehnten Teil ihrer Ernte abliefern.", icon: "🧺" },
+    ],
   },
   {
     id: "medieval_kloster_skriptorium",
@@ -562,6 +853,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Kloster", "Skriptorium", "Mönche", "Pergament", "Ora et labora", "Bücher"],
     suggestedPrompt: "16-bit pixel art style peaceful Benedictine monastery scriptorium room, monks in hooded habits illuminating manuscript pages with gold leaf and quill by tall arched windows, cloister garden outside with herbs, retro narrative room visual",
+    hotspots: [
+      { id: "hs_med_klos_schreiber", x: 45, y: 55, label: "Mönch im Skriptorium", description: "Kopierte Bibeln und antike Werke Buchstabe für Buchstabe mit Gänsekiel und Tinte auf Pergament.", icon: "✍️" },
+      { id: "hs_med_klos_pergament", x: 25, y: 65, label: "Kalbspergament (Vellum)", description: "Aus gereinigten und geschabten Tierhäuten hergestellt; extrem haltbar und kostbar.", icon: "📜" },
+      { id: "hs_med_klos_kraeuter", x: 75, y: 48, label: "Kloster-Heilkräutergarten", description: "Salbei, Thymian und Minze: Mönche und Nonnen bewahrten das Wissen der Klostermedizin.", icon: "🌿" },
+    ],
   },
   {
     id: "medieval_muhle_schmiede",
@@ -571,6 +867,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Wassermühle", "Schmiede", "Amboss", "Wasserkraft", "Handwerk"],
     suggestedPrompt: "16-bit pixel art style medieval watermill with turning wooden paddle wheel splashing in stream, adjacent blacksmith forge glowing with orange embers, smith hammering glowing iron horseshoe on anvil, retro pixel village backdrop",
+    hotspots: [
+      { id: "hs_med_mueh_rad", x: 42, y: 58, label: "Oberschlächtiges Wasserrad", description: "Wasserkraft trieb Mühlsteine zum Mahlen von Korn und mechanische Schmiedehämmer an.", icon: "⚙️" },
+      { id: "hs_med_mueh_schmied", x: 70, y: 62, label: "Die Dorfschmiede am Amboss", description: "Schmiedete Hufeisen, Pflugscharen, Sicheln und Äxte – unverzichtbares Handwerkszentrum jedes Tals.", icon: "🔨" },
+      { id: "hs_med_mueh_bann", x: 22, y: 72, label: "Mühlenbann des Grundherrn", description: "Bauern waren gesetzlich verpflichtet, ihr Getreide nur in der Mühle ihres Herrn gegen Gebühr zu mahlen.", icon: "📜" },
+    ],
   },
   {
     id: "medieval_ritterturnier",
@@ -580,6 +881,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
     tags: ["Turnier", "Tjost", "Ritter", "Lanze", "Ehrenkodex", "Wappen"],
     suggestedPrompt: "16-bit pixel art style colorful medieval jousting tournament list, two armored knights in plate armor galloping along tilt barrier with lowered lances, fluttering banners of lions and eagles, royal spectator grandstand, retro action visual",
+    hotspots: [
+      { id: "hs_med_turn_tjost", x: 48, y: 55, label: "Der Lanzenstich (Tjost)", description: "Zwei gepanzerte Ritter ritten im vollen Galopp entlang der Schranke aufeinander zu, um den Gegner aus dem Sattel zu stoßen.", icon: "🏇" },
+      { id: "hs_med_turn_harnisch", x: 28, y: 48, label: "Plattenharnisch & Wappenrock", description: "Maßgefertigte Rüstung aus geschlagenem Stahl, verziert mit den heraldischen Farben des Adelsgeschlechts.", icon: "🛡️" },
+      { id: "hs_med_turn_damen", x: 75, y: 40, label: "Tribüne & Minnedienst", description: "Adelige Damen verliehen Schleier als Gunstbeweis an jene Ritter, die ritterliche Tugenden bewiesen.", icon: "👑" },
+    ],
   },
   {
     id: "medieval_stadt_markt",
@@ -589,6 +895,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Stadt", "Zunft", "Marktplatz", "Handel", "Stadtluft macht frei", "Fachwerk"],
     suggestedPrompt: "16-bit pixel art style bustling fortified medieval free city market square, timber-framed gabled houses, guild signboards for bakers and weavers, merchant carts trading wool and spices, stone city gatehouse, retro city adventure scene",
+    hotspots: [
+      { id: "hs_med_stadt_tor", x: 48, y: 38, label: "'Stadtluft macht frei nach Jahr und Tag'", description: "Entflohene Leibeigene wurden zu freien Bürgern, wenn ihr Grundherr sie ein Jahr lang nicht zurückforderte.", icon: "🚪" },
+      { id: "hs_med_stadt_zunft", x: 25, y: 62, label: "Zunftzeichen der Bäcker & Gerber", description: "Zünfte regelten Preise, Qualität, Ausbildung und verhinderten Konkurrenz zwischen Handwerksmeistern.", icon: "🥨" },
+      { id: "hs_med_stadt_waage", x: 72, y: 65, label: "Städtische Marktwaage", description: "Garantierte ehrliche Maße und Gewichte; Betrüger wurden im Schandkorb am Pranger öffentlich verspottet.", icon: "⚖️" },
+    ],
   },
   {
     id: "medieval_kathedrale_bau",
@@ -598,6 +909,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Kathedrale", "Gotik", "Dombauhütte", "Spitzbogen", "Kran", "Steinmetz"],
     suggestedPrompt: "16-bit pixel art style construction site of soaring Gothic cathedral, wooden human-powered squirrel-cage treadwheel crane lifting carved gargoyle block onto flying buttress, colorful stained glass windows catching sunlight, retro architectural visual",
+    hotspots: [
+      { id: "hs_med_kath_rippe", x: 48, y: 32, label: "Gotisches Kreuzrippengewölbe", description: "Leitete das gigantische Gewicht der Decke auf Strebepfeiler ab und erlaubte riesige bunte Glasfenster.", icon: "⛪" },
+      { id: "hs_med_kath_bauhuette", x: 28, y: 62, label: "Dombauhütte & Werkmeister", description: "Geheimbund von Steinmetzen und Geometern mit eigenen Erkennungszeichen und Zunftrechten.", icon: "📐" },
+      { id: "hs_med_kath_fenster", x: 75, y: 45, label: "Farbige Glasrosetten", description: "'Lux Nova' – Das göttliche Licht erfüllte den Kirchenraum und erzählte biblische Geschichten in Bildern.", icon: "✨" },
+    ],
   },
   {
     id: "medieval_hanse_hafen",
@@ -607,6 +923,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Hanse", "Kogge", "Hafen", "Fernhandel", "Kaufleute", "Ostsee"],
     suggestedPrompt: "16-bit pixel art style Hanseatic League harbor port at sunset, sturdy clinker-built wooden cog ships tied to wooden quays with barrels of herring and cloth bolts, brick Gothic harbor warehouse with stepped gables, retro maritime trade look",
+    hotspots: [
+      { id: "hs_med_hanse_kogge", x: 45, y: 55, label: "Bauchige Hansekogge", description: "Seetüchtiges Frachtschiff mit großem Laderaum und Kastellen an Bug und Heck zur Piratenabwehr.", icon: "⛵" },
+      { id: "hs_med_hanse_kran", x: 25, y: 48, label: "Tretkran am Hafen", description: "Von Hafenarbeitern im Laufrad angetriebener Kran zum Verladen von Fässern mit Hering, Bier und Pelzen.", icon: "🏗️" },
+      { id: "hs_med_hanse_kontor", x: 75, y: 62, label: "Hanse-Kontor & Kontorbuch", description: "Handelsniederlassungen von Nowgorod bis London vernetzten Kaufleute des nordeuropäischen Raums.", icon: "📜" },
+    ],
   },
   {
     id: "medieval_belagerung_katapult",
@@ -616,6 +937,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Belagerung", "Trebuchet", "Blide", "Rammbock", "Katapult", "Krieg"],
     suggestedPrompt: "16-bit pixel art style medieval siege camp outside moat of massive concentric castle, giant wooden trebuchet siege engine with stone counterweight slinging burning boulder into sky, pavise mantlets shielding crossbowmen, retro battle scene",
+    hotspots: [
+      { id: "hs_med_bela_blide", x: 45, y: 52, label: "Blide (Gegengewichts-Trebuchet)", description: "Tonnenschwere Steine und Pechkugeln wurden über Burgmauern geschleudert, um Wehranlagen zu zertrümmern.", icon: "🎯" },
+      { id: "hs_med_bela_bock", x: 25, y: 65, label: "Überdachter Rammbock ('Katze')", description: "Fahrbares Schutzdach aus nassen Fellen, unter dem Krieger Burgtore mit Eisenbeschlägen aufbrachen.", icon: "🪵" },
+      { id: "hs_med_bela_mine", x: 75, y: 70, label: "Unterminierungsstollen", description: "Pioniere gruben Tunnel unter Burgtürme, stützten sie mit Holzbalken ab und steckten sie in Brand zum Einsturz.", icon: "⛏️" },
+    ],
   },
   {
     id: "medieval_kaiserkroenung",
@@ -625,6 +951,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Kaiserkrönung", "Reichskrone", "Aachen", "Kurfürsten", "Karl der Große", "Kaiser"],
     suggestedPrompt: "16-bit pixel art style imperial coronation inside Aachen Cathedral octagonal palatine chapel, new Holy Roman Emperor seated on white marble throne receiving jewel-encrusted octagonal Imperial Crown, Reichsapfel globus cruciger, seven Prince-Electors cheering, retro royal ending cutscene",
+    hotspots: [
+      { id: "hs_med_kais_krone", x: 50, y: 38, label: "Die Reichskrone", description: "Achteckige goldene Krone mit Edelsteinen und Bildplatten der alttestamentlichen Könige David und Salomo.", icon: "👑" },
+      { id: "hs_med_kais_apfel", x: 32, y: 58, label: "Reichsapfel & Reichsschwert", description: "Symbole weltlicher Macht und Gerechtigkeit: Die Weltkugel bekrönt vom christlichen Kreuz.", icon: "🌍" },
+      { id: "hs_med_kais_kurfuerst", x: 72, y: 52, label: "Die sieben Kurfürsten", description: "Die drei Erzbischöfe (Mainz, Köln, Trier) und vier weltlichen Fürsten, die das Alleinrecht der Königswahl besaßen.", icon: "👥" },
+    ],
   },
 
   // =========================================================================
@@ -638,6 +969,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Frankenreich", "Karl der Große", "Aachen", "Pfalz"],
     suggestedPrompt: "16-bit pixel art style panoramic view of the Frankish Empire under Charlemagne, royal palatine chapel of Aachen with golden imperial eagle banners, knights on horseback escorting king travel caravan across misty European forest valley, retro SNES strategy title banner",
+    hotspots: [
+      { id: "hs_frk_hero_karl", x: 42, y: 45, label: "Karl der Große (Pater Europae)", description: "Herrscher der Franken und Langobarden; einte Mitteleuropa und begründete das abendländische Kaisertum.", icon: "👑" },
+      { id: "hs_frk_hero_pfalz", x: 72, y: 38, label: "Kaiserpfalz Aachen", description: "Hauptresidenz mit der oktogonalen Pfalzkapelle und den berühmten warmen Thermalquellen.", icon: "🏛️" },
+      { id: "hs_frk_hero_reiter", x: 25, y: 65, label: "Fränkische Panzerreiter", description: "Schwere Reiterei mit Spatha-Langschwert und Steigbügeln – die schlagkräftigste Elitetruppe ihrer Epoche.", icon: "🐎" },
+    ],
   },
   {
     id: "franks_chlodwig_taufe",
@@ -647,6 +983,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Chlodwig", "Reims", "Taufe", "Merowinger", "Bischof", "Franken"],
     suggestedPrompt: "16-bit pixel art style Frankish King Clovis kneeling in stone cathedral of Reims receiving baptism from Bishop Remigius with holy oil ampulla, Frankish warriors in ringmail with battle-axes cheering, torchlight, retro historical cutscene",
+    hotspots: [
+      { id: "hs_frk_chlod_taufe", x: 48, y: 52, label: "Taufe in Reims (496)", description: "Bischof Remigius tauft Chlodwig zum katholischen Glauben; Bündnis der Franken mit der römischen Kirche.", icon: "✝️" },
+      { id: "hs_frk_chlod_salbung", x: 32, y: 45, label: "Die Heilige Ampulle mit Chrisam", description: "Der Legende nach von einer Taube vom Himmel gebrachte Salböl-Flasche für die französischen Könige.", icon: "🕊️" },
+      { id: "hs_frk_chlod_lex", x: 72, y: 62, label: "Lex Salica (Salisches Recht)", description: "Älteste germanische Gesetzessammlung in Latein; ersetzte Blutrache durch feste Bußgelder (Wergeld).", icon: "📜" },
+    ],
   },
   {
     id: "franks_bonifatius_eiche",
@@ -656,6 +997,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Bonifatius", "Donareiche", "Thüringen", "Missionierung", "Geismar", "Kloster"],
     suggestedPrompt: "16-bit pixel art style Anglo-Saxon missionary Bonifatius raising iron axe against towering ancient oak tree of Thor in foggy Germanic forest, astonished pagan tribesmen dropping spears, ray of light breaking through canopy, retro adventure scene",
+    hotspots: [
+      { id: "hs_frk_boni_axt", x: 45, y: 50, label: "Die Axt des Bonifatius", description: "Der Missionar fällte 723 die Donareiche in Geismar, um zu beweisen, dass die heidnischen Götter machtlos sind.", icon: "🪓" },
+      { id: "hs_frk_boni_eiche", x: 68, y: 42, label: "Donareiche zu Geismar", description: "Jahrhundertealte heilige Eiche, geweiht dem germanischen Donnergott Thor/Donar.", icon: "🌳" },
+      { id: "hs_frk_boni_holz", x: 25, y: 68, label: "Bau der Peterskirche", description: "Aus dem Holz der gefällten Donareiche ließ Bonifatius sogleich eine christliche Kapelle zimmern.", icon: "⛪" },
+    ],
   },
   {
     id: "franks_reisekönigtum_pfalz",
@@ -665,6 +1011,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1533158307587-828f0a76ef96?auto=format&fit=crop&w=1000&q=80",
     tags: ["Reisekönigtum", "Pfalz", "Missi Dominici", "Königsboten", "Reich"],
     suggestedPrompt: "16-bit pixel art style Frankish royal travel procession arriving at hilltop stone pfalz manor, king Charlemagne on white stallion with crown, mounted royal envoys missi dominici departing with sealed parchment scrolls, retro management visual",
+    hotspots: [
+      { id: "hs_frk_reise_pfalz", x: 52, y: 42, label: "Königspfalz (Regierungsburg)", description: "Da es keine feste Hauptstadt gab, zog der König von Pfalz zu Pfalz, um Recht zu sprechen und Vorräte zu verzehren.", icon: "🏰" },
+      { id: "hs_frk_reise_boten", x: 28, y: 65, label: "Königsboten (Missi Dominici)", description: "Je ein Bischof und ein Graf reisten paarweise durchs Reich, um Grafen und Gerichte zu kontrollieren.", icon: "🐎" },
+      { id: "hs_frk_reise_tross", x: 75, y: 68, label: "Hofstaat & Kanzlei", description: "Hunderte Schreiber, Diener, Falkner und Wachsoldaten zogen mit Wagenkolonnen über die Reichswege.", icon: "📜" },
+    ],
   },
   {
     id: "franks_karolingische_minuskel",
@@ -674,6 +1025,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Schrift", "Minuskel", "Alkuin", "Aachen", "Schule", "Bildung"],
     suggestedPrompt: "16-bit pixel art style royal palace school scriptorium in Aachen, scholar Alcuin of York teaching young Frankish students to write beautiful Carolingian minuscule letters on sheepskin parchment with quill pens, retro educational visual",
+    hotspots: [
+      { id: "hs_frk_minu_schrift", x: 48, y: 52, label: "Die Karolingische Minuskel", description: "Klare, einheitliche Kleinbuchstaben mit Ober- und Unterlängen; Vorläufer unserer heutigen Druckschrift.", icon: "✍️" },
+      { id: "hs_frk_minu_alkuin", x: 25, y: 48, label: "Alkuin von York (Hofschule)", description: "Angelsächsischer Gelehrter, von Karl nach Aachen berufen zur Reform des Schulwesens und der lateinischen Sprache.", icon: "📚" },
+      { id: "hs_frk_minu_initiale", x: 75, y: 62, label: "Prachtvolle Goldinitialen", description: "Mit Blattgold und Purpurfarben verzierte Schmuckbuchstaben in Prachtbibeln und Psaltern.", icon: "✨" },
+    ],
   },
   {
     id: "franks_sachsenkriege",
@@ -683,6 +1039,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
     tags: ["Sachsenkriege", "Widukind", "Panzerreiter", "Schlacht", "Karl"],
     suggestedPrompt: "16-bit pixel art style armored Carolingian heavy cavalry with spangenhelm helmets and round shields facing Saxon warband with bearded axes in northern oak woods, banners of the golden eagle, retro battlefield simulation",
+    hotspots: [
+      { id: "hs_frk_sachs_widu", x: 35, y: 52, label: "Herzog Widukind", description: "Anführer des sächsischen Widerstands; führte über 30 Jahre lang Guerillakrieg gegen die Franken.", icon: "🛡️" },
+      { id: "hs_frk_sachs_irmsul", x: 65, y: 40, label: "Zerstörung der Irminsul", description: "Heilige Holzsäule der Sachsen, die symbolisch das Himmelsgewölbe trug, 772 von Karl zerstört.", icon: "🪵" },
+      { id: "hs_frk_sachs_gesetz", x: 78, y: 68, label: "Capitulatio de partibus Saxoniae", description: "Drastisches Blutgesetz: Todesstrafe für Verweigerung der Taufe oder Rückfall ins Heidentum.", icon: "📜" },
+    ],
   },
   {
     id: "franks_landgut_capitulare",
@@ -692,6 +1053,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Capitulare de villis", "Landgut", "Ackerbau", "Wirtschaft", "Kronschatz"],
     suggestedPrompt: "16-bit pixel art style royal Frankish estate manor villa with herb gardens, beehives, grain barn and fish pond, estate steward checking inventory records on parchment wax tablet, retro simulation game background",
+    hotspots: [
+      { id: "hs_frk_land_ordnung", x: 45, y: 52, label: "Capitulare de villis", description: "Karls Landgüterverordnung: Präzise Vorschriften über Fischteiche, Obstbäume, Viehzucht und Hygiene auf Reichsgütern.", icon: "📜" },
+      { id: "hs_frk_land_meier", x: 25, y: 65, label: "Gutsverwalter (Villicus)", description: "Musste zu Weihnachten detaillierte Abrechnungen über Schweine, Schinken, Eier und Wein vorlegen.", icon: "👨‍🌾" },
+      { id: "hs_frk_land_garten", x: 75, y: 60, label: "73 Heilkräuter & Gemüsesorten", description: "Verbindliche Liste von Pflanzen (u.a. Fenchel, Rosmarin, Salbei), die in jedem Pfalzgarten wachsen mussten.", icon: "🌿" },
+    ],
   },
   {
     id: "franks_aachen_dom",
@@ -701,6 +1067,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Aachen", "Pfalzkapelle", "Oktogon", "Architektur", "Marmor"],
     suggestedPrompt: "16-bit pixel art style interior of Aachen Palatine Chapel, octagonal dome with gold mosaic of Christ Pantocrator, massive bronze chandeliers and archways supported by antique columns, torchlight ambiance, retro isometric architectural cutscene",
+    hotspots: [
+      { id: "hs_frk_aach_oktogon", x: 50, y: 38, label: "Das Oktogon der Pfalzkapelle", description: "Achteckige Zentralkuppel nach byzantinischem Vorbild (San Vitale in Ravenna), Symbol des Himmlischen Jerusalem.", icon: "⛪" },
+      { id: "hs_frk_aach_thron", x: 28, y: 58, label: "Karls Marmorthron", description: "Schlichter Steinthron aus Marmorplatten der Grabeskirche zu Jerusalem im Hochmünster.", icon: "👑" },
+      { id: "hs_frk_aach_saeulen", x: 72, y: 52, label: "Antike Porphyrsäulen", description: "Mit päpstlicher Erlaubnis aus Rom und Ravenna herantransportierte antike Marmorsäulen.", icon: "🏛️" },
+    ],
   },
   {
     id: "franks_rom_kroenung_800",
@@ -710,6 +1081,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
     tags: ["Kaiserkrönung", "Rom", "Papst Leo III", "800", "St. Peter", "Kaiser"],
     suggestedPrompt: "16-bit pixel art style Christmas Day 800 inside Old St. Peter's Basilica in Rome, Pope Leo III placing golden imperial crown upon kneeling Charlemagne's head before high altar, senators and Frankish lords chanting acclamations, retro royal climax",
+    hotspots: [
+      { id: "hs_frk_rom_leo", x: 38, y: 48, label: "Papst Leo III.", description: "Setzte Karl am Weihnachtstag 800 in Alt-St. Peter überraschend die Kaiserkrone aufs Haupt.", icon: "✝️" },
+      { id: "hs_frk_rom_kaisertitel", x: 62, y: 42, label: "'Imperator Augustus'", description: "Erneuerung des weströmischen Kaisertums (Renovatio Imperii) nach über 300 Jahren.", icon: "👑" },
+      { id: "hs_frk_rom_jubel", x: 75, y: 68, label: "Akklamation des römischen Volkes", description: "'Carolo Augusto, a Deo coronato, magno et pacifico imperatori Romanorum, vita et victoria!'", icon: "🗣️" },
+    ],
   },
   {
     id: "franks_gesandte_harun",
@@ -719,6 +1095,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?auto=format&fit=crop&w=1000&q=80",
     tags: ["Abul Abbas", "Elefant", "Harun al-Raschid", "Bagdad", "Diplomatie"],
     suggestedPrompt: "16-bit pixel art style Aachen palace courtyard, Arabian ambassadors in silk turbans presenting giant albino elephant Abul Abbas and mechanical water clock to Emperor Charlemagne, courtiers in awe, retro story encounter",
+    hotspots: [
+      { id: "hs_frk_ele_abul", x: 45, y: 60, label: "Der weiße Elefant Abul Abbas", description: "Diplomatisches Geschenk des Kalifen von Bagdad; reiste per Schiff über das Mittelmeer bis nach Aachen.", icon: "🐘" },
+      { id: "hs_frk_ele_harun", x: 72, y: 48, label: "Kalif Harun al-Raschid", description: "Herrscher aus Tausendundeiner Nacht; suchte das Bündnis mit Karl gegen Byzanz und Córdoba.", icon: "🕌" },
+      { id: "hs_frk_ele_wasseruhr", x: 22, y: 65, label: "Mechanische Messing-Wasseruhr", description: "Wunderwerk orientalischer Feinmechanik: Stündlich fielen Metallkugeln in Zimbeln, und Reiterfiguren traten hervor.", icon: "⏰" },
+    ],
   },
   {
     id: "franks_vertrag_verdun",
@@ -728,6 +1109,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Verdun", "Reichsteilung", "843", "Lothar", "Ludwig der Deutsche", "Karl der Kahle"],
     suggestedPrompt: "16-bit pixel art style Treaty of Verdun 843 council tent, three royal grandsons examining large painted parchment map of Europe dividing Frankish empire into three kingdoms, wax seals on table, retro grand strategy game ending",
+    hotspots: [
+      { id: "hs_frk_verd_karte", x: 50, y: 48, label: "Die Dreiteilung des Reiches (843)", description: "Westfranken (Frankreich), Ostfranken (Deutschland) und das Mittelreich Lotharingien der Enkel Karls.", icon: "🗺️" },
+      { id: "hs_frk_verd_karl_kahl", x: 25, y: 55, label: "Karl der Kahle (Westreich)", description: "Erhielt den romanisch geprägten Westen – Keimzelle des späteren Nationalstaates Frankreich.", icon: "👑" },
+      { id: "hs_frk_verd_ludwig", x: 75, y: 55, label: "Ludwig der Deutsche (Ostreich)", description: "Erhielt den germanischsprachigen Osten jenseits des Rheins – Wurzel des Heiligen Römischen Reiches.", icon: "👑" },
+    ],
   },
 
   // =========================================================================
@@ -741,6 +1127,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Französische Revolution", "Trikolore", "Paris", "Freiheit"],
     suggestedPrompt: "16-bit pixel art style dramatic panoramic painting of French Revolution in Paris, citizen militia waving blue-white-red Tricolore flag on cobblestone street barricades, smoke over Seine bridges, retro 16-bit historical rebellion banner",
+    hotspots: [
+      { id: "hs_rev_hero_bastille", x: 75, y: 40, label: "Festung der Bastille", description: "Symbol königlicher Willkürherrschaft und Waffenarsenal der Aufständischen am 14. Juli 1789.", icon: "🏰" },
+      { id: "hs_rev_hero_kokarde", x: 45, y: 55, label: "Die Trikolore-Kokarde", description: "Blau und Rot (Farben von Paris) umschließen das Weiß der Monarchie: Entstehung der Nationalflagge.", icon: "🇫🇷" },
+      { id: "hs_rev_hero_volk", x: 25, y: 68, label: "Freiheit, Gleichheit, Brüderlichkeit", description: "'Liberté, Égalité, Fraternité' – die revolutionäre Parole, die ganz Europa erschütterte.", icon: "🗣️" },
+    ],
   },
   {
     id: "revolution_generalstaende",
@@ -750,6 +1141,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
     tags: ["Generalstände", "Versailles", "Dritter Stand", "Ludwig XVI", "Steuern"],
     suggestedPrompt: "16-bit pixel art style grand hall of Estates-General at Versailles 1789, King Louis XVI under velvet canopy, third estate deputies in black coats standing up arguing with privileged clergy and nobility, retro courtroom RPG scene",
+    hotspots: [
+      { id: "hs_rev_gen_dritter", x: 35, y: 62, label: "Der Dritte Stand (98 % des Volkes)", description: "Bauern und Bürger besaßen nur ein Drittel der Stimmen und trugen fast die gesamte Steuerlast.", icon: "👥" },
+      { id: "hs_rev_gen_koenig", x: 50, y: 38, label: "König Ludwig XVI. in Versailles", description: "Wegen Staatsbankrotts gezwungen, die Generalstände nach 175 Jahren erstmals wieder einzuberufen.", icon: "👑" },
+      { id: "hs_rev_gen_klerus_adel", x: 75, y: 50, label: "Klerus (1.) & Adel (2. Stand)", description: "Privilegierte Stände beharrten auf Abstimmung nach Köpfen statt nach Ständen zur Wahrung ihrer Macht.", icon: "⚖️" },
+    ],
   },
   {
     id: "revolution_ballhausschwur",
@@ -759,6 +1155,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Ballhausschwur", "Nationalversammlung", "Verfassung", "Bailly", "Schwur"],
     suggestedPrompt: "16-bit pixel art style indoor royal tennis court Ballhaus in Versailles, dozens of third estate representatives with raised hands swearing solemn oath around central table, wind blowing through windows, retro dramatic historical moment",
+    hotspots: [
+      { id: "hs_rev_ball_schwur", x: 50, y: 52, label: "Der Schwur der Abgeordneten", description: "Gelöbnis, sich niemals zu trennen, bis Frankreich eine schriftliche Verfassung erhalten habe.", icon: "📜" },
+      { id: "hs_rev_ball_bailly", x: 30, y: 58, label: "Jean-Sylvain Bailly (Präsident)", description: "Astronom und erster Präsident der Nationalversammlung, verlas den historischen Text.", icon: "🗣️" },
+      { id: "hs_rev_ball_halle", x: 72, y: 42, label: "Das Jeu de Paume (Ballspielhaus)", description: "Ausweichort der Abgeordneten, nachdem der König ihren gewohnten Sitzungssaal hatte verriegeln lassen.", icon: "🏸" },
+    ],
   },
   {
     id: "revolution_bastille",
@@ -768,6 +1169,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["Bastille", "14. Juli", "Sturm", "Kanonen", "Paris", "Freiheit"],
     suggestedPrompt: "16-bit pixel art style storming of the Bastille stone fortress in Paris July 14 1789, citizens and Garde Française firing cannons at drawbridge, smoke billows, Tricolore cockades on tricorn hats, retro action game scene",
+    hotspots: [
+      { id: "hs_rev_bas_tor", x: 48, y: 58, label: "Die Zugbrücke der Bastille", description: "Bürgerwehr und desertierte französische Gardesoldaten brachen mit Kanonen die Ketten der Zugbrücke auf.", icon: "💥" },
+      { id: "hs_rev_bas_kanonen", x: 25, y: 65, label: "Erbeutetes Schießpulver", description: "Die Aufständischen benötigten Munition zur Verteidigung gegen anrückende königliche Söldnerregimenter.", icon: "💣" },
+      { id: "hs_rev_bas_launay", x: 75, y: 50, label: "Kapitulation des Gouverneurs", description: "De Launay ergab sich; der Sturm auf die Bastille markiert bis heute den französischen Nationalfeiertag.", icon: "🏰" },
+    ],
   },
   {
     id: "revolution_menschenrechte",
@@ -777,6 +1183,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Menschenrechte", "Bürgerrechte", "1789", "Freiheit", "Gleichheit", "Verfassung"],
     suggestedPrompt: "16-bit pixel art style Declaration of the Rights of Man carved stone tablet on assembly wall with glowing eye of reason symbol, deputies reading freedom parchment to cheering crowd outside, retro political visual",
+    hotspots: [
+      { id: "hs_rev_menschen_tafel", x: 50, y: 45, label: "Deklaration der Menschenrechte (1789)", description: "'Artikel 1: Die Menschen werden frei und gleich an Rechten geboren und bleiben es.'", icon: "📜" },
+      { id: "hs_rev_menschen_auge", x: 50, y: 20, label: "Auge der Vorsehung & Phrygische Mütze", description: "Symbole der Aufklärung und Freiheit über den Gesetzestafeln nach dem Vorbild der Zehn Gebote.", icon: "👁️" },
+      { id: "hs_rev_menschen_kette", x: 75, y: 65, label: "Zersprengte Ketten des Feudalismus", description: "Abschaffung von Zunftzwang, Standesprivilegien, Leibeigenschaft und kirchlichem Zehnten.", icon: "⛓️" },
+    ],
   },
   {
     id: "revolution_zug_nach_versailles",
@@ -786,6 +1197,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Marktfrauen", "Versailles", "Brot", "Tuilerien", "Paris"],
     suggestedPrompt: "16-bit pixel art style rainy march of Parisian market women armed with pikes and kitchen knives pulling a royal cannon along muddy road to Versailles palace gates, bread loaves on spears, retro narrative visual",
+    hotspots: [
+      { id: "hs_rev_vers_frauen", x: 42, y: 58, label: "Die Marktfrauen von Paris", description: "Tausende Pariserinnen marschierten mit Piken und Kanonen im strömenden Regen 20 km nach Versailles.", icon: "🥖" },
+      { id: "hs_rev_vers_ruf", x: 68, y: 48, label: "'Wir bringen den Bäcker, die Bäckerin & den Bäckerjungen!'", description: "Forderung nach bezahlbarem Brot; die Königsfamilie wurde gezwungen, nach Paris in die Tuilerien umzuziehen.", icon: "👑" },
+      { id: "hs_rev_vers_lafa", x: 22, y: 65, label: "General Lafayette & Nationalgarde", description: "Lafayette verhinderte die Erstürmung der königlichen Gemächer und rettete Königin Marie Antoinette.", icon: "🐎" },
+    ],
   },
   {
     id: "revolution_flucht_varennes",
@@ -795,6 +1211,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1511497584788-87676104235f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Varennes", "Flucht", "König", "Poststation", "Republik"],
     suggestedPrompt: "16-bit pixel art style midnight stop of heavy royal carriage in small village of Varennes, local postmaster with lantern recognizing king's face against gold coin portrait, national guards blocking bridge, retro suspense scene",
+    hotspots: [
+      { id: "hs_rev_varen_kutsche", x: 45, y: 58, label: "Die schwere Reisekutsche (Berline)", description: "Die Königsfamilie floh inkognito, reiste aber zu langsam und mit zu viel Prunkgepäck.", icon: "🐎" },
+      { id: "hs_rev_varen_drouet", x: 72, y: 62, label: "Postmeister Drouet", description: "Erkannte das Profil des Königs anhand einer Assignaten-Banknote und ritt voraus, um die Brücke zu sperren.", icon: "🪙" },
+      { id: "hs_rev_varen_ende", x: 25, y: 45, label: "Endgültiger Vertrauensbruch", description: "Die gescheiterte Flucht bewies dem Volk, dass Ludwig XVI. mit ausländischen Armeen gegen die Nation paktierte.", icon: "🛑" },
+    ],
   },
   {
     id: "revolution_schreckensherrschaft",
@@ -804,6 +1225,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
     tags: ["Jakobiner", "Robespierre", "Guillotine", "Wohlfahrtsausschuss", "Terror"],
     suggestedPrompt: "16-bit pixel art style Place de la Révolution in Paris, wooden scaffold with tall guillotine blade under dark overcast sky, Revolutionary Tribunal guards in red phrygian caps, somber crowd watching, retro dramatic scene",
+    hotspots: [
+      { id: "hs_rev_terr_guillotine", x: 48, y: 42, label: "Die Guillotine (Das nationale Fallbeil)", description: "Als 'humanes' Hinrichtungsgerät erfunden; Instrument des Terrors mit über 16.000 Hinrichtungen in 14 Monaten.", icon: "⚔️" },
+      { id: "hs_rev_terr_robi", x: 25, y: 55, label: "Maximilien de Robespierre", description: "'Der Unbestechliche': Führte den Wohlfahrtsausschuss mit Tugend und Terror gegen angebliche Volksfeinde.", icon: "⚖️" },
+      { id: "hs_rev_terr_sans", x: 75, y: 65, label: "Die Sansculotten", description: "Radikale Kleinbürger in langen Hosen und roten Revolutionsmützen trieben die Radikalisierung voran.", icon: "👥" },
+    ],
   },
   {
     id: "revolution_napoleon_aufstieg",
@@ -813,6 +1239,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
     tags: ["Napoleon", "Brumaire", "Kaiserkrönung", "Code Civil", "General"],
     suggestedPrompt: "16-bit pixel art style General Napoleon Bonaparte in tricorn hat leading grenadiers with fixed bayonets through glass doors into council chamber of deputies, dispersing corrupt politicians, retro action strategy visual",
+    hotspots: [
+      { id: "hs_rev_napo_general", x: 38, y: 48, label: "General Bonaparte auf dem Ross", description: "Aufstieg des korsischen Artillerieoffiziers durch Siege in Italien und Ägypten zum Retter der Nation.", icon: "🐎" },
+      { id: "hs_rev_napo_putsch", x: 68, y: 60, label: "Staatsstreich des 18. Brumaire (1799)", description: "Napoleon löst das korrupte Direktorium auf und ernennt sich zum Ersten Konsul der Republik.", icon: "🏛️" },
+      { id: "hs_rev_napo_code", x: 22, y: 68, label: "Code Civil (Bürgerliches Gesetzbuch)", description: "Gleichheit vor dem Gesetz, Schutz des Eigentums und Trennung von Staat und Kirche für ganz Europa.", icon: "📖" },
+    ],
   },
   {
     id: "revolution_voelkerschlacht",
@@ -822,6 +1253,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Völkerschlacht", "Leipzig", "Befreiungskriege", "Napoleon", "Preußen"],
     suggestedPrompt: "16-bit pixel art style Battle of the Nations near Leipzig October 1813, allied Prussian and Russian infantry firing musket volleys through smoke against French imperial guard, burning village in background, retro war game scene",
+    hotspots: [
+      { id: "hs_rev_leip_denkmal", x: 50, y: 45, label: "Völkerschlacht bei Leipzig (1813)", description: "Größte Feldschlacht der Weltgeschichte bis zum 20. Jh.: 600.000 Soldaten aus über 10 Nationen prallten aufeinander.", icon: "⚔️" },
+      { id: "hs_rev_leip_koalition", x: 25, y: 58, label: "Die verbündeten Monarchen", description: "Preußen, Russland, Österreich und Schweden brachen Napoleons Vorherrschaft über Deutschland.", icon: "👑" },
+      { id: "hs_rev_leip_heer", x: 75, y: 65, label: "Flucht über die Elsterbrücke", description: "Die verfrühte Sprengung der Elsterbrücke schnitt Napoleons Nachhut ab und besiegelte die Niederlage.", icon: "💥" },
+    ],
   },
   {
     id: "revolution_wiener_kongress",
@@ -831,6 +1267,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Wiener Kongress", "Metternich", "Restauration", "Deutscher Bund", "1815"],
     suggestedPrompt: "16-bit pixel art style magnificent Hofburg ballroom in Vienna 1815, prince Metternich and European diplomats gathering around large European map table, crystal chandeliers, waltz dancers in background, retro peace conference cutscene",
+    hotspots: [
+      { id: "hs_rev_wien_metternich", x: 42, y: 48, label: "Fürst Klemens von Metternich", description: "Österreichischer Staatskanzler; Architekt der Restauration und der europäischen Pentarchie (Gleichgewicht).", icon: "👑" },
+      { id: "hs_rev_wien_tanz", x: 72, y: 60, label: "'Der Kongress tanzt, aber geht nicht weiter'", description: "Glanzvolle Walzerbälle in Wiener Palais tarnten zähe diplomatische Verhandlungen um Grenzen.", icon: "💃" },
+      { id: "hs_rev_wien_bund", x: 22, y: 65, label: "Gründung des Deutschen Bundes (1815)", description: "Loser Staatenbund aus 39 souveränen Fürstentümern und freien Städten statt eines geeinten Nationalstaates.", icon: "📜" },
+    ],
   },
 
   // =========================================================================
@@ -844,6 +1285,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Industrialisierung", "Dampfmaschine", "Eisenbahn", "Fabrik"],
     suggestedPrompt: "16-bit pixel art style grand industrial cityscape of 19th century Britain and Ruhr area, rows of brick factories with tall smoking chimneys at dusk, iron bridge with steam locomotive hauling coal wagons, retro factory builder title banner",
+    hotspots: [
+      { id: "hs_ind_hero_schlot", x: 52, y: 38, label: "Rauchende Fabrikschlote", description: "Symbol des ungebremsten industriellen Wachstums und beginnender massiver Umweltverschmutzung.", icon: "🏭" },
+      { id: "hs_ind_hero_dampf", x: 25, y: 60, label: "Dampflokomotive & Gleisnetz", description: "Kohle und Eisenbahn schrumpften Entfernungen und schufen den ersten global vernetzten Massenmarkt.", icon: "🚂" },
+      { id: "hs_ind_hero_arbeiter", x: 78, y: 68, label: "Das neue Industrieproletariat", description: "Millionen Landarbeiter strömten in die Fabriken und arbeiteten unter härtesten Bedingungen für karge Löhne.", icon: "👥" },
+    ],
   },
   {
     id: "industrial_dampfmaschine_watt",
@@ -853,6 +1299,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1000&q=80",
     tags: ["Dampfmaschine", "James Watt", "Spinning Jenny", "Webstuhl", "Erfindung"],
     suggestedPrompt: "16-bit pixel art style inventor workshop with James Watt steam engine, giant iron flywheel spinning, leather belts driving mechanical cotton spinning looms, brass dials and steam valve hissing, retro engineering visual",
+    hotspots: [
+      { id: "hs_ind_watt_kolben", x: 48, y: 45, label: "Kondensator & Zylinder (James Watt)", description: "Separate Kühlung steigerte den Wirkungsgrad um das Vierfache gegenüber der Newcomen-Maschine.", icon: "⚙️" },
+      { id: "hs_ind_watt_schwung", x: 25, y: 55, label: "Riesiges Eisenschwungrad", description: "Wandelte Kolbenhübe in gleichmäßige Drehbewegung um und trieb Hunderte Webstühle synchron an.", icon: "🛞" },
+      { id: "hs_ind_watt_spinning", x: 75, y: 62, label: "Mechanische Spinnmaschine (Jenny)", description: "Produzierte feinstes Baumwollgarn in Minuten statt in Tagen und vernichtete traditionelle Heimarbeit.", icon: "🧵" },
+    ],
   },
   {
     id: "industrial_kohlebergwerk",
@@ -862,6 +1313,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["Kohle", "Bergwerk", "Unter Tage", "Kumpel", "Fördergerüst"],
     suggestedPrompt: "16-bit pixel art style underground coal mine drift, soot-covered miners with Davy safety lamps picking anthracite coal seam, wooden pit props supporting ceiling, iron rail cart, retro subterranean visual",
+    hotspots: [
+      { id: "hs_ind_berg_schacht", x: 48, y: 38, label: "Förderturm der Zeche", description: "Tiefbauschächte drangen hunderte Meter unter Tage vor, um 'Schwarzes Gold' für Dampfkessel zu fördern.", icon: "🏗️" },
+      { id: "hs_ind_berg_grubengas", x: 28, y: 65, label: "Davy-Sicherheitslampe", description: "Drahtnetz um die Flamme verhinderte Schlagwetterexplosionen durch giftiges und brennbares Methangas.", icon: "🪔" },
+      { id: "hs_ind_berg_lore", x: 75, y: 70, label: "Kohlelore auf Holzgleisen", description: "Von Bergleuten und Grubenponys durch kniehohen Schlamm und enge Stollen gezogene Förderwagen.", icon: "⛏️" },
+    ],
   },
   {
     id: "industrial_eisenbahn_adler",
@@ -871,6 +1327,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Eisenbahn", "Adler", "1835", "Nürnberg", "Dampflok", "Mobilität"],
     suggestedPrompt: "16-bit pixel art style historic Adler steam train chugging along iron rails between Nuremberg and Fürth 1835, black chimney puffing white clouds, passengers in top hats waving from open wooden train carriages, retro transport game scene",
+    hotspots: [
+      { id: "hs_ind_adler_lok", x: 45, y: 55, label: "Dampflokomotive 'Adler' (1835)", description: "Erste deutsche Eisenbahn zwischen Nürnberg und Fürth; bewältigte 6 km in nur 9 Minuten.", icon: "🚂" },
+      { id: "hs_ind_adler_stephenson", x: 72, y: 45, label: "Konstruktion von Robert Stephenson", description: "Aus England importierte Spitzentechnologie; Geburtsstunde des deutschen Eisenbahnnetzes.", icon: "⚙️" },
+      { id: "hs_ind_adler_fahrgaeste", x: 22, y: 68, label: "Offene Personenwagen", description: "Ärzte warnten anfangs vor Hirnkrankheiten durch die 'horrende Geschwindigkeit' von 35 km/h.", icon: "🎩" },
+    ],
   },
   {
     id: "industrial_verstaedterung_kaserne",
@@ -880,6 +1341,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Mietskaserne", "Landflucht", "Hinterhof", "Armut", "Verstädterung"],
     suggestedPrompt: "16-bit pixel art style cramped cobblestone tenement courtyard in Berlin 1880s, five-story gray brick buildings with laundry lines hanging between windows, children playing by hand water pump, retro gritty city atmosphere",
+    hotspots: [
+      { id: "hs_ind_kas_hof", x: 48, y: 52, label: "Dunkle Hinterhöfe der Mietskaserne", description: "Bis zu fünf Hinterhöfe hintereinander; Mangel an Licht, frischer Luft und Kanalisation führte zu Seuchen.", icon: "🏢" },
+      { id: "hs_ind_kas_trockner", x: 25, y: 45, label: "'Trockenwohner' im Neubau", description: "Ärmste Familien wohnten spottbillig in feuchten Rohbauten, um durch ihre Körperwärme die Wände zu trocknen.", icon: "🏚️" },
+      { id: "hs_ind_kas_schlaf", x: 75, y: 68, label: "Schlafgänger (Bett-Sharing)", description: "Familien vermieteten Betten stundenweise an Nachtschichtarbeiter, um die Miete bezahlen zu können.", icon: "🛏️" },
+    ],
   },
   {
     id: "industrial_kinderarbeit_fabrik",
@@ -889,6 +1355,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Kinderarbeit", "Weberei", "Fabrikalltag", "Soziale Frage", "Schutzgesetze"],
     suggestedPrompt: "16-bit pixel art style textile mill factory interior, young barefoot children crawling beneath spinning mule machinery to tie broken cotton threads, stern overseer holding pocket watch, factory dust in light beams, retro emotional scene",
+    hotspots: [
+      { id: "hs_ind_kind_stuhl", x: 42, y: 62, label: "Kinder an laufenden Webstühlen", description: "Kleine Hände kletterten unter laufende Maschinen, um gerissene Fäden anzuknüpfen – oft mit tödlichen Verletzungen.", icon: "🧵" },
+      { id: "hs_ind_kind_schicht", x: 72, y: 52, label: "12 bis 14 Stunden Arbeitstag", description: "Arbeitsbeginn ab 5 Uhr morgens für 6- bis 12-jährige Kinder ohne Recht auf Schulbildung.", icon: "⏰" },
+      { id: "hs_ind_kind_preussen", x: 22, y: 42, label: "Preußisches Regulativ (1839)", description: "Erster zögerlicher Kinderschutz: Verbot von Fabrikarbeit unter 9 Jahren – motiviert durch Tauglichkeitsmängel beim Militär.", icon: "📜" },
+    ],
   },
   {
     id: "industrial_stahlwerk_krupp",
@@ -898,6 +1369,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Stahlwerk", "Krupp", "Bessemer", "Gussstahl", "Ruhrgebiet", "Hochofen"],
     suggestedPrompt: "16-bit pixel art style molten steel blast furnace inside giant Krupp steel foundry, orange liquid metal pouring into casting molds, workers with long iron rods wearing protective aprons and goggles, sparks flying, retro factory forge visual",
+    hotspots: [
+      { id: "hs_ind_krupp_hochofen", x: 48, y: 42, label: "Krupp'scher Hochofen", description: "Glühendes Roheisen wird abgestochen; Essen wurde zur 'Waffenschmiede des Deutschen Reiches'.", icon: "🔥" },
+      { id: "hs_ind_krupp_hammer", x: 28, y: 55, label: "Dampfhammer 'Fritz' (1861)", description: "50 Tonnen schwerer Koloss schlug glühende Stahlblöcke; seine Erschütterungen spürte man kilometerweit.", icon: "🔨" },
+      { id: "hs_ind_krupp_ring", x: 75, y: 65, label: "Nahtlose Eisenbahnradreifen", description: "Krupps Durchbruch: Sichere Radreifen ohne Schweißnaht verhinderten verheerende Zugentgleisungen weltweit.", icon: "🛞" },
+    ],
   },
   {
     id: "industrial_gewerkschaften_streik",
@@ -907,6 +1383,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
     tags: ["Gewerkschaft", "Streik", "8-Stunden-Tag", "Solidarität", "Arbeiterbewegung"],
     suggestedPrompt: "16-bit pixel art style striking factory workers gathered outside closed iron factory gates, holding red banners demanding 8 hour work day and safety laws, factory police standing guard, retro social movement scene",
+    hotspots: [
+      { id: "hs_ind_gew_fahne", x: 45, y: 42, label: "Rote Fahne der Solidarität", description: "Symbol der internationalen Arbeiterbewegung im Kampf für den 8-Stunden-Tag und faire Löhne.", icon: "🚩" },
+      { id: "hs_ind_gew_tor", x: 25, y: 62, label: "Streikposten vor dem Werkstor", description: "Gewerkschafter blockierten die Zugänge, um den Einsatz von streikbrechenden Arbeitern zu verhindern.", icon: "🛑" },
+      { id: "hs_ind_gew_kasse", x: 75, y: 68, label: "Gewerkschaftliche Streikkasse", description: "Aus Mitgliedsbeiträgen finanziertes Notgeld zur Ernährung der streikenden Familien.", icon: "💰" },
+    ],
   },
   {
     id: "industrial_karl_marx",
@@ -916,6 +1397,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Karl Marx", "Manifest", "Proletariat", "Klassenkampf", "Theorie"],
     suggestedPrompt: "16-bit pixel art style London reading room of British Museum, bearded Karl Marx writing with ink pen surrounded by towering stacks of economic books and statistics, reading lamp, retro intellectual study visual",
+    hotspots: [
+      { id: "hs_ind_marx_buch", x: 48, y: 55, label: "'Das Kapital' & 'Manifest'", description: "'Proletarier aller Länder, vereinigt euch!' Analyse von Ausbeutung, Mehrwert und unvermeidlicher Revolution.", icon: "📖" },
+      { id: "hs_ind_marx_london", x: 25, y: 45, label: "Lesesaal des British Museum", description: "Hier verfasste Marx im Londoner Exil seine monumentale Kritik der bürgerlichen politischen Ökonomie.", icon: "🏛️" },
+      { id: "hs_ind_marx_engels", x: 75, y: 60, label: "Friedrich Engels (Partner & Förderer)", description: "Textilfabrikantensohn aus Wuppertal; schrieb über die verelendete Lage der arbeitenden Klasse in England.", icon: "🤝" },
+    ],
   },
   {
     id: "industrial_bismarck_sozialgesetze",
@@ -925,6 +1411,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
     tags: ["Bismarck", "Sozialgesetze", "Krankenversicherung", "Rente", "Kaiserreich"],
     suggestedPrompt: "16-bit pixel art style Reichstag debate chamber in Berlin 1883, Chancellor Otto von Bismarck speaking at podium presenting imperial social insurance laws, deputies debating, imperial eagle crest, retro parliament scene",
+    hotspots: [
+      { id: "hs_ind_bis_reichstag", x: 45, y: 42, label: "Kaiserliche Botschaft von 1881", description: "Bismarcks Strategie aus 'Zuckerbrot und Peitsche': Sozialistengesetze zur Unterdrückung, Sozialgesetze zur Beschwichtigung.", icon: "🏛️" },
+      { id: "hs_ind_bis_kranken", x: 25, y: 62, label: "Krankenversicherung (1883)", description: "Weltweit erste gesetzliche Krankenversicherung für Arbeiter mit Arztbehandlung und Krankengeld.", icon: "🏥" },
+      { id: "hs_ind_bis_rente", x: 75, y: 65, label: "Unfall- & Rentenversicherung (1889)", description: "Altersrente ursprünglich ab 70 Jahren – Grundstein des modernen europäischen Wohlfahrtsstaates.", icon: "👴" },
+    ],
   },
   {
     id: "industrial_elektrizitaet_moderne",
@@ -934,6 +1425,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1000&q=80",
     tags: ["Siemens", "Elektrizität", "Dynamo", "Chemie", "Moderne"],
     suggestedPrompt: "16-bit pixel art style late 19th century electrical workshop, Werner von Siemens demonstrating glowing electric dynamo with copper coils, first electric street lamps lighting outside cobblestone street, retro tech invention cutscene",
+    hotspots: [
+      { id: "hs_ind_elek_dynamo", x: 45, y: 55, label: "Dynamomaschine (Werner von Siemens)", description: "1866: Entdeckung des elektrodynamischen Prinzips; mechanische Arbeit wird günstig in elektrischen Strom umgewandelt.", icon: "⚡" },
+      { id: "hs_ind_elek_lampe", x: 72, y: 38, label: "Elektrische Kohlefaden-Glühbirne", description: "Verdrängte offenes Gaslicht und verlängerte den Arbeitstag in Städten und Fabriken unabhängig vom Sonnenlicht.", icon: "💡" },
+      { id: "hs_ind_elek_tram", x: 25, y: 68, label: "Erste elektrische Straßenbahn (Berlin-Lichterfelde)", description: "Ab 1881: Beginn des modernen Nahverkehrs; Abschied von dampfenden und pferdegezogenen Fuhrwerken.", icon: "🚋" },
+    ],
   },
 
   // =========================================================================
@@ -947,6 +1443,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Weimar", "Demokratie", "Bauhaus", "Goldene Zwanziger"],
     suggestedPrompt: "16-bit pixel art style panoramic view of Weimar Theaterplatz with Goethe-Schiller monument and illuminated National Theater, vintage 1920s cars, Bauhaus architectural elements, retro Weimar era title banner",
+    hotspots: [
+      { id: "hs_weim_hero_theater", x: 48, y: 42, label: "Deutsches Nationaltheater Weimar", description: "Ort der Verfassungsgebung 1919; Thüringen als Wiege der ersten deutschen parlamentarischen Demokratie.", icon: "🏛️" },
+      { id: "hs_weim_hero_denkmal", x: 25, y: 55, label: "Goethe-Schiller-Denkmal", description: "Symbol des humanistischen 'Geistes von Weimar' als Gegenentwurf zum preußisch-militaristischen Geist von Potsdam.", icon: "👥" },
+      { id: "hs_weim_hero_auto", x: 75, y: 68, label: "Automobile der Moderne", description: "Neue Mobilität, Rundfunk und rasanter technischer Wandel prägten die zwiespältigen 1920er Jahre.", icon: "🚗" },
+    ],
   },
   {
     id: "weimar_novemberrevolution_1918",
@@ -956,6 +1457,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
     tags: ["Novemberrevolution", "Scheidemann", "Reichstag", "Republik", "Kiel"],
     suggestedPrompt: "16-bit pixel art style Berlin Reichstag window November 9 1918, politician Philipp Scheidemann shouting proclamation of the Republic to sea of cheering workers and soldiers below, red flags, retro historical event cutscene",
+    hotspots: [
+      { id: "hs_weim_nov_scheidemann", x: 45, y: 45, label: "Philipp Scheidemann am Reichstagsfenster", description: "Rief am 9. November 1918 gegen 14 Uhr die 'Deutsche Republik' aus – zwei Stunden vor Karl Liebknechts sozialistischer Republik.", icon: "🗣️" },
+      { id: "hs_weim_nov_kiel", x: 25, y: 62, label: "Matrosenaufstand in Kiel", description: "Weigerung der Flotte zum sinnlosen Selbstopfer gegen England; Auslöser des Sturzes der Monarchie im gesamten Reich.", icon: "⚓" },
+      { id: "hs_weim_nov_abdankung", x: 75, y: 52, label: "Abdankung Kaiser Wilhelms II.", description: "Reichskanzler Max von Baden verkündete eigenmächtig den Thronverzicht; der Kaiser floh ins Exil in die Niederlande.", icon: "👑" },
+    ],
   },
   {
     id: "weimar_nationaltheater_verfassung",
@@ -965,6 +1471,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Weimar", "Nationaltheater", "Verfassung", "Frauenwahlrecht", "Ebert"],
     suggestedPrompt: "16-bit pixel art style interior of Weimar Deutsches Nationaltheater 1919 converted into parliament, delegates in theater stalls debating the democratic constitution, Friedrich Ebert presiding on stage, retro political RPG visual",
+    hotspots: [
+      { id: "hs_weim_nat_ebert", x: 38, y: 48, label: "Reichspräsident Friedrich Ebert", description: "Ehemaliger Sattler und SPD-Vorsitzender; erster demokratisch gewählter Reichspräsident Deutschlands.", icon: "🏛️" },
+      { id: "hs_weim_nat_frauen", x: 68, y: 62, label: "Einführung des Frauenwahlrechts", description: "Artikel 109: Frauen durften erstmals reichsweit wählen und gewählt werden; 37 weibliche Abgeordnete zogen ein.", icon: "🗳️" },
+      { id: "hs_weim_nat_art48", x: 22, y: 68, label: "Der verhängnisvolle Artikel 48", description: "Notverordnungsrecht des Präsidenten mit Befugnis zur Außerkraftsetzung von Grundrechten – spätere Aushöhlung der Republik.", icon: "⚠️" },
+    ],
   },
   {
     id: "weimar_versailles_vertrag",
@@ -974,6 +1485,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
     tags: ["Versailles", "Reparationen", "Kriegsschuld", "Spiegelsaal", "Frieden"],
     suggestedPrompt: "16-bit pixel art style Hall of Mirrors at Versailles palace, signing of 1919 peace treaty, German diplomats signing heavy parchment treaty under cold gaze of victorious allied generals, retro solemn cutscene",
+    hotspots: [
+      { id: "hs_weim_vers_spiegel", x: 50, y: 42, label: "Spiegelsaal von Versailles", description: "Historische Rache: Genau dort unterzeichnet, wo 1871 das Deutsche Kaiserreich nach dem Sieg über Frankreich gegründet worden war.", icon: "🏛️" },
+      { id: "hs_weim_vers_art231", x: 28, y: 58, label: "Artikel 231 (Kriegsschuldartikel)", description: "Alleinige Kriegsschuld Deutschlands und seiner Verbündeten als rechtliche Begründung astronomischer Reparationen.", icon: "📜" },
+      { id: "hs_weim_vers_grenzen", x: 75, y: 62, label: "Gebietsabtretungen & Entmilitarisierung", description: "Verlust von Elsass-Lothringen, Posen, Westpreußen; Begrenzung des deutschen Heeres auf 100.000 Berufssoldaten.", icon: "🗺️" },
+    ],
   },
   {
     id: "weimar_krisenjahr_kapp_putsch",
@@ -983,6 +1499,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
     tags: ["Kapp-Putsch", "Generalstreik", "Freikorps", "Berlin", "Brandenburger Tor"],
     suggestedPrompt: "16-bit pixel art style Berlin Unter den Linden during Kapp Putsch 1920, Freikorps soldiers with skull helmets marching by armored trucks, quiet streets with closed shops, workers organizing general strike, retro crisis visual",
+    hotspots: [
+      { id: "hs_weim_kapp_ehrhardt", x: 42, y: 55, label: "Marinebrigade Ehrhardt", description: "Freikorps-Soldaten mit Hakenkreuz am Stahlhelm besetzten kampflos das Berliner Regierungsviertel im März 1920.", icon: "🪖" },
+      { id: "hs_weim_kapp_streik", x: 72, y: 50, label: "Größter Generalstreik der Geschichte", description: "12 Millionen Arbeiter legten Strom, Wasser, Bahn und Zeitungen lahm; der Militärputsch brach nach 5 Tagen zusammen.", icon: "🛑" },
+      { id: "hs_weim_kapp_seeckt", x: 22, y: 68, label: "General von Seeckt: 'Truppe schießt nicht auf Truppe'", description: "Die Reichswehr verweigerte den Schutz der demokratischen Regierung – Offenbarung der mangelnden Loyalität der Militärelite.", icon: "⚔️" },
+    ],
   },
   {
     id: "weimar_hyperinflation_1923",
@@ -992,6 +1513,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Hyperinflation", "1923", "Milliarden", "Brot", "Geldentwertung", "Ruhrkampf"],
     suggestedPrompt: "16-bit pixel art style Berlin bakery shop line in autumn 1923, customer paying laundry basket filled to brim with billion-Mark paper banknotes for single rye bread loaf, baker counting bundles with despair, retro economic crisis visual",
+    hotspots: [
+      { id: "hs_weim_inf_geld", x: 48, y: 60, label: "Milliarden- & Billionen-Geldscheine", description: "Geld wurde wertlos: Ein Laib Brot kostete im November 1923 201 Milliarden Mark; Löhne wurden täglich im Wäschekorb ausgezahlt.", icon: "💸" },
+      { id: "hs_weim_inf_ofen", x: 25, y: 65, label: "Geldscheine als Brennmaterial", description: "Es war buchstäblich billiger, Papiergeldbündel im Ofen zu verfeuern, als mit dem Geld teure Kohle zu kaufen.", icon: "🔥" },
+      { id: "hs_weim_inf_renten", x: 75, y: 52, label: "Währungsreform: Die Rentenmark", description: "Im November 1923 beendete Währungskommissar Schacht das Chaos: 1 Rentenmark = 1 Billion Papiermark.", icon: "🪙" },
+    ],
   },
   {
     id: "weimar_bauhaus_moderne",
@@ -1001,6 +1527,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Bauhaus", "Weimar", "Walter Gropius", "Design", "Architektur", "Kunst"],
     suggestedPrompt: "16-bit pixel art style Staatliches Bauhaus Weimar design workshop, Walter Gropius and art students testing tubular steel chairs and geometric colorful lamps, clean modernist white building lines, retro avant-garde aesthetic",
+    hotspots: [
+      { id: "hs_weim_bau_gropius", x: 45, y: 48, label: "Walter Gropius & Meisterrat", description: "Gründer des Bauhauses in Weimar 1919: Zusammenführung von Kunst, Handwerk und moderner Industrieproduktion.", icon: "📐" },
+      { id: "hs_weim_bau_form", x: 25, y: 62, label: "'Form follows function'", description: "Verzicht auf Schnörkel und Stuck: Zweckmäßige Eleganz aus Glas, Stahlrohr, Beton und klaren Primärfarben.", icon: "🪑" },
+      { id: "hs_weim_bau_haus_horn", x: 75, y: 55, label: "Musterhaus 'Am Horn' Weimar", description: "Erster revolutionärer Prototyp modernen Wohnens für die breite Bevölkerung mit moderner Einbauküche.", icon: "🏠" },
+    ],
   },
   {
     id: "weimar_goldene_zwanziger",
@@ -1010,6 +1541,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Goldene Zwanziger", "Charleston", "Jazz", "Kino", "Radio", "Kultur"],
     suggestedPrompt: "16-bit pixel art style glamorous 1920s Berlin dance hall ballroom, women with bob haircuts dancing Charleston in flapper dresses, jazz saxophone band playing on stage, glowing incandescent bulb chandeliers, retro nightlife visual",
+    hotspots: [
+      { id: "hs_weim_gold_jazz", x: 48, y: 52, label: "Jazz-Saxophon & Charleston", description: "Lebenshunger nach Krieg und Krise: Tanzpaläste im Berliner Nachtleben feierten bis zum Morgengrauen.", icon: "🎷" },
+      { id: "hs_weim_gold_flapper", x: 28, y: 62, label: "Die 'Neue Frau' (Bubikopf & Zigarette)", description: "Frauen eroberten Berufswelt, Sport und Kultur mit neuer Mode und selbstbewusstem Auftreten.", icon: "💃" },
+      { id: "hs_weim_gold_kino", x: 75, y: 42, label: "UFA-Palast & 'Metropolis' (Fritz Lang)", description: "Das Stummfilmkino wurde zum Leitmedium; Babylon Berlin als pulsierende Kulturhauptstadt Europas.", icon: "🎬" },
+    ],
   },
   {
     id: "weimar_stresemann_locarno",
@@ -1019,6 +1555,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Stresemann", "Locarno", "Völkerbund", "Diplomatie", "Friedensnobelpreis"],
     suggestedPrompt: "16-bit pixel art style lakeside terrace in Locarno 1925, foreign ministers Gustav Stresemann and Aristide Briand shaking hands overlooking blue Lake Maggiore, fountain pens on table, retro diplomatic victory visual",
+    hotspots: [
+      { id: "hs_weim_strese_handschlag", x: 45, y: 52, label: "Stresemann & Briand in Locarno (1925)", description: "Historische Aussöhnung: Deutschland erkannte seine Westgrenze freiwillig an und verzichtete auf Revanche.", icon: "🤝" },
+      { id: "hs_weim_strese_bund", x: 72, y: 45, label: "Aufnahme in den Völkerbund (1926)", description: "Rückkehr Deutschlands als gleichberechtigte Großmacht auf die internationale diplomatische Bühne.", icon: "🌍" },
+      { id: "hs_weim_strese_nobel", x: 22, y: 65, label: "Friedensnobelpreis", description: "Auszeichnung für Gustav Stresemann und Aristide Briand für ihren mutigen Einsatz für dauerhaften europäischen Frieden.", icon: "🕊️" },
+    ],
   },
   {
     id: "weimar_schwarzer_freitag_1929",
@@ -1028,6 +1569,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["1929", "Börsencrash", "Wall Street", "Arbeitslosigkeit", "Krise"],
     suggestedPrompt: "16-bit pixel art style crowded Berlin employment office hall in winter 1930, thousands of downcast unemployed workers standing in lines with stamped cards, cold steam breath, stark black and white posters, retro historical downturn",
+    hotspots: [
+      { id: "hs_weim_1929_wall", x: 52, y: 38, label: "Börsencrash an der Wall Street (Oktober 1929)", description: "Panikverkäufe in New York führten zum sofortigen Abzug amerikanischer Kredite aus Deutschland.", icon: "📉" },
+      { id: "hs_weim_1929_stempel", x: 30, y: 65, label: "Stempelstellen & Massenelend", description: "Über 6 Millionen registrierte Arbeitslose; endlose Schlangen frierender Familien an Suppenküchen.", icon: "👥" },
+      { id: "hs_weim_1929_banken", x: 75, y: 58, label: "Bankenkrise & Danat-Bank-Kollaps", description: "Schaltersturm verzweifelter Sparer; Banken schlossen tagelang ihre Pforten – Ruin des Mittelstandes.", icon: "🏦" },
+    ],
   },
   {
     id: "weimar_praesidialkabinett_untergang",
@@ -1037,6 +1583,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
     tags: ["Notverordnung", "Artikel 48", "Hindenburg", "Radikalisierung", "Ende"],
     suggestedPrompt: "16-bit pixel art style stormy evening outside Reichstag in Berlin 1932, clash of election demonstration marchers on street, old President Hindenburg signing emergency decree Article 48 at dark mahogany desk, retro dramatic finale cutscene",
+    hotspots: [
+      { id: "hs_weim_praesi_hindenburg", x: 38, y: 48, label: "Reichspräsident Paul von Hindenburg", description: "Kaiserlicher Feldmarschall; regierte ab 1930 mit Präsidialkabinetten (Brüning) am Parlament vorbei.", icon: "🎖️" },
+      { id: "hs_weim_praesi_strasse", x: 68, y: 62, label: "Radikalisierung auf den Straßen", description: "Blutige Saalschlachten zwischen SA-Schlägertrupps und dem kommunistischen Rotfrontkämpferbund.", icon: "💥" },
+      { id: "hs_weim_praesi_debatte", x: 22, y: 68, label: "Lähmung des Reichstags", description: "Extreme Parteien (NSDAP und KPD) blockierten jede demokratische Mehrheit – die Republik ohne Republikaner starb.", icon: "🏛️" },
+    ],
   },
 
   // =========================================================================
@@ -1050,6 +1601,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "Erster Weltkrieg", "Westfront", "Grabenkrieg", "Verdun", "Poilu", "Landser"],
     suggestedPrompt: "16-bit pixel art style poignant panoramic view of Western Front trench line at dawn, muddy no-mans-land with barbed wire entanglements and water-filled shell craters, distant silhouette of soldiers in steel helmets, red poppies blooming in mud, retro 16-bit historical anti-war title banner",
+    hotspots: [
+      { id: "hs_ww1_hero_graben", x: 48, y: 62, label: "Zickzack-Schützengraben", description: "Zickzackförmig angelegte Gräben verhinderten, dass eindringende Feinde oder Granatsplitter die ganze Linie bestreichen konnten.", icon: "🪖" },
+      { id: "hs_ww1_hero_draht", x: 25, y: 55, label: "Stacheldrahtverhaue im Niemandsland", description: "Hunderte Meter breite Drahthindernisse stoppten Sturmangriffe im mörderischen Kreuzfeuer der Maschinengewehre.", icon: "⛓️" },
+      { id: "hs_ww1_hero_mohn", x: 75, y: 70, label: "Roter Mohn im Kraterfeld", description: "'In Flanders Fields': Die roten Mohnblumen auf den Soldatenfriedhöfen wurden zum weltweiten Mahnmal des Friedens.", icon: "🌺" },
+    ],
   },
   {
     id: "ww1_julikrise_mobilmachung",
@@ -1059,6 +1615,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Julikrise", "Mobilmachung", "1914", "Bahnhof", "Sarajevo", "Bündnisse"],
     suggestedPrompt: "16-bit pixel art style crowded railway station platform in August 1914, steam train decorated with chalk slogans, young soldiers leaning out of train windows kissing sweethearts farewell, brass band playing, retro emotional departure scene",
+    hotspots: [
+      { id: "hs_ww1_juli_sarajevo", x: 35, y: 45, label: "Attentat von Sarajevo (28. Juni 1914)", description: "Gavrilo Princip erschießt den österreichischen Thronfolger Franz Ferdinand – der Funke im europäischen Pulverfass.", icon: "💥" },
+      { id: "hs_ww1_juli_zug", x: 68, y: 58, label: "Truppentransportzug mit Parolen", description: "'Jeder Schuss ein Russ', 'Ausflug nach Paris': Täuschende Kriegsbegeisterung junger Rekruten im August 1914.", icon: "🚂" },
+      { id: "hs_ww1_juli_buendnis", x: 22, y: 68, label: "Automatismus der Bündnissysteme", description: "Mittelmächte (Deutschland, Österreich-Ungarn) gegen Entente (Frankreich, Russland, Großbritannien) – Kettenreaktion.", icon: "📜" },
+    ],
   },
   {
     id: "ww1_schlieffen_marne",
@@ -1068,6 +1629,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
     tags: ["Marne", "Stellungskrieg", "Taxis", "Schlieffen-Plan", "Frankreich", "1914"],
     suggestedPrompt: "16-bit pixel art style autumn 1914 near the river Marne, column of vintage Parisian Renault taxicabs rushing French infantry in horizon-blue coats to the front, soldiers digging first shallow dirt trenches with entrenching tools, retro military maneuver scene",
+    hotspots: [
+      { id: "hs_ww1_marne_taxis", x: 42, y: 62, label: "Die Taxis der Marne (September 1914)", description: "General Gallieni requirierte 600 Pariser Renault-Taxis, um 4.000 Reservisten über Nacht direkt an die Front zu werfen.", icon: "🚕" },
+      { id: "hs_ww1_marne_schlieffen", x: 25, y: 45, label: "Scheitern des Schlieffen-Plans", description: "Der geplante schnelle Blitzsieg über Frankreich über das neutrale Belgien scheiterte am französischen Gegenangriff.", icon: "🗺️" },
+      { id: "hs_ww1_marne_spaten", x: 75, y: 65, label: "Vom Bewegungskrieg zum Stellungskrieg", description: "Aus Mangel an Munition und Reserven gruben sich beide Heere vom Ärmelkanal bis zur Schweiz in der Erde ein.", icon: "⛏️" },
+    ],
   },
   {
     id: "ww1_graeben_alltag_schlamm",
@@ -1077,6 +1643,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["Schützengraben", "Grabenalltag", "Schlamm", "Unterstand", "Landser", "Poilu"],
     suggestedPrompt: "16-bit pixel art style deep muddy trench dugout, weary soldiers wrapped in sodden blankets drinking tea from tin canteen cups by candle, sandbag parapet with wooden periscope looking over barbed wire, rain pouring down, retro gritty survival visual",
+    hotspots: [
+      { id: "hs_ww1_grab_periskop", x: 45, y: 42, label: "Grabenperiskop mit Spiegel", description: "Erlaubte den Blick über den Sandsackwall; wer den Kopf ungeschützt heraushielt, wurde von Scharfschützen getötet.", icon: "🔭" },
+      { id: "hs_ww1_grab_schlamm", x: 28, y: 72, label: "Morast & Grabenfuß-Krankheit", description: "Monatelanges Stehen in eiskaltem Wasser führte zu Wundbrand ('Trench Foot') und Amputationen.", icon: "🥾" },
+      { id: "hs_ww1_grab_ratten", x: 75, y: 68, label: "Grabenratten & Läuse", description: "Katzenstarke Ratten fraßen Vorräte und Leichen an; Fleckfieber-Läuse machten den Alltag zur Dauerqual.", icon: "🐀" },
+    ],
   },
   {
     id: "ww1_industrie_gas_maschinengewehr",
@@ -1086,6 +1657,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1507842229451-7f01be8510ab?auto=format&fit=crop&w=1000&q=80",
     tags: ["Giftgas", "Ypern", "Trommelfeuer", "Maschinengewehr", "Gasmaske", "Artillerie"],
     suggestedPrompt: "16-bit pixel art style eerie battlefield shrouded in greenish-yellow poison gas clouds, soldiers with round snout gas masks peering from machine gun nest, heavy artillery shells exploding on horizon sending columns of black dirt into sky, retro dramatic war visual",
+    hotspots: [
+      { id: "hs_ww1_waff_mg08", x: 35, y: 55, label: "Maschinengewehr MG 08 (Maxim)", description: "Wasserkühlung und Gurtzuführung erlaubten 500 Schuss pro Minute – das MG dominierte das moderne Schlachtfeld.", icon: "🔫" },
+      { id: "hs_ww1_waff_gas", x: 68, y: 40, label: "Gelbgrüne Chlorgaswolke (Ypern 1915)", description: "Erster völkerrechtswidriger Einsatz von chemischem Giftgas; verätzte Lungen und führte zu Erstickungstod.", icon: "☠️" },
+      { id: "hs_ww1_waff_maske", x: 22, y: 68, label: "Gummigasmaske mit Wechselfilter", description: "Rettender Atemschutz mit Aktivkohlefilter; Soldaten und Pferde mussten blitzartig maskiert werden.", icon: "🤿" },
+    ],
   },
   {
     id: "ww1_hoelle_von_verdun",
@@ -1095,6 +1671,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=80",
     tags: ["Verdun", "Fort Douaumont", "1916", "Voie Sacrée", "Poilu", "Materialschlacht"],
     suggestedPrompt: "16-bit pixel art style devastated concrete armored dome fortress Fort Douaumont on Verdun heights, French poilu soldiers holding position behind shattered parapet, heavy supply trucks rumbling along muddy Voie Sacrée road, retro tragic battlefield visual",
+    hotspots: [
+      { id: "hs_ww1_verd_fort", x: 48, y: 38, label: "Panzerkuppel Fort Douaumont", description: "Mächtigstes Betonfort der Festung Verdun; wechselte mehrfach unter unvorstellbaren Verlusten den Besitzer.", icon: "🛡️" },
+      { id: "hs_ww1_verd_voie", x: 72, y: 55, label: "La Voie Sacrée (Die Heilige Straße)", description: "Einzige Versorgungsader: Tag und Nacht rollten tausende Lastwagen alle 14 Sekunden im Schritttempo nach Verdun.", icon: "🚚" },
+      { id: "hs_ww1_verd_trommel", x: 25, y: 65, label: "Trommelfeuer & Seelenkrüppel", description: "Über 40 Millionen Granaten pflügten die Erde um; 'Kriegszitterer' litten unter schwerem Schocktrauma.", icon: "💥" },
+    ],
   },
   {
     id: "ww1_ostfront_hungerwinter",
@@ -1104,6 +1685,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["Ostfront", "Russland", "Karpaten", "Zarenarmee", "Winter", "Hunger"],
     suggestedPrompt: "16-bit pixel art style snowy frozen Russian front in Carpathian mountains, Russian infantrymen in heavy wool greatcoats and papakha fur hats sharing scarce black bread around fire in snow trench, frozen pines, retro eastern front atmosphere",
+    hotspots: [
+      { id: "hs_ww1_ost_karpaten", x: 52, y: 45, label: "Eisige Karpatenfront", description: "Im Gebirgswinter 1915 erfroren mehr Soldaten in Schneestürmen bei minus 30 Grad, als durch Kugeln fielen.", icon: "❄️" },
+      { id: "hs_ww1_ost_brot", x: 28, y: 68, label: "Munitionsmangel & Brotration", description: "Russische Rekruten wurden teils ohne Gewehr an die Front geschickt; Meutereien gegen die zaristischen Offiziere.", icon: "🍞" },
+      { id: "hs_ww1_ost_kosaken", x: 75, y: 55, label: "Kosaken-Kavallerie", description: "Reitende Eliteverbände des Zaren im weiten Raumkrieg Polens, Ostpreußens und Galiziens.", icon: "🐎" },
+    ],
   },
   {
     id: "ww1_heimatfront_feldpost",
@@ -1113,6 +1699,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1516962215378-7fa2e137ae93?auto=format&fit=crop&w=1000&q=80",
     tags: ["Heimatfront", "Feldpost", "Steckrübenwinter", "Munitionsfabrik", "Hunger"],
     suggestedPrompt: "16-bit pixel art style home front Berlin street scene during turnip winter 1917, long queue of shivering women and children outside municipal rationing store with ration tickets, woman reading handwritten field post letter by gas lamp, retro social history visual",
+    hotspots: [
+      { id: "hs_ww1_heim_brief", x: 45, y: 52, label: "Zensierte Feldpostbriefe", description: "Fast 30 Milliarden Briefe verbanden Front und Heimat; die Militärzensur schwärzte jede Klage über Grausamkeit.", icon: "✉️" },
+      { id: "hs_ww1_heim_kohl", x: 25, y: 65, label: "Steckrübenwinter 1916/17", description: "Weil Kartoffeln fehlten, gab es Steckrübenbrot, Steckrübensuppe und Steckrübenmarmelade – Hungertod für Hunderttausende.", icon: "🥔" },
+      { id: "hs_ww1_heim_fabrik", x: 75, y: 48, label: "Frauen an der Drehbank", description: "Frauen ersetzten eingezogene Männer in Rüstungswerken und Straßenbahnen; wichtiger Impuls für die spätere Gleichberechtigung.", icon: "⚙️" },
+    ],
   },
   {
     id: "ww1_epochenjahr_1917",
@@ -1122,6 +1713,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=1000&q=80",
     tags: ["1917", "Russische Revolution", "USA", "Woodrow Wilson", "U-Boot", "Lenin"],
     suggestedPrompt: "16-bit pixel art style stormy Petrograd Square 1917, Russian sailors and soldiers carrying red banners demanding peace and bread outside Winter Palace, while US transport ships cross ocean on horizon, retro 1917 turning point visual",
+    hotspots: [
+      { id: "hs_ww1_1917_petrograd", x: 35, y: 48, label: "Februar- & Oktoberrevolution", description: "Der Zar dankt ab; Lenin und die Bolschewiki fordern 'Frieden, Land und Brot' und beenden den Krieg im Osten.", icon: "🚩" },
+      { id: "hs_ww1_1917_wilson", x: 68, y: 42, label: "US-Präsident Woodrow Wilson", description: "Kriegseintritt der USA nach uneingeschränktem deutschen U-Boot-Krieg und 'Zimmermann-Depesche'.", icon: "🇺🇸" },
+      { id: "hs_ww1_1917_14punkte", x: 22, y: 68, label: "Das 14-Punkte-Programm", description: "Wilsons Entwurf für eine gerechte Nachkriegsordnung mit Selbstbestimmungsrecht der Völker und Völkerbund.", icon: "📜" },
+    ],
   },
   {
     id: "ww1_panzer_somme_durchbruch",
@@ -1131,6 +1727,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Panzer", "Tank", "Somme", "1918", "Offensive", "Technik"],
     suggestedPrompt: "16-bit pixel art style early British rhomboid Mark IV tank crushing through barbed wire entanglement across trench ditch, infantry following behind armored tracks, artillery smoke on scarred plain, retro armored warfare visual",
+    hotspots: [
+      { id: "hs_ww1_panz_mark", x: 48, y: 52, label: "Britischer Mark-IV-Panzer ('Tank')", description: "Rhombusförmige Stahlkolosse walzten Stacheldraht nieder und überquerten Gräben – Ende der reinen Grabenherrschaft.", icon: "🚜" },
+      { id: "hs_ww1_panz_ludendorff", x: 25, y: 62, label: "Der 'Schwarze Tag des Heeres' (8. August 1918)", description: "Alliierter Panzervorstoß bei Amiens zerschlug die deutschen Linien; die Oberste Heeresleitung gestand die Niederlage ein.", icon: "🛑" },
+      { id: "hs_ww1_panz_sturm", x: 75, y: 65, label: "Deutsche Stoßtrupptaktik", description: "Hochtrainierte Infanteriegruppen mit Flammenwerfern und Handgranaten umgingen gegnerische Stützpunkte.", icon: "💥" },
+    ],
   },
   {
     id: "ww1_waffenstillstand_compiegne",
@@ -1140,6 +1741,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Compiègne", "Waffenstillstand", "11. November", "Frieden", "Eisenbahnwagen"],
     suggestedPrompt: "16-bit pixel art style forest clearing in Compiègne on misty morning November 11 1918, interior of wooden railway salon carriage, French Marshal Foch and German delegation signing armistice treaty on table, clock showing exactly 11:00, retro historic ending visual",
+    hotspots: [
+      { id: "hs_ww1_comp_waggon", x: 50, y: 48, label: "Eisenbahn-Salonwagen 2419 D", description: "Im Wald von Compiègne unterzeichneten Marschall Foch und Matthias Erzberger den Waffenstillstand.", icon: "🚂" },
+      { id: "hs_ww1_comp_uhr", x: 28, y: 42, label: "11. Stunde des 11. Tages im 11. Monat", description: "Um Punkt 11:00 Uhr am 11. November 1918 schwiegen an der Westfront nach über vier Jahren die Kanonen.", icon: "⏰" },
+      { id: "hs_ww1_comp_dolchstoss", x: 72, y: 65, label: "Keim der Dolchstoßlegende", description: "Rechte Generäle behaupteten wahrheitswidrig, das Heer sei 'im Felde unbesiegt' von der Heimat 'erdolcht' worden.", icon: "🗡️" },
+    ],
   },
 
   // =========================================================================
@@ -1153,6 +1759,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80",
     tags: ["Hero", "Banner", "NS-Diktatur", "1933", "Widerstand", "Zivilcourage", "Alltag", "Berlin"],
     suggestedPrompt: "16-bit pixel art style atmospheric panorama of Berlin street in 1930s, vintage tram passing gray apartment blocks, subtle red propaganda banners hanging from government building, citizens on sidewalk, single glowing window with secret typewriter, retro historical drama title banner",
+    hotspots: [
+      { id: "hs_ns_hero_tor", x: 48, y: 38, label: "Brandenburger Tor im Schatten", description: "Schauplatz des SA-Fackelzugs am 30. Januar 1933; architektonisches Zentrum der Machtdemonstration.", icon: "🏛️" },
+      { id: "hs_ns_hero_propaganda", x: 75, y: 48, label: "Propagandabanner an Fassaden", description: "Gleichschaltung des öffentlichen Raumes durch allgegenwärtige Parteisymbole und Einschüchterung.", icon: "🚩" },
+      { id: "hs_ns_hero_fenster", x: 25, y: 65, label: "Erleuchtetes Fenster (Chronist)", description: "Im Verborgenen dokumentierten mutige Bürger in Tagebüchern und Flugblättern die Wahrheit der Verfolgung.", icon: "🕯️" },
+    ],
   },
   {
     id: "nsdap_30_januar_1933",
@@ -1162,6 +1773,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["30. Januar", "1933", "Machtübernahme", "Fackelzug", "Brandenburger Tor", "Hindenburg"],
     suggestedPrompt: "16-bit pixel art style night vista of Brandenburg Gate in Berlin January 30 1933, thousands of SA stormtroopers in brown shirts marching with glowing torches past cheering crowds, ominous shadows cast on neoclassical columns, retro historical moment visual",
+    hotspots: [
+      { id: "hs_ns_30jan_hindenburg", x: 35, y: 45, label: "Ernennung durch Hindenburg", description: "Konservative Politiker um von Papen glaubten fälschlich, Hitler 'in die Ecke gedrückt' zu haben.", icon: "📜" },
+      { id: "hs_ns_30jan_fackeln", x: 68, y: 58, label: "SA-Fackelzug durch die Nacht", description: "25.000 Uniformierte zogen stundenlang durch das Brandenburger Tor an der Reichskanzlei vorbei.", icon: "🔥" },
+      { id: "hs_ns_30jan_liebermann", x: 22, y: 68, label: "Max Liebermann am Pariser Platz", description: "Der jüdische Maler blickte vom Fenster auf den Aufmarsch und sagte: 'Ich kann gar nicht so viel fressen, wie ich kotzen möchte.'", icon: "🎨" },
+    ],
   },
   {
     id: "nsdap_reichstagsbrand_notverordnung",
@@ -1171,6 +1787,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1541123437800-1bb1317badc2?auto=format&fit=crop&w=1000&q=80",
     tags: ["Reichstagsbrand", "Grundrechte", "Notverordnung", "Berlin", "Rechtsstaat"],
     suggestedPrompt: "16-bit pixel art style Berlin Reichstag building dome engulfed in flames at night, fire engines rushing across square, police arresting communist and social democrat deputies on street, newspaper headline 'Grundrechte außer Kraft', retro crisis visual",
+    hotspots: [
+      { id: "hs_ns_brand_kuppel", x: 50, y: 35, label: "Brennende Reichstagskuppel (27. Feb. 1933)", description: "Bis heute historisch umstrittene Brandstiftung, die der NSDAP als Vorwand für den Staatsstreich diente.", icon: "🔥" },
+      { id: "hs_ns_brand_verordnung", x: 25, y: 55, label: "Reichstagsbrandverordnung (28. Feb.)", description: "Außerkraftsetzung der bürgerlichen Grundrechte: Meinungs-, Versammlungs- und Postgeheimnis erloschen.", icon: "📜" },
+      { id: "hs_ns_brand_schutzhaft", x: 75, y: 65, label: "'Schutzhaft' ohne Richter", description: "Tausende Kommunisten, Sozialdemokraten und Gewerkschafter wurden willkürlich in frühe KZ (Dachau) gesperrt.", icon: "🔒" },
+    ],
   },
   {
     id: "nsdap_krolloper_ermaechtigungsgesetz",
@@ -1180,6 +1801,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&w=1000&q=80",
     tags: ["Krolloper", "Ermächtigungsgesetz", "Otto Wels", "SPD", "Diktatur", "1933"],
     suggestedPrompt: "16-bit pixel art style tense assembly hall of Kroll Opera in Berlin March 1933, SPD politician Otto Wels standing bravely at podium speaking against the Enabling Act surrounded by threatening armed SA guards in aisles, retro political drama scene",
+    hotspots: [
+      { id: "hs_ns_kroll_wels", x: 38, y: 52, label: "Mutige Rede von Otto Wels (SPD)", description: "'Freiheit und Leben kann man uns nehmen, die Ehre nicht!' Letztes offenes Eintreten für die Demokratie.", icon: "🗣️" },
+      { id: "hs_ns_kroll_sa", x: 68, y: 42, label: "Bewaffnete SA im Sitzungssaal", description: "Uniformierte Schlägertrupps säumten die Gänge der Krolloper und brüllten Drohungen gegen Abgeordnete.", icon: "🪖" },
+      { id: "hs_ns_kroll_gesetz", x: 22, y: 68, label: "Das Ermächtigungsgesetz (24. März)", description: "Übertragung der Gesetzgebung auf Hitlers Regierung – Selbstentmachtung des Parlaments mit Stimmen des Zentrums.", icon: "📜" },
+    ],
   },
   {
     id: "nsdap_buecherverbrennung_operplatz",
@@ -1189,6 +1815,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["Bücherverbrennung", "Opernplatz", "Kultur", "Gleichschaltung", "Kästner", "Geist"],
     suggestedPrompt: "16-bit pixel art style rainy night on Berlin Opernplatz May 10 1933, large roaring bonfire where uniformed students dump armfuls of banned books into flames, crowd chanting slogans in torchlight, historic St. Hedwig church behind, retro solemn visual",
+    hotspots: [
+      { id: "hs_ns_buch_scheiterhaufen", x: 50, y: 58, label: "Scheiterhaufen auf dem Opernplatz (10. Mai 1933)", description: "Studenten verbrannten über 20.000 Werke verfemter Autoren im Fackellicht vor der Berliner Oper.", icon: "🔥" },
+      { id: "hs_ns_buch_autoren", x: 28, y: 48, label: "Werke von Kästner, Marx & Tucholsky", description: "Erich Kästner stand unerkannt in der Menge und sah seine eigenen Bücher in den Flammen verbrennen.", icon: "📚" },
+      { id: "hs_ns_buch_heine", x: 75, y: 68, label: "Heinrich Heines Prophezeiung (1821)", description: "'Dort wo man Bücher verbrennt, verbrennt man auch am Ende Menschen.' – Erschreckende historische Weitsicht.", icon: "📜" },
+    ],
   },
   {
     id: "nsdap_volksempfaenger_propaganda",
@@ -1198,6 +1829,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
     tags: ["Volksempfänger", "Propaganda", "Goebbels", "Radio", "Zensur", "Wohnzimmer"],
     suggestedPrompt: "16-bit pixel art style cozy 1930s German living room, bakelite Volksempfänger radio on side table glowing orange tuning dial, family listening around kitchen table with mixed expressions, shadow of propaganda poster through window, retro domestic scene",
+    hotspots: [
+      { id: "hs_ns_ve_skala", x: 48, y: 55, label: "Volksempfänger VE 301 ('Goebbelsschnauze')", description: "Billiger Bakelit-Radioapparat (Symbol für 30.1.), technisch so konstruiert, dass ausländische Sender schwer zu empfangen waren.", icon: "📻" },
+      { id: "hs_ns_ve_feindsender", x: 25, y: 42, label: "Verbot von 'Feindsendern'", description: "Das heimliche Hören von Auslandssendern (BBC) wurde bei Kriegsausbruch mit Zuchthaus oder Todesstrafe bedroht.", icon: "⚠️" },
+      { id: "hs_ns_ve_goebbels", x: 75, y: 62, label: "Reichsministerium für Volksaufklärung", description: "Joseph Goebbels kontrollierte Presse, Rundfunk, Film, Kunst und Theater als Propagandamonopol.", icon: "📢" },
+    ],
   },
   {
     id: "nsdap_jugend_hj_bdm",
@@ -1207,6 +1843,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=80",
     tags: ["Hitlerjugend", "BDM", "Swing-Jugend", "Edelweißpiraten", "Erziehung", "Jugend"],
     suggestedPrompt: "16-bit pixel art style village outskirts, uniform Hitler Youth boy scouts marching with trumpet and drum along dirt road, while in basement club nearby rebel Swing Youth teenagers in checked jackets secretly listen to banned jazz records, retro split-perspective scene",
+    hotspots: [
+      { id: "hs_ns_jug_drill", x: 35, y: 52, label: "Hitlerjugend & BDM-Uniform", description: "Militärischer Drill, Zeltlager und Marschieren: Ziel war die geistige und körperliche Formung für den Krieg.", icon: "🏕️" },
+      { id: "hs_ns_jug_swing", x: 72, y: 62, label: "Swing-Jugend & Jazzmusik", description: "Jugendliche Rebellion in Großstädten: Lange Haare, englische Kleidung und Tanzen zu verbotenem amerikanischem Swing.", icon: "🎷" },
+      { id: "hs_ns_jug_piraten", x: 22, y: 68, label: "Edelweißpiraten", description: "Arbeiterjugendliche, die sich der HJ verweigerten, Fahrten unternahmen und Regime-Wandparolen pinselten.", icon: "🌸" },
+    ],
   },
   {
     id: "nsdap_nuernberger_gesetze_1935",
@@ -1216,6 +1857,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1000&q=80",
     tags: ["Nürnberger Gesetze", "1935", "Entrechtung", "Rassenideologie", "Antisemitismus"],
     suggestedPrompt: "16-bit pixel art style quiet neighborhood street corner 1935, yellow municipal sign 'Juden nicht erwünscht' posted outside public park bench, elderly Jewish gentleman with coat looking on in sorrow, passerby averting eyes, retro poignant social visual",
+    hotspots: [
+      { id: "hs_ns_nuern_tafel", x: 48, y: 45, label: "Reichsbürgergesetz & Rassentafeln", description: "Jüdische Deutsche verloren ihre Staatsbürgerrechte und wurden zu Bürgern minderen Rechts degradiert.", icon: "📜" },
+      { id: "hs_ns_nuern_bank", x: 25, y: 65, label: "Parkbank 'Nur für Arier'", description: "Alltägliche Demütigung: Ausschluss aus Parks, Schwimmbädern, Berufen (Ärzte, Anwälte, Beamte) und Vereinen.", icon: "🛑" },
+      { id: "hs_ns_nuern_blutschutz", x: 75, y: 55, label: "'Gesetz zum Schutze des deutschen Blutes'", description: "Kriminalisierung von Eheschließungen und Beziehungen zwischen jüdischen und nicht-jüdischen Bürgern.", icon: "⚖️" },
+    ],
   },
   {
     id: "nsdap_olympia_1936_scheinfassade",
@@ -1225,6 +1871,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1000&q=80",
     tags: ["Olympia", "1936", "Berlin", "Jesse Owens", "Scheinfassade", "Sport"],
     suggestedPrompt: "16-bit pixel art style grand Berlin Olympic Stadium 1936, massive stone colonnades and Olympic rings, black American athlete Jesse Owens sprinting on red cinder track under roar of 100,000 spectators, international flags, retro sports drama visual",
+    hotspots: [
+      { id: "hs_ns_oly_stadium", x: 50, y: 38, label: "Olympiastadion Berlin (1936)", description: "Monumentale Kolonnaden für die Weltöffentlichkeit; antisemitische Hetzschilder wurden kurzzeitig entfernt.", icon: "🏟️" },
+      { id: "hs_ns_oly_owens", x: 30, y: 62, label: "Jesse Owens (4x Goldmedaille)", description: "Der afroamerikanische Leichtathlet widerlegte die nationalsozialistische Rassenideologie vor 100.000 Zuschauern.", icon: "🥇" },
+      { id: "hs_ns_oly_propaganda", x: 75, y: 50, label: "Leni Riefenstahls Olympia-Film", description: "Erste monumentale filmische Live-Inszenierung zur weltweiten Image-Täuschung über die Friedfertigkeit des Regimes.", icon: "🎥" },
+    ],
   },
   {
     id: "nsdap_pogromnacht_1938",
@@ -1234,6 +1885,11 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1000&q=80",
     tags: ["Pogromnacht", "9. November", "1938", "Synagoge", "Scherben", "Terror"],
     suggestedPrompt: "16-bit pixel art style Berlin street morning of November 10 1938, shattered shop window glass glittering on cobblestones outside family store, smoke rising from damaged synagogue dome in background, brave neighbor offering comfort in secret, retro tragedy visual",
+    hotspots: [
+      { id: "hs_ns_pogrom_synagoge", x: 48, y: 42, label: "Brennende Synagogen (9. Nov. 1938)", description: "Organisierter Staatsterror von SA und Gestapo: Über 1.400 Synagogen und Gebetshäuser standen in Flammen.", icon: "🔥" },
+      { id: "hs_ns_pogrom_scherben", x: 28, y: 68, label: "Zersplitterte Schaufenster ('Kristallnacht')", description: "Tausende jüdische Geschäfte und Wohnungen wurden geplündert und zerstört; Feuerwehr schützte nur Nachbarhäuser.", icon: "🪟" },
+      { id: "hs_ns_pogrom_deport", x: 75, y: 62, label: "30.000 Verhaftungen in KZ", description: "Massendeportation jüdischer Männer nach Buchenwald, Dachau und Sachsenhausen zur Erzwingung der Enteignung und Auswanderung.", icon: "🔒" },
+    ],
   },
   {
     id: "nsdap_weg_in_den_krieg_1939",
@@ -1243,5 +1899,10 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     imageUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=80",
     tags: ["1. September 1939", "Kriegsausbruch", "Polen", "Zivilcourage", "Widerstand", "Gewissen"],
     suggestedPrompt: "16-bit pixel art style somber dawn September 1 1939, military trucks with camouflaged canvas tarps rolling out of city barracks towards eastern border, radio broadcast echoing in empty town square, citizen holding diary vowing to document truth, retro climactic finale scene",
+    hotspots: [
+      { id: "hs_ns_1939_gleiwitz", x: 35, y: 48, label: "Überfall auf Sender Gleiwitz", description: "Fingierter polnischer Angriff durch die SS als Propagandalüge: 'Seit 5:45 Uhr wird jetzt zurückgeschossen!'", icon: "📻" },
+      { id: "hs_ns_1939_panzer", x: 68, y: 58, label: "Überfall auf Polen (1. Sept. 1939)", description: "Beginn des Zweiten Weltkrieges: Kriegsschiff 'Schleswig-Holstein' beschießt die Westerplatte bei Danzig.", icon: "⚔️" },
+      { id: "hs_ns_1939_tagebuch", x: 22, y: 68, label: "Tagebuch & Chronist der Zivilcourage", description: "Trotz Todesstrafe für 'Wehrkraftzersetzung' hielten regimekritische Bürger die Wahrheit fest.", icon: "📖" },
+    ],
   },
 ];

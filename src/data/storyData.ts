@@ -418,6 +418,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Waset (Theben) – Aufruhr an den Docks von Luxor",
       milestoneTitle: "Runde 4 [Weg des Volkes]: Die Blockade der Nilschiffer",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r4_thebes_harbor_revolt_1", x: 50, y: 42, label: "Das Allerheiligste von Amun-Re", description: "Nur der Pharao und der Hohepriester durften den goldenen Schrein des Reichsgottes Amun betreten.", icon: "✨" },
+      { id: "hs_r4_thebes_harbor_revolt_2", x: 28, y: 58, label: "Große Säulenhalle (Hypostyl)", description: "134 gewaltige Sandsteinsäulen, die wie ein versteinerter Papyruswald den Urhügel der Schöpfung nachbilden.", icon: "🏛️" },
+      { id: "hs_r4_thebes_harbor_revolt_3", x: 75, y: 32, label: "Obelisk der Hatschepsut", description: "Ein monolithischer Granitfinger, dessen vergoldete Spitze die ersten Sonnenstrahlen des Morgens einfing.", icon: "☀️" },
+    ],
       branchCondition: { requiredStatHigher: 'volk' },
       situation: {
         unterstufe: "Tumult an den Docks von Theben! Die Ruderer und Lastenträger weigern sich weiterzufahren. Sie behaupten, die Fracht sei überladen und sie hätten seit Tagen keinen gerechten Lohn erhalten.",
@@ -493,6 +498,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Das Westufer von Theben – Tal der Könige",
       milestoneTitle: "Runde 5: MEILENSTEIN & REFLEXION I (Gleichgewicht)",
       imagePath: "/assets/thebes_karnak.jpg",
+    hotspots: [
+      { id: "hs_r5_reflection_west_thebes_maat_1", x: 42, y: 52, label: "Versiegelte Grabpforte", description: "Tonnenschwere Felsstürze mit den Siegeln der Nekropolenwächter (Schakal des Anubis) schützten die Pharaonenruhe.", icon: "🔒" },
+      { id: "hs_r5_reflection_west_thebes_maat_2", x: 72, y: 45, label: "Das Amduat-Buch", description: "Mystische Wandmalereien schildern die zwölfstündige Reise des Sonnengottes durch die Unterwelt.", icon: "📜" },
+      { id: "hs_r5_reflection_west_thebes_maat_3", x: 22, y: 68, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
+    ],
       situation: {
         unterstufe: "Halte inne, tapferer Reisender! Du hast das erste Viertel deiner Reise gemeistert. Wie steht es um dein Reich und deine Werte?",
         mittelstufe: "Erste Zäsur der Reise bei den Königsgräbern des Westufers: Prüfe die Balance deiner Macht zwischen Volk, Adel, Priestern und den Göttern.",
@@ -563,6 +573,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Das Westufer von Theben – Die Wachtürme der Wüste",
       milestoneTitle: "Runde 5: MEILENSTEIN & REFLEXION I (Krieg & Schutz)",
       imagePath: "/assets/thebes_karnak.jpg",
+    hotspots: [
+      { id: "hs_r5_reflection_west_thebes_military_1", x: 42, y: 52, label: "Versiegelte Grabpforte", description: "Tonnenschwere Felsstürze mit den Siegeln der Nekropolenwächter (Schakal des Anubis) schützten die Pharaonenruhe.", icon: "🔒" },
+      { id: "hs_r5_reflection_west_thebes_military_2", x: 72, y: 45, label: "Das Amduat-Buch", description: "Mystische Wandmalereien schildern die zwölfstündige Reise des Sonnengottes durch die Unterwelt.", icon: "📜" },
+      { id: "hs_r5_reflection_west_thebes_military_3", x: 22, y: 68, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
+    ],
       situation: {
         unterstufe: "An den Wachtürmen am Wüstenrand brennen Wachfeuer. Beduinenreiter beobachten eure Flotte aus der Ferne. Wie richtest du deine Expedition für die Weiterfahrt aus?",
         mittelstufe: "Zwischenstation bei den westlichen Grenzfestungen Thebens: Militärische Späher melden Karawanenüberfälle. Setzt du auf Aufrüstung, Diplomatie oder religiösen Schutz?",
@@ -637,6 +652,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Dendera – Das Haus der Sternengöttin Hathor",
       milestoneTitle: "Runde 6 [Weg der Sterne]: Der Himmelskalender von Dendera",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r6_dendera_astronomy_1", x: 52, y: 40, label: "Monumentaler Tempelpylon", description: "Riesige Reliefs zeigen den Pharao beim rituellen Opfern vor dem Himmelsfalken Horus.", icon: "🏛️" },
+      { id: "hs_r6_dendera_astronomy_2", x: 30, y: 62, label: "Horus-Granitstatue", description: "Kolossale Falke-Skulptur aus schwarzem Granit mit Doppelkrone bewacht den Eingang des Heiligtums.", icon: "🦅" },
+      { id: "hs_r6_dendera_astronomy_3", x: 76, y: 60, label: "Tempel-Kornkammern", description: "Unterirdische Getreidesilos, aus denen die Priester Notzeiten überbrückten und Prozessionsbrote backten.", icon: "🌾" },
+    ],
       situation: {
         unterstufe: "Ihr macht Halt in Dendera. Es ist Neujahr! Die Priesterinnen der Hathor tanzen mit Sistren und laden das Volk zu Musik und Feier ein.",
         mittelstufe: "Im Hathor-Tempel von Dendera wird der Aufgang des Sterns Sirius beobachtet, der die Nilflut ankündigt. Die Priesterinnen bitten um edle Öle für das Spiegelritual.",
@@ -707,6 +727,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Dendera – Das Sanatorium der heilenden Wasser",
       milestoneTitle: "Runde 6 [Weg der Heilung]: Das Seuchen-Lazarett",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r6_dendera_healing_1", x: 52, y: 40, label: "Monumentaler Tempelpylon", description: "Riesige Reliefs zeigen den Pharao beim rituellen Opfern vor dem Himmelsfalken Horus.", icon: "🏛️" },
+      { id: "hs_r6_dendera_healing_2", x: 30, y: 62, label: "Horus-Granitstatue", description: "Kolossale Falke-Skulptur aus schwarzem Granit mit Doppelkrone bewacht den Eingang des Heiligtums.", icon: "🦅" },
+      { id: "hs_r6_dendera_healing_3", x: 76, y: 60, label: "Tempel-Kornkammern", description: "Unterirdische Getreidesilos, aus denen die Priester Notzeiten überbrückten und Prozessionsbrote backten.", icon: "🌾" },
+    ],
       situation: {
         unterstufe: "Im Sanatorium von Dendera liegen kranke Ruderer und Fischer mit Nilfieber. Die Ärzte bitten dich um Heilkräuter und sauberes Wasser aus den königlichen Vorräten.",
         mittelstufe: "Ein Ausbruch von Wasserfieber schwächt die Hafenbevölkerung von Dendera. Teure Medizin aus Nubien könnte Leben retten, kostet aber Schätze deiner Expedition.",
@@ -781,6 +806,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Abydos – Die Grabstätte des Osiris",
       milestoneTitle: "Runde 7 [Weg der Ahnen]: Die Mysterien von Abydos",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r7_abydos_pilgrims_1", x: 52, y: 40, label: "Monumentaler Tempelpylon", description: "Riesige Reliefs zeigen den Pharao beim rituellen Opfern vor dem Himmelsfalken Horus.", icon: "🏛️" },
+      { id: "hs_r7_abydos_pilgrims_2", x: 30, y: 62, label: "Horus-Granitstatue", description: "Kolossale Falke-Skulptur aus schwarzem Granit mit Doppelkrone bewacht den Eingang des Heiligtums.", icon: "🦅" },
+      { id: "hs_r7_abydos_pilgrims_3", x: 76, y: 60, label: "Tempel-Kornkammern", description: "Unterirdische Getreidesilos, aus denen die Priester Notzeiten überbrückten und Prozessionsbrote backten.", icon: "🌾" },
+    ],
       situation: {
         unterstufe: "Ihr erreicht den heiligsten Pilgerort: Abydos! Hier soll der Gott Osiris begraben sein. Pilger aus allen Landesteilen ziehen mit kleinen Opfergaben den Hügel hinauf.",
         mittelstufe: "In Abydos finden die jährlichen Osiris-Mysterien statt. Ein Streit zwischen Schauspielern und Tempelwächtern droht zu eskalieren.",
@@ -851,6 +881,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Abydos – Die Nekropolenwache der Urkönige",
       milestoneTitle: "Runde 7 [Weg des Rechts]: Der Grabräuber-Prozess",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r7_abydos_tomb_robbery_1", x: 42, y: 52, label: "Versiegelte Grabpforte", description: "Tonnenschwere Felsstürze mit den Siegeln der Nekropolenwächter (Schakal des Anubis) schützten die Pharaonenruhe.", icon: "🔒" },
+      { id: "hs_r7_abydos_tomb_robbery_2", x: 72, y: 45, label: "Das Amduat-Buch", description: "Mystische Wandmalereien schildern die zwölfstündige Reise des Sonnengottes durch die Unterwelt.", icon: "📜" },
+      { id: "hs_r7_abydos_tomb_robbery_3", x: 22, y: 68, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
+    ],
       situation: {
         unterstufe: "Aufregung in den Grabhügeln von Abydos! Die Wächter haben Grabräuber gefasst, die goldenen Schmuck der allerersten Pharaonen stehlen wollten.",
         mittelstufe: "Ein spektakulärer Prozess in Abydos: Handwerker und korrupte Wachmänner wurden beim Aufbrechen uralter Königsgräber ertappt. Die Richter bitten dich um das Urteil.",
@@ -925,6 +960,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Asyut – Die Festung des Wegeöffners Upuaut",
       milestoneTitle: "Runde 8 [Weg des Handels]: Karawanen aus den Oasen",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r8_asyut_caravan_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
+      { id: "hs_r8_asyut_caravan_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
+      { id: "hs_r8_asyut_caravan_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+    ],
       situation: {
         unterstufe: "Bei Asyut treffen Wüstenkarawanen aus den tiefen Oasen ein. Sie bringen geheimnisvolle Steine, Weihrauch und wilde Tiere, aber auch Gerüchte über Beduinen-Überfälle auf Händler.",
         mittelstufe: "Asyut bewacht den Knotenpunkt zwischen Nil und den Karawanenrouten der Westwüste. Nomadenstämme bitten um Handelsrechte, doch der lokale Adel will sie vertreiben.",
@@ -995,6 +1035,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Asyut – Der Rote Sandsturm (Chamsin)",
       milestoneTitle: "Runde 8 [Weg der Elemente]: Der Zorn des Wüstengottes Seth",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r8_asyut_sandstorm_1", x: 32, y: 68, label: "Holzkeil-Spalttechnik", description: "Steinmetze treiben trockene Holzkeile in Bohrlöcher und tränken sie mit Wasser. Das quellende Holz sprengt Rosengranitblöcke ab.", icon: "⛏️" },
+      { id: "hs_r8_asyut_sandstorm_2", x: 64, y: 38, label: "Granit-Abbaustelle", description: "Aus diesen massiven Felswänden wurden Kolossalstatuen und Obelisken für Karnak und Gizeh herausgehauen.", icon: "🏛️" },
+      { id: "hs_r8_asyut_sandstorm_3", x: 78, y: 75, label: "Erster Nilkatarakt", description: "Gefährliche Stromschnellen bildeten die natürliche Südgrenze Ägyptens zum nubischen Reich.", icon: "🌊" },
+    ],
       situation: {
         unterstufe: "Der Himmel färbt sich unheilvoll blutrot! Ein gewaltiger Chamsin-Sandsturm rast aus der Libyschen Wüste auf eure Schiffe zu. Sandkörner peitschen wie Nadeln ins Gesicht.",
         mittelstufe: "Ein verheerender Staubsturm droht eure Lastkähne auf die felsigen Untiefen des Nils zu drücken. Segel reißen, Ruderer sehen kaum die eigene Hand vor Augen.",
@@ -1069,6 +1114,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Achet-Aton (Amarna) – Die Stadt der Sonnenscheibe",
       milestoneTitle: "Runde 9 [Weg der Sonne]: Die Sonnenrevolution Echnatons",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r9_amarna_aton_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
+      { id: "hs_r9_amarna_aton_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
+      { id: "hs_r9_amarna_aton_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+    ],
       situation: {
         unterstufe: "Ihr fahrt an den Ruinen einer seltsamen Stadt vorbei: Hier betete ein früherer Pharao nur noch die Sonnenscheibe Aton an und verbot alle anderen Götter. Doch die alten Priester hassen diese Erinnerung.",
         mittelstufe: "Bei Amarna liegt das Erbe der religiösen Revolution Echnatons. Einige Gelehrte wollen die verbotenen Hymnen retten, während Amun-Priester fordern, jeden Stein zu zerschlagen.",
@@ -1139,6 +1189,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Achet-Aton (Amarna) – Die Werkstatt des Bildhauers Thutmosis",
       milestoneTitle: "Runde 9 [Weg der Kunst]: Die geretteten Meisterwerke",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r9_amarna_artists_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
+      { id: "hs_r9_amarna_artists_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
+      { id: "hs_r9_amarna_artists_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+    ],
       situation: {
         unterstufe: "In einer verlassenen Bildhauerwerkstatt am Ufer entdeckt ihr wunderschöne Skulpturen und bunte Wandmalereien aus Gips und Kalkstein. Die Künstler flehen dich an, ihre Kunstwerke auf deinen Schiffen nach Norden zu retten.",
         mittelstufe: "Kulturgüter in Gefahr: Die lebensechten Porträts der Amarna-Künstler sollen von Tempelwächtern zertrümmert werden. Rettest du die Kunst oder fürchtest du den Bann der Orthodoxie?",
@@ -1213,6 +1268,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Hermopolis Magna (Chmunu) – Die Stadt des Thot",
       milestoneTitle: "Runde 10: MEILENSTEIN & REFLEXION II (Halbzeit der Reise)",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r10_hermopolis_thot_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
+      { id: "hs_r10_hermopolis_thot_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
+      { id: "hs_r10_hermopolis_thot_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+    ],
       situation: {
         unterstufe: "Halbzeit der Expedition! Ihr erreicht Hermopolis, die Stadt des Gottes Thot – Schutzherr aller Schreiber, Zahlen und Weisheit. Wie klug führst du deine Expedition bisher?",
         mittelstufe: "Die Schiffe legen bei Chmunu an. Die Schriftgelehrten fordern dich auf, Rechenschaft abzulegen über deine Erfolge, Vorräte und Werte.",
@@ -1283,6 +1343,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Hermopolis – Der Schatzkammer-Audit des Wesirs",
       milestoneTitle: "Runde 10: MEILENSTEIN & REFLEXION II (Die Schatzprüfung)",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r10_hermopolis_treasury_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
+      { id: "hs_r10_hermopolis_treasury_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
+      { id: "hs_r10_hermopolis_treasury_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+    ],
       situation: {
         unterstufe: "Der oberste Schatzmeister des Reiches betritt euer Schiff mit Papyrusrollen und Waagschalen. Er will genau wissen, wie sparsam oder verschwenderisch du bisher regiert hast!",
         mittelstufe: "Reichsfinanzprüfung zur Halbzeit: Der Wesir verlangt eine genaue Gegenüberstellung deiner Abgaben, Ausgaben und Vorräte. Wie bilanzierst du deine bisherige Reise?",
@@ -1357,6 +1422,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Fajum & See Moeris – Das Grüne Paradies",
       milestoneTitle: "Runde 11 [Weg des Wassers]: Der Dammbruch am Moeris-See",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r11_fayum_flood_1", x: 48, y: 65, label: "Heilige Nilkrokodile", description: "Die Reptilien sonnen sich auf Sandbänken. Das Volk fürchtet und verehrt sie als irdische Verkörperung des Gottes Sobek.", icon: "🐊" },
+      { id: "hs_r11_fayum_flood_2", x: 25, y: 42, label: "Doppelheiligtum", description: "Der Tempel besitzt zwei symmetrische Eingänge und Höfe: links für Sobek, rechts für den falkenköpfigen Haroeris.", icon: "🏛️" },
+      { id: "hs_r11_fayum_flood_3", x: 75, y: 55, label: "Brunnen-Nilometer", description: "Tiefer Treppenschacht zur exakten Pegelmessung der jährlichen Nilschwemme zur Steuerberechnung.", icon: "📏" },
+    ],
       situation: {
         unterstufe: "Ihr nähert euch der Fayum-Oase. Durch Kanäle wurde die Wüste in Weizenfelder verwandelt. Doch ein Dammbruch bedroht die Bauernhöfe!",
         mittelstufe: "Am Moeris-See droht eine Deichkatastrophe. Wenn die Schleusentore nicht gestützt werden, ersaufen tausende Morgen wertvoller Ackerfläche.",
@@ -1427,6 +1497,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Fajum – Die Jagdgründe des Krokodilsgottes",
       milestoneTitle: "Runde 11 [Weg der Wildnis]: Die Jagd im Papyrusdickicht",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r11_fayum_granary_expansion_1", x: 48, y: 65, label: "Heilige Nilkrokodile", description: "Die Reptilien sonnen sich auf Sandbänken. Das Volk fürchtet und verehrt sie als irdische Verkörperung des Gottes Sobek.", icon: "🐊" },
+      { id: "hs_r11_fayum_granary_expansion_2", x: 25, y: 42, label: "Doppelheiligtum", description: "Der Tempel besitzt zwei symmetrische Eingänge und Höfe: links für Sobek, rechts für den falkenköpfigen Haroeris.", icon: "🏛️" },
+      { id: "hs_r11_fayum_granary_expansion_3", x: 75, y: 55, label: "Brunnen-Nilometer", description: "Tiefer Treppenschacht zur exakten Pegelmessung der jährlichen Nilschwemme zur Steuerberechnung.", icon: "📏" },
+    ],
       situation: {
         unterstufe: "In den Schilfwäldern des Fayum wimmelt es von Vögeln, Flusspferden und Fischen. Adlige Jäger wollen mit Wurfhölzern jagen, doch Bauern warnen vor zerstörten Brutstätten.",
         mittelstufe: "Konflikt im Naturschutzgebiet des Fajum: Die höfische Jagdgesellschaft beansprucht die Sümpfe, während lokale Fischer um ihre Existenzgrundlage bangen.",
@@ -1501,6 +1576,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Meidum – Der Kollaps der falschen Pyramide",
       milestoneTitle: "Runde 12 [Weg der Statik]: Die Warnung der Architekten",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r12_meidum_collapse_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
+      { id: "hs_r12_meidum_collapse_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
+      { id: "hs_r12_meidum_collapse_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+    ],
       situation: {
         unterstufe: "Am Horizont ragt ein seltsamer Felsturm empor: Die Pyramide von Meidum! Frühere Bauherren machten Fehler beim Bauwinkel. Die Baumeister streiten über den besten Winkel für Gizeh.",
         mittelstufe: "In Meidum siehst du die Überreste kühner architektonischer Experimente. Der Oberbaumeister bittet dich um eine Richtungsentscheidung für die Neigung der Pyramidenflanken.",
@@ -1571,6 +1651,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Meidum – Die Rampenbauer des Snofru",
       milestoneTitle: "Runde 12 [Weg der Logistik]: Der Kampf um die Ziehrampen",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r12_meidum_quarry_strike_1", x: 32, y: 68, label: "Holzkeil-Spalttechnik", description: "Steinmetze treiben trockene Holzkeile in Bohrlöcher und tränken sie mit Wasser. Das quellende Holz sprengt Rosengranitblöcke ab.", icon: "⛏️" },
+      { id: "hs_r12_meidum_quarry_strike_2", x: 64, y: 38, label: "Granit-Abbaustelle", description: "Aus diesen massiven Felswänden wurden Kolossalstatuen und Obelisken für Karnak und Gizeh herausgehauen.", icon: "🏛️" },
+      { id: "hs_r12_meidum_quarry_strike_3", x: 78, y: 75, label: "Erster Nilkatarakt", description: "Gefährliche Stromschnellen bildeten die natürliche Südgrenze Ägyptens zum nubischen Reich.", icon: "🌊" },
+    ],
       situation: {
         unterstufe: "An den gigantischen Erdrampen von Meidum ist eine schwere Holzstrebe gebrochen. Ein tonnenschwerer Steinblock rutscht ab und blockiert den Hauptzugang für die Transportschlitten.",
         mittelstufe: "Kritischer Rampenschaden: Ohne sofortige Stabilisierung droht die gesamte hölzerne Ziehrampe abzustürzen. Hunderte Arbeiter müssten wochenlang im Schlamm warten.",
@@ -1645,6 +1730,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Dahschur – Das Glänzen der Roten Pyramide",
       milestoneTitle: "Runde 13 [Weg des Metalls]: Die Kupferwerkzeuge der Steinmetze",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r13_dahshur_copper_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
+      { id: "hs_r13_dahshur_copper_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
+      { id: "hs_r13_dahshur_copper_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+    ],
       situation: {
         unterstufe: "In Dahschur glänzt der rötliche Kalkstein. Doch es gibt ein Problem: Tausende Meißel aus Kupfer sind stumpf oder verbogen, und die Minen auf dem Sinai senden keine Lieferungen!",
         mittelstufe: "Akute Ressourcenkrise bei Dahschur: Ohne frisches Sinai-Kupfer stockt das Glätten der Verkleidungssteine. Eine Expedition in die Wüste Sinai ist teuer.",
@@ -1715,6 +1805,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Dahschur – Der weiße Tura-Kalkstein",
       milestoneTitle: "Runde 13 [Weg der Verkleidung]: Das weiße Leuchten",
       imagePath: "/assets/nile_banner.jpg",
+    hotspots: [
+      { id: "hs_r13_dahshur_white_casing_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
+      { id: "hs_r13_dahshur_white_casing_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
+      { id: "hs_r13_dahshur_white_casing_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+    ],
       situation: {
         unterstufe: "Aus den Steinbrüchen von Tura auf der anderen Nilseite treffen weiße Kalksteinblöcke ein. Sie sind so glatt poliert, dass sie wie Schnee in der Wüstensonne strahlen. Doch ein Frachter hat Leck geschlagen!",
         mittelstufe: "Havarie eines Schwertransporters vor Dahschur: Kostbare Verkleidungsblöcke aus schneeweißem Tura-Kalkstein drohen im Schlamm des Nils zu versinken.",
@@ -1789,6 +1884,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Sakkara – Das Meisterwerk des Imhotep",
       milestoneTitle: "Runde 14 [Weg der Weisheit]: Auf den Spuren des ersten Genies",
       imagePath: "/assets/saqqara.jpg",
+    hotspots: [
+      { id: "hs_r14_saqqara_imhotep_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
+      { id: "hs_r14_saqqara_imhotep_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
+      { id: "hs_r14_saqqara_imhotep_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+    ],
       situation: {
         unterstufe: "Ihr steht vor der ältesten Steinpyramide: Der Stufenpyramide von Sakkara! Hier erfand der Arzt und Architekt Imhotep das Bauen mit Stein. Ein junger Schreiber bittet dich um Rat.",
         mittelstufe: "In Sakkara begegnen sich Medizin, Baukunst und Totenkult. Der Hohepriesterrat streitet über die Zulassung neuer medizinischer Papyrusrollen.",
@@ -1859,6 +1959,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Sakkara – Das Serapeum & der Heilige Apis-Stier",
       milestoneTitle: "Runde 14 [Weg des Heiligen Stiers]: Die Weihe des Apis",
       imagePath: "/assets/saqqara.jpg",
+    hotspots: [
+      { id: "hs_r14_saqqara_serapeum_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
+      { id: "hs_r14_saqqara_serapeum_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
+      { id: "hs_r14_saqqara_serapeum_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+    ],
       situation: {
         unterstufe: "In den unterirdischen Hallen von Sakkara wird der heilige Apis-Stier verehrt. Doch der bisherige Stier ist friedlich entschlafen. Die Priester suchen im ganzen Niltal nach dem neuen Kälbchen mit den heiligen Merkmalen.",
         mittelstufe: "Kultische Nachfolgekrise in Sakkara: Die Wahl des neuen Apis-Stiers entscheidet über das Wohlwollen der Götter für die nahende Krönungszeremonie.",
@@ -1933,6 +2038,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Memphis (Ineb-Hedj) – Die Weiße Mauer der Hauptstadt",
       milestoneTitle: "Runde 15: MEILENSTEIN & REFLEXION III (Vor den Toren)",
       imagePath: "/assets/giza_site.jpg",
+    hotspots: [
+      { id: "hs_r15_memphis_gates_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_r15_memphis_gates_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r15_memphis_gates_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
       situation: {
         unterstufe: "Du stehst vor Memphis, der uralten Hauptstadt mit ihren gewaltigen weißen Mauern! Drei Viertel deiner Reise sind vollbracht. Nun trennen dich nur noch wenige Meilen von Gizeh. Prüfe deine Werte!",
         mittelstufe: "Das Hauptquartier des Reiches empfängt deine Expeditionsflotte. Vor dem Einzug verlangt der Hofstaat eine Überprüfung deiner Regentschaftsfähigkeit.",
@@ -2003,6 +2113,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Memphis – Die Große Heerschau vor der Residenz",
       milestoneTitle: "Runde 15: MEILENSTEIN & REFLEXION III (Die Parade der Streitwagen)",
       imagePath: "/assets/giza_site.jpg",
+    hotspots: [
+      { id: "hs_r15_memphis_army_review_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_r15_memphis_army_review_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r15_memphis_army_review_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
       situation: {
         unterstufe: "Vor den Mauern von Memphis paradieren Regimenter mit Bronzeäxten, Bogen und Leopardenfell-Standarten. Die Generäle salutieren vor deinem Schiff. Wie stellst du die Armee für die Krönung auf?",
         mittelstufe: "Große Militärparade in der Reichshauptstadt: Die Streitkräfte verlangen die Bestätigung ihrer Privilegien und ihres Anteils an den Bauressourcen.",
@@ -2077,6 +2192,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Das Plateau von Gizeh – Am Fuße der Pyramiden",
       milestoneTitle: "Runde 16: Die Schatten der Riesen",
       imagePath: "/assets/giza_site.jpg",
+    hotspots: [
+      { id: "hs_r16_giza_harbor_flood_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_r16_giza_harbor_flood_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r16_giza_harbor_flood_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
       situation: {
         unterstufe: "Du hast es geschafft: Vor dir erheben sich die unvorstellbar riesigen Pyramiden! Schiffe ankern im Hafenbecken. Zehntausende Arbeiter transportieren Blöcke.",
         mittelstufe: "Ankunft am Bauplatz von Gizeh. Eine Flutwelle hat Kaianlagen beschädigt; Schiffe drohen zu zerschellen, wenn nicht gehandelt wird.",
@@ -2147,6 +2267,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Das Plateau von Gizeh – Die Vermessung der Nordachse",
       milestoneTitle: "Runde 16: Die Sterne der Ewigkeit",
       imagePath: "/assets/giza_site.jpg",
+    hotspots: [
+      { id: "hs_r16_giza_sandstorm_hazard_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_r16_giza_sandstorm_hazard_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r16_giza_sandstorm_hazard_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
       situation: {
         unterstufe: "Auf dem Felsplateau stehen Hofastronomen mit Peilstöcken und Senkbleien. Sie müssen die Grundlinien der Pyramide exakt nach den vier Himmelsrichtungen ausrichten, bevor das Fundament gegossen wird.",
         mittelstufe: "Präzisionsvermessung auf dem Gizeh-Plateau: Die Ausrichtung nach dem unvergänglichen Polarstern entscheidet über die kosmische Vollkommenheit des Bauwerks.",
@@ -2221,6 +2346,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Heit el-Ghurab – Die Stadt der Pyramidenbauer",
       milestoneTitle: "Runde 17: Fleisch, Bier oder Streik?",
       imagePath: "/assets/giza_site.jpg",
+    hotspots: [
+      { id: "hs_r17_workers_strike_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_r17_workers_strike_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r17_workers_strike_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
       situation: {
         unterstufe: "Im Arbeiterdorf riecht es nach Brot und Knoblauch. Doch heute gibt es Streit: Die Bäcker haben kein Getreide für Starkbier, und die Maurer weigern sich weiterzuarbeiten!",
         mittelstufe: "In der Arbeitersiedlung droht der erste dokumentierte Arbeiterstreik. Die Verpflegung mit proteinreicher Nahrung und Bier ist ins Stocken geraten.",
@@ -2291,6 +2421,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Heit el-Ghurab – Das Baustellenlazarett von Gizeh",
       milestoneTitle: "Runde 17: Gebrochene Knochen & Salbentöpfe",
       imagePath: "/assets/giza_site.jpg",
+    hotspots: [
+      { id: "hs_r17_workers_medical_crisis_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_r17_workers_medical_crisis_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r17_workers_medical_crisis_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
       situation: {
         unterstufe: "Im Lazarett der Arbeiterstadt liegen Steinmetze mit gebrochenen Armen und staubigen Lungen. Die leitenden Ärzte bitten um teures Zedernharz und Leinenbinden für Notoperationen.",
         mittelstufe: "Schwere Arbeitsunfälle auf den oberen Pyramidenstufen fordern die medizinische Versorgung heraus. Spare an Verbandsstoffen oder investiere in das Wohlergehen der Baumeister?",
@@ -2365,6 +2500,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Vor den Pranken der Großen Sphinx (Hor-em-achet)",
       milestoneTitle: "Runde 18: Der Blick des Löwenmenschen",
       imagePath: "/assets/sphinx.jpg",
+    hotspots: [
+      { id: "hs_r18_sphinx_sand_oath_1", x: 48, y: 38, label: "Antlitz des Königs (Khafre)", description: "Der Kopf der Sphinx trägt das Nemes-Kopftuch mit Uräusschlange als Zeichen absoluter Schutzmacht.", icon: "👑" },
+      { id: "hs_r18_sphinx_sand_oath_2", x: 35, y: 68, label: "Löwenpranken aus Monolithfels", description: "Aus einem einzigen natürlichen Kalksteinrücken herausgehauen, symbolisiert er Stärke und Wachsamkeit.", icon: "🦁" },
+      { id: "hs_r18_sphinx_sand_oath_3", x: 62, y: 62, label: "Traumstele Thutmosis' IV.", description: "Zwischen den Pranken berichtet eine Granitstele vom Traum des Prinzen, der die Sphinx vom Wüstensand befreite.", icon: "📜" },
+    ],
       situation: {
         unterstufe: "Ihr steht vor der gigantischen Sphinx! Der Löwenkörper mit dem Gesicht des Königs blickt zur aufgehenden Sonne. Der Wüstenwind hat den Leib halb mit Sand zugeweht.",
         mittelstufe: "Vor der Sphinx versammeln sich Priester. Der Sonnengott fordert ein Gelöbnis: Welches Symbol prägt deine Identität als Herrscher?",
@@ -2435,6 +2575,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Vor der Sphinx – Die Tagundnachtgleiche (Äquinoktium)",
       milestoneTitle: "Runde 18: Der Schatten des Horizonts",
       imagePath: "/assets/sphinx.jpg",
+    hotspots: [
+      { id: "hs_r18_sphinx_solar_alignment_1", x: 48, y: 38, label: "Antlitz des Königs (Khafre)", description: "Der Kopf der Sphinx trägt das Nemes-Kopftuch mit Uräusschlange als Zeichen absoluter Schutzmacht.", icon: "👑" },
+      { id: "hs_r18_sphinx_solar_alignment_2", x: 35, y: 68, label: "Löwenpranken aus Monolithfels", description: "Aus einem einzigen natürlichen Kalksteinrücken herausgehauen, symbolisiert er Stärke und Wachsamkeit.", icon: "🦁" },
+      { id: "hs_r18_sphinx_solar_alignment_3", x: 62, y: 62, label: "Traumstele Thutmosis' IV.", description: "Zwischen den Pranken berichtet eine Granitstele vom Traum des Prinzen, der die Sphinx vom Wüstensand befreite.", icon: "📜" },
+    ],
       situation: {
         unterstufe: "Es ist der Tag der Tagundnachtgleiche! Wenn die Sonne genau im Osten aufgeht, versinkt sie am Abend exakt zwischen den Pyramiden von Cheops und Chephren. Die Menge hält den Atem an.",
         mittelstufe: "Kosmisches Schattenspiel vor der Sphinx: Der König muss das Ritual der Vereinigung von Licht und Schatten leiten, um die Harmonie der Welt zu bekräftigen.",
@@ -2509,6 +2654,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Die Spitze der Großen Pyramide – 146 Meter Höhe",
       milestoneTitle: "Runde 19: Das Pyramidion aus Elektron",
       imagePath: "/assets/giza_site.jpg",
+    hotspots: [
+      { id: "hs_r19_pyramidion_gold_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_r19_pyramidion_gold_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r19_pyramidion_gold_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
       situation: {
         unterstufe: "Der feierlichste Moment ist da! Der letzte Schlussstein – das spitze Pyramidion aus glänzendem Elektron (Gold und Silber) – soll auf die Spitze gehoben werden. Alle halten den Atem an.",
         mittelstufe: "Das Pyramidion steht auf der obersten Plattform bereit. Wer soll die Ehre haben, den Schlussstein an seinen Platz zu setzen?",
@@ -2579,6 +2729,11 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       locationName: "Das Hochplateau von Gizeh – Die Nachtwache vor dem Thron",
       milestoneTitle: "Runde 19: Die Flammen der ewigen Nacht",
       imagePath: "/assets/giza_site.jpg",
+    hotspots: [
+      { id: "hs_r19_pyramidion_night_vigil_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
+      { id: "hs_r19_pyramidion_night_vigil_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r19_pyramidion_night_vigil_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
+    ],
       situation: {
         unterstufe: "Es ist die letzte Nacht vor der Krönung. Tausende Fackeln erhellen das Plateau von Gizeh wie ein Sternenmeer. Älteste und Schreiber treten an dein Zelt und fragen: 'Bist du bereit für die Last der Doppelkrone?'",
         mittelstufe: "Die Nachtwache der Einkehr: Am Vorabend der Thronbesteigung bittest du um letzte Ratschläge deiner Vertrauten. Wo setzt du deine Priorität für die Regentschaft?",
