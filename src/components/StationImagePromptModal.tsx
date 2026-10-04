@@ -13,6 +13,8 @@ import {
   Image as ImageIcon,
   CheckCircle,
   HelpCircle,
+  FolderOpen,
+  Upload,
 } from 'lucide-react';
 import { geminiRotationService } from '../services/geminiRotation';
 import { ArtStyleType, StationHotspot } from '../types/game';
@@ -45,8 +47,8 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
   onSelectImage,
   onUpdateHotspots,
 }) => {
-  // Active Tab: 'prompt' (Generieren) | 'gallery' (Fertiger Pool) | 'hotspots' (Entdecker-Punkte Editor)
-  const [activeTab, setActiveTab] = useState<'prompt' | 'gallery' | 'hotspots'>('prompt');
+  // Active Tab: 'prompt' (Generieren) | 'gallery' (Fertiger Pool) | 'hotspots' (Entdecker-Punkte Editor) | 'upload' (Google Drive & Upload)
+  const [activeTab, setActiveTab] = useState<'prompt' | 'gallery' | 'hotspots' | 'upload'>('prompt');
   
   // Style Selector State
   const [selectedStyle, setSelectedStyle] = useState<ArtStyleType>(currentArtStyle);
@@ -102,6 +104,32 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
   const [isGeneratingImage, setIsGeneratingImage] = useState<boolean>(false);
   const [generatedImageUrl, setGeneratedImageUrl] = useState<string | null>(null);
   const [generationError, setGenerationError] = useState<string | null>(null);
+
+  // Custom URL & Drive Upload State
+  const [customUrlInput, setCustomUrlInput] = useState<string>('');
+  const [uploadSuccessNotice, setUploadSuccessNotice] = useState<string | null>(null);
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result as string;
+      soundFX.playBlessing();
+      onSelectImage(result);
+      setUploadSuccessNotice(`Bild "${file.name}" für Station ${roundNumber} übernommen!`);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleApplyCustomUrl = () => {
+    if (!customUrlInput.trim()) return;
+    soundFX.playBlessing();
+    onSelectImage(customUrlInput.trim());
+    setUploadSuccessNotice('Bild-URL erfolgreich für Station übernommen!');
+    onClose();
+  };
 
   // Hotspot Editor State
   const [localHotspots, setLocalHotspots] = useState<StationHotspot[]>(
@@ -262,6 +290,21 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
           >
             <MapPin className="w-4 h-4 text-amber-400" />
             <span>Entdecker-Punkte Editor ({localHotspots.length})</span>
+          </button>
+
+          <button
+            onClick={() => {
+              soundFX.playClick();
+              setActiveTab('upload');
+            }}
+            className={`flex items-center gap-2 py-3 px-4 font-bold text-xs border-b-2 transition-all ${
+              activeTab === 'upload'
+                ? 'border-amber-400 text-amber-300 bg-amber-500/10'
+                : 'border-transparent text-stone-400 hover:text-stone-200'
+            }`}
+          >
+            <FolderOpen className="w-4 h-4 text-amber-400" />
+            <span>Eigenes Bild & Google Drive</span>
           </button>
         </div>
 
@@ -758,6 +801,97 @@ export const StationImagePromptModal: React.FC<StationImagePromptModalProps> = (
                       </>
                     );
                   })()}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 4: GOOGLE DRIVE & EIGENES BILD */}
+          {activeTab === 'upload' && (
+            <div className="space-y-5 animate-fade-in">
+              {/* Google Drive Direct Folder Banner */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-amber-950/60 to-stone-900 border border-amber-600/60 shadow-lg space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-xs font-bold text-amber-300">
+                    <FolderOpen className="w-5 h-5 text-amber-400" />
+                    <span>Zentraler Google Drive Ordner für dieses Spiel</span>
+                  </div>
+                  <span className="text-[10px] font-mono text-amber-300 bg-black/60 px-2 py-0.5 rounded border border-amber-800/40">
+                    Ordner-ID: 1HMsm3Bl...
+                  </span>
+                </div>
+                <p className="text-xs text-stone-300 leading-relaxed">
+                  Bilder, die du mit Midjourney, DALL-E, Google Imagen oder Canva erstellt hast, kannst du direkt in deinem Google Drive Ordner ablegen oder hier für diese Station hochladen.
+                </p>
+                <div>
+                  <a
+                    href="https://drive.google.com/drive/folders/1HMsm3Bl6WziQdpMZK1t3FypCsQHs22jG"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs shadow-md transition-all cursor-pointer hover:scale-102"
+                  >
+                    <FolderOpen className="w-4 h-4" />
+                    <span>Google Drive Ordner im neuen Tab öffnen</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+
+              {/* Upload Success Alert */}
+              {uploadSuccessNotice && (
+                <div className="p-3.5 rounded-xl bg-emerald-950/80 border border-emerald-500 text-emerald-200 text-xs flex items-center gap-2 animate-fade-in">
+                  <CheckCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>{uploadSuccessNotice}</span>
+                </div>
+              )}
+
+              {/* Local File Upload Section */}
+              <div className="p-5 rounded-2xl bg-stone-900/90 border border-stone-800 space-y-3">
+                <h3 className="text-xs font-bold text-amber-200 flex items-center gap-2">
+                  <Upload className="w-4 h-4 text-amber-400" />
+                  <span>Eigenes Bild von deinem Gerät hochladen:</span>
+                </h3>
+                <p className="text-xs text-stone-400">
+                  Wähle ein Bild (JPEG, PNG oder WEBP) aus. Es wird sofort als 16:9 Stationsbild für Station {roundNumber} ({locationName}) aktiviert.
+                </p>
+                <label className="flex items-center justify-center p-6 border-2 border-dashed border-stone-700 hover:border-amber-500 rounded-xl cursor-pointer bg-stone-950/60 transition-colors group">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="hidden"
+                  />
+                  <div className="text-center space-y-1.5">
+                    <Upload className="w-7 h-7 text-stone-400 group-hover:text-amber-400 mx-auto transition-colors" />
+                    <span className="text-xs text-stone-200 group-hover:text-amber-200 font-bold block">
+                      Hier klicken oder Bild-Datei ablegen
+                    </span>
+                    <span className="text-[10px] text-stone-500 block">
+                      JPEG, PNG, WebP bis 10 MB
+                    </span>
+                  </div>
+                </label>
+              </div>
+
+              {/* Custom Image URL Section */}
+              <div className="p-5 rounded-2xl bg-stone-900/90 border border-stone-800 space-y-3">
+                <h3 className="text-xs font-bold text-amber-200">
+                  Oder Bild per Web-URL einfügen:
+                </h3>
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    placeholder="https://images.unsplash.com/photo-..."
+                    value={customUrlInput}
+                    onChange={(e) => setCustomUrlInput(e.target.value)}
+                    className="flex-1 px-3.5 py-2.5 rounded-xl bg-stone-950 border border-stone-700 text-xs text-stone-200 focus:outline-none focus:ring-1 focus:ring-amber-500"
+                  />
+                  <button
+                    onClick={handleApplyCustomUrl}
+                    className="px-4 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 text-xs font-bold transition-all cursor-pointer"
+                  >
+                    Übernehmen
+                  </button>
                 </div>
               </div>
             </div>

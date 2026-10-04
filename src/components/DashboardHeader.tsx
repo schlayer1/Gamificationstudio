@@ -1,6 +1,6 @@
 import React from 'react';
 import { Stats, Skills, PlayerProfile } from '../types/game';
-import { Zap, Heart, ShieldAlert, Users, Sparkles, BookOpen, Volume2, VolumeX, Shield, Award, Sword } from 'lucide-react';
+import { Zap, Heart, ShieldAlert, Users, Sparkles, BookOpen, Volume2, VolumeX, Shield, Award, Sword, FolderOpen, ExternalLink } from 'lucide-react';
 import { soundFX } from '../utils/sound';
 
 interface DashboardHeaderProps {
@@ -127,6 +127,19 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               <span>🧙‍♂️</span>
               <span className="hidden md:inline font-bold">Lehrer-Studio</span>
             </button>
+
+            {/* Google Drive Cloud-Ordner Button */}
+            <a
+              href="https://drive.google.com/drive/folders/1HMsm3Bl6WziQdpMZK1t3FypCsQHs22jG"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-md bg-stone-900 border border-amber-600/60 text-amber-300 hover:text-white hover:bg-stone-800 transition-all cursor-pointer shadow-sm"
+              title="Google Drive Cloud-Ordner mit allen Spielen und Grafiken öffnen"
+            >
+              <FolderOpen className="w-3.5 h-3.5 text-amber-400" />
+              <span className="hidden md:inline font-bold">Drive-Ordner</span>
+              <ExternalLink className="w-2.5 h-2.5 text-stone-400" />
+            </a>
 
             {/* Lexicon / Archiv Button */}
             <button

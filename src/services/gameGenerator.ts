@@ -1,6 +1,7 @@
 import { geminiRotationService } from './geminiRotation';
 import { GameDefinition, PillarConfig, RoundStory, GradeLevel } from '../types/game';
 import { detectEraTheme } from '../utils/themeManager';
+import { PREDEFINED_HISTORY_ASSETS } from '../data/historyAssetPool';
 
 export interface GenerationRequest {
   title: string;
@@ -286,27 +287,49 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       };
       lexiconEntry.explanation[selectedGradeLevel] = explText;
 
-      // 4. Auto-assign matching historical artwork from asset pool
-      const locLower = (round.locationName || '').toLowerCase();
-      const eraLower = req.era.toLowerCase();
+      // 4. Auto-assign matching historical artwork from curated asset pool
+      const locText = `${round.locationName || ''} ${round.milestoneTitle || ''}`.toLowerCase();
+      const eraFull = `${req.era} ${req.title}`.toLowerCase();
+
+      // Filter assets matching the era
+      const eraAssets = PREDEFINED_HISTORY_ASSETS.filter((a) => {
+        const t = a.topic.toLowerCase();
+        const tags = a.tags.join(' ').toLowerCase();
+
+        if (eraFull.includes('rom') || eraFull.includes('caesar') || eraFull.includes('latein')) {
+          return t.includes('rom') || tags.includes('rom');
+        }
+        if (eraFull.includes('luther') || eraFull.includes('reformation') || eraFull.includes('thesen')) {
+          return t.includes('reformation') || tags.includes('luther');
+        }
+        if (eraFull.includes('steinzeit') || eraFull.includes('urzeit') || eraFull.includes('neolith')) {
+          return t.includes('steinzeit') || tags.includes('steinzeit');
+        }
+        if (eraFull.includes('griechen') || eraFull.includes('alexander') || eraFull.includes('athen')) {
+          return t.includes('griechen') || tags.includes('alexander');
+        }
+        if (eraFull.includes('mittelalter') || eraFull.includes('ritter') || eraFull.includes('burg')) {
+          return t.includes('mittelalter') || tags.includes('ritter');
+        }
+        return t.includes('ägypten') || tags.includes('ägypten');
+      });
+
+      // Try specific location keyword match first
+      const specificMatch = eraAssets.find((a) => {
+        const titleL = a.title.toLowerCase();
+        return a.tags.some((tag) => locText.includes(tag.toLowerCase())) || locText.includes(titleL);
+      });
 
       let matchedImg = '';
-      if (locLower.includes('jagd') || locLower.includes('mammut') || locLower.includes('nomad') || locLower.includes('lager')) {
-        matchedImg = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80';
-      } else if (locLower.includes('dorf') || locLower.includes('langhaus') || locLower.includes('acker') || locLower.includes('siedlung')) {
-        matchedImg = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
-      } else if (eraLower.includes('steinzeit') || eraLower.includes('neolith')) {
-        matchedImg = idx % 2 === 0
-          ? 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80'
-          : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
-      } else if (eraLower.includes('rom')) {
-        matchedImg = idx % 2 === 0
-          ? 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80'
-          : 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80';
-      } else if (eraLower.includes('luther') || eraLower.includes('reformation')) {
-        matchedImg = 'https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1200&q=80';
-      } else if (eraLower.includes('griechen') || eraLower.includes('alexander')) {
-        matchedImg = 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?auto=format&fit=crop&w=1200&q=80';
+      if (specificMatch) {
+        matchedImg = specificMatch.imageUrl;
+      } else if (eraAssets.length > 0) {
+        // Rotate through all assets of this historical era
+        matchedImg = eraAssets[idx % eraAssets.length].imageUrl;
+      } else {
+        // Fallback to detected era theme banner
+        const themeConfig = detectEraTheme(req.era + ' ' + req.title, req.archetype);
+        matchedImg = themeConfig.defaultBannerUrl || '/assets/nile_banner.jpg';
       }
 
       return {
@@ -315,7 +338,7 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         situation: situationObj,
         choices,
         lexiconEntry,
-        imagePath: round.imagePath || matchedImg || undefined,
+        imagePath: round.imagePath || matchedImg,
       };
     });
 

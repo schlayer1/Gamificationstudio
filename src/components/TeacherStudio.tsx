@@ -29,7 +29,9 @@ import {
   Unlock,
   Copy,
   X,
-  Image as ImageIcon
+  Image as ImageIcon,
+  FolderOpen,
+  ExternalLink
 } from 'lucide-react';
 import { StationImagePromptModal } from './StationImagePromptModal';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
@@ -283,6 +285,18 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
 
         {/* Top Actions: Wrapped & touch-optimized */}
         <div className="flex items-center flex-wrap gap-2 w-full sm:w-auto justify-between sm:justify-end">
+          <a
+            href="https://drive.google.com/drive/folders/1HMsm3Bl6WziQdpMZK1t3FypCsQHs22jG"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-xs text-amber-300 font-bold transition-all cursor-pointer shadow-sm hover:text-white"
+            title="Google Drive Cloud-Ordner mit allen Spielen und Grafiken öffnen"
+          >
+            <FolderOpen className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden xs:inline">Drive-Ordner</span>
+            <ExternalLink className="w-2.5 h-2.5 text-stone-400" />
+          </a>
+
           <button
             onClick={() => {
               soundFX.playClick();
@@ -489,12 +503,21 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       {/* FREIGEGEBENE SCHÜLER-SPIELE (Aktive Freigaben) */}
       {publishedGames.length > 0 && (
         <div className="p-5 rounded-2xl bg-stone-900/90 border border-emerald-600/60 shadow-xl space-y-3 animate-fade-in">
-          <div className="flex items-center justify-between border-b border-stone-800 pb-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-stone-800 pb-2 gap-2">
             <div className="flex items-center gap-2 text-emerald-300 text-sm font-bold">
               <Share2 className="w-4 h-4 text-emerald-400" />
               <span>Aktive Schüler-Freigaben ({publishedGames.length} Spiele freigeschaltet)</span>
             </div>
-            <span className="text-[11px] text-stone-400">Schüler treten mit dem Freigabe-Code bei</span>
+            <a
+              href="https://drive.google.com/drive/folders/1HMsm3Bl6WziQdpMZK1t3FypCsQHs22jG"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-xs text-amber-300 hover:text-amber-200 font-medium"
+            >
+              <FolderOpen className="w-3.5 h-3.5 text-amber-400" />
+              <span>Google Drive Cloud-Ordner öffnen</span>
+              <ExternalLink className="w-3 h-3 text-stone-400" />
+            </a>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
