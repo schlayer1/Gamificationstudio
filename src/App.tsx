@@ -11,14 +11,16 @@ import { TeacherStudio } from './components/TeacherStudio';
 import { StationImagePromptModal } from './components/StationImagePromptModal';
 import { StationHeroStage } from './components/StationHeroStage';
 import { ExpeditionMapModal } from './components/ExpeditionMapModal';
+import { EntryPortal } from './components/EntryPortal';
 import { soundFX } from './utils/sound';
 import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon } from 'lucide-react';
 import { detectEraTheme, ERA_THEMES } from './utils/themeManager';
 
 export const App: React.FC = () => {
-  // Game Lifecycle State
-  const [gameState, setGameState] = useState<'setup' | 'playing' | 'gameover' | 'ending' | 'studio'>('setup');
+  // Game Lifecycle State: portal (Code-Eingabe / Lehrer-Login) -> setup -> playing -> gameover / ending / studio
+  const [gameState, setGameState] = useState<'portal' | 'setup' | 'playing' | 'gameover' | 'ending' | 'studio'>('portal');
   const [activeGameDefinition, setActiveGameDefinition] = useState<GameDefinition | null>(null);
+  const [activeShareCode, setActiveShareCode] = useState<string | null>(null);
   const [profile, setProfile] = useState<PlayerProfile>({
     name: '',
     gradeLevel: 'mittelstufe',
@@ -275,12 +277,33 @@ export const App: React.FC = () => {
         />
       )}
 
+      {/* 0. ENTRY PORTAL STATE (Code-Eingabe für Schüler & Lehrer-PIN-Login) */}
+      {gameState === 'portal' && (
+        <EntryPortal
+          onJoinGameWithCode={(game, code) => {
+            setActiveGameDefinition(game);
+            setActiveShareCode(code);
+            setGameState('setup');
+          }}
+          onOpenTeacherStudio={() => {
+            setGameState('studio');
+          }}
+          onQuickStartDefault={(game) => {
+            setActiveGameDefinition(game);
+            setActiveShareCode('EGY01');
+            setGameState('setup');
+          }}
+        />
+      )}
+
       {/* 1. SETUP STATE */}
       {gameState === 'setup' && (
         <SetupScreen
           onStartGame={handleStartGame}
           onOpenStudio={() => setGameState('studio')}
+          onBackToPortal={() => setGameState('portal')}
           activeGame={activeGameDefinition}
+          activeCode={activeShareCode}
           onSelectGame={(game) => {
             setActiveGameDefinition(game);
           }}

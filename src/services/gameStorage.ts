@@ -41,19 +41,61 @@ export class GameStorageService {
   }
 
   /**
-   * Load all games published by the teacher
+   * Load all games published by the teacher (with EGY01 seeded if none exists)
    */
   public getPublishedGames(): PublishedGameRecord[] {
     if (typeof window === 'undefined') return [];
     try {
       const raw = localStorage.getItem(STORAGE_KEY_PUBLISHED_GAMES);
       if (raw) {
-        return JSON.parse(raw);
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          return parsed;
+        }
       }
     } catch (e) {
       console.error("Error loading published games:", e);
     }
-    return [];
+
+    // Default Seed: Ägypten Meisterspiel EGY01
+    const defaultEgypt: PublishedGameRecord = {
+      id: 'game_egypt_original',
+      shareCode: 'EGY01',
+      publishedAt: 'Offizielles Spiel',
+      isPublic: true,
+      game: {
+        id: 'game_egypt_original',
+        title: 'Helfer des Pharaos – Nil-Expedition',
+        subtitle: 'Von Elephantine nach Gizeh',
+        era: 'Altes Ägypten',
+        archetype: 'reigns_balance',
+        artStyle: 'pixel_art',
+        gradeLevel: 'mittelstufe',
+        eraThemeId: 'egypt_gold',
+        targetGrades: 'Klassenstufe 5/6 (Gymnasium & Sekundarstufe)',
+        coreTopics: ['Nilhochwasser', 'Ma\'at & Pharaonentum', 'Pyramidenbau', 'Hieroglyphen', 'Götterwelt'],
+        description: 'Reise auf dem Nil von Elephantine nach Gizeh, meistere 20 historische Runden und balanciere die 4 Mächte Ägyptens.',
+        pillars: [
+          { key: 'goetter', label: 'Götter / Ma\'at', icon: '⚡', description: 'Gunst der Götter und kosmische Ordnung' },
+          { key: 'priester', label: 'Priester / Kult', icon: '🙏', description: 'Einfluss der Tempel und Rituale' },
+          { key: 'adel', label: 'Adel / Hofstaat', icon: '👑', description: 'Macht der Nomarchen und Beamten' },
+          { key: 'volk', label: 'Volk / Bauern', icon: '😊', description: 'Zufriedenheit der Bauern und Steinmetze' },
+        ],
+        specialResourceName: 'Göttliche Gnade',
+        specialResourceEmoji: '🌟',
+        skillNames: {
+          skill1: 'Göttliche Auserwähltheit',
+          skill2: 'Politische Geschicklichkeit',
+          skill3: 'Militärische Stärke',
+        },
+        rounds: [], // Dynamic rounds resolved via storyData engine
+      },
+    };
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_PUBLISHED_GAMES, JSON.stringify([defaultEgypt]));
+    }
+    return [defaultEgypt];
   }
 
   /**

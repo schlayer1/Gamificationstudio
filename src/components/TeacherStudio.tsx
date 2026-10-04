@@ -95,6 +95,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [createdGamePreview, setCreatedGamePreview] = useState<GameDefinition | null>(null);
   const [publishedNotice, setPublishedNotice] = useState<string | null>(null);
   const [copiedShareCode, setCopiedShareCode] = useState<string | null>(null);
+  const [boardModalCode, setBoardModalCode] = useState<{ code: string; title: string } | null>(null);
 
   // Switch template
   const handleSelectTemplate = (tpl: PredefinedTemplate) => {
@@ -223,6 +224,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     const record = gameStorageService.publishGame(gameToPublish);
     setPublishedGames(gameStorageService.getPublishedGames());
     setPublishedNotice(`Spiel freigegeben! Freigabe-Code für Schüler: ${record.shareCode}`);
+    setBoardModalCode({ code: record.shareCode, title: gameToPublish.title });
   };
 
   const handleUnpublishGame = (gameId: string) => {
@@ -456,26 +458,36 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
                 </div>
 
                 <div className="pt-2 border-t border-stone-800/80 flex items-center justify-between gap-2">
-                  <button
-                    onClick={() => handleCopyCode(pub.shareCode)}
-                    className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 hover:text-emerald-300"
-                    title="Code für Beamer/Tafel kopieren"
-                  >
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>{copiedShareCode === pub.shareCode ? "Kopiert!" : "Code kopieren"}</span>
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleCopyCode(pub.shareCode)}
+                      className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 cursor-pointer"
+                      title="Code kopieren"
+                    >
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>{copiedShareCode === pub.shareCode ? "Kopiert!" : "Kopieren"}</span>
+                    </button>
+
+                    <button
+                      onClick={() => setBoardModalCode({ code: pub.shareCode, title: pub.game.title })}
+                      className="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/50 text-amber-300 text-[10px] font-bold hover:bg-amber-500/30 transition-colors cursor-pointer"
+                      title="Großanzeige für Beamer / Tafel"
+                    >
+                      📺 Tafel-Modus
+                    </button>
+                  </div>
 
                   <div className="flex items-center gap-1.5">
                     <button
                       onClick={() => onLoadGameToPlayer(pub.game)}
-                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200"
+                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 cursor-pointer"
                       title="Als Schüler starten"
                     >
                       <Play className="w-3.5 h-3.5 text-amber-400" />
                     </button>
                     <button
                       onClick={() => handleUnpublishGame(pub.id)}
-                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-red-900/60 text-stone-400 hover:text-red-300 transition-colors"
+                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-red-900/60 text-stone-400 hover:text-red-300 transition-colors cursor-pointer"
                       title="Freigabe beenden"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -962,6 +974,58 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
           setIsGalleryOpen(false);
         }}
       />
+
+      {/* TAFEL-MODUS GROSSANZEIGE FÜR BEAMER & SMARTBOARD */}
+      {boardModalCode && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 bg-black/90 backdrop-blur-md animate-fade-in text-stone-100">
+          <div className="w-full max-w-2xl p-8 sm:p-12 rounded-3xl bg-stone-950 border-4 border-amber-500 shadow-2xl text-center space-y-6 relative overflow-hidden">
+            <div className="absolute top-4 right-4">
+              <button
+                onClick={() => setBoardModalCode(null)}
+                className="p-2.5 rounded-2xl bg-stone-900 hover:bg-stone-800 text-stone-400 hover:text-white transition-colors cursor-pointer"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            <div className="space-y-2">
+              <span className="px-3.5 py-1 rounded-full bg-amber-500/20 border border-amber-500/60 text-amber-300 text-xs font-mono font-bold uppercase tracking-widest inline-block">
+                📺 Tafel- & Beamer-Anzeige für Schüler
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-stone-100 font-serif">
+                {boardModalCode.title}
+              </h2>
+              <p className="text-sm text-stone-300">
+                Schüler rufen die App auf und geben folgenden Code ein:
+              </p>
+            </div>
+
+            {/* Giant Classroom Code */}
+            <div className="py-8 px-6 rounded-3xl bg-stone-900/90 border-2 border-amber-400/80 shadow-inner flex flex-col items-center justify-center">
+              <span className="text-6xl sm:text-8xl font-black font-mono tracking-[0.25em] text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-400 select-all">
+                {boardModalCode.code}
+              </span>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
+              <button
+                onClick={() => handleCopyCode(boardModalCode.code)}
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-bold text-sm flex items-center justify-center gap-2 transition-all cursor-pointer shadow-lg"
+              >
+                <Copy className="w-4 h-4" />
+                <span>{copiedShareCode === boardModalCode.code ? "Code kopiert!" : "Code kopieren"}</span>
+              </button>
+
+              <button
+                onClick={() => setBoardModalCode(null)}
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-stone-800 hover:bg-stone-700 text-stone-200 font-bold text-sm transition-all cursor-pointer"
+              >
+                Schließen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

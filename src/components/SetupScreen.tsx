@@ -8,14 +8,18 @@ import { detectEraTheme, ERA_THEMES } from '../utils/themeManager';
 interface SetupScreenProps {
   onStartGame: (profile: PlayerProfile) => void;
   onOpenStudio?: () => void;
+  onBackToPortal?: () => void;
   activeGame?: GameDefinition | null;
+  activeCode?: string | null;
   onSelectGame?: (game: GameDefinition) => void;
 }
 
 export const SetupScreen: React.FC<SetupScreenProps> = ({
   onStartGame,
   onOpenStudio,
+  onBackToPortal,
   activeGame,
+  activeCode,
   onSelectGame,
 }) => {
   const [name, setName] = useState('');
@@ -107,48 +111,37 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
 
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-6 sm:py-10 flex flex-col items-center">
-      {/* Top action bar: Protected Teacher Access & Share Code Join */}
-      <div className="w-full flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 mb-5">
-        {/* Share code input for students */}
-        <form onSubmit={handleJoinWithCode} className="flex items-center gap-1.5 flex-1 max-w-sm">
-          <div className="relative flex-1">
-            <Share2 className="w-4 h-4 text-amber-400 absolute left-3 top-2.5" />
-            <input
-              type="text"
-              placeholder="Spiel-Code eingeben (z.B. ROM44)..."
-              value={shareCodeInput}
-              onChange={(e) => setShareCodeInput(e.target.value.toUpperCase())}
-              className="w-full pl-9 pr-3 py-2 rounded-xl bg-stone-900 border border-stone-800 text-xs font-mono font-bold text-amber-300 placeholder-stone-500 uppercase focus:outline-none focus:ring-1 focus:ring-amber-500"
-            />
-          </div>
+      {/* Top action bar: Back to Portal & Protected Teacher Access */}
+      <div className="w-full flex items-center justify-between gap-3 mb-5">
+        {onBackToPortal ? (
           <button
-            type="submit"
-            className="px-3 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-stone-950 font-bold text-xs flex items-center gap-1 transition-all cursor-pointer"
+            onClick={() => {
+              soundFX.playClick();
+              onBackToPortal();
+            }}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-800 text-stone-300 hover:text-white text-xs font-semibold transition-all cursor-pointer"
           >
-            <span>Beitreten</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <span>← Anderes Spiel wählen</span>
           </button>
-        </form>
+        ) : <div />}
+
+        {activeCode && (
+          <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/50 text-amber-300">
+            Aktivierter Spiel-Code: <strong>{activeCode}</strong>
+          </span>
+        )}
 
         {/* Teacher Studio Button (PIN Protected) */}
         {onOpenStudio && (
           <button
             onClick={handleOpenTeacherStudio}
-            className="flex items-center justify-center gap-2 px-3.5 py-2 rounded-xl bg-stone-900 border border-amber-600/70 hover:border-amber-400 text-xs font-bold text-amber-300 shadow-md transition-all cursor-pointer"
+            className="flex items-center justify-center gap-2 px-3.5 py-1.5 rounded-xl bg-stone-900 border border-amber-600/70 hover:border-amber-400 text-xs font-bold text-amber-300 shadow-md transition-all cursor-pointer"
           >
             <Lock className="w-3.5 h-3.5 text-amber-400" />
-            <span>Lehrkraft-Baukasten (PIN-geschützt)</span>
+            <span>Lehrkraft-Baukasten</span>
           </button>
         )}
       </div>
-
-      {/* Share Code Notice */}
-      {shareCodeNotice && (
-        <div className="w-full p-3 mb-4 rounded-xl bg-stone-900 border border-amber-500/60 text-xs text-amber-200 flex items-center justify-between">
-          <span>{shareCodeNotice}</span>
-          <button onClick={() => setShareCodeNotice(null)} className="text-stone-400 hover:text-white">×</button>
-        </div>
-      )}
 
       {/* Teacher PIN Modal */}
       {showPinModal && (
