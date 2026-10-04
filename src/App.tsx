@@ -347,6 +347,7 @@ export const App: React.FC = () => {
             onToggleSound={handleToggleSound}
             onOpenLexicon={() => setIsLexiconOpen(true)}
             onOpenStudio={() => setGameState('studio')}
+            activeGame={activeGameDefinition}
           />
 
           {/* Main Gameplay Screen (Responsive Standard: fluid-adaptive w-full max-w-[2100px]) */}
@@ -370,7 +371,7 @@ export const App: React.FC = () => {
 
             {/* PROMINENT STATION HERO STAGE: Panoramic 16:9 Illustration with Interactive Hotspots & Visual Reaction FX */}
             <StationHeroStage
-              imageSrc={customStationImages[currentRoundIndex] || currentStory.imagePath || "/assets/nile_banner.jpg"}
+              imageSrc={customStationImages[currentRoundIndex] || currentStory.imagePath || currentTheme.defaultBannerUrl || "/assets/nile_banner.jpg"}
               locationName={currentStory.locationName}
               milestoneTitle={currentStory.milestoneTitle}
               roundNumber={currentStory.roundNumber}

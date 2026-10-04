@@ -176,6 +176,37 @@ WICHTIGSTE REGELN:
       if (!Array.isArray(parsedRounds) || parsedRounds.length === 0) {
         throw new Error("Keine Stationen im JSON gefunden.");
       }
+
+      // Auto-assign matching historical illustrations to every generated round
+      const themeId = detectEraTheme(req.era + ' ' + req.title, req.archetype).id;
+
+      parsedRounds = parsedRounds.map((round, idx) => {
+        // Try to find matching image from asset pool by locationName or era keywords
+        const locLower = (round.locationName || '').toLowerCase();
+        const eraLower = req.era.toLowerCase();
+
+        let matchedImg = '';
+        if (locLower.includes('jagd') || locLower.includes('mammut') || locLower.includes('nomad') || locLower.includes('lager')) {
+          matchedImg = 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80';
+        } else if (locLower.includes('dorf') || locLower.includes('langhaus') || locLower.includes('acker') || locLower.includes('siedlung')) {
+          matchedImg = 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
+        } else if (eraLower.includes('steinzeit') || eraLower.includes('neolith')) {
+          matchedImg = idx % 2 === 0
+            ? 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80'
+            : 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1200&q=80';
+        } else if (eraLower.includes('rom')) {
+          matchedImg = idx % 2 === 0
+            ? 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80'
+            : 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80';
+        } else if (eraLower.includes('luther') || eraLower.includes('reformation')) {
+          matchedImg = 'https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1200&q=80';
+        }
+
+        return {
+          ...round,
+          imagePath: round.imagePath || matchedImg || undefined,
+        };
+      });
     } catch (e: any) {
       console.error("JSON parsing error during game generation:", e, "Raw output:", rawJson);
       throw new Error(

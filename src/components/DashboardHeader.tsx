@@ -14,6 +14,7 @@ interface DashboardHeaderProps {
   onToggleSound: () => void;
   onOpenLexicon: () => void;
   onOpenStudio?: () => void;
+  activeGame?: import('../types/game').GameDefinition | null;
 }
 
 export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
@@ -27,7 +28,21 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   onToggleSound,
   onOpenLexicon,
   onOpenStudio,
+  activeGame,
 }) => {
+  // Dynamic Pillars
+  const pillar1 = activeGame?.pillars?.[0] || { label: 'Götter ⚡', icon: '⚡' };
+  const pillar2 = activeGame?.pillars?.[1] || { label: 'Priester 🙏', icon: '🙏' };
+  const pillar3 = activeGame?.pillars?.[2] || { label: 'Adel 👑', icon: '👑' };
+  const pillar4 = activeGame?.pillars?.[3] || { label: 'Volk 😊', icon: '😊' };
+
+  const resName = activeGame?.specialResourceName || 'Erfahrung (EP)';
+  const resEmoji = activeGame?.specialResourceEmoji || '🧠';
+
+  const skill1Name = activeGame?.skillNames?.skill1 || 'Göttliche Auserwähltheit';
+  const skill2Name = activeGame?.skillNames?.skill2 || 'Politische Geschicklichkeit';
+  const skill3Name = activeGame?.skillNames?.skill3 || 'Militärische Stärke';
+
   // Stat Bar helper with color coding
   const renderStatBar = (
     label: string,
@@ -44,7 +59,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           : 'bg-stone-900/80 border-amber-800/40'
       }`}>
         <div className="flex items-center justify-between text-xs font-semibold mb-1">
-          <span className="flex items-center gap-1.5 text-stone-200">
+          <span className="flex items-center gap-1.5 text-stone-200 truncate">
             {icon}
             {label}
           </span>
@@ -140,69 +155,68 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           </div>
         </div>
 
-        {/* Core Stats Row: Götter, Priester, Adel, Volk & EP */}
+        {/* Core Stats Row: 4 Pillars & Special Resource */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
           {renderStatBar(
-            'Götter ⚡',
+            pillar1.label,
             stats.goetter,
             <Zap className="w-3.5 h-3.5 text-yellow-400" />,
             'bg-gradient-to-r from-yellow-600 to-amber-400',
             stats.goetter <= 15 ? 'bg-red-500 text-white' : 'bg-yellow-950 text-yellow-300'
           )}
           {renderStatBar(
-            'Priester 🙏',
+            pillar2.label,
             stats.priester,
             <Sparkles className="w-3.5 h-3.5 text-purple-400" />,
             'bg-gradient-to-r from-purple-700 to-indigo-400',
             stats.priester <= 15 ? 'bg-red-500 text-white' : 'bg-purple-950 text-purple-300'
           )}
           {renderStatBar(
-            'Adel 👑',
+            pillar3.label,
             stats.adel,
             <Award className="w-3.5 h-3.5 text-blue-400" />,
             'bg-gradient-to-r from-blue-700 to-cyan-400',
             stats.adel <= 15 ? 'bg-red-500 text-white' : 'bg-blue-950 text-blue-300'
           )}
           {renderStatBar(
-            'Volk 😊',
+            pillar4.label,
             stats.volk,
             <Heart className="w-3.5 h-3.5 text-emerald-400" />,
             'bg-gradient-to-r from-emerald-600 to-green-400',
             stats.volk <= 15 ? 'bg-red-500 text-white' : 'bg-emerald-950 text-emerald-300'
           )}
 
-          {/* EP Brain Box (Dezente & elegante Anzeige) */}
+          {/* Special Resource Box */}
           <div className="col-span-2 sm:col-span-1 flex items-center justify-between px-3 py-2 rounded-xl bg-stone-900/80 border border-stone-800 hover:border-amber-700/50 transition-all">
             <div className="flex items-center gap-2">
-              <span className="text-base select-none">🧠</span>
+              <span className="text-base select-none">{resEmoji}</span>
               <div className="leading-tight">
-                <span className="text-[10px] block uppercase font-mono font-semibold text-stone-400">Erfahrung (EP)</span>
-                <span className="text-[10px] text-stone-500">3 EP für Meisteroption</span>
+                <span className="text-[10px] block uppercase font-mono font-semibold text-stone-400 truncate max-w-[110px]">{resName}</span>
+                <span className="text-[10px] text-stone-500">3 Punkte für Option D</span>
               </div>
             </div>
             <div className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-stone-950 border border-amber-600/40 text-amber-300 font-mono font-bold text-xs shadow-inner">
               <span>{stats.ep}</span>
-              <span className="text-[10px] text-amber-500/80">EP</span>
             </div>
           </div>
         </div>
 
-        {/* Secondary Skill Ribbons: Auserwähltheit, Politik, Militär */}
+        {/* Secondary Skill Ribbons: 3 Talente */}
         <div className="flex flex-wrap items-center gap-3 text-xs bg-stone-900/60 px-3 py-1.5 rounded-md border border-stone-800">
-          <span className="text-stone-400 font-medium">Königliche Talente:</span>
+          <span className="text-stone-400 font-medium">Talente & Fertigkeiten:</span>
           <span className="flex items-center gap-1 text-amber-300">
             <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-            Göttliche Auserwähltheit: <strong>{skills.goettlicheAuserwaehltheit}</strong>
+            {skill1Name}: <strong>{skills.goettlicheAuserwaehltheit}</strong>
           </span>
           <span className="text-stone-600">•</span>
           <span className="flex items-center gap-1 text-cyan-300">
             <Users className="w-3.5 h-3.5 text-cyan-400" />
-            Politische Geschicklichkeit: <strong>{skills.politischeGeschicklichkeit}</strong>
+            {skill2Name}: <strong>{skills.politischeGeschicklichkeit}</strong>
           </span>
           <span className="text-stone-600">•</span>
           <span className="flex items-center gap-1 text-red-300">
             <Sword className="w-3.5 h-3.5 text-red-400" />
-            Militärische Stärke: <strong>{skills.militaerischeStaerke}</strong>
+            {skill3Name}: <strong>{skills.militaerischeStaerke}</strong>
           </span>
         </div>
       </div>

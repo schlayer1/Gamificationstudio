@@ -23,6 +23,7 @@ export interface EraThemeConfig {
   icon: string;
   vehicleIcon: string; // Thematic expedition icon (e.g. ⛵ Nilbarke, 🛒 Planwagen/Karren, 🐎 Streitwagen)
   destinationLabel: string; // Thematic finish label (e.g. 'Ziel: Krönung', 'Ziel: Wartburg')
+  defaultBannerUrl: string; // Thematic default hero artwork for each historical era
 }
 
 export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
@@ -43,6 +44,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🏛️',
     vehicleIcon: '⛵',
     destinationLabel: 'Ziel: Gizeh & Krönung',
+    defaultBannerUrl: '/assets/nile_banner.jpg',
   },
   rome_imperial: {
     id: 'rome_imperial',
@@ -61,6 +63,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🦅',
     vehicleIcon: '🐎',
     destinationLabel: 'Ziel: Triumph & Kapitol',
+    defaultBannerUrl: 'https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=1200&q=80',
   },
   luther_ink: {
     id: 'luther_ink',
@@ -79,6 +82,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '📜',
     vehicleIcon: '🛒',
     destinationLabel: 'Ziel: Wartburg & Bibel',
+    defaultBannerUrl: 'https://images.unsplash.com/photo-1548625361-16a9a08e6f1c?auto=format&fit=crop&w=1200&q=80',
   },
   stoneage_earth: {
     id: 'stoneage_earth',
@@ -97,6 +101,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🪨',
     vehicleIcon: '👣',
     destinationLabel: 'Ziel: Erste Siedlung',
+    defaultBannerUrl: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=80',
   },
   greece_aegean: {
     id: 'greece_aegean',
@@ -115,6 +120,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '⚡',
     vehicleIcon: '🏇',
     destinationLabel: 'Ziel: Alexander-Reich',
+    defaultBannerUrl: 'https://images.unsplash.com/photo-1555993539-1732b0258235?auto=format&fit=crop&w=1200&q=80',
   },
   mythology_rune: {
     id: 'mythology_rune',
@@ -133,6 +139,7 @@ export const ERA_THEMES: Record<EraThemeId, EraThemeConfig> = {
     icon: '🌲',
     vehicleIcon: '⚔️',
     destinationLabel: 'Ziel: Heiliger Hain / Walhall',
+    defaultBannerUrl: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1200&q=80',
   },
 };
 

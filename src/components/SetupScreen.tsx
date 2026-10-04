@@ -78,9 +78,73 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
     }
   };
 
-  // Generate regal throne name based on input
+  // Generate era-specific title and character name based on active game era
   const getPreviewThroneName = () => {
-    const trimmed = name.trim() || 'Ramses';
+    const trimmed = name.trim() || 'Alex';
+    const eraLower = (activeGame?.era || '').toLowerCase();
+    const titleLower = (activeGame?.title || '').toLowerCase();
+
+    // 1. Steinzeit
+    if (eraLower.includes('steinzeit') || eraLower.includes('neolith') || titleLower.includes('steinzeit')) {
+      if (gender === 'prinzessin') {
+        const titles = ['Sippenführerin Ayla', 'Jägerin Tara', 'Schamanin Kaya', 'Hüterin Sola'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else if (gender === 'prinz') {
+        const titles = ['Sippenanführer Torak', 'Großwildjäger Orok', 'Spurenleser Baran', 'Werkzeugmacher Keno'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} (${trimmed})`;
+      } else {
+        return `Sippenältester/e ${trimmed}`;
+      }
+    }
+
+    // 2. Antikes Rom
+    if (eraLower.includes('rom') || eraLower.includes('caesar') || titleLower.includes('rom')) {
+      if (gender === 'prinzessin') {
+        const titles = ['Patrizierin Julia', 'Senatorin Livia', 'Augusta Octavia', 'Cornelia'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} ${trimmed}`;
+      } else if (gender === 'prinz') {
+        const titles = ['Konsul Marcus', 'Tribun Gaius', 'Legat Lucius', 'Senator Flavius'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} ${trimmed}`;
+      } else {
+        return `Magistrat ${trimmed} von Rom`;
+      }
+    }
+
+    // 3. Reformation / Mittelalter
+    if (eraLower.includes('reformation') || eraLower.includes('luther') || eraLower.includes('mittelalter')) {
+      if (gender === 'prinzessin') {
+        const titles = ['Burgfräulein Katharina', 'Gelehrte Elisabeth', 'Magistra Anna', 'Fürstin Sophie'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} ${trimmed}`;
+      } else if (gender === 'prinz') {
+        const titles = ['Magister Johannes', 'Ritter Friedrich', 'Gelehrter Heinrich', 'Reformer Lucas'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} ${trimmed}`;
+      } else {
+        return `Chronist/in ${trimmed}`;
+      }
+    }
+
+    // 4. Antikes Griechenland / Alexander
+    if (eraLower.includes('alexander') || eraLower.includes('griechen') || titleLower.includes('alexander')) {
+      if (gender === 'prinzessin') {
+        const titles = ['Strategin Helena', 'Priesterin Kassandra', 'Prinzessin Roxane', 'Gelehrte Sophia'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} ${trimmed}`;
+      } else if (gender === 'prinz') {
+        const titles = ['Hetairos Leonidas', 'Feldherr Nikostratos', 'Stratege Lysander', 'Reiterführer Perikles'];
+        const chosen = titles[Math.abs(trimmed.length) % titles.length];
+        return `${chosen} ${trimmed}`;
+      } else {
+        return `Archon ${trimmed} von Hellas`;
+      }
+    }
+
+    // Default: Altes Ägypten
     if (gender === 'prinzessin') {
       const titles = ['Nefertari', 'Hatschepsut', 'Meritaten', 'Cleopatra'];
       const chosen = titles[Math.abs(trimmed.length) % titles.length];
@@ -196,10 +260,10 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
         </div>
       )}
 
-      {/* Decorative Banner (Adapts to Active Game or Default Nile) */}
+      {/* Decorative Banner (Adapts to Active Game Era Theme) */}
       <div className="w-full relative rounded-2xl overflow-hidden border-2 border-amber-600/60 shadow-2xl mb-6 group">
         <img
-          src={activeGame?.rounds[0]?.imagePath || "/assets/nile_banner.jpg"}
+          src={activeGame?.rounds[0]?.imagePath || theme.defaultBannerUrl || "/assets/nile_banner.jpg"}
           alt="Banner"
           className="w-full h-48 sm:h-64 object-cover object-center group-hover:scale-105 transition-transform duration-700"
         />
