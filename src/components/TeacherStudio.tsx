@@ -97,6 +97,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [publishedNotice, setPublishedNotice] = useState<string | null>(null);
   const [copiedShareCode, setCopiedShareCode] = useState<string | null>(null);
   const [boardModalCode, setBoardModalCode] = useState<{ code: string; title: string } | null>(null);
+  const [mobileTab, setMobileTab] = useState<'create' | 'published' | 'keys'>('create');
 
   // Switch template
   const handleSelectTemplate = (tpl: PredefinedTemplate) => {
@@ -257,46 +258,50 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 py-8 space-y-8 animate-fade-in text-stone-100">
-      {/* Studio Header */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-amber-800/60 pb-5">
+    <div className="w-full max-w-6xl mx-auto px-3 sm:px-6 py-4 sm:py-8 space-y-6 sm:space-y-8 animate-fade-in text-stone-100 pb-24 sm:pb-8">
+      {/* Studio Header (Mobile optimized with wrap & responsive text) */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-amber-800/60 pb-4 sm:pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-3 rounded-2xl bg-amber-500/20 border border-amber-500/50 text-amber-300">
-            <Wand2 className="w-7 h-7" />
+          <div className="p-2.5 sm:p-3 rounded-2xl bg-amber-500/20 border border-amber-500/50 text-amber-300 shrink-0">
+            <Wand2 className="w-6 h-6 sm:w-7 sm:h-7" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-amber-200 font-serif m-0">
-              History Trail Studio
-            </h1>
-            <p className="text-xs sm:text-sm text-stone-400">
-              Lehrer-Baukasten: Erstelle didaktisch geführte 20-Runden Geschichts-Abenteuer mit automatischer Differenzierung
+            <div className="flex items-center gap-2">
+              <h1 className="text-xl sm:text-3xl font-extrabold text-amber-200 font-serif m-0">
+                History Trail Studio
+              </h1>
+              <span className="hidden sm:inline-block px-2 py-0.5 rounded text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                Mobil & Desktop
+              </span>
+            </div>
+            <p className="text-[11px] sm:text-xs text-stone-400 mt-0.5">
+              Spiele für den Unterricht auf Knopfdruck erstellen & per Code freigeben
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          {/* Lehrplan-Bildergalerie Button */}
+        {/* Top Actions: Wrapped & touch-optimized */}
+        <div className="flex items-center flex-wrap gap-2 w-full sm:w-auto justify-between sm:justify-end">
           <button
             onClick={() => {
               soundFX.playClick();
               setIsGalleryOpen(true);
             }}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-xs text-amber-300 font-bold transition-all cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-xs text-amber-300 font-bold transition-all cursor-pointer"
           >
-            <Camera className="w-4 h-4 text-amber-400" />
-            <span>Geschichts-Galerie & Prompts</span>
+            <Camera className="w-3.5 h-3.5 text-amber-400" />
+            <span className="hidden xs:inline">Galerie</span>
           </button>
 
-          {/* 4-Key Rotation Status Pill */}
           <button
             onClick={() => {
               soundFX.playClick();
               setShowKeyManager(!showKeyManager);
             }}
-            className="flex items-center gap-2 px-3 py-2 rounded-xl bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-xs text-amber-300 font-mono transition-all"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-900 border border-amber-700/60 hover:border-amber-400 text-xs text-amber-300 font-mono transition-all cursor-pointer"
           >
-            <Key className="w-4 h-4 text-amber-400" />
-            <span>Gemini Keys: <strong>{keys.length}/4 aktiv</strong></span>
+            <Key className="w-3.5 h-3.5 text-amber-400" />
+            <span>{keys.length}/4 Keys</span>
           </button>
 
           <button
@@ -304,11 +309,46 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
               soundFX.playClick();
               onCloseStudio();
             }}
-            className="px-4 py-2 rounded-xl bg-amber-700/60 hover:bg-amber-600 text-amber-100 text-xs font-bold transition-all"
+            className="px-3.5 py-2 rounded-xl bg-amber-700/70 hover:bg-amber-600 text-amber-100 text-xs font-bold transition-all cursor-pointer"
           >
-            Zurück zum Spiel
+            ← Zurück
           </button>
         </div>
+      </div>
+
+      {/* MOBILE SEGMENTED CONTROL: Auf Smartphones zwischen Spiel-Bau, Freigaben & Setup wechseln */}
+      <div className="flex sm:hidden p-1 rounded-xl bg-stone-900/90 border border-stone-800 text-xs font-bold">
+        <button
+          onClick={() => {
+            soundFX.playClick();
+            setMobileTab('create');
+          }}
+          className={`flex-1 py-2 rounded-lg text-center transition-all ${
+            mobileTab === 'create'
+              ? 'bg-amber-600 text-stone-950 shadow-md font-black'
+              : 'text-stone-400 hover:text-stone-200'
+          }`}
+        >
+          ⚡ Spiel bauen
+        </button>
+        <button
+          onClick={() => {
+            soundFX.playClick();
+            setMobileTab('published');
+          }}
+          className={`flex-1 py-2 rounded-lg text-center transition-all relative ${
+            mobileTab === 'published'
+              ? 'bg-amber-600 text-stone-950 shadow-md font-black'
+              : 'text-stone-400 hover:text-stone-200'
+          }`}
+        >
+          <span>Freigaben</span>
+          {publishedGames.length > 0 && (
+            <span className="ml-1 px-1.5 py-0.2 rounded-full bg-stone-950 text-amber-400 text-[10px]">
+              {publishedGames.length}
+            </span>
+          )}
+        </button>
       </div>
 
       {/* Optional: 4 API Key Manager Modal / Accordion */}
@@ -964,9 +1004,9 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         <button
           onClick={handleGenerateGame}
           disabled={isGenerating}
-          className="w-full sm:w-auto px-10 py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-stone-950 font-black text-lg shadow-2xl flex items-center justify-center gap-3 cursor-pointer transition-all active:scale-98 disabled:opacity-50"
+          className="w-full sm:w-auto px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl bg-gradient-to-r from-amber-500 via-amber-600 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-stone-950 font-black text-base sm:text-lg shadow-2xl flex items-center justify-center gap-3 cursor-pointer transition-all active:scale-98 disabled:opacity-50"
         >
-          <Sparkles className="w-6 h-6 animate-spin-slow" />
+          <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 animate-spin-slow" />
           <span>{isGenerating ? "Erstelle didaktisches Spiel..." : `Neues ${roundCount}-Runden Spiel jetzt generieren`}</span>
         </button>
 
@@ -975,6 +1015,25 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
             {generationProgress}
           </p>
         )}
+      </div>
+
+      {/* STICKY BOTTOM QUICK ACTION BAR FOR SMARTPHONES (Handy-Schnellzugriff) */}
+      <div className="fixed sm:hidden bottom-0 left-0 right-0 p-3 bg-stone-950/95 border-t border-amber-600/70 backdrop-blur-lg flex items-center justify-between gap-3 z-40 shadow-2xl">
+        <div className="leading-tight">
+          <span className="text-[10px] font-mono text-stone-400 uppercase block">Vorlage aktiv:</span>
+          <span className="text-xs font-bold text-amber-300 truncate max-w-[150px] block">
+            {selectedTemplate.title}
+          </span>
+        </div>
+
+        <button
+          onClick={handleGenerateGame}
+          disabled={isGenerating}
+          className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 active:scale-95 text-stone-950 font-black text-xs flex items-center justify-center gap-2 shadow-lg disabled:opacity-50 cursor-pointer"
+        >
+          <Sparkles className="w-4 h-4" />
+          <span>{isGenerating ? "Erstelle..." : "Jetzt generieren"}</span>
+        </button>
       </div>
 
       {/* Lehrplan-Bildergalerie & Prompt Modal */}
