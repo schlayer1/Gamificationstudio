@@ -132,6 +132,25 @@ export class GameStorageService {
   }
 
   /**
+   * Update an existing game while keeping its share code and publication metadata
+   */
+  public updateGame(updatedGame: GameDefinition): void {
+    const existing = this.getPublishedGames();
+    const updated = existing.map((rec) => {
+      if (rec.id === updatedGame.id || rec.game.id === updatedGame.id) {
+        return {
+          ...rec,
+          game: updatedGame,
+        };
+      }
+      return rec;
+    });
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_PUBLISHED_GAMES, JSON.stringify(updated));
+    }
+  }
+
+  /**
    * Unpublish / Delete a game from student view
    */
   public unpublishGame(gameId: string): void {

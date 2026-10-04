@@ -342,6 +342,9 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       };
     });
 
+    const heroPrompt = `${selectedStylePrompt} of panoramic grand historical landscape and iconic landmarks of ${req.era} representing "${req.title}", majestic composition, cinematic lighting, 16:9 banner aspect ratio`;
+    const defaultHeroImg = detectEraTheme(req.era + ' ' + req.title, req.archetype).defaultBannerUrl;
+
     const gameDefinition: GameDefinition = {
       id: `game_${Date.now()}`,
       title: req.title,
@@ -351,6 +354,8 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       gradeLevel: selectedGradeLevel,
       targetGrades: req.targetGrades,
       eraThemeId: themeId,
+      heroPrompt,
+      heroImage: defaultHeroImg,
       coreTopics: req.coreTopics,
       pillars: req.pillars,
       specialResourceName: req.specialResourceName,

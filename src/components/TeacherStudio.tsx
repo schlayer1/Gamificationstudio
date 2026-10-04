@@ -34,6 +34,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { StationImagePromptModal } from './StationImagePromptModal';
+import { GameArtworkStudioModal } from './GameArtworkStudioModal';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
 import { googleDriveSyncService } from '../services/googleDriveSync';
 
@@ -100,6 +101,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [copiedShareCode, setCopiedShareCode] = useState<string | null>(null);
   const [boardModalCode, setBoardModalCode] = useState<{ code: string; title: string } | null>(null);
   const [mobileTab, setMobileTab] = useState<'create' | 'published' | 'keys'>('create');
+  const [artworkModalGame, setArtworkModalGame] = useState<GameDefinition | null>(null);
 
   // Switch template
   const handleSelectTemplate = (tpl: PredefinedTemplate) => {
@@ -258,6 +260,20 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     navigator.clipboard.writeText(code);
     setCopiedShareCode(code);
     setTimeout(() => setCopiedShareCode(null), 2000);
+  };
+
+  const handleSaveArtworkGame = (updatedGame: GameDefinition) => {
+    soundFX.playBlessing();
+    if (createdGamePreview && createdGamePreview.id === updatedGame.id) {
+      setCreatedGamePreview(updatedGame);
+    }
+    const pubRecord = publishedGames.find((p) => p.game.id === updatedGame.id || p.id === updatedGame.id);
+    if (pubRecord) {
+      gameStorageService.updateGame(updatedGame);
+      setPublishedGames(gameStorageService.getPublishedGames());
+      googleDriveSyncService.saveGameToDrive(updatedGame, pubRecord.shareCode).catch(console.error);
+    }
+    setPublishedNotice(`Bilder für „${updatedGame.title}“ erfolgreich aktualisiert!`);
   };
 
   return (
@@ -456,6 +472,18 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
 
             <div className="flex items-center gap-2">
               <button
+                onClick={() => {
+                  soundFX.playClick();
+                  setArtworkModalGame(createdGamePreview);
+                }}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-950/80 hover:bg-amber-900 border border-amber-500/80 text-amber-200 text-xs font-bold transition-all cursor-pointer shadow-md"
+                title="Bilder für Hero und Stationen per Drag & Drop verwalten"
+              >
+                <Camera className="w-4 h-4 text-amber-400" />
+                <span>Bilder & Prompts (Drag & Drop)</span>
+              </button>
+
+              <button
                 onClick={() => handlePublishGame(createdGamePreview)}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-stone-950 text-xs font-bold shadow-lg transition-all cursor-pointer"
               >
@@ -558,6 +586,16 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
                   </div>
 
                   <div className="flex items-center gap-1.5">
+                    <button
+                      onClick={() => {
+                        soundFX.playClick();
+                        setArtworkModalGame(pub.game);
+                      }}
+                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-amber-300 hover:text-amber-200 cursor-pointer"
+                      title="Bilder & Prompts per Drag & Drop bearbeiten"
+                    >
+                      <Camera className="w-3.5 h-3.5" />
+                    </button>
                     <button
                       onClick={() => onLoadGameToPlayer(pub.game)}
                       className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 cursor-pointer"
@@ -1128,6 +1166,16 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
             </div>
           </div>
         </div>
+      )}
+
+      {/* Game Artwork Studio Modal (Prompts & Drag-and-Drop Dropzones) */}
+      {artworkModalGame && (
+        <GameArtworkStudioModal
+          isOpen={!!artworkModalGame}
+          onClose={() => setArtworkModalGame(null)}
+          game={artworkModalGame}
+          onSaveGame={handleSaveArtworkGame}
+        />
       )}
     </div>
   );

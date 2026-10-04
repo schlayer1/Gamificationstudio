@@ -142,6 +142,8 @@ export interface GameDefinition {
     skill2: string; // e.g. "Politische Geschicklichkeit" or "Diplomatie"
     skill3: string; // e.g. "Militärische Stärke" or "Verwaltung"
   };
+  heroImage?: string; // Custom cover/hero banner image
+  heroPrompt?: string; // AI image generation prompt for the main game cover/hero
   rounds: RoundStory[]; // Array of 20 rounds or dynamic branch pairs
 }
 

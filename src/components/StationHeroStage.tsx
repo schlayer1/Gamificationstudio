@@ -30,6 +30,7 @@ interface StationHeroStageProps {
     icon?: string;
   }>;
   onOpenImageModal?: () => void;
+  onDropImage?: (imageUrl: string) => void;
   theme?: import('../utils/themeManager').EraThemeConfig;
 }
 
@@ -43,9 +44,11 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
   lastReactionType,
   hotspots,
   onOpenImageModal,
+  onDropImage,
   theme,
 }) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [isDraggingOver, setIsDraggingOver] = useState(false);
   const [activeHotspot, setActiveHotspot] = useState<{
     label: string;
     description: string;
@@ -85,10 +88,45 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
 
   return (
     <div
-      className={`relative w-full rounded-2xl overflow-hidden border-2 ${heroBorder} shadow-2xl transition-all duration-500 group bg-stone-950 ${
+      onDragOver={(e) => {
+        e.preventDefault();
+        setIsDraggingOver(true);
+      }}
+      onDragLeave={() => setIsDraggingOver(false)}
+      onDrop={(e) => {
+        e.preventDefault();
+        setIsDraggingOver(false);
+        const files = e.dataTransfer.files;
+        if (files && files.length > 0 && files[0].type.startsWith('image/')) {
+          const file = files[0];
+          const reader = new FileReader();
+          reader.onload = () => {
+            const dataUrl = reader.result as string;
+            soundFX.playBlessing();
+            onDropImage && onDropImage(dataUrl);
+          };
+          reader.readAsDataURL(file);
+        }
+      }}
+      className={`relative w-full rounded-2xl overflow-hidden border-2 transition-all duration-500 group bg-stone-950 ${
+        isDraggingOver ? 'border-amber-400 ring-4 ring-amber-500/50 scale-[1.01]' : heroBorder
+      } shadow-2xl ${
         isFullscreen ? 'fixed inset-4 z-50 rounded-2xl max-h-[96vh]' : 'h-64 sm:h-80 md:h-96 lg:h-[420px]'
       }`}
     >
+      {/* Drag & Drop Visual Target Overlay */}
+      {isDraggingOver && (
+        <div className="absolute inset-0 z-30 bg-stone-950/85 border-4 border-dashed border-amber-400 flex flex-col items-center justify-center text-center p-4 backdrop-blur-sm animate-fade-in pointer-events-none">
+          <Camera className="w-12 h-12 text-amber-400 mb-2 animate-bounce" />
+          <h3 className="text-lg sm:text-xl font-bold text-amber-200 font-serif m-0">
+            Bild für Station {roundNumber} hier ablegen!
+          </h3>
+          <p className="text-xs text-amber-300 mt-1">
+            Wird sofort als neues Stationsbild für „{locationName}“ übernommen.
+          </p>
+        </div>
+      )}
+
       {/* Background Image with Cinematic Pan / Ken Burns effect & FX reaction */}
       <img
         src={imageSrc}

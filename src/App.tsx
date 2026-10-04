@@ -372,7 +372,7 @@ export const App: React.FC = () => {
 
             {/* PROMINENT STATION HERO STAGE: Panoramic 16:9 Illustration with Interactive Hotspots & Visual Reaction FX */}
             <StationHeroStage
-              imageSrc={customStationImages[currentRoundIndex] || currentStory.imagePath || currentTheme.defaultBannerUrl || "/assets/nile_banner.jpg"}
+              imageSrc={customStationImages[currentRoundIndex] || currentStory.imagePath || activeGameDefinition?.heroImage || currentTheme.defaultBannerUrl || "/assets/nile_banner.jpg"}
               locationName={currentStory.locationName}
               milestoneTitle={currentStory.milestoneTitle}
               roundNumber={currentStory.roundNumber}
@@ -380,6 +380,13 @@ export const App: React.FC = () => {
               lastReactionChoice={lastConsequence?.choiceLabel}
               lastReactionType={lastReactionType}
               hotspots={customStationHotspots[currentRoundIndex] || currentStory.hotspots}
+              onOpenImageModal={() => setIsImageModalOpen(true)}
+              onDropImage={(newUrl) => {
+                setCustomStationImages((prev) => ({
+                  ...prev,
+                  [currentRoundIndex]: newUrl,
+                }));
+              }}
               theme={currentTheme}
             />
 
