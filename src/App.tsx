@@ -310,9 +310,9 @@ export const App: React.FC = () => {
           onOpenTeacherStudio={() => {
             setGameState('studio');
           }}
-          onQuickStartDefault={(game) => {
+          onQuickStartDefault={(game, code) => {
             setActiveGameDefinition(game);
-            setActiveShareCode('EGY01');
+            setActiveShareCode(code || game.shareCode || 'EGY01');
             setGameState('setup');
           }}
         />

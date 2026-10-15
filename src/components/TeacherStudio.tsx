@@ -32,7 +32,9 @@ import {
   Image as ImageIcon,
   FolderOpen,
   ExternalLink,
-  Printer
+  Printer,
+  Edit3,
+  Trophy
 } from 'lucide-react';
 import { StationImagePromptModal } from './StationImagePromptModal';
 import { GameArtworkStudioModal } from './GameArtworkStudioModal';
@@ -55,7 +57,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [showKeyManager, setShowKeyManager] = useState<boolean>(false);
 
   // Selected Template / Creation State
-  const [creationMode, setCreationMode] = useState<'template' | 'freeform'>('template');
+  const [creationMode, setCreationMode] = useState<'official' | 'template' | 'freeform'>('official');
   const [freeformSettingInput, setFreeformSettingInput] = useState<string>('');
   const [isAnalyzingSetting, setIsAnalyzingSetting] = useState<boolean>(false);
   const [selectedTemplate, setSelectedTemplate] = useState<PredefinedTemplate>(PREDEFINED_TEMPLATES[0]);
@@ -152,6 +154,32 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     setSpecialResourceName(tpl.specialResource.name);
     setSpecialResourceEmoji(tpl.specialResource.emoji);
     setSkills(tpl.skills);
+  };
+
+  // Meisterspiel in den Editor laden (zur Anpassung / KI-Neugenerierung)
+  const handleLoadMasterGameToEditor = (game: GameDefinition) => {
+    soundFX.playBlessing();
+    setCustomTitle(game.title);
+    setCustomEra(game.era);
+    setCustomArchetype(game.archetype || 'reigns_balance');
+    setGradeLevel(game.gradeLevel || 'mittelstufe');
+    setTargetGrades(game.targetGrades || 'Mittelstufe (Klasse 7–9)');
+    setCoreTopics(game.coreTopics || []);
+    if (game.pillars && game.pillars.length === 4) {
+      setPillars([
+        game.pillars[0],
+        game.pillars[1],
+        game.pillars[2],
+        game.pillars[3],
+      ]);
+    }
+    setSpecialResourceName(game.specialResourceName || 'Erfahrungspunkte');
+    setSpecialResourceEmoji(game.specialResourceEmoji || '🧠');
+    if (game.skillNames) {
+      setSkills(game.skillNames);
+    }
+    setRoundCount(game.rounds?.length || 20);
+    setPublishedNotice(`Spiel „${game.title}“ wurde in den Editor geladen! Du kannst die Einstellungen unten anpassen oder direkt generieren.`);
   };
 
   // KI-Auto-Design für freies Lehrer-Setting (ohne Vorlage)
@@ -791,16 +819,39 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1 border-b border-stone-800">
           <div>
             <h2 className="text-sm font-bold uppercase tracking-wider text-amber-400 flex items-center gap-2">
-              <span>Schritt 1:</span> {creationMode === 'template' ? 'Historische Vorlage wählen' : 'Freies Thema / Eigenes Setting eingeben'}
+              <span>Schritt 1:</span>{' '}
+              {creationMode === 'official'
+                ? '🏆 Fertige Meisterspiele (Sofort spielbereit)'
+                : creationMode === 'template'
+                ? '📜 Lehrplan-Vorlagen (KI-Generator)'
+                : '✨ Freies Thema / Eigenes Setting eingeben'}
             </h2>
             <p className="text-xs text-stone-400">
-              {creationMode === 'template'
-                ? 'Wähle aus den bewährten Lehrplan-Vorlagen oder wechsle zur freien Themeneingabe.'
-                : 'Gib ein beliebiges historisches Thema oder Setting ein – die KI konzipiert das Spiel automatisch!'}
+              {creationMode === 'official'
+                ? 'Fix und fertig ausgearbeitete 20-Runden-Expeditionen mit Pixel-Art & Hotspots – direkt spielbar oder im Editor anpassbar.'
+                : creationMode === 'template'
+                ? 'Wähle ein vorgefertigtes historisches Thema, um ein neues individuelles Spiel mit KI zu generieren.'
+                : 'Gib ein beliebiges Thema ein – die KI konzipiert alle Runden, Säulen und Bilder automatisch!'}
             </p>
           </div>
 
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-stone-900 border border-stone-800 self-start sm:self-auto shrink-0">
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-stone-900 border border-stone-800 self-start sm:self-auto shrink-0 flex-wrap">
+            <button
+              type="button"
+              onClick={() => {
+                soundFX.playClick();
+                setCreationMode('official');
+              }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
+                creationMode === 'official'
+                  ? 'bg-gradient-to-r from-amber-500 to-yellow-500 text-stone-950 shadow-md font-black'
+                  : 'text-amber-400 hover:text-amber-300'
+              }`}
+            >
+              <Trophy className="w-3.5 h-3.5" />
+              <span>🏆 Fertige Meisterspiele ({publishedGames.filter(p => p.publishedAt.includes('Meisterspiel') || ['EGY01', 'WW101', 'STN01'].includes(p.shareCode)).length})</span>
+            </button>
+
             <button
               type="button"
               onClick={() => {
@@ -814,7 +865,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
               }`}
             >
               <BookOpen className="w-3.5 h-3.5" />
-              <span>Aus Vorlage (14)</span>
+              <span>📜 KI-Vorlagen ({PREDEFINED_TEMPLATES.length})</span>
             </button>
 
             <button
@@ -830,10 +881,91 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
               }`}
             >
               <Wand2 className="w-3.5 h-3.5 animate-pulse" />
-              <span>✨ Völlig freies Setting</span>
+              <span>✨ Freies Thema</span>
             </button>
           </div>
         </div>
+
+        {/* MODE 1: FERTIGE MEISTER-SPIELE (Offizielle Games EGY01, WW101, STN01 etc.) */}
+        {creationMode === 'official' && (
+          <div className="space-y-3">
+            <div className="p-3 rounded-xl bg-amber-950/30 border border-amber-500/40 text-amber-200/90 text-xs flex items-center justify-between">
+              <span className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-amber-400 shrink-0" />
+                <span>
+                  Diese Spiele sind <strong>bereits fertig konzipiert und mit handgefertigter Pixel-Art ausgestattet</strong>. Du kannst sie sofort starten oder in den Editor laden, um Einstellungen anzupassen.
+                </span>
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+              {publishedGames
+                .filter(p => p.publishedAt.includes('Meisterspiel') || ['EGY01', 'WW101', 'STN01'].includes(p.shareCode))
+                .map((pub) => {
+                  const roundsCount = pub.game.rounds?.length || 20;
+                  return (
+                    <div
+                      key={pub.id}
+                      className="p-4 rounded-xl bg-gradient-to-br from-stone-900/95 via-stone-900/90 to-amber-950/40 border-2 border-amber-500/60 hover:border-amber-400 shadow-xl transition-all flex flex-col justify-between space-y-3"
+                    >
+                      <div>
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-[10px] font-mono font-bold">
+                            Code: {pub.shareCode}
+                          </span>
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700/60 text-[10px] font-bold">
+                            {roundsCount} Runden • Pixel-Art
+                          </span>
+                        </div>
+
+                        <h3 className="text-sm font-extrabold text-amber-100 mb-1 font-serif">
+                          {pub.game.title}
+                        </h3>
+                        <p className="text-xs text-amber-400/90 font-medium mb-1.5">
+                          {pub.game.subtitle || pub.game.era}
+                        </p>
+                        <p className="text-[11px] text-stone-300 line-clamp-2 leading-relaxed">
+                          {pub.game.description}
+                        </p>
+
+                        <div className="mt-2.5 pt-2 border-t border-stone-800/80 flex items-center justify-between text-[11px] text-stone-400">
+                          <span>Zielgruppe:</span>
+                          <span className="font-semibold text-amber-300">
+                            {pub.game.targetGrades || (pub.game.gradeLevel === 'unterstufe' ? 'Klassenstufe 5/6' : 'Klassenstufe 7–9')}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="pt-2 border-t border-amber-800/40 flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            soundFX.playBlessing();
+                            onLoadGameToPlayer(pub.game);
+                          }}
+                          className="flex-1 py-2 px-3 rounded-lg bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-stone-950 font-black text-xs flex items-center justify-center gap-1.5 shadow-md active:scale-95 transition-all cursor-pointer"
+                          title="Spiel direkt für dich oder Schüler starten"
+                        >
+                          <Play className="w-3.5 h-3.5 fill-current" />
+                          <span>Sofort starten</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={() => handleLoadMasterGameToEditor(pub.game)}
+                          className="py-2 px-3 rounded-lg bg-stone-800 hover:bg-stone-700 text-amber-300 hover:text-white border border-stone-700 font-bold text-xs flex items-center gap-1.5 transition-all cursor-pointer"
+                          title="In den Editor laden, um Runden, Säulen oder Prompt anzupassen"
+                        >
+                          <Edit3 className="w-3.5 h-3.5 text-amber-400" />
+                          <span>Im Editor bearbeiten</span>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
 
         {/* MODE A: PREDEFINED TEMPLATES GRID */}
         {creationMode === 'template' && (

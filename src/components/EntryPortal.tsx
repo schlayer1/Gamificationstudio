@@ -9,7 +9,7 @@ import { detectEraTheme, ERA_THEMES } from '../utils/themeManager';
 interface EntryPortalProps {
   onJoinGameWithCode: (game: GameDefinition, code: string) => void;
   onOpenTeacherStudio: () => void;
-  onQuickStartDefault: (game: GameDefinition) => void;
+  onQuickStartDefault: (game: GameDefinition, code?: string) => void;
 }
 
 export const EntryPortal: React.FC<EntryPortalProps> = ({
@@ -189,7 +189,7 @@ export const EntryPortal: React.FC<EntryPortalProps> = ({
                   key={record.id}
                   onClick={() => {
                     soundFX.playBlessing();
-                    onQuickStartDefault(record.game);
+                    onQuickStartDefault(record.game, record.shareCode);
                   }}
                   className={`px-3.5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border ${gameTheme.badgeBorder} text-xs font-semibold ${gameTheme.badgeText} flex items-center gap-2 transition-all cursor-pointer hover:scale-105 shadow-sm`}
                 >
