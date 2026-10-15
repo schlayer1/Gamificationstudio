@@ -1,5 +1,6 @@
 import { GameDefinition } from '../types/game';
 import { WW1_MASTER_GAME } from '../data/predefinedGames/ww1Game';
+import { STONEAGE_MASTER_GAME } from '../data/predefinedGames/stoneageGame';
 
 const STORAGE_KEY_PUBLISHED_GAMES = 'history_trail_published_games';
 const STORAGE_KEY_ACTIVE_PIN = 'history_trail_teacher_pin';
@@ -102,7 +103,16 @@ export class GameStorageService {
       game: WW1_MASTER_GAME,
     };
 
-    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1];
+    // 3. Offizielles Steinzeit Meisterspiel (STN01)
+    const defaultStoneAge: PublishedGameRecord = {
+      id: STONEAGE_MASTER_GAME.id,
+      shareCode: 'STN01',
+      publishedAt: 'Offizielles Meisterspiel',
+      isPublic: true,
+      game: STONEAGE_MASTER_GAME,
+    };
+
+    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1, defaultStoneAge];
 
     try {
       const raw = localStorage.getItem(STORAGE_KEY_PUBLISHED_GAMES);

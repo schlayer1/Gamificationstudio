@@ -506,7 +506,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 1: Die Mammutjagd in der Eiszeit-Tundra (Altsteinzeit)",
     description: "Sippenmitglieder treiben ein Wollhaarmammut mit Speeren, Harpunen und Speerschleudern in eine Schlucht.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Victoria.Mammut.P1033804.jpg/1280px-Victoria.Mammut.P1033804.jpg",
+    imageUrl: "/assets/stoneage_station_01.jpg",
     tags: ["Mammut", "Altsteinzeit", "Jagd", "Speerschleuder", "Tundra", "Eiszeit"],
     suggestedPrompt: "16-bit pixel art style dramatic Paleolithic mammoth hunt in snowy windswept tundra, hunters in fur cloaks using atlatl spear-throwers driving massive woolly mammoth near ravine trap, jagged snow peaks, retro action adventure game scene",
     hotspots: [
@@ -520,7 +520,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 2: Höhlenmalerei von Lascaux & Heiliges Feuer",
     description: "Mit Ocker, Holzkohle und Röhrenknochen malen Jäger Wisente, Pferde und Jagdszenen an die Felswand.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/07/Lascaux2.jpg",
+    imageUrl: "/assets/stoneage_station_02.jpg",
     tags: ["Lascaux", "Höhlenmalerei", "Ocker", "Felswand", "Schamane", "Kult"],
     suggestedPrompt: "16-bit pixel art style ancient painted cave interior like Lascaux, shaman blowing red ochre powder over hand stencil onto rock wall, vivid paintings of bison and running horses illuminated by flickering torch flame, retro mystery adventure feel",
     hotspots: [
@@ -534,7 +534,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 3: Die Feuerstein-Werkstatt (Silex-Abschläge)",
     description: "Herstellung von Faustkeilen, Klingen, Schabern und Pfeilspitzen durch gezieltes Schlagen auf Feuerstein-Knollen.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/08/Biface_Cintegabelle_MHNT_PRE_2009.0.201.1_V2.fond.jpg/1280px-Biface_Cintegabelle_MHNT_PRE_2009.0.201.1_V2.fond.jpg",
+    imageUrl: "/assets/stoneage_station_03.jpg",
     tags: ["Feuerstein", "Faustkeil", "Werkzeug", "Silex", "Schlagstein"],
     suggestedPrompt: "16-bit pixel art style prehistoric craftsman sitting by leather hide mat carefully knapping sharp flint hand axes, flint flakes flying, antlers and hammerstones beside him, pine trees behind, retro crafting screen visual",
     hotspots: [
@@ -548,7 +548,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 4: Sammlerinnen im Beerenhain & Harpunenfischen am Fluss",
     description: "Sammeln von Nüssen, Wurzeln und Heilkräutern, während Fischer mit Knochenharpunen Hechte erbeuten.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Hunter_gatherer%27s_camp_at_Irish_National_Heritage_Park_-_geograph.org.uk_-_1252699.jpg/1280px-Hunter_gatherer%27s_camp_at_Irish_National_Heritage_Park_-_geograph.org.uk_-_1252699.jpg",
+    imageUrl: "/assets/stoneage_station_04.jpg",
     tags: ["Sammlerinnen", "Beeren", "Fluss", "Harpune", "Fischfang", "Ernährung"],
     suggestedPrompt: "16-bit pixel art style Mesolithic riverbank camp, gatherers filling woven birch bark baskets with wild berries and roots, fisher with notched bone harpoon standing on river rocks spearing fish, sparkling stream, retro nature sim look",
     hotspots: [
@@ -562,7 +562,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 5: Das Ende der Eiszeit – Der Wald breitet sich aus",
     description: "Das Eis weicht, dichte Eichenmischwälder entstehen; Großwild wandert ab, Rehe und Hirsche werden neue Beute.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Mollweide.jpg/1280px-Mollweide.jpg",
+    imageUrl: "/assets/stoneage_station_05.jpg",
     tags: ["Klimawandel", "Nacheiszeit", "Wald", "Hirsch", "Pfeil und Bogen"],
     suggestedPrompt: "16-bit pixel art style lush temperate post-glacial forest with tall oaks and birch trees, hunter aiming recurve wooden bow at red deer through bushes, melting snow patches, green moss carpet, retro survival adventure",
     hotspots: [
@@ -576,7 +576,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 6: Das erste Langhaus – Sesshaftwerdung (Bandkeramik)",
     description: "Bau massiver Holzhäuser aus Spaltbohlen mit Lehmbewurf und Schilfdach für eine ganze Großfamilie.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/3/31/Orkney_Skara_Brae.jpg",
+    imageUrl: "/assets/stoneage_station_06.jpg",
     tags: ["Langhaus", "Bandkeramik", "Sesshaftwerdung", "Lehm", "Holzbau", "Dorf"],
     suggestedPrompt: "16-bit pixel art style construction of early Neolithic wooden longhouse with wattle-and-daub clay walls and thick thatched roof, villagers carrying timber logs and reeds, clearing forest with polished stone adzes, retro city builder view",
     hotspots: [
@@ -590,7 +590,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 7: Die ersten Ackerbauern – Saat und Ernte von Emmer & Einkorn",
     description: "Rodung des Urwaldes, Furchen mit dem Grabstock ziehen und Ernte mit Feuersteinsicheln.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/5/5f/Usdaemmer1.jpg",
+    imageUrl: "/assets/stoneage_station_07.jpg",
     tags: ["Ackerbau", "Emmer", "Einkorn", "Sichel", "Ernte", "Neolithikum"],
     suggestedPrompt: "16-bit pixel art style primitive Neolithic wheat fields on forest clearing, farmers harvesting golden emmer and einkorn ears with curved flint sickles, wooden grain storage granary raised on stilts, sunny summer sky, retro farming game art",
     hotspots: [
@@ -604,7 +604,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 8: Domestikation der Tiere – Schafe, Ziegen & Rinder",
     description: "Aus wilden Mufflons und Auerochsen werden zahme Haustiere für Milch, Fleisch, Wolle und Zugkraft.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a3/Murgjo_Sharr_Mountain_Dog_Nedi_Limani.jpg/1280px-Murgjo_Sharr_Mountain_Dog_Nedi_Limani.jpg",
+    imageUrl: "/assets/stoneage_station_08.jpg",
     tags: ["Domestikation", "Haustiere", "Schafe", "Auerochse", "Viehzucht", "Gehege"],
     suggestedPrompt: "16-bit pixel art style Neolithic village animal corral with woven wicker fences, domesticated primitive sheep, goats and oxen, boy milking goat into earthenware pot, dog barking by gate, retro settlement life",
     hotspots: [
@@ -618,7 +618,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 9: Erfindung der Töpferei & Bandkeramik-Brennöfen",
     description: "Formen von Tongefäßen in Wulsttechnik, Einritzen von Bandmustern und Brennen in Feldbrandgruben.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/TalaveraDisplayFranzMayer.jpg/1280px-TalaveraDisplayFranzMayer.jpg",
+    imageUrl: "/assets/stoneage_station_09.jpg",
     tags: ["Keramik", "Töpfern", "Bandkeramik", "Brennofen", "Vorrat", "Ton"],
     suggestedPrompt: "16-bit pixel art style Neolithic pottery open firing pit with glowing charcoal embers, woman decorating clay pot with coiled ribbon pattern using bone stylus, finished ceramic jars storing grain in background, retro craft visual",
     hotspots: [
@@ -632,7 +632,7 @@ export const PREDEFINED_HISTORY_ASSETS: PredefinedAsset[] = [
     topic: "Steinzeit & Neolithische Revolution",
     title: "Station 10: Der Megalith-Steinkreis & Hünengräber (Stonehenge-Kult)",
     description: "Gemeinschaftsarbeit transportiert tonnenschwere Kolosssteine auf Rollen zur Sonnenwendfeier.",
-    imageUrl: "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0f/Stonehenge%2C_Salisbury_retouched.jpg/1280px-Stonehenge%2C_Salisbury_retouched.jpg",
+    imageUrl: "/assets/stoneage_station_10.jpg",
     tags: ["Megalith", "Steinkreis", "Dolmen", "Sonnenwende", "Kult", "Gemeinschaft"],
     suggestedPrompt: "16-bit pixel art style monumental megalithic stone circle standing on green grassy hill at summer solstice sunrise, whole tribe pulling massive sarsen stone block with ropes on rolling tree trunks, sun rays piercing stone trilithon, retro climax cutscene",
     hotspots: [
