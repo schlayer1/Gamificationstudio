@@ -30,6 +30,8 @@ export class GoogleDriveSyncService {
         action: 'saveGame',
         code: code.trim().toUpperCase(),
         title: game.title,
+        author: game.authorName || 'Lehrkraft',
+        authorId: game.authorId || '',
         folderId: this.folderId,
         game: game,
       };

@@ -13,9 +13,7 @@ import {
   AlertCircle,
   Wand2,
   BookOpen,
-  ArrowRight,
   Shield,
-  Layers,
   FileCode,
   Download,
   Upload,
@@ -24,23 +22,26 @@ import {
   Camera,
   Palette,
   Share2,
-  Eye,
-  Lock,
-  Unlock,
   Copy,
   X,
   Image as ImageIcon,
   FolderOpen,
   ExternalLink,
-  Printer,
   Edit3,
-  Trophy
+  Trophy,
+  UserCheck,
+  LogOut,
+  Users,
+  CopyCheck,
+  Compass
 } from 'lucide-react';
 import { StationImagePromptModal } from './StationImagePromptModal';
 import { GameArtworkStudioModal } from './GameArtworkStudioModal';
 import { WorksheetPrintModal } from './WorksheetPrintModal';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
 import { googleDriveSyncService } from '../services/googleDriveSync';
+import { teacherAuthService } from '../services/teacherAuth';
+import { PortalUser } from '../types/user';
 
 interface TeacherStudioProps {
   onLoadGameToPlayer: (game: GameDefinition) => void;
@@ -104,6 +105,8 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [errorNotice, setErrorNotice] = useState<string | null>(null);
 
   // Published Games Management (Lehrer-Freigabe & geschützte Ansicht)
+  const [currentTeacher, setCurrentTeacher] = useState<PortalUser | null>(teacherAuthService.getCurrentTeacher());
+  const [gamesPoolTab, setGamesPoolTab] = useState<'my' | 'kollegium' | 'master'>('my');
   const [publishedGames, setPublishedGames] = useState<PublishedGameRecord[]>(gameStorageService.getPublishedGames());
   const [createdGamePreview, setCreatedGamePreview] = useState<GameDefinition | null>(null);
   const [publishedNotice, setPublishedNotice] = useState<string | null>(null);
@@ -339,10 +342,16 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
 
   const handlePublishGame = async (gameToPublish: GameDefinition) => {
     soundFX.playBlessing();
-    const record = gameStorageService.publishGame(gameToPublish);
+    const record = gameStorageService.publishGame(
+      gameToPublish,
+      undefined,
+      currentTeacher || undefined,
+      true
+    );
     setPublishedGames(gameStorageService.getPublishedGames());
-    setPublishedNotice(`Spiel lokal freigegeben! Freigabe-Code: ${record.shareCode}`);
+    setPublishedNotice(`Spiel für Schüler freigegeben! Freigabe-Code: ${record.shareCode}`);
     setBoardModalCode({ code: record.shareCode, title: gameToPublish.title });
+    setGamesPoolTab('my');
 
     // Sync to Google Drive in the background into dedicated subfolder
     setIsSyncingDrive(true);
@@ -355,6 +364,32 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       console.error("Google Drive sync failed:", err);
     } finally {
       setIsSyncingDrive(false);
+    }
+  };
+
+  const handleSaveDraft = (gameToDraft: GameDefinition) => {
+    soundFX.playClick();
+    if (currentTeacher) {
+      gameStorageService.saveDraftGame(gameToDraft, currentTeacher);
+      setPublishedGames(gameStorageService.getPublishedGames());
+      setPublishedNotice(`Entwurf für „${gameToDraft.title}“ erfolgreich in deinem Account gesichert!`);
+      setGamesPoolTab('my');
+    } else {
+      handlePublishGame(gameToDraft);
+    }
+  };
+
+  const handleDuplicateGame = (gameId: string) => {
+    soundFX.playBlessing();
+    if (!currentTeacher) {
+      alert("Bitte mit persönlicher Lehrer-PIN anmelden, um Spiele zu duplizieren.");
+      return;
+    }
+    const cloned = gameStorageService.duplicateGame(gameId, currentTeacher);
+    if (cloned) {
+      setPublishedGames(gameStorageService.getPublishedGames());
+      setGamesPoolTab('my');
+      setPublishedNotice(`🎉 Spiel erfolgreich als persönliche Vorlage kopiert: „${cloned.game.title}“!`);
     }
   };
 
@@ -493,6 +528,30 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
             <Key className="w-3.5 h-3.5 text-amber-400" />
             <span>{keys.length}/4 Keys</span>
           </button>
+
+          {/* Active Teacher Badge & Logout */}
+          {currentTeacher && (
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-950/80 border border-amber-600/50 text-xs shadow-inner">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-stone-300 hidden sm:inline">Lehrkraft:</span>
+              <span className="font-bold text-amber-200">{currentTeacher.name}</span>
+              {currentTeacher.role === 'admin' && (
+                <span className="px-1.5 py-0.5 rounded text-[10px] bg-red-900/60 border border-red-500/50 text-red-200 font-bold">Admin</span>
+              )}
+              <button
+                onClick={() => {
+                  soundFX.playClick();
+                  teacherAuthService.logout();
+                  setCurrentTeacher(null);
+                  onCloseStudio();
+                }}
+                className="ml-1 p-1 hover:bg-stone-800 rounded text-stone-400 hover:text-red-300 transition-colors cursor-pointer"
+                title="Abmelden"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
 
           <button
             onClick={() => {
@@ -664,8 +723,18 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
               </button>
 
               <button
+                onClick={() => handleSaveDraft(createdGamePreview)}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-amber-500/80 text-amber-200 text-xs font-bold transition-all cursor-pointer shadow-md"
+                title="Als privaten Entwurf im eigenen Account sichern"
+              >
+                <FileCode className="w-4 h-4 text-amber-400" />
+                <span>Als Entwurf sichern</span>
+              </button>
+
+              <button
                 onClick={() => handlePublishGame(createdGamePreview)}
                 className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-stone-950 text-xs font-bold shadow-lg transition-all cursor-pointer"
+                title="Für Schüler freischalten & auf Google Drive hochladen"
               >
                 <Share2 className="w-4 h-4" />
                 <span>Für Schüler freigeben</span>
@@ -708,112 +777,248 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         </div>
       )}
 
-      {/* FREIGEGEBENE SCHÜLER-SPIELE (Aktive Freigaben) */}
-      {publishedGames.length > 0 && (
-        <div className="p-5 rounded-2xl bg-stone-900/90 border border-emerald-600/60 shadow-xl space-y-3 animate-fade-in">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-stone-800 pb-2 gap-2">
-            <div className="flex items-center gap-2 text-emerald-300 text-sm font-bold">
-              <Share2 className="w-4 h-4 text-emerald-400" />
-              <span>Aktive Schüler-Freigaben ({publishedGames.length} Spiele freigeschaltet)</span>
-            </div>
-            <a
-              href="https://drive.google.com/drive/folders/1HMsm3Bl6WziQdpMZK1t3FypCsQHs22jG"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-amber-300 hover:text-amber-200 font-medium"
-            >
-              <FolderOpen className="w-3.5 h-3.5 text-amber-400" />
-              <span>Google Drive Cloud-Ordner öffnen</span>
-              <ExternalLink className="w-3 h-3 text-stone-400" />
-            </a>
-          </div>
+      {/* MULTI-USER SPIEL-BIBLIOTHEK: MEINE SPIELE & ENTWÜRFE | KOLLEGIUMS-ARCHIV | MEISTERSPIELE */}
+      {(() => {
+        const gamesPool = gameStorageService.getGamesForTeacher(currentTeacher);
+        const currentList = gamesPoolTab === 'my' 
+          ? gamesPool.myGames 
+          : gamesPoolTab === 'kollegium' 
+          ? gamesPool.kollegiumGames 
+          : gamesPool.masterGames;
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-            {publishedGames.map((pub) => (
-              <div
-                key={pub.id}
-                className="p-3.5 rounded-xl bg-stone-950 border border-stone-800 hover:border-emerald-500/60 transition-all space-y-2 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[10px] font-mono text-stone-400">{pub.publishedAt}</span>
-                    <span className="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700/60 text-[10px] font-mono font-bold">
-                      Code: {pub.shareCode}
-                    </span>
-                  </div>
-                  <h4 className="text-xs font-bold text-amber-200">{pub.game.title}</h4>
-                  <p className="text-[11px] text-stone-400">{pub.game.era}</p>
-                </div>
+        return (
+          <div className="p-5 rounded-2xl bg-stone-900/90 border border-amber-600/60 shadow-xl space-y-4 animate-fade-in">
+            {/* Header with 3 Category Tabs */}
+            <div className="flex flex-col md:flex-row md:items-center justify-between border-b border-stone-800 pb-3 gap-3">
+              {/* Category Segmented Tabs */}
+              <div className="flex flex-wrap items-center gap-1.5 p-1 rounded-xl bg-stone-950/80 border border-stone-800">
+                <button
+                  onClick={() => {
+                    soundFX.playClick();
+                    setGamesPoolTab('my');
+                  }}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    gamesPoolTab === 'my'
+                      ? 'bg-amber-600 text-stone-950 font-black shadow-sm'
+                      : 'text-stone-400 hover:text-stone-200'
+                  }`}
+                >
+                  <UserCheck className="w-3.5 h-3.5" />
+                  <span>Meine Spiele & Entwürfe</span>
+                  <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-stone-900 text-amber-300 font-mono">
+                    {gamesPool.myGames.length}
+                  </span>
+                </button>
 
-                <div className="pt-2 border-t border-stone-800/80 flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => handleCopyCode(pub.shareCode)}
-                      className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 cursor-pointer"
-                      title="Code kopieren"
-                    >
-                      <Copy className="w-3.5 h-3.5" />
-                      <span>{copiedShareCode === pub.shareCode ? "Kopiert!" : "Kopieren"}</span>
-                    </button>
+                <button
+                  onClick={() => {
+                    soundFX.playClick();
+                    setGamesPoolTab('kollegium');
+                  }}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    gamesPoolTab === 'kollegium'
+                      ? 'bg-amber-600 text-stone-950 font-black shadow-sm'
+                      : 'text-stone-400 hover:text-stone-200'
+                  }`}
+                >
+                  <Users className="w-3.5 h-3.5" />
+                  <span>Kollegiums-Archiv</span>
+                  <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-stone-900 text-amber-300 font-mono">
+                    {gamesPool.kollegiumGames.length}
+                  </span>
+                </button>
 
-                    <button
-                      onClick={() => setBoardModalCode({ code: pub.shareCode, title: pub.game.title })}
-                      className="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/50 text-amber-300 text-[10px] font-bold hover:bg-amber-500/30 transition-colors cursor-pointer"
-                      title="Großanzeige für Beamer / Tafel"
-                    >
-                      📺 Tafel-Modus
-                    </button>
-                  </div>
-
-                  <div className="flex items-center gap-1.5">
-                    <button
-                      onClick={() => {
-                        soundFX.playClick();
-                        setArtworkModalGame(pub.game);
-                      }}
-                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-amber-300 hover:text-amber-200 cursor-pointer"
-                      title="Bilder & Prompts per Drag & Drop bearbeiten"
-                    >
-                      <Camera className="w-3.5 h-3.5" />
-                    </button>
-                    <button
-                      onClick={() => {
-                        soundFX.playClick();
-                        setWorksheetModalGame(pub.game);
-                      }}
-                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-amber-300 cursor-pointer"
-                      title="Begleit-Laufzettel & Musterlösung drucken (DIN A4)"
-                    >
-                      <FileText className="w-3.5 h-3.5 text-amber-400" />
-                    </button>
-                    <button
-                      onClick={() => handleExportJson(pub.game, pub.shareCode)}
-                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-amber-300 cursor-pointer"
-                      title="Als .json Spieldatei exportieren / herunterladen"
-                    >
-                      <Download className="w-3.5 h-3.5 text-amber-400" />
-                    </button>
-                    <button
-                      onClick={() => onLoadGameToPlayer(pub.game)}
-                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 cursor-pointer"
-                      title="Als Schüler starten"
-                    >
-                      <Play className="w-3.5 h-3.5 text-amber-400" />
-                    </button>
-                    <button
-                      onClick={() => handleUnpublishGame(pub.id)}
-                      className="p-1.5 rounded-lg bg-stone-800 hover:bg-red-900/60 text-stone-400 hover:text-red-300 transition-colors cursor-pointer"
-                      title="Freigabe beenden"
-                    >
-                      <Trash2 className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
-                </div>
+                <button
+                  onClick={() => {
+                    soundFX.playClick();
+                    setGamesPoolTab('master');
+                  }}
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                    gamesPoolTab === 'master'
+                      ? 'bg-amber-600 text-stone-950 font-black shadow-sm'
+                      : 'text-stone-400 hover:text-stone-200'
+                  }`}
+                >
+                  <Compass className="w-3.5 h-3.5" />
+                  <span>Offizielle Meisterspiele</span>
+                  <span className="px-1.5 py-0.2 rounded-full text-[10px] bg-stone-900 text-amber-300 font-mono">
+                    {gamesPool.masterGames.length}
+                  </span>
+                </button>
               </div>
-            ))}
+
+              {/* Cloud Drive Link */}
+              <a
+                href="https://drive.google.com/drive/folders/1HMsm3Bl6WziQdpMZK1t3FypCsQHs22jG"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-amber-300 hover:text-amber-200 font-medium"
+              >
+                <FolderOpen className="w-3.5 h-3.5 text-amber-400" />
+                <span>Google Drive Cloud-Ordner</span>
+                <ExternalLink className="w-3 h-3 text-stone-400" />
+              </a>
+            </div>
+
+            {/* Empty State */}
+            {currentList.length === 0 && (
+              <div className="p-8 text-center text-stone-400 space-y-2">
+                <p className="text-sm">In dieser Kategorie sind noch keine Spiele hinterlegt.</p>
+                {gamesPoolTab === 'my' && (
+                  <p className="text-xs text-stone-500">
+                    Erstelle oben ein neues Spiel oder klicke im Kollegiums-Archiv auf „Kopieren“, um eine Vorlage zu übernehmen!
+                  </p>
+                )}
+              </div>
+            )}
+
+            {/* Game Cards Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {currentList.map((pub) => {
+                const isMaster = pub.authorId === 'official';
+
+                return (
+                  <div
+                    key={pub.id}
+                    className="p-3.5 rounded-xl bg-stone-950 border border-stone-800 hover:border-amber-500/60 transition-all space-y-2 flex flex-col justify-between"
+                  >
+                    <div>
+                      {/* Top Badges */}
+                      <div className="flex items-center justify-between mb-1 gap-1">
+                        <span className="text-[10px] font-mono text-stone-400 truncate">
+                          {pub.publishedAt}
+                        </span>
+
+                        <div className="flex items-center gap-1">
+                          {pub.isDraft ? (
+                            <span className="px-2 py-0.5 rounded-full bg-amber-950 text-amber-300 border border-amber-700/60 text-[10px] font-mono font-bold">
+                              📝 Entwurf
+                            </span>
+                          ) : (
+                            <span className="px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700/60 text-[10px] font-mono font-bold">
+                              Code: {pub.shareCode}
+                            </span>
+                          )}
+
+                          {pub.authorName && pub.authorId !== 'official' && (
+                            <span className="px-1.5 py-0.5 rounded text-[10px] bg-stone-900 border border-stone-700 text-stone-300 font-medium">
+                              👤 {pub.authorName}
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <h4 className="text-xs font-bold text-amber-200 line-clamp-1">{pub.game.title}</h4>
+                      <p className="text-[11px] text-stone-400">{pub.game.era}</p>
+                    </div>
+
+                    {/* Actions Toolbar */}
+                    <div className="pt-2 border-t border-stone-800/80 flex items-center justify-between gap-1.5 flex-wrap">
+                      {/* Left: Code copy / publish / Tafel-Modus */}
+                      <div className="flex items-center gap-1.5">
+                        {pub.isDraft ? (
+                          <button
+                            onClick={() => handlePublishGame(pub.game)}
+                            disabled={isSyncingDrive}
+                            className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-500 hover:to-green-500 text-stone-950 text-[10px] font-black shadow transition-all cursor-pointer"
+                            title="Für Schüler freigeben & auf Google Drive hochladen"
+                          >
+                            <Share2 className="w-3 h-3" />
+                            <span>Freigeben</span>
+                          </button>
+                        ) : (
+                          <>
+                            <button
+                              onClick={() => handleCopyCode(pub.shareCode)}
+                              className="flex items-center gap-1 text-[11px] font-bold text-emerald-400 hover:text-emerald-300 cursor-pointer"
+                              title="Schüler-Freigabecode kopieren"
+                            >
+                              <Copy className="w-3.5 h-3.5" />
+                              <span>{copiedShareCode === pub.shareCode ? "Kopiert!" : "Kopieren"}</span>
+                            </button>
+
+                            <button
+                              onClick={() => setBoardModalCode({ code: pub.shareCode, title: pub.game.title })}
+                              className="px-2 py-0.5 rounded bg-amber-500/20 border border-amber-500/50 text-amber-300 text-[10px] font-bold hover:bg-amber-500/30 transition-colors cursor-pointer"
+                              title="Großanzeige für Beamer / Tafel"
+                            >
+                              📺 Tafel
+                            </button>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Right: Actions */}
+                      <div className="flex items-center gap-1">
+                        {/* Duplicate/Fork button for Kollegium & Master games */}
+                        {(gamesPoolTab === 'kollegium' || gamesPoolTab === 'master') && (
+                          <button
+                            onClick={() => handleDuplicateGame(pub.id)}
+                            className="px-2 py-1 rounded-lg bg-amber-600/30 hover:bg-amber-600 border border-amber-500/50 text-amber-200 hover:text-stone-950 text-[10px] font-bold transition-all cursor-pointer flex items-center gap-1"
+                            title="Als persönliche Vorlage in meinen Account duplizieren"
+                          >
+                            <CopyCheck className="w-3 h-3" />
+                            <span>Kopieren</span>
+                          </button>
+                        )}
+
+                        <button
+                          onClick={() => {
+                            soundFX.playClick();
+                            setArtworkModalGame(pub.game);
+                          }}
+                          className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-amber-300 hover:text-amber-200 cursor-pointer"
+                          title="Bilder & Prompts per Drag & Drop bearbeiten"
+                        >
+                          <Camera className="w-3.5 h-3.5" />
+                        </button>
+
+                        <button
+                          onClick={() => {
+                            soundFX.playClick();
+                            setWorksheetModalGame(pub.game);
+                          }}
+                          className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-amber-300 cursor-pointer"
+                          title="Begleit-Laufzettel & Musterlösung drucken (DIN A4)"
+                        >
+                          <FileText className="w-3.5 h-3.5 text-amber-400" />
+                        </button>
+
+                        <button
+                          onClick={() => handleExportJson(pub.game, pub.shareCode)}
+                          className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-amber-300 cursor-pointer"
+                          title="Als .json Spieldatei exportieren / herunterladen"
+                        >
+                          <Download className="w-3.5 h-3.5 text-amber-400" />
+                        </button>
+
+                        <button
+                          onClick={() => onLoadGameToPlayer(pub.game)}
+                          className="p-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-stone-200 cursor-pointer"
+                          title="Als Schüler starten / testen"
+                        >
+                          <Play className="w-3.5 h-3.5 text-amber-400" />
+                        </button>
+
+                        {/* Delete / Unpublish (only if owner or admin) */}
+                        {gameStorageService.canEditGame(pub.game, currentTeacher) && !isMaster && (
+                          <button
+                            onClick={() => handleUnpublishGame(pub.id)}
+                            className="p-1.5 rounded-lg bg-stone-800 hover:bg-red-900/60 text-stone-400 hover:text-red-300 transition-colors cursor-pointer"
+                            title="Löschen / Freigabe beenden"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      )}
+        );
+      })()}
       <div className="space-y-4">
         {/* Toggle between Predefined Templates and Completely Freeform Setting */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-1 border-b border-stone-800">

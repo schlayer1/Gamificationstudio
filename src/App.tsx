@@ -295,7 +295,7 @@ export const App: React.FC = () => {
       {gameState === 'studio' && (
         <TeacherStudio
           onLoadGameToPlayer={handleLoadGameFromStudio}
-          onCloseStudio={() => setGameState('setup')}
+          onCloseStudio={() => setGameState('portal')}
         />
       )}
 

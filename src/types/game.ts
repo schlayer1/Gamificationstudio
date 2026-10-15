@@ -186,6 +186,12 @@ export interface GameDefinition {
   rounds: RoundStory[]; // Array of 20 rounds or dynamic branch pairs
   worksheet?: GameWorksheet; // Didactic DIN-A4 student worksheet & teacher solution sheet
   shareCode?: string; // Persistent cloud & export share code (e.g. "ROM44", "IND12")
+  authorId?: string; // e.g. "t-keller", "official", etc.
+  authorName?: string; // e.g. "Keller", "Meisterspiel"
+  isDraft?: boolean; // True if saved as private draft in teacher studio
+  sharedWithKollegium?: boolean; // True if visible to colleagues in the Kollegium-Pool
+  createdAt?: number; // Timestamp
+  updatedAt?: number; // Timestamp
 }
 
 export interface GameLogEntry {

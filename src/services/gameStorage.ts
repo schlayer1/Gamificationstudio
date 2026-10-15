@@ -1,12 +1,12 @@
 import { GameDefinition } from '../types/game';
+import { PortalUser } from '../types/user';
+import { teacherAuthService } from './teacherAuth';
 import { WW1_MASTER_GAME } from '../data/predefinedGames/ww1Game';
 import { STONEAGE_MASTER_GAME } from '../data/predefinedGames/stoneageGame';
 import { ROME_MASTER_GAME } from '../data/predefinedGames/romeGame';
 import { ROME_CULTURE_MASTER_GAME } from '../data/predefinedGames/romeCultureGame';
 
 const STORAGE_KEY_PUBLISHED_GAMES = 'history_trail_published_games';
-const STORAGE_KEY_ACTIVE_PIN = 'history_trail_teacher_pin';
-const DEFAULT_PIN = '1234'; // Default Teacher PIN for easy school setup
 
 export interface PublishedGameRecord {
   id: string;
@@ -14,38 +14,23 @@ export interface PublishedGameRecord {
   game: GameDefinition;
   publishedAt: string;
   isPublic: boolean;
+  authorId?: string; // e.g. "t-keller" or "official"
+  authorName?: string; // e.g. "Keller"
+  isDraft?: boolean; // true = private draft, false = published for students
+  sharedWithKollegium?: boolean; // true = visible to colleagues in the pool
 }
 
 export class GameStorageService {
   /**
-   * Get teacher access PIN (defaults to 1234)
-   */
-  public getTeacherPin(): string {
-    if (typeof window !== 'undefined') {
-      return localStorage.getItem(STORAGE_KEY_ACTIVE_PIN) || DEFAULT_PIN;
-    }
-    return DEFAULT_PIN;
-  }
-
-  /**
-   * Set a custom teacher PIN
-   */
-  public setTeacherPin(newPin: string): void {
-    if (typeof window !== 'undefined' && newPin.trim()) {
-      localStorage.setItem(STORAGE_KEY_ACTIVE_PIN, newPin.trim());
-    }
-  }
-
-  /**
-   * Verify teacher PIN
+   * Verify teacher PIN against central user list
    */
   public verifyPin(enteredPin: string): boolean {
-    const currentPin = this.getTeacherPin();
-    return enteredPin.trim() === currentPin.trim();
+    const res = teacherAuthService.loginWithPin(enteredPin);
+    return res.success;
   }
 
   /**
-   * Load all games published by the teacher (with EGY01 seeded if none exists)
+   * Load all games published by teachers & official master games
    */
   public getPublishedGames(): PublishedGameRecord[] {
     if (typeof window === 'undefined') return [];
@@ -56,6 +41,10 @@ export class GameStorageService {
       shareCode: 'EGY01',
       publishedAt: 'Offizielles Meisterspiel',
       isPublic: true,
+      authorId: 'official',
+      authorName: 'Meisterspiel',
+      isDraft: false,
+      sharedWithKollegium: true,
       game: {
         id: 'game_egypt_original',
         title: 'Helfer des Pharaos – Nil-Expedition',
@@ -82,6 +71,10 @@ export class GameStorageService {
           skill3: 'Militärische Stärke',
         },
         rounds: [], // Dynamic rounds resolved via storyData engine
+        authorId: 'official',
+        authorName: 'Meisterspiel',
+        isDraft: false,
+        sharedWithKollegium: true
       },
     };
 
@@ -91,7 +84,17 @@ export class GameStorageService {
       shareCode: 'WW101',
       publishedAt: 'Offizielles Meisterspiel',
       isPublic: true,
-      game: WW1_MASTER_GAME,
+      authorId: 'official',
+      authorName: 'Meisterspiel',
+      isDraft: false,
+      sharedWithKollegium: true,
+      game: {
+        ...WW1_MASTER_GAME,
+        authorId: 'official',
+        authorName: 'Meisterspiel',
+        isDraft: false,
+        sharedWithKollegium: true
+      },
     };
 
     // 3. Offizielles Steinzeit Meisterspiel (STN01)
@@ -100,7 +103,17 @@ export class GameStorageService {
       shareCode: 'STN01',
       publishedAt: 'Offizielles Meisterspiel',
       isPublic: true,
-      game: STONEAGE_MASTER_GAME,
+      authorId: 'official',
+      authorName: 'Meisterspiel',
+      isDraft: false,
+      sharedWithKollegium: true,
+      game: {
+        ...STONEAGE_MASTER_GAME,
+        authorId: 'official',
+        authorName: 'Meisterspiel',
+        isDraft: false,
+        sharedWithKollegium: true
+      },
     };
 
     // 4. Offizielles Antikes Rom Meisterspiel (ROM01)
@@ -109,7 +122,17 @@ export class GameStorageService {
       shareCode: 'ROM01',
       publishedAt: 'Offizielles Meisterspiel',
       isPublic: true,
-      game: ROME_MASTER_GAME,
+      authorId: 'official',
+      authorName: 'Meisterspiel',
+      isDraft: false,
+      sharedWithKollegium: true,
+      game: {
+        ...ROME_MASTER_GAME,
+        authorId: 'official',
+        authorName: 'Meisterspiel',
+        isDraft: false,
+        sharedWithKollegium: true
+      },
     };
 
     // 5. Offizielles Antikes Rom: Kultur & Religion Meisterspiel (ROM02)
@@ -118,7 +141,17 @@ export class GameStorageService {
       shareCode: 'ROM02',
       publishedAt: 'Offizielles Meisterspiel',
       isPublic: true,
-      game: ROME_CULTURE_MASTER_GAME,
+      authorId: 'official',
+      authorName: 'Meisterspiel',
+      isDraft: false,
+      sharedWithKollegium: true,
+      game: {
+        ...ROME_CULTURE_MASTER_GAME,
+        authorId: 'official',
+        authorName: 'Meisterspiel',
+        isDraft: false,
+        sharedWithKollegium: true
+      },
     };
 
     const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1, defaultStoneAge, defaultRome, defaultRomeCulture];
@@ -135,7 +168,15 @@ export class GameStorageService {
             if (idx === -1) {
               result.push(off);
             } else {
-              result[idx] = { ...result[idx], game: off.game, publishedAt: 'Offizielles Meisterspiel' };
+              result[idx] = { 
+                ...result[idx], 
+                game: off.game, 
+                publishedAt: 'Offizielles Meisterspiel',
+                authorId: 'official',
+                authorName: 'Meisterspiel',
+                isDraft: false,
+                sharedWithKollegium: true
+              };
             }
           }
           return result;
@@ -152,19 +193,65 @@ export class GameStorageService {
   }
 
   /**
-   * Publish / Freigeben a game so students can join via share code or selection.
+   * Save a game as a private draft in the teacher's account
+   */
+  public saveDraftGame(game: GameDefinition, author: PortalUser): PublishedGameRecord {
+    const existing = this.getPublishedGames();
+    const existingRec = existing.find((g) => g.id === game.id);
+
+    const authorId = author.id;
+    const authorName = author.name;
+
+    game.authorId = authorId;
+    game.authorName = authorName;
+    game.isDraft = true;
+    game.updatedAt = Date.now();
+    if (!game.createdAt) game.createdAt = Date.now();
+
+    const record: PublishedGameRecord = {
+      id: game.id,
+      shareCode: game.shareCode || existingRec?.shareCode || 'ENTWURF',
+      game,
+      publishedAt: new Date().toLocaleDateString('de-DE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+      isPublic: false,
+      authorId,
+      authorName,
+      isDraft: true,
+      sharedWithKollegium: game.sharedWithKollegium ?? false
+    };
+
+    const updated = [record, ...existing.filter((g) => g.id !== game.id)];
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_PUBLISHED_GAMES, JSON.stringify(updated));
+    }
+    return record;
+  }
+
+  /**
+   * Publish / Freigeben a game so students can join via share code.
    * If a shareCode is already present in the game/imported JSON or passed explicitly, it is preserved!
    */
-  public publishGame(game: GameDefinition, preferredShareCode?: string): PublishedGameRecord {
+  public publishGame(
+    game: GameDefinition, 
+    preferredShareCode?: string, 
+    author?: PortalUser,
+    shareWithKollegium: boolean = true
+  ): PublishedGameRecord {
     const existing = this.getPublishedGames();
     
     // Check if an existing published record already had a code for this game id
     const existingRec = existing.find((g) => g.id === game.id);
 
-    let shareCode = preferredShareCode || game.shareCode || existingRec?.shareCode;
+    let shareCode = preferredShareCode || game.shareCode || (existingRec?.shareCode !== 'ENTWURF' ? existingRec?.shareCode : undefined);
 
-    // If still no share code, generate a clean 4-6 char code, e.g. "ROM44" or "NIL20"
-    if (!shareCode || !shareCode.trim()) {
+    // If still no share code or placeholder, generate a clean 4-6 char code, e.g. "ROM44" or "NIL20"
+    if (!shareCode || !shareCode.trim() || shareCode === 'ENTWURF') {
       const prefix = (game.era.slice(0, 3) || 'HIS').toUpperCase().replace(/[^A-Z]/g, 'G');
       const randomSuffix = Math.floor(10 + Math.random() * 90);
       shareCode = `${prefix}${randomSuffix}`;
@@ -172,8 +259,17 @@ export class GameStorageService {
       shareCode = shareCode.trim().toUpperCase();
     }
 
-    // Keep shareCode attached to game object for persistence
+    // Keep author information
+    const authorId = author?.id || game.authorId || existingRec?.authorId || 't-lehrer';
+    const authorName = author?.name || game.authorName || existingRec?.authorName || 'Lehrkraft';
+
     game.shareCode = shareCode;
+    game.authorId = authorId;
+    game.authorName = authorName;
+    game.isDraft = false;
+    game.sharedWithKollegium = shareWithKollegium;
+    game.updatedAt = Date.now();
+    if (!game.createdAt) game.createdAt = Date.now();
 
     const record: PublishedGameRecord = {
       id: game.id,
@@ -187,6 +283,10 @@ export class GameStorageService {
         minute: '2-digit',
       }),
       isPublic: true,
+      authorId,
+      authorName,
+      isDraft: false,
+      sharedWithKollegium: shareWithKollegium
     };
 
     // Filter out previous version if overwriting
@@ -195,6 +295,82 @@ export class GameStorageService {
       localStorage.setItem(STORAGE_KEY_PUBLISHED_GAMES, JSON.stringify(updated));
     }
     return record;
+  }
+
+  /**
+   * Filter games into categorized pools for the Teacher Studio:
+   * - myGames: Drafts and published games owned by the logged-in teacher
+   * - kollegiumGames: Published games by colleagues (clonable)
+   * - masterGames: Official school curriculum master games
+   */
+  public getGamesForTeacher(teacher: PortalUser | null): {
+    myGames: PublishedGameRecord[];
+    kollegiumGames: PublishedGameRecord[];
+    masterGames: PublishedGameRecord[];
+  } {
+    const all = this.getPublishedGames();
+    const masterGames = all.filter((r) => r.authorId === 'official' || r.shareCode === 'EGY01' || r.shareCode === 'WW101' || r.shareCode === 'STN01' || r.shareCode === 'ROM01' || r.shareCode === 'ROM02');
+
+    if (!teacher) {
+      return {
+        myGames: [],
+        kollegiumGames: all.filter((r) => !masterGames.includes(r) && !r.isDraft),
+        masterGames
+      };
+    }
+
+    const isAdmin = teacher.role === 'admin';
+
+    // If Admin, they see all games in myGames as editable
+    const myGames = all.filter((r) => {
+      if (masterGames.includes(r)) return false;
+      if (isAdmin) return true;
+      return r.authorId === teacher.id;
+    });
+
+    const kollegiumGames = all.filter((r) => {
+      if (masterGames.includes(r)) return false;
+      if (r.authorId === teacher.id) return false;
+      return !r.isDraft || r.sharedWithKollegium;
+    });
+
+    return {
+      myGames,
+      kollegiumGames,
+      masterGames
+    };
+  }
+
+  /**
+   * Duplicate / Fork a game (master game or colleague game) into teacher's personal account
+   */
+  public duplicateGame(gameId: string, targetTeacher: PortalUser): PublishedGameRecord | null {
+    const all = this.getPublishedGames();
+    const sourceRec = all.find((r) => r.id === gameId || r.game.id === gameId);
+    if (!sourceRec) return null;
+
+    const newId = `game_${Date.now()}_${Math.random().toString(36).slice(2, 7)}`;
+    const clonedGame: GameDefinition = JSON.parse(JSON.stringify(sourceRec.game));
+    
+    clonedGame.id = newId;
+    clonedGame.title = `${clonedGame.title} (Kopie ${targetTeacher.name})`;
+    clonedGame.authorId = targetTeacher.id;
+    clonedGame.authorName = targetTeacher.name;
+    clonedGame.isDraft = true;
+    delete clonedGame.shareCode;
+
+    return this.saveDraftGame(clonedGame, targetTeacher);
+  }
+
+  /**
+   * Permission check: can the current teacher edit this game?
+   */
+  public canEditGame(game: GameDefinition, teacher: PortalUser | null): boolean {
+    if (!teacher) return false;
+    if (teacher.role === 'admin') return true;
+    if (game.authorId === 'official') return false; // Masters are protected templates
+    if (!game.authorId) return true; // Legacy unassigned game
+    return game.authorId === teacher.id;
   }
 
   /**
@@ -207,6 +383,10 @@ export class GameStorageService {
         return {
           ...rec,
           game: updatedGame,
+          authorId: updatedGame.authorId || rec.authorId,
+          authorName: updatedGame.authorName || rec.authorName,
+          isDraft: updatedGame.isDraft ?? rec.isDraft,
+          sharedWithKollegium: updatedGame.sharedWithKollegium ?? rec.sharedWithKollegium
         };
       }
       return rec;
@@ -233,7 +413,8 @@ export class GameStorageService {
   public findGameByShareCode(code: string): GameDefinition | null {
     const cleanCode = code.trim().toUpperCase();
     const games = this.getPublishedGames();
-    const match = games.find((g) => g.shareCode.toUpperCase() === cleanCode);
+    // Only published games (not private drafts) can be joined by code
+    const match = games.find((g) => g.shareCode.toUpperCase() === cleanCode && !g.isDraft);
     return match ? match.game : null;
   }
 
@@ -294,4 +475,3 @@ export class GameStorageService {
 }
 
 export const gameStorageService = new GameStorageService();
-
