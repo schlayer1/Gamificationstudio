@@ -1,4 +1,5 @@
 import { GameDefinition } from '../types/game';
+import { WW1_MASTER_GAME } from '../data/predefinedGames/ww1Game';
 
 const STORAGE_KEY_PUBLISHED_GAMES = 'history_trail_published_games';
 const STORAGE_KEY_ACTIVE_PIN = 'history_trail_teacher_pin';
@@ -57,11 +58,11 @@ export class GameStorageService {
       console.error("Error loading published games:", e);
     }
 
-    // Default Seed: Ägypten Meisterspiel EGY01
+    // 1. Offizielles Ägypten Meisterspiel (EGY01)
     const defaultEgypt: PublishedGameRecord = {
       id: 'game_egypt_original',
       shareCode: 'EGY01',
-      publishedAt: 'Offizielles Spiel',
+      publishedAt: 'Offizielles Meisterspiel',
       isPublic: true,
       game: {
         id: 'game_egypt_original',
@@ -92,10 +93,43 @@ export class GameStorageService {
       },
     };
 
-    if (typeof window !== 'undefined') {
-      localStorage.setItem(STORAGE_KEY_PUBLISHED_GAMES, JSON.stringify([defaultEgypt]));
+    // 2. Offizielles Erster Weltkrieg Meisterspiel (WW101)
+    const defaultWW1: PublishedGameRecord = {
+      id: WW1_MASTER_GAME.id,
+      shareCode: 'WW101',
+      publishedAt: 'Offizielles Meisterspiel',
+      isPublic: true,
+      game: WW1_MASTER_GAME,
+    };
+
+    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1];
+
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY_PUBLISHED_GAMES);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          // Merge: ensure all official defaults exist with the latest content
+          const result = [...parsed];
+          for (const off of officialDefaults) {
+            const idx = result.findIndex((g) => g.shareCode === off.shareCode || g.id === off.id);
+            if (idx === -1) {
+              result.push(off);
+            } else {
+              result[idx] = { ...result[idx], game: off.game, publishedAt: 'Offizielles Meisterspiel' };
+            }
+          }
+          return result;
+        }
+      }
+    } catch (e) {
+      console.error("Error loading published games:", e);
     }
-    return [defaultEgypt];
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY_PUBLISHED_GAMES, JSON.stringify(officialDefaults));
+    }
+    return officialDefaults;
   }
 
   /**
