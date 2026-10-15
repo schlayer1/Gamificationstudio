@@ -2,6 +2,7 @@ import { GameDefinition } from '../types/game';
 import { WW1_MASTER_GAME } from '../data/predefinedGames/ww1Game';
 import { STONEAGE_MASTER_GAME } from '../data/predefinedGames/stoneageGame';
 import { ROME_MASTER_GAME } from '../data/predefinedGames/romeGame';
+import { ROME_CULTURE_MASTER_GAME } from '../data/predefinedGames/romeCultureGame';
 
 const STORAGE_KEY_PUBLISHED_GAMES = 'history_trail_published_games';
 const STORAGE_KEY_ACTIVE_PIN = 'history_trail_teacher_pin';
@@ -111,7 +112,16 @@ export class GameStorageService {
       game: ROME_MASTER_GAME,
     };
 
-    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1, defaultStoneAge, defaultRome];
+    // 5. Offizielles Antikes Rom: Kultur & Religion Meisterspiel (ROM02)
+    const defaultRomeCulture: PublishedGameRecord = {
+      id: ROME_CULTURE_MASTER_GAME.id,
+      shareCode: 'ROM02',
+      publishedAt: 'Offizielles Meisterspiel',
+      isPublic: true,
+      game: ROME_CULTURE_MASTER_GAME,
+    };
+
+    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1, defaultStoneAge, defaultRome, defaultRomeCulture];
 
     try {
       const raw = localStorage.getItem(STORAGE_KEY_PUBLISHED_GAMES);
