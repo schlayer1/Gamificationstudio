@@ -47,17 +47,6 @@ export class GameStorageService {
    */
   public getPublishedGames(): PublishedGameRecord[] {
     if (typeof window === 'undefined') return [];
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY_PUBLISHED_GAMES);
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (Array.isArray(parsed) && parsed.length > 0) {
-          return parsed;
-        }
-      }
-    } catch (e) {
-      console.error("Error loading published games:", e);
-    }
 
     // 1. Offizielles Ägypten Meisterspiel (EGY01)
     const defaultEgypt: PublishedGameRecord = {
