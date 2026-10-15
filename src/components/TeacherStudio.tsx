@@ -849,7 +849,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
               }`}
             >
               <Trophy className="w-3.5 h-3.5" />
-              <span>🏆 Fertige Meisterspiele ({publishedGames.filter(p => p.publishedAt.includes('Meisterspiel') || ['EGY01', 'WW101', 'STN01'].includes(p.shareCode)).length})</span>
+              <span>🏆 Fertige Meisterspiele ({publishedGames.filter(p => p.publishedAt.includes('Meisterspiel') || ['EGY01', 'WW101', 'STN01', 'ROM01'].includes(p.shareCode)).length})</span>
             </button>
 
             <button
@@ -900,7 +900,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
               {publishedGames
-                .filter(p => p.publishedAt.includes('Meisterspiel') || ['EGY01', 'WW101', 'STN01'].includes(p.shareCode))
+                .filter(p => p.publishedAt.includes('Meisterspiel') || ['EGY01', 'WW101', 'STN01', 'ROM01'].includes(p.shareCode))
                 .map((pub) => {
                   const roundsCount = pub.game.rounds?.length || 20;
                   return (

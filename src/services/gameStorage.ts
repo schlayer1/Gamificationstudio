@@ -1,6 +1,7 @@
 import { GameDefinition } from '../types/game';
 import { WW1_MASTER_GAME } from '../data/predefinedGames/ww1Game';
 import { STONEAGE_MASTER_GAME } from '../data/predefinedGames/stoneageGame';
+import { ROME_MASTER_GAME } from '../data/predefinedGames/romeGame';
 
 const STORAGE_KEY_PUBLISHED_GAMES = 'history_trail_published_games';
 const STORAGE_KEY_ACTIVE_PIN = 'history_trail_teacher_pin';
@@ -101,7 +102,16 @@ export class GameStorageService {
       game: STONEAGE_MASTER_GAME,
     };
 
-    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1, defaultStoneAge];
+    // 4. Offizielles Antikes Rom Meisterspiel (ROM01)
+    const defaultRome: PublishedGameRecord = {
+      id: ROME_MASTER_GAME.id,
+      shareCode: 'ROM01',
+      publishedAt: 'Offizielles Meisterspiel',
+      isPublic: true,
+      game: ROME_MASTER_GAME,
+    };
+
+    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1, defaultStoneAge, defaultRome];
 
     try {
       const raw = localStorage.getItem(STORAGE_KEY_PUBLISHED_GAMES);
