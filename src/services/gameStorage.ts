@@ -5,6 +5,7 @@ import { WW1_MASTER_GAME } from '../data/predefinedGames/ww1Game';
 import { STONEAGE_MASTER_GAME } from '../data/predefinedGames/stoneageGame';
 import { ROME_MASTER_GAME } from '../data/predefinedGames/romeGame';
 import { ROME_CULTURE_MASTER_GAME } from '../data/predefinedGames/romeCultureGame';
+import { GREECE_MASTER_GAME } from '../data/predefinedGames/greeceGame';
 
 const STORAGE_KEY_PUBLISHED_GAMES = 'history_trail_published_games';
 
@@ -154,7 +155,26 @@ export class GameStorageService {
       },
     };
 
-    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1, defaultStoneAge, defaultRome, defaultRomeCulture];
+    // 6. Offizielles Antikes Griechenland Meisterspiel (GRE01)
+    const defaultGreece: PublishedGameRecord = {
+      id: GREECE_MASTER_GAME.id,
+      shareCode: 'GRE01',
+      publishedAt: 'Offizielles Meisterspiel',
+      isPublic: true,
+      authorId: 'official',
+      authorName: 'Meisterspiel',
+      isDraft: false,
+      sharedWithKollegium: true,
+      game: {
+        ...GREECE_MASTER_GAME,
+        authorId: 'official',
+        authorName: 'Meisterspiel',
+        isDraft: false,
+        sharedWithKollegium: true
+      },
+    };
+
+    const officialDefaults: PublishedGameRecord[] = [defaultEgypt, defaultWW1, defaultStoneAge, defaultRome, defaultRomeCulture, defaultGreece];
 
     try {
       const raw = localStorage.getItem(STORAGE_KEY_PUBLISHED_GAMES);
