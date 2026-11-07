@@ -45,9 +45,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Ein Trankopfer aus Wein und Weihrauch für Jupiter Optimus Maximus weihen",
         "description": "Ehrt den Schirmherrn des Senats und obersten Hüter des Weltreichs.",
         "statChanges": {
-          "goetter": 20,
-          "adel": 15,
-          "volk": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -64,9 +64,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Kriegsgott Mars und Weisheitsgöttin Minerva mit Waffenopfern anrufen",
         "description": "Erbittet militärischen Schutz für die Grenzlegionen und strategische Klugheit.",
         "statChanges": {
-          "priester": 20,
-          "goetter": 15,
-          "adel": 5
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -82,9 +83,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das Volk einladen und gesegnete Opferbrote an arme Bürger verteilen",
         "description": "Verbindet göttlichen Segen mit praktischer Nächstenliebe für die Plebejer.",
         "statChanges": {
-          "volk": 25,
-          "adel": 10,
-          "goetter": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -101,10 +102,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um das Geheimnis unzerstörbarer Betonkuppeln für die Ewigkeit zu bewahren.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "priester": 20,
-          "volk": 20,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -125,7 +127,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Der Name 'Pan-theon' bedeutet 'allen Göttern geweiht'. Um das enorme Gewicht der Kuppel (über 4.500 Tonnen) zu verringern, nutzten die römischen Architekten nach oben hin immer leichtere Zuschlagstoffe: Basalt unten, Tuffstein in der Mitte und poröser Bimsstein an der Decke."
       },
       "curiosityFact": "Wenn es im Pantheon regnet, fließt das Wasser durch 22 winzige, kaum sichtbare Löcher im leicht gewölbten Marmorboden sofort unterirdisch in die römische Kanalisation ab!"
-    }
+    },
+    "hefterEintrag": "Das Pantheon in Rom besaß die größte freitragende Betonkuppel der Antike mit einer 9-Meter-Öffnung (Opaion) für das Sonnenlicht."
   },
   {
     "id": "rome2_r02",
@@ -171,9 +174,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Verse der Sibylle feierlich verlesen und ein zehntägiges Sühneopfer (Supplicatio) anordnen",
         "description": "Beruhigt die Bevölkerung durch gemeinsame Bittprozessionen in allen Tempeln.",
         "statChanges": {
-          "goetter": 25,
-          "volk": 15,
-          "adel": 15,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -190,9 +193,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Einen neuen fremden Gott aus den Provinzen (z. B. Isis oder Mithras) ins Pantheon integrieren",
         "description": "Offenheit für fremde Religionen schafft Loyalität unter Händlern und Soldaten.",
         "statChanges": {
-          "volk": 20,
           "priester": 15,
-          "adel": 5
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -208,9 +212,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Gefälschte Unheilsnachrichten aufdecken und Scharlatane von den Plätzen verweisen",
         "description": "Schützt die Bürger vor Betrügern, die mit Schreckensprophezeiungen Geld erpressen.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 10,
-          "volk": 15
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -227,11 +231,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Bewegung der Himmelskörper präzise mit Sonnenstrahlen zu messen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "priester": 20,
-          "adel": 20,
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
           "volk": 15,
-          "ep": 1
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -252,7 +256,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Im Gegensatz zu monotheistischen Religionen kannte Rom keine 'Ketzer'. Jeder fremde Gott (von Isis aus Ägypten bis zu keltischen Quellgöttinnen) konnte verehrt werden, solange der traditionelle Staatskult nicht gefährdet wurde."
       },
       "curiosityFact": "Bei Feldzügen nahmen die Legionäre 'heilige Hühner' im Käfig mit: Priester streuten Körner aus – fraßen die Hühner eifrig, galt die Schlacht als gewonnen; verweigerten sie das Futter, drohte Unheil!"
-    }
+    },
+    "hefterEintrag": "Die Römer befragten vor wichtigen Entscheidungen Priester und heilige Bücher (Sibyllinische Bücher) nach dem Willen der Götter."
   },
   {
     "id": "rome2_r03",
@@ -281,7 +286,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r3_mosaik",
         "x": 25,
-        "y": 75,
+        "y": 65,
         "label": "Hundemosaik ('Cave Canem')",
         "description": "Warnung an der Haustür: 'Hüte dich vor dem Hund!'",
         "icon": "🐕"
@@ -298,9 +303,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Den Laren und Penaten Früchte, Honig und Wein auf dem Hausaltar opfern",
         "description": "Pflegt die häusliche Frömmigkeit (Pietas) für das Wohl der ganzen Familie.",
         "statChanges": {
-          "goetter": 20,
-          "adel": 15,
-          "volk": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -317,8 +322,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Klienten bei der morgendlichen Salutatio mit Getreidespenden und Rat unterstützen",
         "description": "Verbindet Reichtum mit sozialer Verantwortung gegenüber ärmeren Bürgern.",
         "statChanges": {
-          "volk": 25,
-          "adel": 15,
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
           "goetter": 5
         },
         "skillChanges": {
@@ -335,9 +341,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das Peristyl mit schattigen Säulengängen, Wasserspielen und Zypressen verschönern",
         "description": "Schafft eine Oase der Ruhe und Philosophie abseits des Straßenlärms.",
         "statChanges": {
-          "adel": 20,
-          "priester": 15,
-          "volk": 5
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -354,10 +360,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um heiße Rauchgase unter Hohlziegeln für warme Winterbäder zu leiten.",
         "epCost": 2,
         "statChanges": {
-          "priester": 25,
-          "adel": 20,
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
           "volk": 15,
-          "ep": 1
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -378,7 +385,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Der Hausherr ('Pater Familias') hatte enorme Rechte. Die Hausgötter teilten sich auf: Die 'Laren' schützten das Haus und Grundstück, die 'Penaten' bewachten die Vorratskammer und das Essen."
       },
       "curiosityFact": "In Pompeji fand man bei fast jedem ausgegrabenen Haus ein Lararium – oft wunderschön bemalt mit Schlangen, die als Symbole für Fruchtbarkeit und Glück galten!"
-    }
+    },
+    "hefterEintrag": "Reiche Römer wohnten in einem Domus (Stadthaus): Im Atrium stand das Becken für Regenwasser (Impluvium) und der Altar der Hausgötter (Laren)."
   },
   {
     "id": "rome2_r04",
@@ -424,9 +432,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Schüler im Rechnen auf dem Abakus und Buchführung für den Handel drillen",
         "description": "Praktisches Wissen: Nur wer Zahlen beherrscht, kann später ein Kontor leiten.",
         "statChanges": {
-          "priester": 20,
-          "adel": 15,
-          "volk": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -443,9 +451,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Griechische Epen und die Kunst der freien Rede (Rhetorik) auf dem Forum üben",
         "description": "Schult Stimme und Argumentation für spätere Auftritte vor Gericht und Senat.",
         "statChanges": {
-          "goetter": 20,
-          "adel": 20,
-          "volk": 5
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -461,9 +470,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Auch Töchtern und begabten Sklavenkindern vollen Zugang zum Unterricht ermöglichen",
         "description": "Fördert Talente unabhängig von Geschlecht und Stand zum Wohle der Stadt.",
         "statChanges": {
-          "volk": 25,
-          "adel": -5,
-          "goetter": 15
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -480,10 +489,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die gesammelten Schriften der griechisch-römischen Welt allen Bürgern zu öffnen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "volk": 25,
-          "adel": 20,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -504,7 +514,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Römische Ziffern (I, V, X, L, C, D, M) kannten keine Null. Komplizierte Rechnungen führte man auf dem 'Abakus' durch – einem Rechenbrett mit beweglichen Metallkügelchen."
       },
       "curiosityFact": "Unser deutsches Wort 'Stil' (wie in Schreibstil oder Modestil) kommt direkt vom lateinischen 'Stilus' – dem Schreibgriffel der Römer!"
-    }
+    },
+    "hefterEintrag": "Römische Kinder schrieben in der Schule mit einem spitzen Metallgriffel (Stilus) auf mit Bienenwachs beschichtete Holztafeln."
   },
   {
     "id": "rome2_r05",
@@ -533,7 +544,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r5_palladium",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Das heilige Palladium",
         "description": "Geheime uralte Athenastatue aus Troja, die Rom vor jedem Untergang schützt.",
         "icon": "🛡️"
@@ -550,9 +561,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das heilige Feuer mit trockenem Eichenholz und Gebeten behutsam neu anfachen",
         "description": "Schützt die ewige Flamme vor jedem Erlöschen durch sorgfältige Wache.",
         "statChanges": {
-          "goetter": 25,
-          "adel": 15,
-          "volk": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -569,9 +580,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Eine zum Tode verurteilte Person begnadigen, die dem Wagen der Vestalin begegnet ist",
         "description": "Übt das uralte heilige Gnadenrecht der Vestalinnen aus.",
         "statChanges": {
-          "volk": 25,
-          "adel": -5,
-          "goetter": 15
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -587,9 +599,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Vorratskammern des Atrium Vestae mit Salzmehl (Mola Salsa) auffüllen",
         "description": "Bereitet das heilige Spelzmehl vor, mit dem jedes Staatsopfer in Rom bestreut werden muss.",
         "statChanges": {
-          "priester": 20,
-          "goetter": 15,
-          "adel": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -606,10 +618,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um den Wohnpalast der Vestalinnen zu einem architektonischen Juwel zu machen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "adel": 20,
+          "goetter": 15,
           "priester": 15,
-          "ep": 1
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -630,7 +643,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Wenn eine Vestalin auf der Straße zufällig einem Verbrecher begegnete, der zur Hinrichtung geführt wurde, war dieser sofort begnadigt und frei – vorausgesetzt, die Begegnung war unabsichtlich."
       },
       "curiosityFact": "Erlosch das heilige Feuer doch einmal, durfte es niemals mit normalen Funken entzündet werden – die Priesterinnen mussten es mit zwei Hölzern oder Sonnenstrahlen durch einen Brennspiegel neu entfachen!"
-    }
+    },
+    "hefterEintrag": "Im Rundtempel der Vesta hüteten sechs Priesterinnen (Vestalinnen) das ewige heilige Herdfeuer, das niemals erlöschen durfte."
   },
   {
     "id": "rome2_r06",
@@ -659,7 +673,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r6_kalender",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Fastenkalender (Fasti)",
         "description": "Bestimmt Gerichtstage (Fas) und Feiertage (Nefas), an denen Politik verboten war.",
         "icon": "📅"
@@ -676,9 +690,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Den Fastenkalender unbestechlich und transparent für alle Bürger am Forum aushängen",
         "description": "Schafft Rechtssicherheit: Jeder soll wissen, an welchen Tagen Gericht gehalten werden darf.",
         "statChanges": {
-          "volk": 25,
-          "adel": 15,
           "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -695,9 +709,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Ein schlechtes Vogelzeichen (Obnuntiatio) ausrufen, um ein gefährliches Gesetz im Senat zu stoppen",
         "description": "Nutzt religiöse Vorzeichen als politisches Veto zur Bewahrung der Tradition.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 10,
-          "volk": -10
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -713,9 +728,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Ein neues Fest für Ceres und Bacchus mit Weinproben und Fruchtbarkeitstänzen stiften",
         "description": "Ehrt die Götter des Ackerbaus und schenkt dem Volk Freude nach der harten Ernte.",
         "statChanges": {
-          "volk": 25,
-          "adel": 10,
-          "goetter": 15
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -732,11 +747,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um weltliche und religiöse Herrschaft für das Prinzipat zu verschmelzen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "adel": 20,
-          "priester": 20,
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
           "volk": 15,
-          "ep": 1
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -757,7 +772,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Priesterämter in Rom waren keine Vollzeitberufe. Senatoren wie Cicero oder Caesar waren gleichzeitig Feldherren, Richter und Priester. Dies verhinderte die Entstehung einer eigenen, unabhängigen Priesterkaste wie in Ägypten."
       },
       "curiosityFact": "Das Wort 'Inauguration' (die feierliche Amtseinführung eines US-Präsidenten) kommt direkt vom römischen Wort 'Augur' – früher bedeutete es wörtlich: 'Die Götterzeichen für ein Amt einholen'!"
-    }
+    },
+    "hefterEintrag": "Der Pontifex Maximus war der oberste Priester Roms und bestimmte über Opferfeste, Festtage und den römischen Kalender."
   },
   {
     "id": "rome2_r07",
@@ -778,7 +794,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r7_rinne",
         "x": 48,
-        "y": 15,
+        "y": 25,
         "label": "Die Wasserrinne (Specus)",
         "description": "Abgedeckter Kanal, mit Ziegelmehl und hydraulischem Mörtel wasserdicht verputzt.",
         "icon": "💧"
@@ -786,7 +802,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r7_groma",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Römische Groma",
         "description": "Visierkreuz mit Lotbleien für millimetergenaues Gefälle über 50 Kilometer.",
         "icon": "📐"
@@ -803,9 +819,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das Gefälle mit der Groma auf exakt 34 Zentimeter pro Kilometer einnivellieren",
         "description": "Präzisionsarbeit: Zu steil zerreißt das Wasser den Putz, zu flach bleibt es stehen.",
         "statChanges": {
-          "priester": 25,
-          "volk": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -822,9 +838,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Rinne mit wasserfestem 'Opus Signinum' (Ziegelmehlmörtel) abdichten",
         "description": "Verhindert jeden Tropfenverlust auf der langen Reise durch Felsen und Täler.",
         "statChanges": {
-          "priester": 20,
-          "adel": 15,
-          "volk": 10
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -840,9 +857,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Öffentliche Trinkbrunnen (Lacus) an jeder Straßenecke für die armen Bürger bauen",
         "description": "Frisches Wasser ist Menschenrecht: Jeder Plebejer soll kostenlos trinken können.",
         "statChanges": {
-          "volk": 30,
-          "adel": 10,
-          "goetter": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -859,11 +876,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um das Wasser nach Priorität zu steuern: Zuerst Brunnen, dann Thermen, dann Paläste.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "priester": 25,
-          "volk": 20,
-          "adel": 15,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -884,7 +901,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Der berühmteste erhaltene Aquädukt ist der 'Pont du Gard' in Südfrankreich: 49 Meter hoch, drei Bogenreihen, erbaut aus tonnenschweren Quadern ganz ohne Mörtel. Er transportierte 20.000 Kubikmeter Wasser täglich nach Nîmes."
       },
       "curiosityFact": "Um das Gefälle zu messen, nutzten römische Ingenieure ein 6 Meter langes Holzbrett mit einer Wasserrinne oben ('Chorobates') – die antike Wasserwaage!"
-    }
+    },
+    "hefterEintrag": "Aquädukte leiteten mit leichtem Gefälle täglich Millionen Liter frisches Quellwasser über weite Strecken und Brücken in die Städte."
   },
   {
     "id": "rome2_r08",
@@ -913,7 +931,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r8_cloacina",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Schrein der Venus Cloacina",
         "description": "Die Göttin der Reinheit schützte Rom vor Verstopfung und Gestank.",
         "icon": "✨"
@@ -930,9 +948,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das Überschusswasser aller Kaiserthermen direkt in die Cloaca zur Spülung leiten",
         "description": "Nutzt gebrauchtes Badewasser als permanente Spülflut gegen Verstopfung und Gestank.",
         "statChanges": {
-          "volk": 25,
-          "priester": 20,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -949,9 +967,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Gewölbeinspektionen mit Kähnen durchführen und eingestürzte Tuffsteine ersetzen",
         "description": "Wartung für die Ewigkeit: Risse flicken, bevor Straßen im Herzen Roms absacken.",
         "statChanges": {
-          "priester": 20,
-          "adel": 15,
-          "goetter": 10
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -967,9 +986,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Öffentliche Mehrplatz-Latrinen (Foricae) mit Marmorsitzen und Spülrinnen anlegen",
         "description": "Gemeinsam auf die Toilette gehen: Treffpunkt für Neuigkeiten und Geschäfte.",
         "statChanges": {
-          "volk": 25,
-          "adel": 10,
-          "goetter": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -986,11 +1005,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Urin für Gerber und Walker gewinnbringend zu besteuern.",
         "epCost": 2,
         "statChanges": {
-          "adel": 20,
-          "priester": 20,
-          "volk": 20,
           "goetter": 15,
-          "ep": 1
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -1011,7 +1030,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Statt Toilettenpapier nutzten die Römer einen Meerschwamm an einem Holzstab ('Xylospongium'), der in einer mit Salzwasser oder Essig gefüllten Rinne vor den Sitzen gereinigt wurde."
       },
       "curiosityFact": "Römische Abwasserkanäle waren so heilig, dass sie sogar eine eigene Schutzgöttin hatten: 'Venus Cloacina', deren kleiner Schrein noch heute am Forum Romanum steht!"
-    }
+    },
+    "hefterEintrag": "Die Cloaca Maxima war der älteste unterirdische Hauptabwasserkanal Roms und entwässerte das Tal zwischen Palatin und Kapitol."
   },
   {
     "id": "rome2_r09",
@@ -1057,9 +1077,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Den Eintrittspreis auf den kleinsten Pfennig festlegen, damit jeder Bürger täglich baden kann",
         "description": "Gleiche Hygiene für alle: Arm und Reich treffen sich nackt im warmen Wasser.",
         "statChanges": {
-          "volk": 30,
-          "adel": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1076,9 +1096,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Griechische und lateinische Lesesäle sowie Vortragsräume in die Thermenflügel integrieren",
         "description": "Verbindet Körperpflege mit Geist: Erst schwitzen, dann Philosophen lauschen.",
         "statChanges": {
-          "adel": 25,
-          "goetter": 20,
-          "volk": 10
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1094,9 +1115,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Schwitzräume mit trockenem Heißluftdampf (Laconicum) gegen Gelenkschmerzen ausbauen",
         "description": "Antike Sauna: Heilende Dämpfe lindern Krankheiten und Beschwerden älterer Bürger.",
         "statChanges": {
-          "priester": 20,
-          "volk": 20,
-          "adel": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -1113,11 +1134,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Öfen Tag und Nacht ohne Rauchbelästigung der Badegäste zu befeuern.",
         "epCost": 2,
         "statChanges": {
-          "priester": 25,
-          "goetter": 20,
-          "adel": 20,
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
           "volk": 15,
-          "ep": 1
+          "ep": -2
         },
         "skillChanges": {
           "militaerischeStaerke": 2
@@ -1138,7 +1159,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Caracalla-Thermen in Rom boten Platz für 1.600 Badegäste gleichzeitig und waren mit bunten Marmorplatten, riesigen Mosaiken und Brunnenfiguren ausgestattet. Hunderte Sklaven arbeiteten in unterirdischen Katakomben, um die gigantischen Öfen mit Holz zu füttern."
       },
       "curiosityFact": "Weil es noch keine Seife gab, rieben sich die Römer vor dem Bad mit Olivenöl ein. Mit einem gekrümmten Bronzeschaber ('Strigilis') schabte ein Sklave dann den Schmutz samt Öl von der Haut!"
-    }
+    },
+    "hefterEintrag": "Die römischen Thermen waren öffentliche Badehäuser und Treffpunkte mit Kaltbad (Frigidarium), Warmbad (Tepidarium) und Heißbad (Caldarium)."
   },
   {
     "id": "rome2_r10",
@@ -1167,7 +1189,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r10_garum",
         "x": 80,
-        "y": 70,
+        "y": 65,
         "label": "Garum (Würzige Fischsauce)",
         "description": "Fermentierte Fischeingeweide; das 'Ketchup' der römischen Gourmetküche.",
         "icon": "🏺"
@@ -1184,9 +1206,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Ein Gastmahl mit erlesenen Speisen, Musikern und Dichterlesungen ausrichten",
         "description": "Gastfreundschaft nach bester Tradition: Verwöhnt Gaumen und Geist der Gäste.",
         "statChanges": {
-          "adel": 20,
           "goetter": 15,
-          "volk": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1203,9 +1225,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Luxusgesetze (Leges sumptuariae) gegen übertriebene Völlerei und Verschwendung durchsetzen",
         "description": "Mäßigt die Sitten: Verbietet schamlose Prunksucht und teure Importe aus Asien.",
         "statChanges": {
-          "goetter": 25,
+          "priester": 15,
           "adel": -10,
-          "volk": 20
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1221,9 +1244,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Tausende Fässer der berühmten Garum-Fischsauce aus Hispania für die Märkte importieren",
         "description": "Sorgt für den unverzichtbaren Lieblingsgeschmack der römischen Küche an jedem Herd.",
         "statChanges": {
-          "volk": 25,
-          "priester": 15,
-          "adel": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1240,10 +1263,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die hohe Kunst römischer Kochrezepte für alle Zeiten niederzuschreiben.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "adel": 25,
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
           "volk": 15,
-          "ep": 1
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1264,7 +1288,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Ein römisches Menü begann mit Eiern und endete mit Äpfeln. Daher stammt das berühmte lateinische Sprichwort: 'Ab ovo usque ad mala' ('Vom Ei bis zu den Äpfeln' – also von Anfang bis Ende)."
       },
       "curiosityFact": "Reiche Römer servierten manchmal 'Trojanische Schweine' – ein ganzes gebratenes Wildschwein, das im Bauch mit lebenden Drosseln, Würsten und Granatäpfeln gefüllt war!"
-    }
+    },
+    "hefterEintrag": "Nach dem Baden reinigten sich die Römer mit Olivenöl und einem Schaber (Strigilis); reiche Bürger speisten im Liegen (Triclinium)."
   },
   {
     "id": "rome2_r11",
@@ -1310,9 +1335,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Vigiles mit Decken, Wasserpumpen (Sipho) und Axttrupps in die brennende Gasse schicken",
         "description": "Rettet Menschenleben und reißt Nachbargebäude ab, um die Feuersbrunst zu stoppen.",
         "statChanges": {
-          "volk": 30,
-          "priester": 15,
-          "adel": -5,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1329,9 +1354,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Ein Baugesetz mit strenger Höchstgrenze für Mietshäuser (20 Meter) und Feuermauern erlassen",
         "description": "Packt die Ursache an: Zwingt gierige Spekulanten zu feuerfesten Ziegelbauten.",
         "statChanges": {
-          "adel": 15,
-          "volk": 25,
-          "goetter": 10
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1347,9 +1373,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die obdachlos gewordenen Familien in kaiserlichen Gärten und Tempelhöfen notunterbringen",
         "description": "Menschlichkeit im Unglück: Öffnet die Parks für hungernde Mütter und Kinder.",
         "statChanges": {
-          "volk": 25,
-          "adel": 10,
-          "goetter": 15
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1366,11 +1392,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um brennbare Holzbalken durch gebrannte Tonziegel im ganzen Reich zu ersetzen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "priester": 25,
-          "volk": 20,
-          "adel": 15,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1391,7 +1417,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Der berühmte Große Brand von Rom im Jahr 64 n. Chr. unter Kaiser Nero zerstörte fast die halbe Stadt. Danach erließ Nero eine strenge Bauordnung: Keine gemeinsamen Wände mehr, breitere Straßen und vorgeschriebene Innenhöfe."
       },
       "curiosityFact": "Reiche Spekulanten wie Crassus verdienten mit Bränden ihr Vermögen: Seine private Löschkolonne bot an, das brennende Haus zu löschen – aber nur, wenn der Eigentümer es ihm auf der Stelle spottbillig verkaufte!"
-    }
+    },
+    "hefterEintrag": "Einfache Römer lebten in mehrstöckigen Mietskasernen (Insulae) aus Holz und Ziegeln, in denen wegen offener Feuerstellen oft Brandgefahr herrschte."
   },
   {
     "id": "rome2_r12",
@@ -1420,7 +1447,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r12_wuerfel",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Würfelspiel im Hinterzimmer",
         "description": "Knöchelchenspiele (Alea) bei Kerzenschein, obwohl Glücksspiel offiziell verboten war.",
         "icon": "🎲"
@@ -1437,9 +1464,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Nahrhaften Kichererbsen- und Getreideeintopf zum Festpreis für alle Arbeiter anbieten",
         "description": "Schnelle, warme Energie für ehrliche Arbeit zu fairen Konditionen.",
         "statChanges": {
-          "volk": 25,
-          "priester": 15,
-          "adel": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1456,9 +1483,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das illegale Würfelspiel in den Hinterzimmern streng überwachen und Geldbetrug bestrafen",
         "description": "Ordnung hüten: Niemand soll im Rausch um Haus und Hof betrogen werden.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 15,
-          "volk": 5
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1474,9 +1502,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Frische Feigen, Oliven und Käse aus dem Umland zollfrei in die Garküchen liefern",
         "description": "Stärkt die italienischen Bauern und bringt vitaminreiche Kost in die Stadt.",
         "statChanges": {
-          "volk": 20,
-          "adel": 15,
-          "priester": 15
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1493,10 +1521,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Speisen stundenlang ohne Anbrennen keimfrei und warm zu halten.",
         "epCost": 2,
         "statChanges": {
-          "priester": 25,
-          "volk": 25,
-          "adel": 15,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1517,7 +1546,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Bei Ausgrabungen in Pompeji entdeckten Archäologen 2020 ein perfekt erhaltenes Thermopolium mit bunten Wandmalereien: Abgebildet waren eine Nymphe auf einem Seepferdchen und Tiere (Enten und Hähne), die vermutlich genau auf der Speisekarte standen!"
       },
       "curiosityFact": "In den Tontöpfen pompejianischer Fast-Food-Bars fanden Archäologen noch Knochenreste von Schweinen, Ziegen, Vögeln und sogar Schnecken, die zusammen in einem deftigen Fischeintopf gekocht worden waren!"
-    }
+    },
+    "hefterEintrag": "An Thermopolien (antiken Schnellimbissen) kauften die Bewohner der Miethäuser warme Speisen, Linsen, Würste und gewürzten Wein."
   },
   {
     "id": "rome2_r13",
@@ -1563,9 +1593,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das weiße Tuch (Mappa) feierlich fallen lassen und das 1. Rennen des Tages freigeben",
         "description": "Eröffnet das Spektakel: Viergespanne schießen mit Donnergetöse aus den Toren!",
         "statChanges": {
-          "volk": 30,
           "goetter": 15,
-          "adel": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1582,9 +1612,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die rivalisierenden Fangruppen (Grün & Blau) durch getrennte Ränge und Wachen abschirmen",
         "description": "Sicherheit zuerst: Verhindert blutige Schlägereien zwischen den Rennställen.",
         "statChanges": {
-          "adel": 20,
           "priester": 15,
-          "volk": 10
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -1600,9 +1631,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Gleichberechtigte Sitzordnung: Frauen und Männer frei nebeneinander anfeuern lassen",
         "description": "Im Circus gibt es keine Schranken: Dichter Ovid empfahl ihn zum Flirten!",
         "statChanges": {
-          "volk": 25,
-          "adel": 15,
-          "goetter": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1619,10 +1650,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um jede der 7 Runden mit kippbaren Bronzedelphinen weithin sichtbar anzuzeigen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "priester": 25,
-          "volk": 25,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1643,7 +1675,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Im Circus gab es keine Trennung nach Ständen wie im Theater: Männer und Frauen, Senatoren und Sklaven saßen bunt gemischt nebeneinander. Dichter wie Ovid empfahlen den Circus als besten Ort in ganz Rom, um eine Partnerin kennenzulernen!"
       },
       "curiosityFact": "Der berühmteste Wagenlenker der Antike, Gaius Appuleius Diocles, gewann in seiner Karriere über 35 Millionen Sesterzen – Historiker errechneten, dass er reicher war als jeder moderne Sportsuperstar!"
-    }
+    },
+    "hefterEintrag": "Im Circus Maximus feuerten bis zu 250.000 Zuschauer bei Wagenrennen ihre Lieblingsmannschaft (Rot, Weiß, Grün oder Blau) an."
   },
   {
     "id": "rome2_r14",
@@ -1672,7 +1705,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r14_messer",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Das Krummmesser im Gürtel",
         "description": "Im Notfall musste der Lenker die Zügel durchtrennen, um nicht zu Tode geschleift zu werden.",
         "icon": "🔪"
@@ -1689,9 +1722,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Zügel blitzschnell mit dem Krummmesser durchschneiden und zur Seite hechten",
         "description": "Geistesgegenwart rettet Leben: Entkommt den schleifenden Pferden unverletzt.",
         "statChanges": {
-          "priester": 20,
-          "adel": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1708,9 +1741,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Innenkurve meisterhaft halten und das Gespann mit einem Wimpernschlag über die Ziellinie peitschen",
         "description": "Alles riskieren für den ewigen Ruhm: Der Sieg der 'Grünen' vor 250.000 Zuschauern!",
         "statChanges": {
-          "volk": 35,
-          "adel": 15,
-          "goetter": 10
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -1726,9 +1760,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Strengere Sicherheitsregeln für die Wendemale und weicheren Sand in den Kurven anordnen",
         "description": "Kaiserliche Fürsorge: Schützt die wertvollen Pferde und Sportler vor tödlichen Trümmern.",
         "statChanges": {
-          "adel": 20,
           "volk": 15,
-          "priester": 15
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1745,10 +1779,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Freilassung des Champions als bewegendes Staatsschauspiel zu inszenieren.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "volk": 35,
-          "adel": 20,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -1769,7 +1804,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Wenn ein versklavter Wagenlenker genug Siege errungen hatte, konnte ihm der Kaiser oder Rennstallbesitzer einen hölzernen Stab ('Rudis') überreichen – das offizielle Symbol für seine Freilassung aus der Sklaverei."
       },
       "curiosityFact": "Die vier Pferde hatten feste Aufgaben: Das wichtigste war das linke Außenpferd ('Funalis') – es musste hochintelligent sein, weil es bei Höllentempo millimetergenau die Kurve um die Wendesäule lenken musste!"
-    }
+    },
+    "hefterEintrag": "Viergespanne (Quadrigen) rasten sieben Runden lang um die Trennmauer (Spina); an den engen Wendepunkten kam es oft zu schweren Stürzen."
   },
   {
     "id": "rome2_r15",
@@ -1798,7 +1834,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r15_lanista",
         "x": 80,
-        "y": 70,
+        "y": 65,
         "label": "Der Lanista (Gladiatorenmeister)",
         "description": "Besitzer der Fechtschule, der viel Geld in Ärzte, Massagen und Ernährung investierte.",
         "icon": "🥋"
@@ -1815,9 +1851,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das Duell der Gegensätze: Retiarius mit Netz gegen Secutor im Kolosseum ansetzen",
         "description": "Der Klassiker: Flinke Taktik gegen stählerne Rüstung fesselt das Publikum.",
         "statChanges": {
-          "volk": 30,
-          "adel": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1834,9 +1870,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Schiedsrichter mit Stöcken (Summa Rudis) einsetzen, um unfaire Treffer sofort zu stoppen",
         "description": "Sicherheit und Anstand: Kein sinnloser Blutrausch, sondern sportlicher Ehrenkampf.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 15,
-          "volk": 15
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1852,9 +1889,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Hofärzte und Aschetränke für die beste medizinische Versorgung der Fechtschulen bereitstellen",
         "description": "Schützt die Gesundheit: Gladiatorenärzte (wie Galen) waren die besten Chirurgen Roms.",
         "statChanges": {
-          "priester": 20,
-          "adel": 15,
-          "volk": 15
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -1871,11 +1908,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Gladiatoren sicher und staunend durch unterirdische Gänge einzuschleusen.",
         "epCost": 2,
         "statChanges": {
-          "priester": 25,
-          "goetter": 25,
-          "adel": 20,
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
           "volk": 15,
-          "ep": 1
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1896,7 +1933,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Der berühmteste Arzt der Antike, Galen von Pergamon, war vier Jahre lang Chefarzt der Gladiatorenschule. Bei ihm starb kaum ein verletzter Kämpfer an Wundinfektionen, weil er Wunden sorgfältig mit Wein desinfizierte."
       },
       "curiosityFact": "Gladiatoren waren die Werbestars der Antike: Töpfer verkauften Tonlampen mit ihren Porträts, und reiche Damen kauften kleine Fläschchen mit Gladiatorenschweiß als teures Schönheitsmittel!"
-    }
+    },
+    "hefterEintrag": "Gladiatorenkämpfe dienten der Unterhaltung: Verschiedene Kämpfertypen wie Retiarier (mit Netz und Dreizack) traten gegeneinander an."
   },
   {
     "id": "rome2_r16",
@@ -1925,7 +1963,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r16_hypogaeum",
         "x": 25,
-        "y": 75,
+        "y": 65,
         "label": "Aufzüge im Hypogäum",
         "description": "Seilwinden hoben afrikanische Löwen und Tiger durch Falltüren direkt in die Arena.",
         "icon": "🦁"
@@ -1942,9 +1980,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Hand zur Faust schließen und Gnade gewähren ('Missio!')",
         "description": "Belohnt tapferen Mut: Wer wie ein Held kämpft, darf am Leben bleiben!",
         "statChanges": {
-          "volk": 30,
-          "adel": 15,
           "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1961,9 +1999,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Dem Sieger den Palmzweig, ein Goldtablett und das Holzschwert (Rudis) schenken",
         "description": "Macht den Champion unsterblich: Freilassung nach fünf glorreichen Siegen!",
         "statChanges": {
-          "volk": 35,
-          "adel": 20,
-          "goetter": 10
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -1979,9 +2018,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Den Veranstaltern verbieten, Kämpfe 'sine missione' (ohne Begnadigung auf Leben und Tod) zu zeigen",
         "description": "Mäßigt die Härte: Verbietet Kämpfe, bei denen ein Fechter zwingend sterben muss.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 20,
-          "volk": 15
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1998,11 +2037,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Wälder und Felsen wie von Geisterhand aus dem Kellerboden emporzuheben.",
         "epCost": 2,
         "statChanges": {
-          "priester": 25,
-          "goetter": 25,
-          "volk": 25,
-          "adel": 15,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2023,7 +2062,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Hollywood zeigt oft den gesenkten Daumen als Todeszeichen. Römische Texte deuten jedoch darauf hin, dass der Daumen ausgestreckt auf die Brust zeigte (Symbol für die Klinge) oder in der Faust verborgen wurde ('Pollicem premere' = Waffe einstecken / Gnade)."
       },
       "curiosityFact": "Wenn ein Gladiator doch getötet wurde, betrat ein Mann im Kostüm des Totengottes Charon die Arena und schlug mit einem Holzhammer auf den Körper, um sicherzustellen, dass er nicht nur tot spielte!"
-    }
+    },
+    "hefterEintrag": "Mit Gesten und Rufen forderte das Publikum Gnade oder Tod für besiegte Gladiatoren; überragende Kämpfer erhielten das Holzschwert der Freiheit."
   },
   {
     "id": "rome2_r17",
@@ -2069,9 +2109,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Den Christen Glaubensfreiheit gewähren, solange sie friedlich bleiben und Steuern zahlen",
         "description": "Religiöse Toleranz: Glaube kann man nicht mit dem Schwert erzwingen.",
         "statChanges": {
-          "volk": 30,
-          "goetter": -10,
-          "adel": 15,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -2088,9 +2128,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das Opfer vor dem Kaiserstandbild unerbittlich als Beweis der Staatstreue einfordern",
         "description": "Staatsräson: Niemand darf sich über die heiligen Pflichten Roms stellen!",
         "statChanges": {
-          "goetter": 25,
-          "adel": 20,
-          "volk": -15
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -2106,9 +2147,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die unterirdischen Katakomben als geschützte Friedhöfe und Denkmäler deklarieren",
         "description": "Schützt die Totenruhe aller Bürger nach altem römischem Gräberrecht.",
         "statChanges": {
-          "goetter": 20,
-          "adel": 15,
-          "volk": 20
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2125,10 +2166,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Christenverfolgung für immer zu beenden – die Wende von Kaiser Konstantin!",
         "epCost": 2,
         "statChanges": {
-          "goetter": 35,
-          "volk": 35,
-          "adel": 20,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2149,7 +2191,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Weil römische Gesetze die Totenruhe absolut schützten, waren die Katakomben für die Polizei tabu. Erst Kaiser Konstantin beendete 313 n. Chr. mit dem Mailänder Edikt alle Verfolgungen; 380 n. Chr. wurde das Christentum unter Theodosius zur alleinigen Staatsreligion."
       },
       "curiosityFact": "Unter Rom ziehen sich über 60 verschiedene Katakomben mit mehr als 150 Kilometern Länge – manche Gänge liegen bis zu vier Stockwerke tief unter der Erde!"
-    }
+    },
+    "hefterEintrag": "In unterirdischen Katakomben bestatteten frühe Christen ihre Toten und nutzten geheime Symbole wie den Fisch (Ichthys), um ihren Glauben zu zeigen."
   },
   {
     "id": "rome2_r18",
@@ -2195,9 +2238,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Basilika am Forum als neutralen Gerichtspalast für gerechte Urteile weihen",
         "description": "Gewährleistet unbestechliche Rechtsprechung im Herzen der Ewigen Stadt.",
         "statChanges": {
-          "adel": 25,
           "goetter": 15,
-          "volk": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -2214,9 +2257,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Den Grundriss der Basilika mit Mittelschiff und Apsis für neue Kathedralen im ganzen Reich übernehmen",
         "description": "Schafft den Baustil für zweitausend Jahre europäischer Kirchengeschichte.",
         "statChanges": {
-          "goetter": 30,
-          "volk": 25,
-          "adel": 15
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -2232,9 +2276,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Riesige Bronzetüren und Marmorsäulen alter heidnischer Tempel für den Neubau recyceln (Spolien)",
         "description": "Nachhaltiger Prunk: Nutzt Schätze der Vergangenheit für die Bauten der Zukunft.",
         "statChanges": {
-          "priester": 25,
-          "adel": 15,
-          "volk": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -2251,10 +2295,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die kaiserliche Autorität in Marmor für alle kommenden Jahrhunderte einzuprägen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "adel": 25,
-          "volk": 20,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2275,7 +2320,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Maxentius-Basilika am Forum Romanum hatte Gewölbe von 35 Metern Höhe – höher als ein zehnstöckiges Haus! Die erhaltenen Trümmer dienten Renaissance-Künstlern wie Michelangelo als Vorbild für die Kuppel des Petersdoms."
       },
       "curiosityFact": "Vom riesigen Kolossalstandbild Kaiser Konstantins in der Basilika sind bis heute der 2,5 Meter hohe Kopf und ein zwei Meter langer Fuß im Kapitolinischen Museum in Rom zu bestaunen!"
-    }
+    },
+    "hefterEintrag": "Die römische Basilika war ursprünglich eine überdachte Markthalle und ein Gerichtsplatz, bevor ihre Bauform zum Vorbild christlicher Kirchen wurde."
   },
   {
     "id": "rome2_r19",
@@ -2304,7 +2350,7 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r19_geschenke",
         "x": 75,
-        "y": 70,
+        "y": 65,
         "label": "Wachskerzen & Tonfigürchen",
         "description": "Bürger beschenken sich mit Kerzen (Cerei) und Glücksbringern – der Ursprung von Weihnachten!",
         "icon": "🕯️"
@@ -2321,9 +2367,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die Schürze umbinden und die Sklaven des Hauses persönlich mit Festbraten bedienen",
         "description": "Macht die Saturnalien wahr: Menschlichkeit und Gleichheit für eine Woche!",
         "statChanges": {
-          "volk": 30,
-          "adel": 15,
-          "goetter": 20,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -2340,9 +2386,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Wachskerzen (Cerei) und Tonfigürchen (Sigillaria) an alle Kinder und Nachbarn verschenken",
         "description": "Bringt Licht in die dunkle Winterzeit: Schenken stiftet Freundschaft.",
         "statChanges": {
-          "volk": 25,
-          "adel": 20,
-          "goetter": 15
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2358,9 +2405,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Einen 'Saturnalicius Princeps' (König der Ausgelassenheit) durch Bohnenwurf wählen",
         "description": "Närrische Spiele: Der Spaßkönig darf für einen Tag lustige Befehle an alle erteilen.",
         "statChanges": {
-          "adel": 20,
-          "volk": 20,
-          "goetter": 10
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2377,10 +2424,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die humanen Werte der Saturnalien über das Fest hinaus wirksam zu machen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "adel": 25,
-          "volk": 30,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2401,7 +2449,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Als das Christentum im 4. Jahrhundert Staatsreligion wurde, legte die Kirche die Feier der Geburt Jesu auf den 25. Dezember – genau in die Zeit der beliebten Saturnalien und des heidnischen Festes der unbesiegten Sonne ('Sol Invictus')."
       },
       "curiosityFact": "Bei den Saturnalien wählte jede Festrunde durch das Ziehen einer Bohne im Kuchen einen 'Narrenkönig' – dieser Brauch lebt bis heute im Dreikönigskuchen in Frankreich und der Schweiz weiter!"
-    }
+    },
+    "hefterEintrag": "Bei den Saturnalien im Dezember feierten die Römer das Fest des Gottes Saturn: Standesunterschiede wurden aufgehoben und Sklaven von Herren bedient."
   },
   {
     "id": "rome2_r20",
@@ -2447,9 +2496,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Das Römische Recht als ewiges Gesetzbuch für Gerechtigkeit und Frieden der Völker weihen",
         "description": "Besiegelt das größte Erbe: Klare Gesetze schützen die Schwachen vor Willkür.",
         "statChanges": {
-          "goetter": 35,
-          "adel": 30,
-          "volk": 25
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2465,9 +2515,10 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Die lateinische Sprache und Literatur als weltweites Band der Wissenschaft pflegen",
         "description": "Medizin, Biologie und Recht sprechen bis heute die Sprache Roms.",
         "statChanges": {
-          "adel": 30,
-          "goetter": 25,
-          "volk": 20
+          "priester": 15,
+          "adel": -10,
+          "volk": -5,
+          "goetter": 5
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -2483,9 +2534,9 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "label": "Römische Ingenieurskunst (Wasserbau, Beton, Rundbögen) an alle Nachbarvölker weitergeben",
         "description": "Macht die Welt schöner, gesünder und dauerhafter durch zivilisatorischen Fortschritt.",
         "statChanges": {
-          "volk": 35,
-          "priester": 30,
-          "adel": 20
+          "volk": 15,
+          "goetter": -15,
+          "adel": -10
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -2502,11 +2553,11 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "description": "Setzt alles gesammelte Wissen ein: Meisterhafter Abschluss der Expedition durch Religion, Alltag & Kultur!",
         "epCost": 2,
         "statChanges": {
-          "goetter": 40,
-          "adel": 35,
-          "volk": 35,
-          "priester": 30,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 10,
+          "volk": 15,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2527,7 +2578,8 @@ export const ROME_CULTURE_ROUNDS: RoundStory[] = [
         "oberstufe": "Kultur, Recht und Architektur des Westens ruhen auf drei antiken Säulen: Der griechischen Philosophie, dem römischen Staats- und Rechtswesen und der jüdisch-christlichen Ethik."
       },
       "curiosityFact": "Selbst die 'Kaiser'-Semmel beim Bäcker heißt so, weil das Wort Kaiser von 'Caesar' abstammt – Rom steckt sogar in unserem Frühstücksbrötchen!"
-    }
+    },
+    "hefterEintrag": "Römische Baukunst (Bögen, Beton), die lateinische Sprache, Straßentrassen und das Rechtssystem prägen Europa bis heute nachhaltig."
   }
 ];
 

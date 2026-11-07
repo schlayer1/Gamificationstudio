@@ -265,38 +265,6 @@ export const EntryPortal: React.FC<EntryPortalProps> = ({
               )}
             </button>
           </form>
-
-          {/* Quick-Start Meisterspiele */}
-          <div className="pt-6 border-t border-stone-800/80 relative z-10 flex flex-col items-center gap-3">
-            <span className="text-xs uppercase tracking-widest font-mono text-stone-400">
-              Oder Meisterspiel direkt starten:
-            </span>
-
-            <div className="flex flex-wrap items-center justify-center gap-2">
-              {publishedGames.map((record) => {
-                const gameTheme = record.game.eraThemeId
-                  ? ERA_THEMES[record.game.eraThemeId]
-                  : detectEraTheme(record.game.era);
-
-                return (
-                  <button
-                    key={record.id}
-                    onClick={() => {
-                      soundFX.playBlessing();
-                      onQuickStartDefault(record.game, record.shareCode);
-                    }}
-                    className={`px-3.5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border ${gameTheme.badgeBorder} text-xs font-semibold ${gameTheme.badgeText} flex items-center gap-2 transition-all cursor-pointer hover:scale-105 shadow-sm`}
-                  >
-                    <span>{gameTheme.icon}</span>
-                    <span>{record.game.title}</span>
-                    <span className="font-mono text-[10px] bg-stone-950 px-1.5 py-0.5 rounded border border-stone-700 text-amber-400">
-                      Code: {record.shareCode}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
         </div>
       )}
 

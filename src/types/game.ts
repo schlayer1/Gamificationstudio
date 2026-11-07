@@ -100,6 +100,7 @@ export interface RoundStory {
   imagePath?: string;
   imagePrompt?: string; // Pre-configured image generation prompt for Gemini Imagen / Midjourney / DALL-E
   hotspots?: StationHotspot[];
+  hefterEintrag?: string; // 📓 Prägnanter 1-2 Satz Merksatz für den Geschichtshefter der Schüler
   quiz?: QuizQuestion; // Optional Quiz Prüfstein (Mythologie/Schnitzeljagd)
   scavengerClue?: string; // Optionaler Rätsel-Hinweis (Rom-Schnitzeljagd)
   branchCondition?: {

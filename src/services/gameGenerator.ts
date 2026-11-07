@@ -225,17 +225,17 @@ Antworte STRENG als valides JSON nach diesem Schema:
       unterstufe: {
         name: 'Unterstufe',
         classes: '5.–6. Klasse',
-        instructions: 'Sprache bildhaft, lebendig und emotional greifbar. Kurze, leicht verständliche Sätze. Keine verschachtelten Fremdwörter ohne direkte Erklärung. Klare, greifbare Dilemmata (z.B. Mut, Freundschaft, Vorräte teilen, Gefahren trotzen).',
+        instructions: 'Lebendige, bildhafte Schülersprache (5.–6. Klasse). Kurze, klare Sätze aus der direkten Du-Perspektive. Keine schwierigen akademischen Fremdwörter ohne sofortige kindgerechte Erklärung in Klammern (z.B. "Patrizier (reiche Adlige)", "Pomerium (heilige Stadtgrenze)"). Klare, emotionale Dilemmata.',
       },
       mittelstufe: {
         name: 'Mittelstufe',
         classes: '7.–9. Klasse',
-        instructions: 'Ausgewogene historische Fachsprache (z.B. Patrizier, Privilegien, Reformation, Handelsmonopol). Multiperspektivische Interessenkonflikte, gesellschaftliche Spannungen und ethische Grauzonen. Dilemmata über Verantwortung und Weitsicht.',
+        instructions: 'Packende, verständliche Sprache für Jugendliche (7.–9. Klasse). Fremdwörter sparsam und verständlich einsetzen. Direkte Ich/Du-Perspektive der Schülerrolle. Multiperspektivische Interessenkonflikte ohne universitäre Schachtelsätze.',
       },
       oberstufe: {
         name: 'Oberstufe',
         classes: 'ab 10. Klasse',
-        instructions: 'Anspruchsvolles akademisches Sprachniveau. Staatsphilosophische, soziologische und geopolitische Kausalitäten. Quellennah, tiefe historische Dilemmata, ethische Spannungsfelder und hoher Abstraktionsgrad.',
+        instructions: 'Reflektiertes historisches Sprachniveau. Staatsphilosophische, soziologische und geopolitische Kausalitäten. Quellennah, differenzierte historische Dilemmata und ethische Spannungsfelder.',
       },
     };
 
@@ -263,7 +263,15 @@ REFLEXIONSPHASE: Alle ${reflectionInterval} Runden eine Reflexions- und Strategi
 ZIELGRUPPE & DIDAKTISCHES SPRACHNIVEAU (EXKLUSIV):
 - Zielgruppe: ${currentGrade.name} (${currentGrade.classes})
 - Didaktische Sprachanweisung: ${currentGrade.instructions}
-- STRENGSTE VORGABE: Generiere alle Texte (Situation, Optionen, Konsequenzen, Begriffserklärungen) AUSSCHLIESSLICH und EXAKT auf dem Niveau für ${currentGrade.classes}. Erstelle KEINE Texte für andere Jahrgangsstufen!
+- STRENGSTE VORGABE: Generiere alle Texte (Situation, Optionen, Konsequenzen, Begriffserklärungen) AUSSCHLIESSLICH und EXAKT auf dem Niveau für ${currentGrade.classes}. Erstelle KEINE unverständlichen universitären Texte!
+- PERSPEKTIVE: Sprich die Schüler direkt als historische Akteure an ("Du stehst vor...", "Deine Berater drängen dich...").
+
+SPIELMECHANIK & REIGNS-BALANCING:
+- Die 4 Machtsäulen starten bei jeweils 45% (ausgewogene Mitte).
+- ECHTE TRADE-OFFS: Jede Entscheidung für Option A, B oder C MUSS spürbare Vor- UND Nachteile haben!
+  Beispiel: Option A bringt +15% bei Säule 1, zieht aber zwingend -10% bis -15% bei Säule 2 oder 3 ab!
+  Es darf KEINE reinen "Alles-wird-besser"-Optionen ohne Punktabzug geben. Spieler müssen wie in Reigns balancieren.
+- FÜR JEDE STATION MUSS ein 'hefterEintrag' generiert werden: 1-2 prägnante Merksätze (Tafelbild-Zusammenfassung zum Abschreiben in den Geschichtshefter für ${currentGrade.classes}).
 
 ${archetype === 'mythology_duel' ? '- Integriere Quiz-Prüfungen (❓) mit Tipp-Button (💡), Erklärung und Belohnung (🏆) sowie mythologische Artefakte (🗡️, 🔮).' : ''}
 ${archetype === 'conquest_campaign' ? '- Integriere Konsequenzen-Bäume mit unmittelbaren und langfristigen Auswirkungen auf Heeresdisziplin und Eroberung.' : ''}
@@ -283,7 +291,7 @@ Regeln & didaktische Vorgaben:
 4. Verbindliche Kernthemen aus dem Lehrplan: ${req.coreTopics.join(', ')}.
 5. Jede Runde enthält 4 Optionen (A, B, C und die exklusive Meister-Option D, die 3 Spezialressourcen kostet).
 6. Jede Runde enthält ein didaktisches Lexikon ('lexiconEntry') mit Begriff, altersgerechter Erklärung für ${currentGrade.classes} und 'curiosityFact' ("💡 Hast du gewusst?").
-7. Jede Runde enthält genau 3 bildpassende Entdecker-Hotspots ('hotspots') mit Prozent-Koordinaten (x: 0-100, y: 0-100), die reale visuelle Details des Bildes erklären (z.B. Architektur, Werkzeuge, Kleidung, Schriftzeichen, Göttersymbole).
+7. Jede Runde enthält genau 3 bildpassende Entdecker-Hotspots ('hotspots') mit Prozent-Koordinaten (x: 15-85, y: 25-70 im sichtbaren Bereich), die reale visuelle Details des Bildes erklären.
 8. Antwort MUSS zwingend als valides JSON formatiert sein.
 `;
 
@@ -316,6 +324,7 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         { "id": "hs_3", "x": 50, "y": 20, "label": "Detail 3", "description": "Historische Erklärung...", "icon": "✨" }
       ],
       "situation": "Prägnanter historischer Situations-Text für ${currentGrade.classes}...",
+      "hefterEintrag": "1-2 prägnante Merksätze zum Abschreiben in den Geschichtshefter für ${currentGrade.classes} (Tafelbild-Kernaussage)...",
       "choices": [
         {
           "id": "A",
@@ -590,12 +599,18 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
         ? round.hotspots
         : matchedHotspots;
 
+      // Preserve or build concise hefterEintrag
+      const hefterEintrag = round.hefterEintrag && typeof round.hefterEintrag === 'string' && round.hefterEintrag.trim()
+        ? round.hefterEintrag.trim()
+        : `${round.lexiconEntry?.title || round.milestoneTitle}: ${explText ? explText.split('.')[0] + '.' : 'Wichtiger historischer Meilenstein.'}`;
+
       return {
         ...round,
         roundNumber: idx + 1,
         situation: situationObj,
         choices,
         lexiconEntry,
+        hefterEintrag,
         imagePath: round.imagePath || matchedImg,
         hotspots: finalHotspots,
       };

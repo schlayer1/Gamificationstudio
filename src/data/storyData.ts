@@ -14,7 +14,7 @@ const FIXED_START_STORIES: RoundStory[] = [
       {
         id: "hs_aswan_keile",
         x: 32,
-        y: 68,
+        y: 60,
         label: "Holzkeil-Spalttechnik",
         description: "Steinmetze treiben trockene Sykomorenholzkeile in Bohrlöcher und tränken sie mit Nilwasser. Das Quellholz sprengt den härtesten Rosengranit geradlinig ab.",
         icon: "⛏️"
@@ -30,7 +30,7 @@ const FIXED_START_STORIES: RoundStory[] = [
       {
         id: "hs_aswan_nilufer",
         x: 82,
-        y: 72,
+        y: 60,
         label: "Verladestelle am 1. Katarakt",
         description: "Hier warten robuste Lastkähne mit Rollbalken, um die tonnenschwere Fracht bei Hochwasser nilabwärts zu transportieren.",
         icon: "⛵"
@@ -92,6 +92,7 @@ const FIXED_START_STORIES: RoundStory[] = [
         }
       }
     ],
+    hefterEintrag: "Chnum & die Granitbrüche von Assuan: In Assuan gab es den besten harten Stein für Pyramiden und Statuen.",
     lexiconEntry: {
       title: "Chnum & die Granitbrüche von Assuan",
       term: "Granit & Nilkatarakte",
@@ -194,6 +195,7 @@ const FIXED_START_STORIES: RoundStory[] = [
         }
       }
     ],
+    hefterEintrag: "Sobek – Herrscher der Sümpfe: Sobek war der Krokodilgott.",
     lexiconEntry: {
       title: "Sobek – Herrscher der Sümpfe",
       term: "Sobek & Tierkulte",
@@ -234,7 +236,7 @@ const FIXED_START_STORIES: RoundStory[] = [
       {
         id: "hs_edfu_schreiber",
         x: 78,
-        y: 70,
+        y: 60,
         label: "Kornschreiber-Station",
         description: "Beamte wiegen Getreidesäcke und notieren jede Ration auf Tonscherben (Ostraka) und Papyrus.",
         icon: "📜"
@@ -296,6 +298,7 @@ const FIXED_START_STORIES: RoundStory[] = [
         }
       }
     ],
+    hefterEintrag: "Horus & die ägyptischen Kornkammern: Getreide war im alten Ägypten wie Geld.",
     lexiconEntry: {
       title: "Horus & die ägyptischen Kornkammern",
       term: "Kornspeicher & Bürokratie",
@@ -341,7 +344,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
         {
           id: "hs_karnak_opfer",
           x: 74,
-          y: 68,
+          y: 60,
           label: "Opfertische & Rauchfässer",
           description: "Rinder, Gänse, Weihrauch und Lotosblüten werden täglich als Speiseopfer für die Götter dargebracht.",
           icon: "🏺"
@@ -400,7 +403,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Das Allerheiligste & Amun-Re: Nur der Pharao und der Hohepriester durften das Allerheiligste betreten, wo die goldene Statue des Gottes stand.",
+    lexiconEntry: {
         title: "Das Allerheiligste & Amun-Re",
         term: "Karnak & Hohepriester",
         explanation: {
@@ -476,7 +480,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Die Schiffer & Lastkähne auf dem Nil: Der Nil war die Autobahn des alten Ägyptens! Ohne Lastschiffe und Ruderer konnte kein einziger Pyramidenstein bewegt werden.",
+    lexiconEntry: {
         title: "Die Schiffer & Lastkähne auf dem Nil",
         term: "Nilbarken & Transportgilden",
         explanation: {
@@ -501,7 +506,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r5_reflection_west_thebes_maat_1", x: 42, y: 52, label: "Versiegelte Grabpforte", description: "Tonnenschwere Felsstürze mit den Siegeln der Nekropolenwächter (Schakal des Anubis) schützten die Pharaonenruhe.", icon: "🔒" },
       { id: "hs_r5_reflection_west_thebes_maat_2", x: 72, y: 45, label: "Das Amduat-Buch", description: "Mystische Wandmalereien schildern die zwölfstündige Reise des Sonnengottes durch die Unterwelt.", icon: "📜" },
-      { id: "hs_r5_reflection_west_thebes_maat_3", x: 22, y: 68, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
+      { id: "hs_r5_reflection_west_thebes_maat_3", x: 22, y: 60, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
     ],
       situation: {
         unterstufe: "Halte inne, tapferer Reisender! Du hast das erste Viertel deiner Reise gemeistert. Wie steht es um dein Reich und deine Werte?",
@@ -555,7 +560,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Das Prinzip der Ma'at – Ordnung gegen Chaos: Ma'at ist die Göttin der Wahrheit und Ordnung.",
+    lexiconEntry: {
         title: "Das Prinzip der Ma'at – Ordnung gegen Chaos",
         term: "Ma'at & Feder der Wahrheit",
         explanation: {
@@ -576,7 +582,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r5_reflection_west_thebes_military_1", x: 42, y: 52, label: "Versiegelte Grabpforte", description: "Tonnenschwere Felsstürze mit den Siegeln der Nekropolenwächter (Schakal des Anubis) schützten die Pharaonenruhe.", icon: "🔒" },
       { id: "hs_r5_reflection_west_thebes_military_2", x: 72, y: 45, label: "Das Amduat-Buch", description: "Mystische Wandmalereien schildern die zwölfstündige Reise des Sonnengottes durch die Unterwelt.", icon: "📜" },
-      { id: "hs_r5_reflection_west_thebes_military_3", x: 22, y: 68, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
+      { id: "hs_r5_reflection_west_thebes_military_3", x: 22, y: 60, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
     ],
       situation: {
         unterstufe: "An den Wachtürmen am Wüstenrand brennen Wachfeuer. Beduinenreiter beobachten eure Flotte aus der Ferne. Wie richtest du deine Expedition für die Weiterfahrt aus?",
@@ -630,7 +636,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Month – Der thebanische Kriegsgott: Month war der Gott des Krieges mit Falkenkopf und zwei langen Federn auf der Krone.",
+    lexiconEntry: {
         title: "Month – Der thebanische Kriegsgott",
         term: "Month & Grenzsicherung",
         explanation: {
@@ -709,7 +716,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Hathor, Sirius & das ägyptische Neujahr: Wenn der hellste Stern Sirius am Morgenhimmel erschien, wussten die Ägypter: Das lebenswichtige Nilwasser kommt bald!.",
+    lexiconEntry: {
         title: "Hathor, Sirius & das ägyptische Neujahr",
         term: "Sirius (Sothis) & Nilflut",
         explanation: {
@@ -784,7 +792,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Medizin & Sanatorien im Alten Ägypten: Tempel hatten oft Sanatorien mit Badebecken.",
+    lexiconEntry: {
         title: "Medizin & Sanatorien im Alten Ägypten",
         term: "Ägyptische Heilkunde & Sanatorien",
         explanation: {
@@ -863,7 +872,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Osiris, Isis & die Wiedergeburt: Osiris war der Gott der Toten und des ewigen Lebens.",
+    lexiconEntry: {
         title: "Osiris, Isis & die Wiedergeburt",
         term: "Osiris-Mythos & Königsliste",
         explanation: {
@@ -884,7 +894,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r7_abydos_tomb_robbery_1", x: 42, y: 52, label: "Versiegelte Grabpforte", description: "Tonnenschwere Felsstürze mit den Siegeln der Nekropolenwächter (Schakal des Anubis) schützten die Pharaonenruhe.", icon: "🔒" },
       { id: "hs_r7_abydos_tomb_robbery_2", x: 72, y: 45, label: "Das Amduat-Buch", description: "Mystische Wandmalereien schildern die zwölfstündige Reise des Sonnengottes durch die Unterwelt.", icon: "📜" },
-      { id: "hs_r7_abydos_tomb_robbery_3", x: 22, y: 68, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
+      { id: "hs_r7_abydos_tomb_robbery_3", x: 22, y: 60, label: "Medjay-Wächter", description: "Elitäre nubische Wüstenspäher patrouillierten Tag und Nacht über den Felskämmen von Theben-West.", icon: "🗡️" },
     ],
       situation: {
         unterstufe: "Aufregung in den Grabhügeln von Abydos! Die Wächter haben Grabräuber gefasst, die goldenen Schmuck der allerersten Pharaonen stehlen wollten.",
@@ -938,7 +948,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Gräber, Totengericht & Grabraub: Gräber waren für die Ewigkeit gebaut.",
+    lexiconEntry: {
         title: "Gräber, Totengericht & Grabraub",
         term: "Nekropolenrecht & Ahnenkult",
         explanation: {
@@ -963,7 +974,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r8_asyut_caravan_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
       { id: "hs_r8_asyut_caravan_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
-      { id: "hs_r8_asyut_caravan_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+      { id: "hs_r8_asyut_caravan_3", x: 52, y: 60, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
     ],
       situation: {
         unterstufe: "Bei Asyut treffen Wüstenkarawanen aus den tiefen Oasen ein. Sie bringen geheimnisvolle Steine, Weihrauch und wilde Tiere, aber auch Gerüchte über Beduinen-Überfälle auf Händler.",
@@ -1017,7 +1028,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Upuaut – Der Wegeöffner & die Oasen: Upuaut war ein schakalköpfiger Kriegsgott.",
+    lexiconEntry: {
         title: "Upuaut – Der Wegeöffner & die Oasen",
         term: "Upuaut & Karawanenwege",
         explanation: {
@@ -1036,9 +1048,9 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       milestoneTitle: "Runde 8 [Weg der Elemente]: Der Zorn des Wüstengottes Seth",
       imagePath: "/assets/nile_banner.jpg",
     hotspots: [
-      { id: "hs_r8_asyut_sandstorm_1", x: 32, y: 68, label: "Holzkeil-Spalttechnik", description: "Steinmetze treiben trockene Holzkeile in Bohrlöcher und tränken sie mit Wasser. Das quellende Holz sprengt Rosengranitblöcke ab.", icon: "⛏️" },
+      { id: "hs_r8_asyut_sandstorm_1", x: 32, y: 60, label: "Holzkeil-Spalttechnik", description: "Steinmetze treiben trockene Holzkeile in Bohrlöcher und tränken sie mit Wasser. Das quellende Holz sprengt Rosengranitblöcke ab.", icon: "⛏️" },
       { id: "hs_r8_asyut_sandstorm_2", x: 64, y: 38, label: "Granit-Abbaustelle", description: "Aus diesen massiven Felswänden wurden Kolossalstatuen und Obelisken für Karnak und Gizeh herausgehauen.", icon: "🏛️" },
-      { id: "hs_r8_asyut_sandstorm_3", x: 78, y: 75, label: "Erster Nilkatarakt", description: "Gefährliche Stromschnellen bildeten die natürliche Südgrenze Ägyptens zum nubischen Reich.", icon: "🌊" },
+      { id: "hs_r8_asyut_sandstorm_3", x: 78, y: 60, label: "Erster Nilkatarakt", description: "Gefährliche Stromschnellen bildeten die natürliche Südgrenze Ägyptens zum nubischen Reich.", icon: "🌊" },
     ],
       situation: {
         unterstufe: "Der Himmel färbt sich unheilvoll blutrot! Ein gewaltiger Chamsin-Sandsturm rast aus der Libyschen Wüste auf eure Schiffe zu. Sandkörner peitschen wie Nadeln ins Gesicht.",
@@ -1092,7 +1104,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Seth – Gott der Wüste, Stürme & des Chaos: Seth war der Gott der roten Wüste und der Stürme.",
+    lexiconEntry: {
         title: "Seth – Gott der Wüste, Stürme & des Chaos",
         term: "Seth & der Wüstensturm Chamsin",
         explanation: {
@@ -1117,7 +1130,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r9_amarna_aton_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
       { id: "hs_r9_amarna_aton_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
-      { id: "hs_r9_amarna_aton_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+      { id: "hs_r9_amarna_aton_3", x: 52, y: 60, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
     ],
       situation: {
         unterstufe: "Ihr fahrt an den Ruinen einer seltsamen Stadt vorbei: Hier betete ein früherer Pharao nur noch die Sonnenscheibe Aton an und verbot alle anderen Götter. Doch die alten Priester hassen diese Erinnerung.",
@@ -1171,7 +1184,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Echnaton, Nofretete & der Sonnengott Aton: Pharao Echnaton schaffte fast alle Götter ab und betete nur noch die Sonnenscheibe Aton an.",
+    lexiconEntry: {
         title: "Echnaton, Nofretete & der Sonnengott Aton",
         term: "Amarna-Zeit & Monotheismus",
         explanation: {
@@ -1192,7 +1206,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r9_amarna_artists_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
       { id: "hs_r9_amarna_artists_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
-      { id: "hs_r9_amarna_artists_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+      { id: "hs_r9_amarna_artists_3", x: 52, y: 60, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
     ],
       situation: {
         unterstufe: "In einer verlassenen Bildhauerwerkstatt am Ufer entdeckt ihr wunderschöne Skulpturen und bunte Wandmalereien aus Gips und Kalkstein. Die Künstler flehen dich an, ihre Kunstwerke auf deinen Schiffen nach Norden zu retten.",
@@ -1246,7 +1260,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Die Bildhauer von Amarna & Nofretete: In Amarna malten die Künstler Menschen zum ersten Mal ganz echt mit Falten und Gefühlen, statt immer steif und fehlerfrei.",
+    lexiconEntry: {
         title: "Die Bildhauer von Amarna & Nofretete",
         term: "Amarna-Kunst & Bildhauer Thutmosis",
         explanation: {
@@ -1271,7 +1286,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r10_hermopolis_thot_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
       { id: "hs_r10_hermopolis_thot_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
-      { id: "hs_r10_hermopolis_thot_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+      { id: "hs_r10_hermopolis_thot_3", x: 52, y: 60, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
     ],
       situation: {
         unterstufe: "Halbzeit der Expedition! Ihr erreicht Hermopolis, die Stadt des Gottes Thot – Schutzherr aller Schreiber, Zahlen und Weisheit. Wie klug führst du deine Expedition bisher?",
@@ -1325,7 +1340,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Thot – Gott der Schreiber, Magie & des Mondes: Thot wurde als Pavian oder Ibis mit langem Schnabel dargestellt.",
+    lexiconEntry: {
         title: "Thot – Gott der Schreiber, Magie & des Mondes",
         term: "Thot & Schreiberhandwerk",
         explanation: {
@@ -1346,7 +1362,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r10_hermopolis_treasury_1", x: 35, y: 62, label: "Königliche Schreiber", description: "Schreiber notierten mit Binsenfeder und Rußtusche jede Kornabgabe auf feinstem Papyrus.", icon: "📜" },
       { id: "hs_r10_hermopolis_treasury_2", x: 68, y: 50, label: "Pegelstufen des Nilometers", description: "16 Ellen bedeuteten Überfluss; weniger als 12 Ellen führten zu Dürre und Hungersnot.", icon: "📐" },
-      { id: "hs_r10_hermopolis_treasury_3", x: 52, y: 74, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
+      { id: "hs_r10_hermopolis_treasury_3", x: 52, y: 60, label: "Tonsiegel der Kornspeicher", description: "Amtliche Stempel aus Fayence sicherten die Krüge mit Steuergetreide gegen Diebstahl.", icon: "🏺" },
     ],
       situation: {
         unterstufe: "Der oberste Schatzmeister des Reiches betritt euer Schiff mit Papyrusrollen und Waagschalen. Er will genau wissen, wie sparsam oder verschwenderisch du bisher regiert hast!",
@@ -1400,7 +1416,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Das ägyptische Steuersystem & die Zählung: Alle zwei Jahre fand die große Viehzählung statt.",
+    lexiconEntry: {
         title: "Das ägyptische Steuersystem & die Zählung",
         term: "Viehzählung & Abgabenwesen",
         explanation: {
@@ -1479,7 +1496,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Wasserbau & die Fayum-Urbarmachung: Die Könige bauten Kanäle, um Nilwasser in den See Moeris zu leiten.",
+    lexiconEntry: {
         title: "Wasserbau & die Fayum-Urbarmachung",
         term: "Bahr Yusuf & Kanalbau",
         explanation: {
@@ -1554,7 +1572,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Papyrus & die Jagd im Schilf: Aus Papyrus machten die Ägypter nicht nur Schreibpapier, sondern auch Boote, Seile, Sandalen und Körbe!.",
+    lexiconEntry: {
         title: "Papyrus & die Jagd im Schilf",
         term: "Papyrus & Sumpfwelt",
         explanation: {
@@ -1579,7 +1598,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r12_meidum_collapse_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
       { id: "hs_r12_meidum_collapse_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
-      { id: "hs_r12_meidum_collapse_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+      { id: "hs_r12_meidum_collapse_3", x: 78, y: 60, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
     ],
       situation: {
         unterstufe: "Am Horizont ragt ein seltsamer Felsturm empor: Die Pyramide von Meidum! Frühere Bauherren machten Fehler beim Bauwinkel. Die Baumeister streiten über den besten Winkel für Gizeh.",
@@ -1633,7 +1652,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Die Pyramidenentwicklung von Meidum nach Dahschur: Die Ägypter bauten nicht sofort perfekte Pyramiden.",
+    lexiconEntry: {
         title: "Die Pyramidenentwicklung von Meidum nach Dahschur",
         term: "Knickpyramide & Statik",
         explanation: {
@@ -1652,9 +1672,9 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       milestoneTitle: "Runde 12 [Weg der Logistik]: Der Kampf um die Ziehrampen",
       imagePath: "/assets/nile_banner.jpg",
     hotspots: [
-      { id: "hs_r12_meidum_quarry_strike_1", x: 32, y: 68, label: "Holzkeil-Spalttechnik", description: "Steinmetze treiben trockene Holzkeile in Bohrlöcher und tränken sie mit Wasser. Das quellende Holz sprengt Rosengranitblöcke ab.", icon: "⛏️" },
+      { id: "hs_r12_meidum_quarry_strike_1", x: 32, y: 60, label: "Holzkeil-Spalttechnik", description: "Steinmetze treiben trockene Holzkeile in Bohrlöcher und tränken sie mit Wasser. Das quellende Holz sprengt Rosengranitblöcke ab.", icon: "⛏️" },
       { id: "hs_r12_meidum_quarry_strike_2", x: 64, y: 38, label: "Granit-Abbaustelle", description: "Aus diesen massiven Felswänden wurden Kolossalstatuen und Obelisken für Karnak und Gizeh herausgehauen.", icon: "🏛️" },
-      { id: "hs_r12_meidum_quarry_strike_3", x: 78, y: 75, label: "Erster Nilkatarakt", description: "Gefährliche Stromschnellen bildeten die natürliche Südgrenze Ägyptens zum nubischen Reich.", icon: "🌊" },
+      { id: "hs_r12_meidum_quarry_strike_3", x: 78, y: 60, label: "Erster Nilkatarakt", description: "Gefährliche Stromschnellen bildeten die natürliche Südgrenze Ägyptens zum nubischen Reich.", icon: "🌊" },
     ],
       situation: {
         unterstufe: "An den gigantischen Erdrampen von Meidum ist eine schwere Holzstrebe gebrochen. Ein tonnenschwerer Steinblock rutscht ab und blockiert den Hauptzugang für die Transportschlitten.",
@@ -1708,7 +1728,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Pyramidenrampen & Hebetechnik: Kräne gab es damals nicht! Die Ägypter schütteten riesige Rampen aus Schlamm, Schotter und Holz, über die sie die Steine zogen.",
+    lexiconEntry: {
         title: "Pyramidenrampen & Hebetechnik",
         term: "Bau-Rampen & Schlittenzüge",
         explanation: {
@@ -1733,7 +1754,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r13_dahshur_copper_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
       { id: "hs_r13_dahshur_copper_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
-      { id: "hs_r13_dahshur_copper_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+      { id: "hs_r13_dahshur_copper_3", x: 78, y: 60, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
     ],
       situation: {
         unterstufe: "In Dahschur glänzt der rötliche Kalkstein. Doch es gibt ein Problem: Tausende Meißel aus Kupfer sind stumpf oder verbogen, und die Minen auf dem Sinai senden keine Lieferungen!",
@@ -1787,7 +1808,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Kupfer, Türkis & die Minen des Sinai: Eisen kannten die Pyramidenbauer noch nicht! Alle riesigen Steine wurden mit einfachen Meißeln aus Kupfer bearbeitet.",
+    lexiconEntry: {
         title: "Kupfer, Türkis & die Minen des Sinai",
         term: "Sinai-Expeditionen & Werkzeuge",
         explanation: {
@@ -1808,7 +1830,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r13_dahshur_white_casing_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
       { id: "hs_r13_dahshur_white_casing_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
-      { id: "hs_r13_dahshur_white_casing_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+      { id: "hs_r13_dahshur_white_casing_3", x: 78, y: 60, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
     ],
       situation: {
         unterstufe: "Aus den Steinbrüchen von Tura auf der anderen Nilseite treffen weiße Kalksteinblöcke ein. Sie sind so glatt poliert, dass sie wie Schnee in der Wüstensonne strahlen. Doch ein Frachter hat Leck geschlagen!",
@@ -1862,7 +1884,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Tura-Kalkstein & die Verkleidung: Die Pyramiden waren früher nicht stufig und braun, sondern spiegelglatt und strahlend weiß verkleidet!.",
+    lexiconEntry: {
         title: "Tura-Kalkstein & die Verkleidung",
         term: "Tura-Kalkstein & Politur",
         explanation: {
@@ -1887,7 +1910,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r14_saqqara_imhotep_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
       { id: "hs_r14_saqqara_imhotep_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
-      { id: "hs_r14_saqqara_imhotep_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+      { id: "hs_r14_saqqara_imhotep_3", x: 78, y: 60, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
     ],
       situation: {
         unterstufe: "Ihr steht vor der ältesten Steinpyramide: Der Stufenpyramide von Sakkara! Hier erfand der Arzt und Architekt Imhotep das Bauen mit Stein. Ein junger Schreiber bittet dich um Rat.",
@@ -1941,7 +1964,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Imhotep – Der erste Baumeister & Universalgelehrte: Imhotep war so klug, dass die Ägypter ihn später als Gott verehrten! Er baute für König Djoser die erste Pyramide.",
+    lexiconEntry: {
         title: "Imhotep – Der erste Baumeister & Universalgelehrte",
         term: "Imhotep & Papyrus Edwin Smith",
         explanation: {
@@ -1962,7 +1986,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
     hotspots: [
       { id: "hs_r14_saqqara_serapeum_1", x: 50, y: 38, label: "Stufenpyramide des Djoser", description: "Sechs übereinandergesetzte Mastabas bilden die erste monumentale Steinarchitektur der Menschheit.", icon: "🏛️" },
       { id: "hs_r14_saqqara_serapeum_2", x: 26, y: 64, label: "Genie Imhotep", description: "Königlicher Baumeister, Arzt und Wesir, der später als Gott der Weisheit und Heilkunst verehrt wurde.", icon: "📐" },
-      { id: "hs_r14_saqqara_serapeum_3", x: 78, y: 66, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
+      { id: "hs_r14_saqqara_serapeum_3", x: 78, y: 60, label: "Tura-Kalksteinquader", description: "Fein behauene weiße Blöcke, die mit Kupfermeißeln fugenlos aneinandergepasst wurden.", icon: "⛏️" },
     ],
       situation: {
         unterstufe: "In den unterirdischen Hallen von Sakkara wird der heilige Apis-Stier verehrt. Doch der bisherige Stier ist friedlich entschlafen. Die Priester suchen im ganzen Niltal nach dem neuen Kälbchen mit den heiligen Merkmalen.",
@@ -2016,7 +2040,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Der Apis-Stier & das Serapeum: Der Apis-Stier war das heiligste Tier Ägyptens.",
+    lexiconEntry: {
         title: "Der Apis-Stier & das Serapeum",
         term: "Apis-Stier & Serapeum",
         explanation: {
@@ -2040,7 +2065,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/giza_site.jpg",
     hotspots: [
       { id: "hs_r15_memphis_gates_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
-      { id: "hs_r15_memphis_gates_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r15_memphis_gates_2", x: 65, y: 60, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
       { id: "hs_r15_memphis_gates_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
     ],
       situation: {
@@ -2095,7 +2120,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Memphis – Die Weiße Mauer (Ineb-Hedj): Memphis war die erste Hauptstadt des vereinigten Ägyptens.",
+    lexiconEntry: {
         title: "Memphis – Die Weiße Mauer (Ineb-Hedj)",
         term: "Memphis & Gott Ptah",
         explanation: {
@@ -2115,7 +2141,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/giza_site.jpg",
     hotspots: [
       { id: "hs_r15_memphis_army_review_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
-      { id: "hs_r15_memphis_army_review_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r15_memphis_army_review_2", x: 65, y: 60, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
       { id: "hs_r15_memphis_army_review_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
     ],
       situation: {
@@ -2170,7 +2196,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Das altägyptische Heer & seine Waffen: Soldaten kämpften barfuß mit Speeren, Krummdolchen und großen Schilden aus Rinderfell.",
+    lexiconEntry: {
         title: "Das altägyptische Heer & seine Waffen",
         term: "Ägyptische Kriegskunst & Regimenter",
         explanation: {
@@ -2194,7 +2221,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/giza_site.jpg",
     hotspots: [
       { id: "hs_r16_giza_harbor_flood_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
-      { id: "hs_r16_giza_harbor_flood_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r16_giza_harbor_flood_2", x: 65, y: 60, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
       { id: "hs_r16_giza_harbor_flood_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
     ],
       situation: {
@@ -2249,7 +2276,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Der Hafen von Gizeh & der Niltransport: Archäologen entdeckten, dass der Nil damals direkt bis an die Pyramiden reichte! Über Kanäle fuhren Schiffe bis an die Baustelle.",
+    lexiconEntry: {
         title: "Der Hafen von Gizeh & der Niltransport",
         term: "Hafen von Gizeh & Schlammschmierung",
         explanation: {
@@ -2269,7 +2297,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/giza_site.jpg",
     hotspots: [
       { id: "hs_r16_giza_sandstorm_hazard_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
-      { id: "hs_r16_giza_sandstorm_hazard_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r16_giza_sandstorm_hazard_2", x: 65, y: 60, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
       { id: "hs_r16_giza_sandstorm_hazard_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
     ],
       situation: {
@@ -2324,7 +2352,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Die Ausrichtung der Cheopspyramide: Die Seiten der Cheopspyramide weichen nur um winzige Bruchteile eines Grades von den echten Himmelsrichtungen ab!.",
+    lexiconEntry: {
         title: "Die Ausrichtung der Cheopspyramide",
         term: "Merkhet & Polarsterne",
         explanation: {
@@ -2348,7 +2377,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/giza_site.jpg",
     hotspots: [
       { id: "hs_r17_workers_strike_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
-      { id: "hs_r17_workers_strike_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r17_workers_strike_2", x: 65, y: 60, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
       { id: "hs_r17_workers_strike_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
     ],
       situation: {
@@ -2403,7 +2432,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Die Pyramidenbauer – Freie Bürger statt Sklaven: Pyramidenbauer waren KEINE Sklaven! Es waren geachtete Arbeiter, die reichlich Fleisch, Bier und ärztliche Versorgung bekamen.",
+    lexiconEntry: {
         title: "Die Pyramidenbauer – Freie Bürger statt Sklaven",
         term: "Arbeiterstadt & Pyramidenstreik",
         explanation: {
@@ -2423,7 +2453,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/giza_site.jpg",
     hotspots: [
       { id: "hs_r17_workers_medical_crisis_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
-      { id: "hs_r17_workers_medical_crisis_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r17_workers_medical_crisis_2", x: 65, y: 60, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
       { id: "hs_r17_workers_medical_crisis_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
     ],
       situation: {
@@ -2478,7 +2508,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Medizinische Versorgung der Pyramidenbauer: Skelettfunde in Gizeh bewiesen: Gebrochene Knochen von Pyramidenarbeitern waren fachmännisch geschient und perfekt verheilt!.",
+    lexiconEntry: {
         title: "Medizinische Versorgung der Pyramidenbauer",
         term: "Baustellenmedizin & Knochenchirurgie",
         explanation: {
@@ -2502,7 +2533,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/sphinx.jpg",
     hotspots: [
       { id: "hs_r18_sphinx_sand_oath_1", x: 48, y: 38, label: "Antlitz des Königs (Khafre)", description: "Der Kopf der Sphinx trägt das Nemes-Kopftuch mit Uräusschlange als Zeichen absoluter Schutzmacht.", icon: "👑" },
-      { id: "hs_r18_sphinx_sand_oath_2", x: 35, y: 68, label: "Löwenpranken aus Monolithfels", description: "Aus einem einzigen natürlichen Kalksteinrücken herausgehauen, symbolisiert er Stärke und Wachsamkeit.", icon: "🦁" },
+      { id: "hs_r18_sphinx_sand_oath_2", x: 35, y: 60, label: "Löwenpranken aus Monolithfels", description: "Aus einem einzigen natürlichen Kalksteinrücken herausgehauen, symbolisiert er Stärke und Wachsamkeit.", icon: "🦁" },
       { id: "hs_r18_sphinx_sand_oath_3", x: 62, y: 62, label: "Traumstele Thutmosis' IV.", description: "Zwischen den Pranken berichtet eine Granitstele vom Traum des Prinzen, der die Sphinx vom Wüstensand befreite.", icon: "📜" },
     ],
       situation: {
@@ -2557,7 +2588,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Die Große Sphinx & die Traumstele: Die Sphinx ist die größte Skulptur der Antike, aus einem Felsen gehauen! Sie hat den Körper eines Löwen und den Kopf eines Königs.",
+    lexiconEntry: {
         title: "Die Große Sphinx & die Traumstele",
         term: "Sphinx (Harmachis) & Traumstele",
         explanation: {
@@ -2577,7 +2609,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/sphinx.jpg",
     hotspots: [
       { id: "hs_r18_sphinx_solar_alignment_1", x: 48, y: 38, label: "Antlitz des Königs (Khafre)", description: "Der Kopf der Sphinx trägt das Nemes-Kopftuch mit Uräusschlange als Zeichen absoluter Schutzmacht.", icon: "👑" },
-      { id: "hs_r18_sphinx_solar_alignment_2", x: 35, y: 68, label: "Löwenpranken aus Monolithfels", description: "Aus einem einzigen natürlichen Kalksteinrücken herausgehauen, symbolisiert er Stärke und Wachsamkeit.", icon: "🦁" },
+      { id: "hs_r18_sphinx_solar_alignment_2", x: 35, y: 60, label: "Löwenpranken aus Monolithfels", description: "Aus einem einzigen natürlichen Kalksteinrücken herausgehauen, symbolisiert er Stärke und Wachsamkeit.", icon: "🦁" },
       { id: "hs_r18_sphinx_solar_alignment_3", x: 62, y: 62, label: "Traumstele Thutmosis' IV.", description: "Zwischen den Pranken berichtet eine Granitstele vom Traum des Prinzen, der die Sphinx vom Wüstensand befreite.", icon: "📜" },
     ],
       situation: {
@@ -2632,7 +2664,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Die Ausrichtung der Sphinx nach den Sternen: Die Sphinx schaut genau nach Osten, wo jeden Morgen die Sonne aufgeht.",
+    lexiconEntry: {
         title: "Die Ausrichtung der Sphinx nach den Sternen",
         term: "Äquinoktium & Sonnenkult",
         explanation: {
@@ -2656,7 +2689,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/giza_site.jpg",
     hotspots: [
       { id: "hs_r19_pyramidion_gold_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
-      { id: "hs_r19_pyramidion_gold_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r19_pyramidion_gold_2", x: 65, y: 60, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
       { id: "hs_r19_pyramidion_gold_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
     ],
       situation: {
@@ -2711,7 +2744,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Das Pyramidion – Der Urhügel Benben: Das Pyramidion war der spitzeste Stein ganz oben auf der Pyramide aus vergoldetem Elektron, das wie Feuer glänzte.",
+    lexiconEntry: {
         title: "Das Pyramidion – Der Urhügel Benben",
         term: "Pyramidion & Elektron-Metall",
         explanation: {
@@ -2731,7 +2765,7 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
       imagePath: "/assets/giza_site.jpg",
     hotspots: [
       { id: "hs_r19_pyramidion_night_vigil_1", x: 38, y: 55, label: "Baustellenrampe", description: "Gewaltige Lehmziegel- und Schuttransporte, über die 2,5-Tonnen-Blöcke emporgezogen wurden.", icon: "🪵" },
-      { id: "hs_r19_pyramidion_night_vigil_2", x: 65, y: 70, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
+      { id: "hs_r19_pyramidion_night_vigil_2", x: 65, y: 60, label: "Transportschlitten & Wasser", description: "Arbeiter gossen Wasser vor die Kufen auf den Nilschlick, um die Reibung um die Hälfte zu senken.", icon: "🛷" },
       { id: "hs_r19_pyramidion_night_vigil_3", x: 58, y: 30, label: "Cheops-Pyramide", description: "Bestehend aus über 2,3 Millionen Steinblöcken mit einer ursprünglichen Höhe von 146,6 Metern.", icon: "🔺" },
     ],
       situation: {
@@ -2786,7 +2820,8 @@ const DYNAMIC_BRANCH_STORIES: { [roundNumber: number]: { branchA: RoundStory; br
           }
         }
       ],
-      lexiconEntry: {
+      hefterEintrag: "Die Nachtwache des Pharaos vor dem Thron: Vor der Krönung fastete der künftige König und betete die ganze Nacht, um von allen Sünden gereinigt zu werden.",
+    lexiconEntry: {
         title: "Die Nachtwache des Pharaos vor dem Thron",
         term: "Sed-Fest & Königsweihe",
         explanation: {
@@ -2890,7 +2925,8 @@ const FIXED_END_STORY: RoundStory = {
       }
     }
   ],
-  lexiconEntry: {
+  hefterEintrag: "Die Doppelkrone (Pschent) & der Throntitel: Der Pharao trug die Doppelkrone: Die weiße Krone für Oberägypten und die rote Krone für Unterägypten, um die Einheit zu zeigen.",
+    lexiconEntry: {
     title: "Die Doppelkrone (Pschent) & der Throntitel",
     term: "Pschent & fünf Titulaturen",
     explanation: {

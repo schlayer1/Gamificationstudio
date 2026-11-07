@@ -12,7 +12,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r1_spuren",
         "x": 45,
-        "y": 70,
+        "y": 65,
         "label": "Frische Mammutfährte",
         "description": "Riesige Trittsiegel im Schnee zeigen eine kleine Herde, die nach Süden zieht.",
         "icon": "🐾"
@@ -46,7 +46,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Nutzt natürliche Felsspalten und Schluchten, um das Tier ohne Frontalangriff einzukesseln.",
         "statChanges": {
           "goetter": 15,
-          "volk": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -63,9 +64,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Einen sofortigen Überraschungsangriff mit Wurfspeeren und Fackeln wagen",
         "description": "Nutzt den Schneesturm als Deckung, um die Tiere in Panik zu versetzen.",
         "statChanges": {
-          "goetter": 20,
-          "priester": -10,
-          "adel": -5
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -81,9 +82,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Vorerst auf Schneehühner und Rentiere ausweichen, um kein Risiko einzugehen",
         "description": "Kleinere Beute sichert das tägliche Überleben ohne Lebensgefahr für die Sippe.",
         "statChanges": {
-          "goetter": 5,
           "adel": 15,
-          "volk": 5
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -100,11 +101,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen über Hebelwirkung ein, um Speere mit doppelter Durchschlagskraft zu werfen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
+          "goetter": 15,
           "priester": 15,
-          "adel": 10,
+          "adel": 15,
           "volk": 10,
-          "ep": 1
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -125,7 +126,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Die eiszeitliche Tundrensteppe (Mammutsteppe) bot reichlich proteinreiche Gräser. Der Mensch des Jungpaläolithikums (Cro-Magnon) perfektionierte kooperative Treibjagden und komplexe Werkzeugkombinate."
       },
       "curiosityFact": "Mammut-Stoßzähne konnten über 4 Meter lang werden und bis zu 100 Kilogramm wiegen!"
-    }
+    },
+    "hefterEintrag": "In der Altsteinzeit lebten die Menschen als wandernde Jäger und Sammler; Mammuts lieferten Fleisch, Fell, Knochen und Sehnen."
   },
   {
     "id": "stoneage_r02",
@@ -146,7 +148,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r2_feuer",
         "x": 65,
-        "y": 70,
+        "y": 65,
         "label": "Rauchfeuer zum Dörren",
         "description": "Über Wacholder- und Kiefernzweigen wird Fleischstreifen die Feuchtigkeit entzogen.",
         "icon": "💨"
@@ -171,9 +173,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Alle Anteile streng gleichmäßig an jede Familie verteilen",
         "description": "Jeder Kopf der Sippe erhält exakt dieselbe Menge Fleisch und Fett.",
         "statChanges": {
-          "adel": 15,
-          "volk": 15,
-          "goetter": 5
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -190,8 +193,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Belohnt besonderen Mut, um den Ehrgeiz zukünftiger Jagdzüge zu steigern.",
         "statChanges": {
           "priester": 15,
-          "adel": -10,
-          "goetter": 10
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -207,9 +210,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Das meiste Fleisch sofort räuchern und als Notreserve im Permafrost vergraben",
         "description": "Sichert die kommenden harten Frostwochen ab, auch wenn heute weniger geschlemmt wird.",
         "statChanges": {
-          "goetter": 20,
-          "priester": 10,
-          "adel": -5
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -227,10 +230,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "epCost": 2,
         "statChanges": {
           "goetter": 15,
-          "priester": 20,
+          "priester": 15,
           "adel": 15,
           "volk": 10,
-          "ep": 1
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -251,7 +254,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Egalitäre Verteilungsmechanismen verhinderten soziale Spaltungen. Fleischverteilung folgte präzisen traditionellen Verhaltenskodizes, die den sozialen Frieden innerhalb der Horde stabilisierten."
       },
       "curiosityFact": "Fleisch wurde in tiefen Gruben im gefrorenen Boden vergraben – der erste natürliche Gefrierschrank der Menschheit!"
-    }
+    },
+    "hefterEintrag": "Die Jagdbeute wurde in der Sippe geteilt, um das Überleben aller Sippenmitglieder im harten Eiszeitwinter zu sichern."
   },
   {
     "id": "stoneage_r03",
@@ -264,7 +268,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r3_fettlampe",
         "x": 30,
-        "y": 68,
+        "y": 65,
         "label": "Sandstein-Fettlampe",
         "description": "Brennt rußarm mit Tierfett und Moosdocht tief im Felseninneren.",
         "icon": "🪔"
@@ -280,7 +284,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r3_pigment",
         "x": 75,
-        "y": 70,
+        "y": 65,
         "label": "Ocker-Mörserstein",
         "description": "Hier werden gelbe und rote Eisenoxide zu feinstem Puder zermahlen.",
         "icon": "🎨"
@@ -297,8 +301,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Einen gewaltigen Ur-Bison mit Holzkohle und Rötel an die Felsrippe zeichnen",
         "description": "Nutzt die natürliche Wölbung des Steins, um dem Tier plastische Tiefe zu verleihen.",
         "statChanges": {
-          "adel": 15,
-          "priester": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -315,9 +320,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Gemeinsam mit den Kindern Handschablonen mit Pfeifröhrchen anblasen",
         "description": "Jedes Sippenmitglied verewigt seinen Handabdruck mit rotem Ockerpulver.",
         "statChanges": {
-          "adel": 20,
-          "volk": 15,
-          "goetter": -5
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -333,9 +338,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Bessere Fettlampen mit getrocknetem Wacholder herstellen",
         "description": "Konzentriert euch auf die Beleuchtung, damit man tiefer in unbekannte Gänge vordringen kann.",
         "statChanges": {
-          "priester": 15,
-          "goetter": 10,
-          "adel": 5
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -352,10 +357,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Höhlenakustik für ein überwältigendes Klangerlebnis zu nutzen.",
         "epCost": 2,
         "statChanges": {
-          "adel": 20,
+          "goetter": 15,
           "priester": 15,
-          "volk": 15,
-          "ep": 1
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -376,7 +382,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Die parietale Kunst des Jungpaläolithikums zeigt ein hochentwickeltes Symbolsystem. Neueste Forschungen deuten auf Punkt- und Strichmarkierungen hin, die als Vorläufer eines Mondkalenders dienten."
       },
       "curiosityFact": "In der Höhle 'Hohle Fels' auf der Schwäbischen Alb fand man eine 40.000 Jahre alte Flöte aus Gänsegeierknochen – das älteste Musikinstrument der Welt!"
-    }
+    },
+    "hefterEintrag": "Höhlenmalereien (wie in Lascaux) mit Erdfarben und Holzkohle dienten vermutlich schamanischen Jagdritualen und Naturgeistern."
   },
   {
     "id": "stoneage_r04",
@@ -397,7 +404,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r4_holz",
         "x": 20,
-        "y": 70,
+        "y": 65,
         "label": "Trockenes Kiefernholz",
         "description": "Sorgfältig geschichtet, um auch bei feuchtem Wetter rauchfrei zu brennen.",
         "icon": "🪵"
@@ -422,9 +429,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Das Feuer mit Fellen und Rindenabdeckungen abschirmen und trockenes Hartholz nachlegen",
         "description": "Schützt die Glut pragmatisch mit vereinten Kräften gegen Regen und Wind.",
         "statChanges": {
-          "volk": 15,
-          "priester": 10,
-          "goetter": 5
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -441,8 +449,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Bereitet tragbare Feuerbüchsen vor, falls das Hauptfeuer doch erlischt.",
         "statChanges": {
           "priester": 15,
-          "goetter": 10,
-          "ep": 1
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -459,8 +467,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Jeder wacht abwechselnd zwei Stunden, um Brennholz kontinuierlich nachzulegen.",
         "statChanges": {
           "adel": 15,
-          "volk": 10,
-          "priester": 5
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -477,10 +485,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um das Feuer jederzeit unabhängig vom Wetter blitzschnell neu entzünden zu können.",
         "epCost": 2,
         "statChanges": {
-          "priester": 20,
           "goetter": 15,
-          "volk": 15,
-          "ep": 1
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -501,7 +510,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Beherrschung von Pyrotechnologien war Voraussetzung für alle späteren Kulturstufen – von der Keramikbrennung bis zur Kupfer- und Eisenverhüttung."
       },
       "curiosityFact": "Ötzi trug vor 5.300 Jahren ein komplettes 'Feuerzeug' bei sich: Feuerstein, Pyritkrümel und Zunderschwamm in einem Lederbeutel!"
-    }
+    },
+    "hefterEintrag": "Das Feuer spendete Wärme, Schutz vor Raubtieren und machte Fleisch durch Braten haltbarer und bekömmlicher."
   },
   {
     "id": "stoneage_r05",
@@ -547,8 +557,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Einen massiven, vielseitigen Faustkeil zweiseitig aus dem Kern schlagen",
         "description": "Robustes Universalwerkzeug zum Schneiden, Hacken, Graben und Zertrümmern von Knochen.",
         "statChanges": {
-          "priester": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -565,8 +576,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Feine, rasiermesserscharfe Klingen und Schaber für die Fellbearbeitung herstellen",
         "description": "Spezialwerkzeuge, um Tierhäute zu säubern und zarte Nähriemen zu schneiden.",
         "statChanges": {
-          "volk": 15,
-          "priester": 10,
+          "priester": 15,
+          "goetter": -15,
           "adel": 5
         },
         "skillChanges": {
@@ -584,8 +595,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Sicherheit geht vor: Schützt Augen und Hände der Lehrlinge vor messerscharfen Abschlägen.",
         "statChanges": {
           "adel": 15,
-          "volk": 10,
-          "goetter": 5
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -602,10 +613,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Nutzt Wissenspunkte, um mikrofeine Widerhaken für Jagdpfeile und Harpunen zu drücken.",
         "epCost": 2,
         "statChanges": {
-          "priester": 25,
           "goetter": 15,
-          "adel": 10,
-          "ep": 1
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -626,7 +638,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Feuerstein war das erste überregional gehandelte Wirtschaftsgut Europas. Silex aus berühmten Vorkommen (z.B. Grand-Pressigny) wurde über Hunderte von Kilometern durch Tauschketten distribuiert."
       },
       "curiosityFact": "Moderne Augenchirurgen nutzen manchmal Klingen aus Obsidian (Vulkanglas), weil deren Schnittkante nur wenige Moleküle dick ist – genau wie in der Steinzeit!"
-    }
+    },
+    "hefterEintrag": "Feuerstein (Silex) war der 'Stahl der Steinzeit': Durch gezieltes Abschlagen entstanden messerscharfe Klingen und Schaber."
   },
   {
     "id": "stoneage_r06",
@@ -639,7 +652,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r6_pech",
         "x": 48,
-        "y": 70,
+        "y": 65,
         "label": "Schweltopf mit Birkenrinde",
         "description": "Unter Luftabschluss erhitzt, destilliert klebriges, schwarzes Birkenpech.",
         "icon": "🏺"
@@ -672,9 +685,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Das Birkenpech in einer Erdkuhle langsam ausschwelen und die Klingen fest einkleben",
         "description": "Geduldige Hitzezufuhr verhindert, dass der wertvolle Teerkleber verbrennt.",
         "statChanges": {
-          "priester": 15,
-          "goetter": 10,
-          "volk": 5
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -690,9 +704,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Die Schäftung zusätzlich mit feuchten Hirschsehnen kreuzweise umwickeln",
         "description": "Beim Trocknen ziehen sich die Sehnen zusammen und klemmen das Holz unlösbar fest.",
         "statChanges": {
-          "priester": 10,
-          "volk": 15,
-          "adel": 10
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -709,8 +723,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Schafft Reserven im Lager, damit zerbrochene Schäfte sofort ersetzt werden können.",
         "statChanges": {
           "adel": 15,
-          "priester": 10,
-          "goetter": 5
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -727,10 +741,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Hebelkraft beim Holzhacken durch eine L-förmige Astgabel zu verdoppeln.",
         "epCost": 2,
         "statChanges": {
-          "priester": 20,
           "goetter": 15,
-          "volk": 15,
-          "ep": 1
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -751,7 +766,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Bereits der Neandertaler vor über 100.000 Jahren beherrschte die kontrollierte Pyrolyse von Birkenrinde. Dies widerlegt endgültig das überholte Bild vom primitiven Urmenschen."
       },
       "curiosityFact": "Ötzis berühmtes Kupferbeil war genau mit diesem uralten Birkenpech und Lederbändern im Eibenholzschaft verklebt!"
-    }
+    },
+    "hefterEintrag": "Mit schwarzem Birkenpech (dem ersten Alleskleber der Menschheit) befestigten die Jäger Steinspitzen sicher an Holzschäften."
   },
   {
     "id": "stoneage_r07",
@@ -772,7 +788,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r7_wurzel",
         "x": 60,
-        "y": 70,
+        "y": 65,
         "label": "Essbare Rohrkolbenwurzel",
         "description": "Stärkereich und nahrhaft, lässt sich getrocknet zu nahrhaftem Mehl zerstoßen.",
         "icon": "🌿"
@@ -798,8 +814,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Fett- und proteinreiche Nüsse halten monatelang ohne zu verderben.",
         "statChanges": {
           "goetter": 15,
-          "volk": 15,
-          "adel": 5
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -815,9 +832,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Heilkräuter, Weidenrinde und Wundmoos für verletzte Sippenmitglieder sammeln",
         "description": "Bereitet Wickel und Tees vor, um Entzündungen und Wundfieber zu behandeln.",
         "statChanges": {
-          "adel": 15,
           "priester": 15,
-          "goetter": 5
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -833,9 +850,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Den Kindern das Erkennen giftiger Pilze und Beeren spielerisch beibringen",
         "description": "Traditionswissen sichern, damit die nächste Generation sicher überlebt.",
         "statChanges": {
-          "volk": 20,
-          "adel": 10,
-          "ep": 1
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -852,10 +869,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um unverdauliche Stärke durch Heißstein-Kochen in nahrhafte Energie umzuwandeln.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 20,
+          "goetter": 15,
           "priester": 15,
-          "volk": 15,
-          "ep": 1
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -876,7 +894,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Neuere bioarchäologische Isotopenanalysen an menschlichen Knochen zeigen, dass pflanzliche Nahrung bis zu 80 % der Gesamtkalorien im Mesolithikum ausmachte."
       },
       "curiosityFact": "Haselnussschalen findet man bei fast jeder steinzeitlichen Ausgrabung in riesigen Mengen – die Steinzeitmenschen rösteten sie in Gruben, um sie jahrelang haltbar zu machen!"
-    }
+    },
+    "hefterEintrag": "Sammlerinnen sicherten mit Kräutern, Beeren, Nüssen und Wurzeln den Großteil der täglichen Nahrung und besaßen Heilwissen."
   },
   {
     "id": "stoneage_r08",
@@ -897,7 +916,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r8_lachs",
         "x": 40,
-        "y": 75,
+        "y": 65,
         "label": "Springender Atlantischer Lachs",
         "description": "Zieht zu Tausenden flussaufwärts zu den kiesigen Laichplätzen.",
         "icon": "🌊"
@@ -923,7 +942,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Präzise Jagd mit Widerhakenharpunen, gesichert durch feste Flachsschnüre.",
         "statChanges": {
           "goetter": 15,
-          "priester": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -940,8 +960,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Ein Wehr aus Steinen und geflochtenen Weidenreusen im Nebenarm errichten",
         "description": "Leitet das Wasser so um, dass die Fische direkt in Reusenkörbe schwimmen.",
         "statChanges": {
-          "volk": 20,
-          "goetter": 15,
+          "priester": 15,
+          "goetter": -15,
           "adel": 5
         },
         "skillChanges": {
@@ -958,9 +978,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Fische sofort filetieren und über rauchigen Erlenzweigen haltbar räuchern",
         "description": "Verhindert Madenbefall und sichert wohlschmeckende Eiweißrationen für Wochen.",
         "statChanges": {
-          "goetter": 20,
-          "adel": 10,
-          "priester": 5
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -977,11 +997,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Bootsbau und Netzknüpfkunst für Rekordfänge zu kombinieren.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
+          "goetter": 15,
           "priester": 15,
-          "volk": 15,
-          "adel": 10,
-          "ep": 1
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1002,7 +1022,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Im Mesolithikum (Mittelsteinzeit) bildeten Flussauen und Küstenlinie die primären Siedlungsachsen. Fischfangreusen und Netzreste aus Lindenbast belegen hochentwickelte Flecht- und Knotentechniken."
       },
       "curiosityFact": "Fischharpunen aus Hirschgeweih hatten oft eine Schnuröse: Nach dem Einstich löste sich die Spitze vom Schaft, damit der zappelnde Fisch den Holzstab nicht zerbrach!"
-    }
+    },
+    "hefterEintrag": "Fischreusen, Harpunen aus Knochen und Netze ermöglichten den Jägern den reichen Fang von Lachsen an Flussläufen."
   },
   {
     "id": "stoneage_r09",
@@ -1048,8 +1069,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Einen elastischen Flachbogen aus feinjährigem Eibenholz schnitzen",
         "description": "Präzise Fernwaffe, mit der man ein Reh auf 40 Meter lautlos erlegen kann.",
         "statChanges": {
-          "priester": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1066,9 +1088,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Auf Fährtenlesung und Pirsch im Unterholz umschulen",
         "description": "Lernt, leise wie ein Luchs zu schleichen, den Wind zu prüfen und Knackgeräusche zu vermeiden.",
         "statChanges": {
-          "adel": 15,
-          "volk": 10,
-          "goetter": 5
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1084,9 +1106,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Waldfrüchte, Pilze und Waldhonig systematisch kartieren",
         "description": "Erkundet Lichtungen und Bienenbäume, um süße Energiequellen zu erschließen.",
         "statChanges": {
-          "goetter": 15,
-          "volk": 15,
-          "priester": 5
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1103,10 +1125,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um mit geometrischen Feuersteinen messerscharfe Pfeilschneiden zu kleben.",
         "epCost": 2,
         "statChanges": {
-          "priester": 20,
           "goetter": 15,
+          "priester": 15,
           "adel": 15,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1127,7 +1150,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Der Bogen war die erste mechanische Fernwaffe des Menschen, die gespeicherte Muskelkraft schlagartig freisetzte. Er veränderte Jagd und kriegerische Konflikte bis ins späte Mittelalter."
       },
       "curiosityFact": "Steinzeitliche Pfeile flogen mit bis zu 150 km/h – schnell genug, um selbst dicke Hirschknochen sauber zu durchschlagen!"
-    }
+    },
+    "hefterEintrag": "Nach dem Ende der Eiszeit (um 10.000 v. Chr.) erwärmte sich das Klima: Dichte Wälder entstanden und Pfeil und Bogen wurden erfunden."
   },
   {
     "id": "stoneage_r10",
@@ -1148,7 +1172,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r10_knochen",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Hundeknochen mit Nagespuren",
         "description": "Hunde fraßen Reste, die der Mensch nicht mehr verdauen konnte.",
         "icon": "🦴"
@@ -1173,9 +1197,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Den jungen Wolf mit Fleischresten füttern und ihn behutsam an Menschen gewöhnen",
         "description": "Geduld und Sanftmut verwandeln das Raubtier in einen treuen Freund.",
         "statChanges": {
-          "adel": 15,
-          "volk": 15,
-          "goetter": 5
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1191,8 +1216,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Den Hund sofort darauf trainieren, Spuren von Rehen und Hirschen im Dickicht anzuzeigen",
         "description": "Nutzt seinen überlegenen Geruchssinn gezielt für künftige Jagdzüge.",
         "statChanges": {
-          "goetter": 15,
-          "priester": 10,
+          "priester": 15,
+          "goetter": -15,
           "adel": 5
         },
         "skillChanges": {
@@ -1209,9 +1234,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Ihm eine Schlafstelle am Eingang zuweisen, damit er nachts bei Gefahr anschlägt",
         "description": "Macht ihn zum Wachposten gegen Raubtiere und fremde Stammesgruppen.",
         "statChanges": {
-          "volk": 15,
-          "adel": 10,
-          "priester": 5
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1228,10 +1253,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die geistige Verbindung zwischen Mensch und Tier feierlich zu besiegeln.",
         "epCost": 2,
         "statChanges": {
-          "adel": 20,
           "goetter": 15,
-          "volk": 15,
-          "ep": 1
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1252,7 +1278,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Das Doppelgrab von Bonn-Oberkassel (ca. 14.000 v. Chr.) enthielt einen Hund, der zusammen mit einem Mann und einer Frau feierlich bestattet wurde – ein klares Indiz für tiefe Gefühle."
       },
       "curiosityFact": "Hunde haben gelernt, die Mimik des Menschen zu lesen: Sie können erkennen, ob ein Gesicht fröhlich oder verärgert blickt!"
-    }
+    },
+    "hefterEintrag": "Der Wolf war das erste Haustier des Menschen: Als Jagdhelfer und Wachhund schloss er sich vor über 15.000 Jahren dem Lager an."
   },
   {
     "id": "stoneage_r11",
@@ -1298,8 +1325,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Massive Eichenstämme mit Dechsel-Steinbeilen fällen und spalten",
         "description": "Schwerstarbeit im Wald, um das stabile Pfostengerüst für Jahrzehnte zu errichten.",
         "statChanges": {
-          "volk": 15,
-          "priester": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1316,9 +1344,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Wände aus Weidengeflecht mit Lehm, Mist und Häcksel isolieren",
         "description": "Schafft winddichte, warme Wände, die im Sommer kühlen und im Winter wärmen.",
         "statChanges": {
-          "adel": 15,
-          "volk": 15,
-          "goetter": 5
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1334,9 +1362,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Einen getrennten Vorrats- und Stallbereich im hinteren Hausteil einplanen",
         "description": "Trennt Schlafplätze hygienisch von Getreidespeichern und Tierbuchten.",
         "statChanges": {
-          "goetter": 15,
-          "adel": 10,
-          "priester": 10
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1353,11 +1381,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um maximale Sonneneinstrahlung im Winter und Schutz vor Westwinden zu nutzen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 20,
+          "goetter": 15,
+          "priester": 15,
           "adel": 15,
-          "volk": 15,
-          "priester": 10,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1378,7 +1406,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Das Langhaus symbolisiert die 'Neolithische Revolution'. Mit festen Häusern entstanden Grundbesitz, Dorfgemeinschaften, aber auch neue Konflikte um Ackerland und Vorräte."
       },
       "curiosityFact": "Bandkeramische Langhäuser waren so stabil gebaut, dass sie 30 bis 50 Jahre lang Wind und Wetter trotzten!"
-    }
+    },
+    "hefterEintrag": "In der Jungsteinzeit wurden Menschen sesshaft und bauten bis zu 40 Meter lange Holzhäuser (Langhäuser) mit Lehmwänden."
   },
   {
     "id": "stoneage_r12",
@@ -1407,7 +1436,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r12_mahlstein",
         "x": 75,
-        "y": 70,
+        "y": 65,
         "label": "Gemeinsamer Sattelmahlstein",
         "description": "Hier mahlen Frauen stundenlang Körner zu Mehl und tauschen Neuigkeiten aus.",
         "icon": "🌾"
@@ -1424,9 +1453,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Einen Ältestenrat einberufen und eine Schadensersatz-Regelung beschließen",
         "description": "Die Ziegenbesitzer müssen den Schaden durch zwei Krüge getrocknetes Korn und Arbeitsleistung ausgleichen.",
         "statChanges": {
-          "adel": 15,
-          "volk": 15,
-          "goetter": 5
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1442,9 +1472,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Alle Familien verpflichten, gemeinsam einen festen Weidezaun um das Vieh zu bauen",
         "description": "Packt die Ursache an der Wurzel, damit so etwas nie wieder passieren kann.",
         "statChanges": {
-          "volk": 20,
-          "adel": 10,
-          "priester": 5
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1460,9 +1490,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Feste Grenzen zwischen den Familienfeldern mit Markierungssteinen abstecken",
         "description": "Klarheit über Grund und Boden schafft Ordnung für künftige Generationen.",
         "statChanges": {
-          "priester": 15,
-          "adel": 10,
-          "ep": 1
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -1479,10 +1509,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um gekochten Getreidebrei und Kräutergetränke für alle zur Einigung bereitzustellen.",
         "epCost": 2,
         "statChanges": {
-          "adel": 20,
-          "volk": 20,
-          "goetter": 10,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1503,7 +1534,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Sesshaftwerdung führte zu tiefergehenden sozialen Transformationen: Bevölkerungswachstum, Spezialisierung von Handwerken, aber auch zu ersten Befestigungsanlagen und kriegerischen Überfällen."
       },
       "curiosityFact": "Ausgrabungen zeigen, dass bandkeramische Dörfer oft 100 bis 200 Meter Abstand zueinander hielten – genug Platz für Weideland!"
-    }
+    },
+    "hefterEintrag": "Das Zusammenleben in festen Dörfern erforderte klare Regeln der Ältesten, um Streit um Land und Vorräte friedlich zu schlichten."
   },
   {
     "id": "stoneage_r13",
@@ -1524,7 +1556,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r13_grabstock",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Grabstock mit Steingewicht",
         "description": "Der Vorläufer des Pflugs: Zieht feine Rillen in die weiche Schwarzerde.",
         "icon": "⛏️"
@@ -1550,7 +1582,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Reichert den Boden mit Mineralstoffen und Kalium für kräftiges Ährenwachstum an.",
         "statChanges": {
           "goetter": 15,
-          "volk": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1567,9 +1600,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Die Saatkörner mit gewichteten Grabstöcken tief in die feuchte Erde drücken",
         "description": "Schützt die kostbaren Körner vor Vögeln und Austrocknung durch Sommersonne.",
         "statChanges": {
-          "volk": 15,
-          "adel": 10,
-          "goetter": 5
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1586,8 +1619,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Hält hungrige Wildschweine und Rehe davon ab, die jungen Triebe niederzutrampeln.",
         "statChanges": {
           "adel": 15,
-          "priester": 10,
-          "volk": 5
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -1604,10 +1637,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Erdoberfläche im Team zehnmal schneller aufzulockern als von Hand.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "volk": 20,
-          "adel": 10,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1628,7 +1662,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Selektion von Getreidemutationen mit nicht-zerbrechender Ährenspindel war die wichtigste genetische Anpassung der Domestikation: Reife Körner fielen nicht mehr zu Boden, sondern warteten auf den Ernteschnitt."
       },
       "curiosityFact": "Einkorn hat nur ein einziges Körnchen pro Spindelglied – moderner Hochleistungsweizen hat heute bis zu fünf!"
-    }
+    },
+    "hefterEintrag": "Mit Grabstöcken und Steinhacken rodeten die ersten Bauern Waldflächen und bauten die Urgetreidearten Einkorn und Emmer an."
   },
   {
     "id": "stoneage_r14",
@@ -1675,7 +1710,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Schont die Klingen und spart wertvollen Platz beim Transport ins Dorf.",
         "statChanges": {
           "goetter": 15,
-          "priester": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1692,8 +1728,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Einen Stelzenspeicher mit Mäuseschutz-Steinplatten bauen",
         "description": "Hält Feuchtigkeit und hungrige Nager zuverlässig von den Getreidevorräten fern.",
         "statChanges": {
-          "volk": 20,
-          "goetter": 15,
+          "priester": 15,
+          "goetter": -15,
           "adel": 5
         },
         "skillChanges": {
@@ -1711,8 +1747,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Niemals das ganze Korn aufessen: Nur wer Saatgut schont, kann im nächsten Jahr wieder ernten.",
         "statChanges": {
           "adel": 15,
-          "goetter": 10,
-          "priester": 10
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1729,10 +1765,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um gekeimtes Korn zu süßlichem Ur-Bier zu vergären und Fladen auf heißen Steinen zu backen.",
         "epCost": 2,
         "statChanges": {
-          "adel": 20,
-          "goetter": 20,
-          "volk": 15,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1753,7 +1790,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Einige Archäologen vertreten die 'Bier-Hypothese': Der Wunsch nach berauschenden Festgetränken für Kulthandlungen sei ein ebenso starker Motor für den Getreideanbau gewesen wie der reine Hunger."
       },
       "curiosityFact": "Unter dem Mikroskop glänzen alte Feuersteinsicheln wie Gold – das liegt an mikroskopischen Kieselsäurekristallen in den Weizenhalmen!"
-    }
+    },
+    "hefterEintrag": "Mit Feuersteinsicheln schnitten die Bauern das Korn und mahlten die Körner auf flachen Reibsteinen zu nahrhaftem Mehl."
   },
   {
     "id": "stoneage_r15",
@@ -1799,9 +1837,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Die sanftmütigsten Kälber und Lämmer für die Weiterzucht auswählen",
         "description": "Wählt gezielt friedliche Tiere aus, um die Herde zahmer und lenkbarer zu machen.",
         "statChanges": {
-          "volk": 15,
-          "adel": 10,
-          "goetter": 5
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1818,8 +1857,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Schützt die wertvollen Tiere nachts vor den Raubtieren des dichten Urwaldes.",
         "statChanges": {
           "priester": 15,
-          "goetter": 10,
-          "volk": 5
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -1835,9 +1874,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Heu und getrocknetes Laub auf Gestellen als Winterfutter anlegen",
         "description": "Verhindert, dass die Tiere im frostigen Winter verhungern oder notgeschlachtet werden müssen.",
         "statChanges": {
-          "goetter": 20,
-          "adel": 10,
-          "volk": 5
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1854,10 +1893,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die tierische Muskelkraft vor den Pflug zu spannen – ein Sprung für die Menschheit!",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "volk": 20,
+          "goetter": 15,
           "priester": 15,
-          "ep": 1
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1878,7 +1918,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Alle heutigen Hausrinder Eurasiens stammen genetisch von nur etwa 80 urzeitlichen weiblichen Auerochsen ab, die vor 10.500 Jahren im Nahen Osten domestiziert wurden."
       },
       "curiosityFact": "Der letzte wilde Auerochse der Welt starb im Jahr 1627 in einem polnischen Wald aus!"
-    }
+    },
+    "hefterEintrag": "Menschen begannen Tiere zu zähmen (Domestikation): Aus Wildschaf, Ziege und Auerochse entstanden die ersten Haustierherden."
   },
   {
     "id": "stoneage_r16",
@@ -1907,7 +1948,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r16_lager",
         "x": 80,
-        "y": 70,
+        "y": 65,
         "label": "Kühler Lehmkeller",
         "description": "Hier reifen gesalzene Käselaibe über Wochen zu haltbarem Proviant heran.",
         "icon": "🏺"
@@ -1925,7 +1966,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Trennung von flüssiger Molke und festem Käsebruch ergibt bekömmlichen Frischkäse.",
         "statChanges": {
           "goetter": 15,
-          "volk": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1942,9 +1984,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Käselaibe salzen und in tiefen, kühlen Erdlöchern monatelang reifen lassen",
         "description": "Schafft haltbare, schnittfeste Käselaibe als eiserne Reserve für harte Winterwochen.",
         "statChanges": {
-          "goetter": 20,
-          "adel": 10,
-          "priester": 5
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1960,9 +2002,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Die saure Molke an die Schweine verfüttern, um nichts zu verschwenden",
         "description": "Kreislaufwirtschaft im Dorf: Abfallprodukte der Käserei mästen die dörflichen Nutztiere.",
         "statChanges": {
-          "volk": 15,
-          "adel": 10,
-          "priester": 5
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1979,10 +2021,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um reines Milchfett mechanisch abzuscheiden – reich an Vitaminen und Energie.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
+          "goetter": 15,
+          "priester": 15,
           "adel": 15,
-          "volk": 15,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2003,7 +2046,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "In Polen fanden Archäologen bandkeramische Tonscherben mit vielen Löchern aus der Zeit um 5.500 v. Chr. Chemische Analysen bewiesen: Darin klebten noch heute Fettsäuren von geronnenem Käse!"
       },
       "curiosityFact": "Käse war die 'Lebensversicherung' der ersten Bauern: Eine einzige Milchkuh lieferte über die Jahre mehr Kalorien als zehn geschlachtete Rinder!"
-    }
+    },
+    "hefterEintrag": "Durch die Zucht von Milchvieh lernten die Menschen, Milch zu melken und durch Gärung haltbaren Käse und Joghurt herzustellen."
   },
   {
     "id": "stoneage_r17",
@@ -2032,7 +2076,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r17_grube",
         "x": 75,
-        "y": 70,
+        "y": 65,
         "label": "Feldbrandgrube mit Glut",
         "description": "Unter Holzkohle und Rasenabdeckung bei ca. 700 Grad gebrannt.",
         "icon": "🔥"
@@ -2049,8 +2093,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Den Ton sorgfältig mit Quarzsand magern, damit er beim Brennen nicht springt",
         "description": "Verhindert Schwindungsrisse und sorgt für bruchfeste, robuste Vorratsgefäße.",
         "statChanges": {
-          "priester": 15,
-          "volk": 15,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -2067,9 +2112,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Traditionelle Sippensymbole und Fruchtbarkeitsmuster in die Tonwand ritzen",
         "description": "Dekoration und Erkennungszeichen, das Geschichten und Herkunft der Familie erzählt.",
         "statChanges": {
-          "adel": 15,
-          "volk": 10,
-          "goetter": 5
+          "priester": 15,
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2085,9 +2130,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Wasserdichte Kugelamphoren mit Ösen für den Tragriemen formen",
         "description": "Ermöglicht den bequemen Wassertransport von der Quelle ins hochgelegene Dorf.",
         "statChanges": {
-          "goetter": 15,
-          "priester": 10,
-          "volk": 10
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2104,10 +2149,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Hitze im Ofen zu stauen – für steinhartes, klingendes Geschirr.",
         "epCost": 2,
         "statChanges": {
-          "priester": 20,
           "goetter": 15,
-          "volk": 15,
-          "ep": 1
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2128,7 +2174,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Bandkeramische Kultur (LBK) breitete sich in nur wenigen Jahrhunderten von Ungarn bis an den Rhein aus. Sie besiedelte ausschließlich die extrem fruchtbaren Lössböden entlang der Flüsse."
       },
       "curiosityFact": "Bis heute datieren Archäologen steinzeitliche Siedlungen anhand der Ritzmuster auf Tonscherben – fast wie ein Barcode der Urgeschichte!"
-    }
+    },
+    "hefterEintrag": "Aus Ton formten die Töpferinnen Vorratsgefäße und verzierten sie mit eingeritzten Bändern (Bandkeramik), bevor sie im Feuer brannten."
   },
   {
     "id": "stoneage_r18",
@@ -2174,9 +2221,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Hochwertiges Getreide und getrockneten Käse gegen Spondylus-Muschelarmreife tauschen",
         "description": "Agrarüberschüsse eintauschen gegen den wertvollsten Statusschmuck der Epoche.",
         "statChanges": {
-          "adel": 20,
-          "goetter": -10,
-          "volk": 10
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2192,8 +2240,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Überschüssige Tongefäße gegen Rohknollen aus feinstem Karpaten-Feuerstein eintauschen",
         "description": "Tauscht handwerkliche Fertigwaren gegen erstklassiges Rohmaterial für neue Waffen und Beile.",
         "statChanges": {
-          "priester": 20,
-          "volk": 10,
+          "priester": 15,
+          "goetter": -15,
           "adel": 5
         },
         "skillChanges": {
@@ -2211,8 +2259,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Bewirtet die Fremden, um als sicherer Rastplatz für alle künftigen Karawanen zu gelten.",
         "statChanges": {
           "adel": 15,
-          "volk": 15,
-          "goetter": 5
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2229,10 +2277,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Betrug zu verhindern und allen Sippenmitgliedern gerechten Tausch zu sichern.",
         "epCost": 2,
         "statChanges": {
-          "adel": 20,
-          "volk": 20,
-          "priester": 10,
-          "ep": 1
+          "goetter": 15,
+          "priester": 15,
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2253,7 +2302,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Der Spondylus-Handel erstreckte sich über mehr als 2.000 Kilometer. Er beweist, dass neolithische Gesellschaften über ein engmaschiges Kommunikations- und Informationsnetzwerk verfügten."
       },
       "curiosityFact": "Spondylus-Muscheln waren damals so wertvoll wie heute Diamanten – zerbrochene Armreife wurden sorgfältig mit Drähten geflickt!"
-    }
+    },
+    "hefterEintrag": "Über Hunderte Kilometer tauschten Händler begehrten Feuerstein und Spondylus-Muscheln vom Mittelmeer als Schmuck und Währung."
   },
   {
     "id": "stoneage_r19",
@@ -2274,7 +2324,7 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r19_rollen",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Geölte Baumstamm-Rollen",
         "description": "Hartholzstämme werden vorne wieder eingelegt, wenn der Stein darüberrollt.",
         "icon": "🪵"
@@ -2299,8 +2349,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Den Transportweg mit feuchtem Lehm und geölten Holzrollen präparieren",
         "description": "Minimiert die Reibung, sodass der Riesenstein fast wie auf Schienen gleitet.",
         "statChanges": {
-          "volk": 15,
-          "priester": 15,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -2318,8 +2369,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Verhindert gefährliches Reißen der Zugseile unter der extremen Zugspannung.",
         "statChanges": {
           "priester": 15,
-          "adel": 10,
-          "volk": 5
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2335,9 +2386,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Alle zehn Nachbardörfer mit Rindern und Vorräten für die Baustelle versorgen",
         "description": "Gemeinsame Verpflegung sichert gute Laune und Durchhaltevermögen hunderter Helfer.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 10,
-          "volk": 10
+          "adel": 15,
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2354,11 +2405,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Hebelwirkung mit Gegengewichten für das punktgenaue Aufrichten zu nutzen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
+          "goetter": 15,
+          "priester": 15,
           "adel": 15,
-          "volk": 15,
-          "priester": 10,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2379,7 +2430,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Megalithbauten erforderten eine feste Organisation und einen enormen Überschuss an Lebensmitteln, um die Bauarbeiter monatelang freizustellen. Sie markieren den Beginn hierarchischerer Gesellschaften."
       },
       "curiosityFact": "Der größte transportierte Megalithstein der Jungsteinzeit wog über 300 Tonnen – der 'Grand Menhir Brisé' in der Bretagne!"
-    }
+    },
+    "hefterEintrag": "In der späten Jungsteinzeit errichteten Dorfgemeinschaften gewaltige Megalith-Gräber (Dolmen) und Steinkreise aus tonnenschweren Findlingen."
   },
   {
     "id": "stoneage_r20",
@@ -2425,9 +2477,10 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Das Sonnenwendfest mit dem feierlichen Schwur ewigen Friedens zwischen den Sippen weihen",
         "description": "Besiegelt das Bündnis aller teilnehmenden Stämme vor dem heiligen Sonnenlicht.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 20,
-          "volk": 15
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2443,9 +2496,9 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "label": "Das astronomische Kalenderwissen als Gesetz für Saat- und Erntezeiten festschreiben",
         "description": "Stellt sicher, dass das Dorf nie wieder durch verfrühte Saat von Frost überrascht wird.",
         "statChanges": {
-          "goetter": 25,
           "priester": 15,
-          "adel": 10
+          "goetter": -15,
+          "adel": 5
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -2462,8 +2515,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Verankert die Erinnerung an die Pioniere, die das Land urbar machten, für immer im Stein.",
         "statChanges": {
           "adel": 15,
-          "volk": 20,
-          "priester": 10
+          "priester": -10,
+          "volk": -5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2480,11 +2533,11 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "description": "Setzt alles gesammelte Wissen ein, um die Errungenschaften der Menschheit der Ewigkeit zu hinterlassen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "adel": 20,
-          "volk": 20,
+          "goetter": 15,
           "priester": 15,
-          "ep": 1
+          "adel": 15,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2505,7 +2558,8 @@ export const STONEAGE_ROUNDS: RoundStory[] = [
         "oberstufe": "Dieser Wandel legte das Fundament für die gesamte Menschheitsgeschichte: Städte, Gesetze, Schrift, Wissenschaft, aber auch Seuchen, Kriege und soziale Ungleichheit nahmen hier ihren Anfang."
       },
       "curiosityFact": "Stonehenge in England ist so präzise gebaut, dass am 21. Juni die Sonne genau über dem 'Heel Stone' aufgeht und den Mittelpunkt des Kreises erleuchtet!"
-    }
+    },
+    "hefterEintrag": "Die Neolithische Revolution (Übergang von Jägern zu sesshaften Bauern) ist der wichtigste Entwicklungsschritt der Menschheitsgeschichte."
   }
 ];
 

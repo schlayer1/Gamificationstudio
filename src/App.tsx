@@ -13,7 +13,7 @@ import { StationHeroStage } from './components/StationHeroStage';
 import { ExpeditionMapModal } from './components/ExpeditionMapModal';
 import { EntryPortal } from './components/EntryPortal';
 import { soundFX } from './utils/sound';
-import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon } from 'lucide-react';
+import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon, CheckCircle2, PenTool } from 'lucide-react';
 import { detectEraTheme, ERA_THEMES } from './utils/themeManager';
 
 export const App: React.FC = () => {
@@ -32,12 +32,12 @@ export const App: React.FC = () => {
   const [currentRoundIndex, setCurrentRoundIndex] = useState<number>(0);
   const totalRounds = activeGameDefinition?.rounds?.length || 20;
 
-  // Primary Stats (Start values from user request: 10% each, EP: 2)
+  // Primary Stats (Reigns-Balancing: Balanced start at 45% each, EP: 2)
   const [stats, setStats] = useState<Stats>({
-    goetter: 10,
-    priester: 10,
-    adel: 10,
-    volk: 10,
+    goetter: 45,
+    priester: 45,
+    adel: 45,
+    volk: 45,
     ep: 2,
   });
 
@@ -47,6 +47,9 @@ export const App: React.FC = () => {
     politischeGeschicklichkeit: 1,
     militaerischeStaerke: 1,
   });
+
+  // Track checked notebook entries per round ("Für deinen Geschichtshefter")
+  const [checkedHefterRounds, setCheckedHefterRounds] = useState<Record<number, boolean>>({});
 
   // Grace Period (Gnadenfrist: Einmaliger Reset bei 0% gegen Verlust aller EP)
   const [graceUsed, setGraceUsed] = useState<boolean>(false);
@@ -77,15 +80,40 @@ export const App: React.FC = () => {
   // Failure tracking
   const [fallenStat, setFallenStat] = useState<string>('Kollaps');
 
+  // Helper: Extract or build child-friendly concise notebook summary (1-2 sentences)
+  const getHefterText = (story: import('./types/game').RoundStory, gradeLevel: import('./types/game').GradeLevel): string => {
+    if (story.hefterEintrag && story.hefterEintrag.trim()) {
+      return story.hefterEintrag.trim();
+    }
+    // Didactic fallback: Build clear, student-friendly bullet from title & key explanation
+    const title = story.lexiconEntry?.title || story.milestoneTitle;
+    const expl = story.lexiconEntry?.explanation?.[gradeLevel] || '';
+    const firstSentence = expl.split('.')[0] ? expl.split('.')[0].trim() + '.' : '';
+    return `${title}: ${firstSentence || 'Wichtige historische Entwicklung an diesem Ort.'}`;
+  };
+
+  const handleToggleHefterChecked = (roundNum: number) => {
+    const nextVal = !checkedHefterRounds[roundNum];
+    if (nextVal) {
+      soundFX.playBlessing();
+    } else {
+      soundFX.playClick();
+    }
+    setCheckedHefterRounds((prev) => ({
+      ...prev,
+      [roundNum]: nextVal,
+    }));
+  };
+
   // Start new game from setup
   const handleStartGame = (newProfile: PlayerProfile) => {
     setProfile(newProfile);
     setCurrentRoundIndex(0);
     setStats({
-      goetter: 10,
-      priester: 10,
-      adel: 10,
-      volk: 10,
+      goetter: 45,
+      priester: 45,
+      adel: 45,
+      volk: 45,
       ep: 2,
     });
     setSkills({
@@ -95,6 +123,7 @@ export const App: React.FC = () => {
     });
     setGraceUsed(false);
     setGraceTriggeredNotice(null);
+    setCheckedHefterRounds({});
     setLogs([]);
     setLastConsequence(null);
     setGameState('playing');
@@ -374,6 +403,10 @@ export const App: React.FC = () => {
             onOpenStudio={() => setGameState('studio')}
             activeGame={activeGameDefinition}
             theme={currentTheme}
+            hefterCount={{
+              checked: Object.values(checkedHefterRounds).filter(Boolean).length,
+              total: totalRounds,
+            }}
           />
 
           {/* Main Gameplay Screen (Responsive Standard: fluid-adaptive w-full max-w-[2100px]) */}
@@ -434,6 +467,65 @@ export const App: React.FC = () => {
                   <p className="text-base sm:text-lg text-stone-100 font-medium leading-relaxed font-serif">
                     {currentStory.situation[profile.gradeLevel]}
                   </p>
+
+                  {/* PROMINENTER HEFTER-KASTEN FÜR SCHÜLER ("Für deinen Geschichtshefter") */}
+                  {(() => {
+                    const isChecked = !!checkedHefterRounds[currentStory.roundNumber];
+                    const hefterText = getHefterText(currentStory, profile.gradeLevel);
+
+                    return (
+                      <div className={`p-4 rounded-xl border-2 transition-all mt-3 ${
+                        isChecked
+                          ? 'bg-emerald-950/40 border-emerald-500/80 shadow-md ring-1 ring-emerald-500/30'
+                          : 'bg-gradient-to-r from-amber-950/80 via-stone-900 to-amber-950/80 border-amber-400 shadow-xl ring-2 ring-amber-400/40'
+                      }`}>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                          <div className="flex items-start gap-3">
+                            <div className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border shadow-md ${
+                              isChecked
+                                ? 'bg-emerald-500/20 border-emerald-400 text-emerald-300'
+                                : 'bg-amber-500/20 border-amber-400 text-amber-300'
+                            }`}>
+                              <PenTool className="w-5 h-5" />
+                            </div>
+                            <div className="space-y-1">
+                              <div className="flex flex-wrap items-center gap-2">
+                                <span className="text-xs font-mono font-black uppercase tracking-wider text-amber-300 flex items-center gap-1.5">
+                                  <span>📓</span> Für deinen Geschichtshefter:
+                                </span>
+                                {isChecked ? (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 border border-emerald-400 text-emerald-300 flex items-center gap-1">
+                                    <CheckCircle2 className="w-3 h-3" /> Im Heft notiert ✓
+                                  </span>
+                                ) : (
+                                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/30 border border-amber-400 text-amber-300 animate-pulse">
+                                    ✏️ Jetzt ins Heft schreiben!
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-sm sm:text-base font-semibold text-stone-100 leading-snug font-sans">
+                                {hefterText}
+                              </p>
+                            </div>
+                          </div>
+
+                          <button
+                            type="button"
+                            onClick={() => handleToggleHefterChecked(currentStory.roundNumber)}
+                            className={`px-4 py-2.5 rounded-xl font-black text-xs flex items-center justify-center gap-2 shrink-0 transition-all cursor-pointer shadow-lg active:scale-95 ${
+                              isChecked
+                                ? 'bg-stone-800 hover:bg-stone-700 text-emerald-300 border border-emerald-500/60'
+                                : 'bg-gradient-to-r from-amber-400 to-yellow-500 hover:from-amber-300 hover:to-yellow-400 text-stone-950 hover:scale-105 ring-2 ring-yellow-400/50'
+                            }`}
+                            title="Bestätige, dass du diese Mitschrift in deinen Geschichtshefter eingetragen hast"
+                          >
+                            <CheckCircle2 className="w-4 h-4" />
+                            <span>{isChecked ? 'Im Heft notiert ✓' : 'Im Heft notiert ✓'}</span>
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })()}
                 </div>
 
                 {/* Choices Grid */}

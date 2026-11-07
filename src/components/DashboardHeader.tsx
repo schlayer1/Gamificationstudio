@@ -16,6 +16,7 @@ interface DashboardHeaderProps {
   onOpenStudio?: () => void;
   activeGame?: import('../types/game').GameDefinition | null;
   theme?: import('../utils/themeManager').EraThemeConfig;
+  hefterCount?: { checked: number; total: number };
 }
 
 export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
@@ -31,6 +32,7 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   onOpenStudio,
   activeGame,
   theme,
+  hefterCount,
 }) => {
   // Dynamic Pillars
   const pillar1 = activeGame?.pillars?.[0] || { label: 'Götter ⚡', icon: '⚡' };
@@ -135,6 +137,22 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
               <span className="hidden sm:inline">Gnadenfrist:</span>
               <span className="font-bold">{graceUsed ? 'Erloschen' : 'Aktiv (1x)'}</span>
             </div>
+
+            {/* Hefter Progress Badge */}
+            {hefterCount && (
+              <div
+                className={`flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-md border ${
+                  hefterCount.checked >= hefterCount.total
+                    ? 'bg-emerald-950/80 border-emerald-500/80 text-emerald-300'
+                    : 'bg-stone-900 border-amber-600/60 text-amber-300'
+                }`}
+                title="Bisher im Geschichtshefter notierte Stationen"
+              >
+                <span>📓</span>
+                <span className="hidden sm:inline">Hefter:</span>
+                <span className="font-bold font-mono">{hefterCount.checked}/{hefterCount.total}</span>
+              </div>
+            )}
 
             {/* Studio / Lehrermodus Button */}
             <button

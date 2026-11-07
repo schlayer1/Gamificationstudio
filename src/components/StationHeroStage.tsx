@@ -292,7 +292,12 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
     },
   ];
 
-  const currentHotspots = hotspots && hotspots.length > 0 ? hotspots : defaultHotspots;
+  const currentHotspots = (hotspots && hotspots.length > 0 ? hotspots : defaultHotspots).map(hs => ({
+    ...hs,
+    // Ensure hotspots stay in safe visible vertical bounds (20% to 75%) so mobile headers or bottom edges never clip them
+    y: Math.max(20, Math.min(75, hs.y)),
+    x: Math.max(10, Math.min(90, hs.x)),
+  }));
   const heroBorder = theme?.borderHero || 'border-amber-600/70';
 
   return (
@@ -350,7 +355,7 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
       />
 
       {/* Atmospheric Vignette & Color Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/30 to-stone-950/20 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-stone-950/60 via-stone-950/20 to-stone-950/30 pointer-events-none" />
       <div className="absolute inset-0 bg-gradient-to-r from-stone-950/40 via-transparent to-stone-950/40 pointer-events-none" />
 
       {/* Choice Flash Reaction FX Overlay */}
@@ -442,7 +447,7 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
 
       {/* Active Hotspot Detail Card (Overlay Popup) */}
       {activeHotspot && (
-        <div className="absolute bottom-20 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md p-4 rounded-2xl bg-stone-950/95 border-2 border-amber-500 text-stone-100 shadow-2xl backdrop-blur-lg animate-fade-in z-20 space-y-2">
+        <div className="absolute bottom-12 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md p-4 rounded-2xl bg-stone-950/95 border-2 border-amber-500 text-stone-100 shadow-2xl backdrop-blur-lg animate-fade-in z-20 space-y-2">
           <div className="flex items-center justify-between border-b border-stone-800 pb-1.5">
             <div className="flex items-center gap-2">
               <span className="text-base">{activeHotspot.icon || '🏛️'}</span>
@@ -463,21 +468,10 @@ export const StationHeroStage: React.FC<StationHeroStageProps> = ({
         </div>
       )}
 
-      {/* Bottom Hero Caption Bar */}
-      <div className="absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 flex flex-col sm:flex-row items-start sm:items-end justify-between gap-2 z-10 pointer-events-none">
-        <div className="space-y-0.5 max-w-2xl bg-stone-950/70 p-3 sm:p-4 rounded-2xl border border-amber-900/40 backdrop-blur-md">
-          <span className="text-[10px] sm:text-xs font-mono font-bold tracking-wider uppercase text-amber-400 block">
-            {milestoneTitle}
-          </span>
-          <h2 className="text-sm sm:text-xl md:text-2xl font-black text-amber-100 font-serif leading-tight drop-shadow-md">
-            {locationName}
-          </h2>
-        </div>
-
-        <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-stone-950/80 border border-stone-800 text-[11px] text-stone-300 backdrop-blur-md pointer-events-auto">
-          <Sparkles className="w-3.5 h-3.5 text-amber-400" />
-          <span>Tippe auf die pulsierenden Marker im Bild zum Erkunden</span>
-        </div>
+      {/* Subtle Hint Chip (Non-blocking) */}
+      <div className="absolute bottom-2.5 right-3 pointer-events-none z-10 hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-stone-950/70 border border-stone-800 text-[10px] text-amber-300/80 backdrop-blur-sm shadow">
+        <Sparkles className="w-3 h-3 text-amber-400" />
+        <span>Tippe auf die Marker zum Erkunden</span>
       </div>
     </div>
   );

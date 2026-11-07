@@ -46,8 +46,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Macht unmissverständlich klar: Niemand überschreitet ungestraft Roms Mauern!",
         "statChanges": {
           "goetter": 15,
-          "adel": -5,
-          "volk": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -65,8 +65,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Teilt das Land friedlich auf, um das Blutvergießen unter den Gründern zu verhindern.",
         "statChanges": {
           "adel": 15,
-          "volk": 15,
-          "goetter": 5
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -82,9 +82,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Priester bitten, den Vogelflug (Auspizien) erneut zu befragen",
         "description": "Sucht den Willen der Götter, um jeden menschlichen Streit durch göttliche Vorzeichen zu beenden.",
         "statChanges": {
-          "goetter": 20,
-          "priester": 10,
-          "adel": 5
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -101,11 +102,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Roms Bevölkerung durch ein bedingungsloses Asylrecht über Nacht zu vervielfachen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 20,
+          "goetter": 15,
           "adel": 15,
-          "volk": 25,
           "priester": 10,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -126,7 +127,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Das Pomerium war die sakrale Stadtgrenze, innerhalb derer Waffen verboten waren. Roms Lage an der Tiberfurt sicherte die Kontrolle über den antiken Salzhandel auf der Via Salaria."
       },
       "curiosityFact": "Die berühmte Bronzestatue der 'Kapitolinischen Wölfin' steht bis heute als Wahrzeichen im Museum auf dem Kapitol in Rom!"
-    }
+    },
+    "hefterEintrag": "Romulus gründete Rom der Sage nach 753 v. Chr. am Fluss Tiber ('7-5-3 – Rom schlüpft aus dem Ei')."
   },
   {
     "id": "rome_r02",
@@ -155,7 +157,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r2_frauen",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Die sabinischen Frauen",
         "description": "Stellen sich mutig zwischen die kämpfenden Heere ihrer Väter und Ehemänner.",
         "icon": "🕊️"
@@ -172,9 +174,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Auf den Ruf der Frauen hören, die Waffen senken und die Sabiner als gleichberechtigte Bürger aufnehmen",
         "description": "Macht aus Feinden Brüder: Verschmelzt beide Völker zu einem gemeinsamen Staat.",
         "statChanges": {
-          "adel": 20,
-          "volk": 20,
-          "goetter": 10
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -190,9 +193,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Einen Ausfallversuch wagen und die feindlichen Anführer im Zweikampf bezwingen",
         "description": "Beweist kriegerische Stärke, um keinen Gesichtsverlust vor den Nachbarn zu erleiden.",
         "statChanges": {
-          "priester": 20,
-          "adel": -10,
-          "goetter": 10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -208,9 +211,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Einen Tempel für Jupiter Stator (den Festiger) geloben, um die Reihen zu ordnen",
         "description": "Ruft die Götter an, damit fliehende römische Truppen standhalten und die Schlacht wenden.",
         "statChanges": {
-          "goetter": 20,
           "priester": 15,
-          "adel": 5
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -227,11 +231,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die erste Senatsverfassung der Geschichte mit Mitbestimmung zu gründen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "adel": 20,
-          "volk": 15,
-          "priester": 15,
-          "ep": 1
+          "goetter": 15,
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -252,7 +256,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Der frühe Senat besaß die 'Auctoritas Patrum' – das Recht, Beschlüsse der Volksversammlung zu bestätigen. Er verband monarchische Führung mit aristokratischem Konsens."
       },
       "curiosityFact": "Das Wort 'Patrizier' bedeutet wörtlich 'diejenigen, die Väter haben' – also die ihre vornehme Abstammung bis zu den Gründern zurückverfolgen konnten!"
-    }
+    },
+    "hefterEintrag": "Um das Überleben der jungen Stadt zu sichern, schloss Rom frühe Bündnisse mit Nachbarstämmen wie den Sabinern."
   },
   {
     "id": "rome_r03",
@@ -298,9 +303,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das Volk auf dem Forum versammeln und die Verbannung des Königs auf Lebenszeit schwören",
         "description": "Jagd die Tyrannenfamilie ohne Blutbad aus Rom und beendet die Monarchie für immer.",
         "statChanges": {
-          "adel": 15,
-          "volk": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -317,9 +322,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Tore befestigen und einen etruskischen Gegenangriff mit Lanzen abwehren",
         "description": "Macht euch gefasst: Tarquinius wird mit den verbündeten Etruskern zurückschlagen!",
         "statChanges": {
-          "priester": 20,
-          "goetter": 10,
-          "adel": -5
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -335,9 +340,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Den Palast des Königs beschlagnahmen und seine Ländereien an arme Bürger verteilen",
         "description": "Stärkt die kleinen Bauern, damit sie treu hinter der neuen Republik stehen.",
         "statChanges": {
-          "volk": 20,
-          "adel": -5,
-          "priester": 10
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -354,10 +360,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Macht auf zwei gewählte Konsuln für genau 1 Jahr zu begrenzen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "adel": 20,
-          "volk": 20,
-          "ep": 1
+          "goetter": 15,
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -378,7 +385,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Die römische Republik war keine Demokratie nach modernem Sinn, sondern eine Mischverfassung (nach Polybios) aus monarchischen (Konsuln), aristokratischen (Senat) und demokratischen (Volksversammlung) Elementen."
       },
       "curiosityFact": "Bis zum Untergang des Weströmischen Reiches zählte man die Jahre nicht nach Zahlen, sondern nach den Namen der beiden amtierenden Konsuln!"
-    }
+    },
+    "hefterEintrag": "509 v. Chr. vertrieben die Römer den letzten etruskischen König und schworen, nie wieder einen König zu dulden: Die Republik entstand."
   },
   {
     "id": "rome_r04",
@@ -407,7 +415,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r4_urne",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Wahlurne der Komitien",
         "description": "Stimmabgabe der Bürger auf dem Marsfeld für Prätoren und Konsuln.",
         "icon": "🗳️"
@@ -425,8 +433,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Macht euch einen Namen durch absolute Unbestechlichkeit und Finanzdisziplin.",
         "statChanges": {
           "goetter": 15,
-          "adel": 15,
-          "volk": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -443,9 +451,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Als Ädil prachtvolle Festspiele und kostenlose Getreidespenden für das Volk organisieren",
         "description": "Investiert euer Privatvermögen, um die Gunst der einfachen Bürger zu gewinnen.",
         "statChanges": {
-          "volk": 25,
-          "adel": 5,
-          "goetter": -10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -461,9 +469,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Als Militärtribun mit den Legionen in Kampanien marschieren und Beute heimbringen",
         "description": "Beweist Tapferkeit im Feld, um den Respekt der Soldaten und Senatoren zu erringen.",
         "statChanges": {
-          "priester": 20,
-          "goetter": 10,
-          "adel": 5
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -480,11 +489,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Republik vor Korruption und Ämterkauf dauerhaft zu schützen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 20,
+          "goetter": 15,
           "adel": 15,
-          "volk": 20,
           "priester": 10,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -505,7 +514,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Politiker erhielten für ihre Ämter kein Gehalt; im Gegenteil: Sie zahlten Spiele und Bauten aus eigener Tasche. Politik war daher ein Privileg der wohlhabenden Oberschicht (Nobilität)."
       },
       "curiosityFact": "Römische Konsuln trugen bei Wahlen eine schneeweiß gebleichte Toga ('toga candida') – davon stammt unser heutiges deutsches Wort 'Kandidat' ab!"
-    }
+    },
+    "hefterEintrag": "Die römische Republik wurde von zwei gewählten Konsuln und dem Senat (Adelige) geführt. Alle Ämter waren auf ein Jahr befristet."
   },
   {
     "id": "rome_r05",
@@ -534,14 +544,14 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r5_volkstribun",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Das neue Amt: Volkstribun",
         "description": "Gewählte Schutzherren der Plebejer mit unantastbarem Status (Sacrosanctitas).",
         "icon": "🛡️"
       }
     ],
     "situation": {
-      "unterstufe": "Jahr 494 v. Chr.: Das Maß ist voll! Die einfachen Bürger (Plebejer) schuften und kämpfen in allen Kriegen, haben aber keine politischen Rechte und verarmen durch Schulden. Wütend packen sie ihre Sachen und ziehen aus Rom aus auf den Heiligen Berg – der erste Generalstreik der Geschichte!",
+      "unterstufe": "Jahr 494 v. Chr.: Das Maß ist voll! Die einfachen Bürger (Plebejer (die einfachen Bürger)) schuften und kämpfen in allen Kriegen, haben aber keine politischen Rechte und verarmen durch Schulden. Wütend packen sie ihre Sachen und ziehen aus Rom aus auf den Heiligen Berg – der erste Generalstreik der Geschichte!",
       "mittelstufe": "Die Ständekämpfe erschüttern Rom: Ohne Plebejer gibt es kein Brot, keine Handwerker und keine Soldaten mehr. Die adligen Patrizier geraten in Panik, da feindliche Nachbarn vor den Toren stehen.",
       "oberstufe": "Die 'Secessio plebis' als revolutionäres Druckmittel: Plebejer verweigern den Wehrdienst und bilden eine Gegengesellschaft. Um den Staatskollaps zu verhindern, muss der Senat Zugeständnisse machen: Die Volkstribune mit Veto-Recht."
     },
@@ -551,9 +561,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das Volkstribunat mit dem Veto-Recht ('Ich verbiete!') und Schutz vor Verhaftung anerkennen",
         "description": "Gebt den Plebejern eigene Schutzbeamte, um den Streik friedlich zu beenden.",
         "statChanges": {
-          "volk": 25,
-          "adel": -5,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -571,8 +581,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Erklärt den Streikenden, dass der Adel (Magen) und das Volk (Glieder) einander brauchen.",
         "statChanges": {
           "adel": 15,
-          "volk": 15,
-          "goetter": 10
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -588,9 +598,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die drückende Schuldknechtschaft sofort gesetzlich mildern und verschuldete Bauern freilassen",
         "description": "Entlastet die Ärmsten von der Angst, bei Missernten in die Sklaverei gestürzt zu werden.",
         "statChanges": {
-          "volk": 20,
-          "adel": -10,
-          "priester": 10
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -607,10 +618,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um den Plebejern ein eigenes Parlament für rechtsverbindliche Plebiszite zu stiften.",
         "epCost": 2,
         "statChanges": {
-          "volk": 30,
           "goetter": 15,
-          "adel": 10,
-          "ep": 1
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -631,7 +643,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Ständekämpfe dauerten über 200 Jahre (ca. 500–287 v. Chr.). Sie endeten nicht im Bürgerkrieg, sondern in verfassungsrechtlichen Kompromissen – Roms größte politische Stärke."
       },
       "curiosityFact": "Das Wort 'Veto' benutzen wir bis heute: Im UN-Sicherheitsrat haben die fünf ständigen Mitglieder genau dieses uralte römische Einspruchsrecht!"
-    }
+    },
+    "hefterEintrag": "494 v. Chr. zogen die Plebejer (Bürger) im Streik auf den Heiligen Berg und erstritten Volkstribunen mit Vetorecht gegen den Senatsadel."
   },
   {
     "id": "rome_r06",
@@ -652,7 +665,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r6_schueler",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Schulkinder beim Auswendiglernen",
         "description": "Jeder römische Junge musste die Zwölf Tafeln wie ein Gedicht hersagen können.",
         "icon": "👦"
@@ -677,9 +690,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Bronzetafeln an den Rostra aufstellen und Schulkindern das Auswendiglernen vorschreiben",
         "description": "Rechtsbewusstsein von Kindesbeinen an verankern: Recht schützt die Freiheit!",
         "statChanges": {
-          "goetter": 20,
-          "adel": 15,
-          "volk": 15,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -696,9 +709,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das Heiratsverbot zwischen Patriziern und Plebejern sofort ersatzlos streichen",
         "description": "Erlaubt Ehen zwischen beiden Ständen, um die Spaltung der Gesellschaft zu überwinden.",
         "statChanges": {
-          "volk": 25,
-          "adel": -5,
-          "goetter": 10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -714,9 +727,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Klare Fristen und Zeugenvorschriften bei Gerichtsprozessen festschreiben",
         "description": "Schützt arme Bürger vor Verschleppung und korrupten Schiedsrichtern.",
         "statChanges": {
-          "adel": 15,
-          "volk": 20,
-          "priester": 5
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -733,10 +747,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um universelle humanistische Rechtsprinzipien für Jahrtausende zu begründen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "volk": 25,
+          "goetter": 15,
           "adel": 15,
-          "ep": 1
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -757,7 +772,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Das Römische Recht (Corpus Iuris Civilis) basiert auf den Zwölf Tafeln. Nahezu alle modernen europäischen Gesetzbücher (wie das deutsche BGB) nutzen bis heute römische Rechtsbegriffe!"
       },
       "curiosityFact": "Obwohl die Originaltafeln beim Galliersturm 390 v. Chr. verbrannten, kannten römische Autoren fast jeden einzelnen Paragrafen noch Jahrhunderte später auswendig!"
-    }
+    },
+    "hefterEintrag": "Um 450 v. Chr. wurde das Zwölftafelgesetz auf dem Forum aufgestellt: Erstmals galten für alle römischen Bürger dieselben aufgeschriebenen Gesetze."
   },
   {
     "id": "rome_r07",
@@ -803,10 +819,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Jede Kapitulation verbieten, Staatssklaven freikaufen und neue Legionen aufstellen",
         "description": "Eisernes Durchhaltevermögen: Rom verhandelt niemals nach einer Niederlage!",
         "statChanges": {
-          "goetter": 20,
-          "priester": 20,
-          "volk": 10,
-          "adel": -5,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -823,9 +838,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Taktik des 'Zauderers' (Fabius Cunctator) anwenden: Hannibal zermürben statt Feldschlachten suchen",
         "description": "Verweigert offene Schlachten, schneidet Nachschub ab und verbrennt die Ernten.",
         "statChanges": {
-          "priester": 15,
           "adel": 15,
-          "goetter": 10
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -841,9 +856,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die treuen Bundesgenossen in Italien belohnen und Bürgerrechte in Aussicht stellen",
         "description": "Verhindert, dass etruskische und samnitische Städte zu Hannibal überlaufen.",
         "statChanges": {
-          "volk": 25,
-          "adel": 10,
-          "goetter": 5
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -860,11 +876,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Hannibal durch einen Gegenangriff auf seine Heimatstadt aus Italien zu zwingen.",
         "epCost": 2,
         "statChanges": {
-          "priester": 25,
-          "goetter": 25,
-          "volk": 15,
+          "goetter": 15,
           "adel": 15,
-          "ep": 1
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "militaerischeStaerke": 2
@@ -885,7 +901,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Nach dem Sieg über Karthago im Zweiten Punischen Krieg (201 v. Chr.) gab es keine Macht mehr im westlichen Mittelmeer, die Rom trotzen konnte. Das Mittelmeer wurde zu 'Mare Nostrum' ('Unser Meer')."
       },
       "curiosityFact": "Hannibal schickte nach der Schlacht von Cannae drei Scheffel voller goldener Ringe gefallener römischer Senatoren und Ritter nach Karthago, um seinen Sieg zu beweisen!"
-    }
+    },
+    "hefterEintrag": "Im 2. Punischen Krieg zog der karthagische Feldherr Hannibal mit Elefanten über die Alpen und besiegte Rom 216 v. Chr. bei Cannae."
   },
   {
     "id": "rome_r08",
@@ -914,7 +931,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r8_beute",
         "x": 80,
-        "y": 70,
+        "y": 65,
         "label": "Marmor, Seide & Olivenöl",
         "description": "Reichtümer aus Griechenland, Spanien und Kleinasien strömen nach Rom.",
         "icon": "🏺"
@@ -931,9 +948,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Getreideversorgung Roms über Ostia mit festen Staatslagern und Flotten sichern",
         "description": "Garantiert tägliches Brot für Hunderttausende Bürger aus Sizilien und Afrika.",
         "statChanges": {
-          "volk": 20,
-          "priester": 15,
-          "goetter": 10
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -949,9 +967,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Griechische Philosophen, Bibliotheken und Gelehrte nach Rom holen (Hellenisierung)",
         "description": "Verbindet römische Tatkraft mit griechischer Philosophie, Kunst und Rhetorik.",
         "statChanges": {
-          "goetter": 20,
           "adel": 15,
-          "ep": 1
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -967,9 +985,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Seeräuber im östlichen Mittelmeer durch eine mobile Flottenkampagne vernichten",
         "description": "Macht die Seewege frei für Händler, Reisende und Kriegskuriere.",
         "statChanges": {
-          "priester": 20,
-          "volk": 15,
-          "adel": 5
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -986,11 +1005,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Provinzen vor gierigen Steuerpächtern zu schützen und loyal zu binden.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
+          "goetter": 15,
           "adel": 15,
-          "volk": 20,
-          "priester": 15,
-          "ep": 1
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -1011,7 +1030,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Eroberung des Mittelmeerraums war das erste Mal in der Geschichte, dass dieser riesige Wirtschaftsraum unter einer einheitlichen Währung (Denar), Sprache (Latein/Griechisch) und Rechtsordnung vereint war."
       },
       "curiosityFact": "Römische Handelsschiffe konnten bis zu 500 Tonnen Getreide laden – so viel wie zehn moderne Güterwaggons der Eisenbahn!"
-    }
+    },
+    "hefterEintrag": "Nach dem Sieg über Karthago beherrschte Rom das gesamte Mittelmeer ('Mare Nostrum' = Unser Meer)."
   },
   {
     "id": "rome_r09",
@@ -1032,7 +1052,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r9_pack",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Marschgepäck ('Marius-Maultiere')",
         "description": "Legionäre trugen Schanzeisen, Pfähle, Kessel und Rationen für 14 Tage selbst.",
         "icon": "🎒"
@@ -1057,9 +1077,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Proletarier mit standardisierter Kettenrüstung (Lorica Hamata) und Pilum ausstatten",
         "description": "Schafft einheitliche Bewaffnung und Disziplin auf Staatskosten.",
         "statChanges": {
-          "priester": 25,
           "goetter": 15,
-          "volk": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1076,9 +1096,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Schildkrötenformation (Testudo) und stundenlangen Schanzdrill einführen",
         "description": "Jeder Legionär muss lernen, in drei Stunden ein befestigtes Lager aus dem Boden zu stampfen.",
         "statChanges": {
-          "priester": 20,
           "adel": 15,
-          "goetter": 5
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -1094,9 +1114,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Den silbernen Adler (Aquila) als heiliges Zentrum jeder Legion vereidigen",
         "description": "Stiftet Korpsgeist und bedingungslose Treue zu den Farben der Legion.",
         "statChanges": {
-          "goetter": 20,
-          "adel": 15,
-          "priester": 10
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -1113,11 +1134,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die Treue der Soldaten an die Republik statt an ehrgeizige Generäle zu binden.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "volk": 25,
+          "goetter": 15,
           "adel": 15,
-          "priester": 15,
-          "ep": 1
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -1138,7 +1159,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Kehrseite der Reform: Weil der Senat den Veteranen oft das versprochene Land verweigerte, hielten die Soldaten zu ihren Feldherren (wie Sulla, Pompeius oder Caesar) statt zur Republik. Dies führte direkt in den Bürgerkrieg."
       },
       "curiosityFact": "Das Marschgepäck eines Legionärs wog bis zu 35 Kilogramm – und damit mussten sie täglich 30 Kilometer im Eilmarsch zurücklegen!"
-    }
+    },
+    "hefterEintrag": "107 v. Chr. schuf Marius die römische Berufsarmee: Besitzlose Bürger wurden Soldaten, erhielten Sold und wurden an ihren Feldherrn gebunden."
   },
   {
     "id": "rome_r10",
@@ -1159,7 +1181,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r10_civitas",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Civitas Romana (Bürgerrecht)",
         "description": "Garantiert Stimmrecht, Schutz vor Auspeitschung und freie Berufswahl.",
         "icon": "📜"
@@ -1184,9 +1206,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das volle römische Bürgerrecht (Civitas Romana) unverzüglich an alle Völker Italiens vergeben",
         "description": "Beendet den Krieg mit einem Federstrich: Macht aus Aufständischen stolze Römer!",
         "statChanges": {
-          "volk": 25,
-          "adel": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1203,9 +1225,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Zuerst einen harten militärischen Sieg erringen und erst dann Verhandlungen führen",
         "description": "Zeigt Stärke im Gefecht, damit Rom nicht erpressbar wirkt.",
         "statChanges": {
-          "priester": 20,
-          "goetter": 10,
-          "adel": -5
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -1221,9 +1243,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Bürgerrecht nur stufenweise vergeben: Zuerst eingeschränktes Handelsrecht (Ius Latii)",
         "description": "Ein Zwischenschritt, um den Einfluss der Neuwähler in der Hauptstadt langsam zu dosieren.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 10,
-          "volk": 5
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1240,11 +1263,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die neuen Bürger mit Mitsprache direkt im Herzen der Macht zu verankern.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "adel": 20,
-          "volk": 25,
+          "goetter": 15,
+          "adel": 15,
           "priester": 10,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -1265,7 +1288,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Der berühmte Ausruf 'Civis Romanus sum!' ('Ich bin römischer Bürger!') schützte selbst in den fernsten Provinzen vor Willkür örtlicher Herrscher, wie es die Bibel über den Apostel Paulus berichtet."
       },
       "curiosityFact": "Römische Bürger trugen ein hölzernes Klappdiplom mit Wachssiegeln bei sich – der erste Personalausweis der Welt!"
-    }
+    },
+    "hefterEintrag": "Im Bundesgenossenkrieg (91–88 v. Chr.) erkämpften die italischen Bundesgenossen das volle römische Bürgerrecht."
   },
   {
     "id": "rome_r11",
@@ -1294,7 +1318,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r11_kapitol",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Blutbad am Kapitol",
         "description": "Knüppel und zerbrochene Bänke: Der erste politische Mord in der Geschichte der Republik.",
         "icon": "🩸"
@@ -1311,9 +1335,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das Ackergesetz (Lex Sempronia Agraria) friedlich mit mäßigen Höchstgrenzen im Senat verhandeln",
         "description": "Sucht den Kompromiss mit den Patriziern, um das Blutvergießen zu verhindern.",
         "statChanges": {
-          "adel": 15,
-          "volk": 15,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1330,9 +1354,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das Volk auf dem Forum bewaffnen und das Ackergesetz gegen jedes Senats-Veto durchpeitschen",
         "description": "Brecht den Widerstand der reichen Grundbesitzer mit eiserner Volksmacht.",
         "statChanges": {
-          "volk": 25,
-          "adel": -15,
-          "priester": 10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -1348,9 +1372,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Kolonien für verarmte Bürger in Übersee (Karthago / Narbo) zur Ansiedlung gründen",
         "description": "Schafft neue Existenzen im Ausland, ohne den italienischen Adelsbesitz anzutasten.",
         "statChanges": {
-          "volk": 20,
-          "adel": 10,
-          "priester": 10
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1367,10 +1392,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Brotpreise gesetzlich zu deckeln – der Vorläufer des Wohlfahrtsstaates.",
         "epCost": 2,
         "statChanges": {
-          "volk": 30,
-          "adel": 10,
           "goetter": 15,
-          "ep": 1
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -1391,7 +1417,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Ermordung des Tiberius Gracchus 133 v. Chr. gilt Historikern als Beginn der Krise der Römischen Republik: Erstmals wurde innenpolitischer Streit mit Mord statt mit Gesetzen gelöst."
       },
       "curiosityFact": "Ihre Mutter Cornelia war berühmt für ihren Stolz: Als eine Freundin mit Juwelen prahlte, zeigte Cornelia auf ihre beiden Söhne und sagte: 'Seht, das sind meine Juwelen!'"
-    }
+    },
+    "hefterEintrag": "Die Brüder Gracchus wollten Land an arme Bauern verteilen, wurden aber vom Senatsadel gewaltsam ermordet (Beginn der Krise der Republik)."
   },
   {
     "id": "rome_r12",
@@ -1420,7 +1447,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r12_crassus",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Marcus Licinius Crassus",
         "description": "Reichster Mann Roms; schlägt den Aufstand mit acht Legionen erbarmungslos nieder.",
         "icon": "💰"
@@ -1437,10 +1464,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Spartacus mit einer gewaltigen Zangenbewegung der Legionen von Crassus und Pompeius stellen",
         "description": "Militärische Übermacht einsetzen, um die Rebellion vor Rom endgültig zu ersticken.",
         "statChanges": {
-          "priester": 25,
           "goetter": 15,
-          "adel": 10,
-          "volk": -10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1457,9 +1483,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Den Sklaven freien Abzug über die Alpen anbieten, wenn sie die Waffen niederlegen",
         "description": "Vermeidet den letzten blutigen Kampf und lässt die Menschen in ihre Heimatländer ziehen.",
         "statChanges": {
-          "volk": 20,
-          "adel": -10,
-          "goetter": 10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1475,9 +1501,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Gesetzliche Schutzrechte für Sklaven erlassen und willkürliche Grausamkeit verbieten",
         "description": "Bessert die Arbeitsbedingungen nach, um zukünftige Verzweiflungsaufstände im Keim zu ersticken.",
         "statChanges": {
-          "adel": 15,
-          "volk": 15,
-          "goetter": 10
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1494,11 +1521,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um Sklaven durch Hoffnung auf ehrenhafte Freilassung ('Freigelassene') loyal zu machen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "adel": 20,
-          "volk": 20,
+          "goetter": 15,
+          "adel": 15,
           "priester": 10,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -1519,7 +1546,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Nach der Niederschlagung ließ Crassus 6.000 gefangene Sklaven entlang der 200 Kilometer langen Via Appia zwischen Rom und Capua kreuzigen – ein grausames Abschreckungsmahnmal des Senats."
       },
       "curiosityFact": "Spartacus stammte aus Thrakien (dem heutigen Bulgarien) und hatte früher selbst als Soldat in den römischen Hilfstruppen gedient, bevor er versklavt wurde!"
-    }
+    },
+    "hefterEintrag": "73 v. Chr. führte der Gladiator Spartacus den größten Sklavenaufstand der Antike an, der nach zwei Jahren von Legionen niedergeschlagen wurde."
   },
   {
     "id": "rome_r13",
@@ -1548,7 +1576,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r13_wuerfel",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Die gefallenen Würfel",
         "description": "'Alea iacta est' – der Schritt, der den Bürgerkrieg um die Alleinherrschaft auslöst.",
         "icon": "🎲"
@@ -1565,9 +1593,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Den Rubikon überschreiten und im Eilmarsch auf Rom vorrücken",
         "description": "Wagt alles auf eine Karte: 'Alea iacta est!'",
         "statChanges": {
-          "priester": 25,
-          "goetter": 20,
+          "goetter": 15,
           "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1584,9 +1612,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Legionen auflösen und vor Gericht in Rom mit meisterhafter Beredsamkeit für das Recht kämpfen",
         "description": "Geht kein Risiko eines Bürgerkriegs ein und vertraut auf eure Unschuld.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 10,
-          "priester": -10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1602,9 +1630,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die besiegten Bürgerkriegsgegner begnadigen und Milde ('Clementia Caesaris') walten lassen",
         "description": "Keine Proskriptionen und keine Hinrichtungen: Versöhnt Rom durch Güte.",
         "statChanges": {
-          "volk": 25,
-          "adel": 15,
-          "goetter": 10
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1621,11 +1650,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um das heillose Kalenderchaos mit ägyptischer Astronomie für immer zu ordnen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "volk": 25,
+          "goetter": 15,
           "adel": 15,
           "priester": 10,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1646,7 +1675,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Caesars Milde ('Clementia') gegenüber besiegten Senatoren war neu. Doch genau diese begnadigten Senatoren (wie Brutus und Cassius) verschworen sich später gegen ihn, um die alte Republik zu retten."
       },
       "curiosityFact": "Nach Caesar ist der Monat Juli benannt – und von seinem Namen 'Caesar' stammen sowohl der deutsche Titel 'Kaiser' als auch das russische Wort 'Zar' ab!"
-    }
+    },
+    "hefterEintrag": "49 v. Chr. überschritt Julius Caesar mit seinen Legionen den Grenzfluss Rubikon ('Die Würfel sind gefallen') und eroberte die Macht in Rom."
   },
   {
     "id": "rome_r14",
@@ -1692,9 +1722,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Auf Caesars Totenfeier sein Testament verlesen und den Bürgern Geld vermachen",
         "description": "Entfacht die Treue der Massen: Caesar schenkt jedem Bürger 300 Sesterzen!",
         "statChanges": {
-          "volk": 30,
+          "goetter": 15,
           "adel": -15,
-          "goetter": 10,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1711,9 +1741,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Den Mördern Amnestie gewähren, um den Frieden in Rom im Senat zu wahren",
         "description": "Verhindert den nächsten Bürgerkrieg durch Verzicht auf Rache.",
         "statChanges": {
-          "adel": 20,
-          "volk": -10,
-          "goetter": 10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1729,8 +1759,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das Zweite Triumvirat (Octavian, Antonius, Lepidus) zur Bestrafung der Attentäter formieren",
         "description": "Schließt ein eisernes Bündnis der Rächer, um Brutus und Cassius in Griechenland zu stellen.",
         "statChanges": {
-          "priester": 25,
-          "goetter": 15,
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
           "adel": -10
         },
         "skillChanges": {
@@ -1748,10 +1779,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die kaiserliche Legitimation durch Vergöttlichung sakral zu begründen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "volk": 25,
+          "goetter": 15,
           "adel": 15,
-          "ep": 1
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1772,7 +1804,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Caesar hinterließ sein gesamtes Vermögen und seinen Namen seinem damals 18-jährigen Großneffen Octavian. Dieser nutzte das Erbe meisterhaft und wurde als 'Augustus' der erste Kaiser Roms."
       },
       "curiosityFact": "Nach Caesars Ermordung erschien sieben Tage lang ein heller Komet am Himmel – die Römer glaubten fest, dies sei Caesars Seele, die zu den Göttern aufstieg!"
-    }
+    },
+    "hefterEintrag": "An den Iden des März (15. März 44 v. Chr.) ermordeten Senatoren um Brutus Caesar, um die Republik zu retten – lösten aber Bürgerkriege aus."
   },
   {
     "id": "rome_r15",
@@ -1818,9 +1851,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die 'Pax Romana' (Römischer Frieden) im ganzen Weltreich verkünden und die Tore des Janustempels schließen",
         "description": "Schließt die Tempeltore als uraltes Zeichen: In ganz Rom herrscht vollkommener Frieden!",
         "statChanges": {
-          "goetter": 25,
-          "volk": 20,
-          "adel": 15,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1837,9 +1870,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Prätorianergarde als persönliche kaiserliche Leibwache in Rom aufstellen",
         "description": "Schützt die Person des Kaisers mit neun Elitekohorten vor Attentaten im Senat.",
         "statChanges": {
-          "priester": 25,
-          "adel": -5,
-          "goetter": 10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -1855,9 +1888,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Monumentale Bauten aus weißem Carrara-Marmor auf dem Marsfeld errichten",
         "description": "Macht Rom zur strahlenden Weltmetropole: 'Eine Stadt aus Marmor!'",
         "statChanges": {
-          "volk": 20,
-          "adel": 15,
-          "goetter": 15
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1874,10 +1908,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um die römische Geschichte durch Weltliteratur in die Ewigkeit einzubrennen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "adel": 20,
-          "volk": 20,
-          "ep": 1
+          "goetter": 15,
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -1898,7 +1933,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Das Prinzipat war eine Meisterleistung der Täuschung: Augustus ließ alle republikanischen Ämter (Konsuln, Senat, Tribune) scheinbar weiterbestehen, vereinte die entscheidende Macht aber unumstößlich in seiner Person."
       },
       "curiosityFact": "Nach Kaiser Augustus ist unser achter Monat 'August' benannt – und weil der Juli (nach Caesar) 31 Tage hatte, bekam der August ebenfalls 31 Tage!"
-    }
+    },
+    "hefterEintrag": "27 v. Chr. begründete Augustus das Prinzipat (Kaisertum) und sicherte nach 100 Jahren Bürgerkrieg die Pax Romana (Römischer Frieden)."
   },
   {
     "id": "rome_r16",
@@ -1911,7 +1947,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r16_strasse",
         "x": 45,
-        "y": 70,
+        "y": 65,
         "label": "Basaltstein-Pflasterung",
         "description": "Tief fundamentierte Heerstraße mit Entwässerungsgräben und Kiesbett.",
         "icon": "🧱"
@@ -1944,9 +1980,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Via Appia und Fernstraßen mit massiven Basaltpolygonen und Drainage ausbauen",
         "description": "Baut für die Ewigkeit: Mehrschichtiger Straßenbau trotzt jedem Unwetter.",
         "statChanges": {
-          "volk": 20,
-          "priester": 20,
-          "goetter": 10,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -1963,9 +1999,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Feste Wechselstationen (Mansiones) mit Herbergen und Schmieden alle 20 Kilometer einrichten",
         "description": "Schafft Rastplätze für Kuriere, Händler und kaiserliche Beamte.",
         "statChanges": {
-          "priester": 15,
           "adel": 15,
-          "volk": 15
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -1981,9 +2017,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Kaiserliche Reise-Pässe (Diploma) ausstellen, um Missbrauch der Postpferde zu verhindern",
         "description": "Strenge Kontrollen: Nur wer ein offizielles Siegel trägt, darf kaiserliche Wagen nutzen.",
         "statChanges": {
-          "adel": 20,
-          "goetter": 15,
-          "priester": 5
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2000,10 +2037,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um alle Entfernungen der Welt exakt auf das Herz Roms auszurichten.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "adel": 20,
-          "volk": 20,
-          "ep": 1
+          "goetter": 15,
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2024,7 +2062,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Das Straßennetz war vor allem für die Reichssicherheit essenziell: Eine Legion konnte bei Aufständen in einer einzigen Woche mehrere hundert Kilometer marschieren."
       },
       "curiosityFact": "Um Wasser abfließen zu lassen, bauten die Römer Straßen in der Mitte leicht gewölbt – genau das Prinzip, das bis heute im Straßenbau gilt!"
-    }
+    },
+    "hefterEintrag": "Ein gepflastertes Fernstraßennetz (wie die Via Appia) und der kaiserliche Kurierdienst verbanden Rom schnell mit allen Provinzen."
   },
   {
     "id": "rome_r17",
@@ -2070,9 +2109,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Truppen sammeln, einen Verteidigungswall errichten und den geordneten Rückzug antreten",
         "description": "Rettet, wer gerettet werden kann, um die Katastrophe abzufedern.",
         "statChanges": {
-          "priester": 15,
-          "adel": 15,
-          "goetter": 5,
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -2089,9 +2128,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Rachefeldzüge unter Germanicus starten und die verlorenen Legionsadler zurückerobern",
         "description": "Stellt Roms Ehre wieder her: Kein germanischer Stamm darf ungestraft Legionen vernichten!",
         "statChanges": {
-          "priester": 25,
-          "goetter": 20,
-          "adel": -10
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "militaerischeStaerke": 1
@@ -2107,9 +2146,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Auf weitere Eroberungen im Osten verzichten und die Grenze an Rhein und Donau festigen",
         "description": "Folgt dem Vermächtnis des Augustus: Das Imperium hat seine natürlichen Grenzen erreicht.",
         "statChanges": {
-          "goetter": 20,
-          "volk": 20,
-          "adel": 15
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2126,11 +2166,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um aus Feinden friedliche Handelspartner für Bernstein, Felle und Sklaven zu machen.",
         "epCost": 2,
         "statChanges": {
-          "volk": 25,
-          "adel": 20,
           "goetter": 15,
+          "adel": 15,
           "priester": 10,
-          "ep": 1
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 2
@@ -2151,7 +2191,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Die Schlacht stoppte die römische Expansion nach Osten für immer. Der Rhein wurde zur festen Grenze zwischen dem Römischen Reich und 'Germania Magna' (dem freien Germanien)."
       },
       "curiosityFact": "Bei Ausgrabungen in Kalkriese bei Osnabrück fanden Archäologen die berühmte eiserne Gesichtsmaske eines römischen Reiterhelms – ein stummer Zeuge der Katastrophe!"
-    }
+    },
+    "hefterEintrag": "9 n. Chr. vernichteten germanische Krieger unter Arminius drei römische Legionen in der Varusschlacht: Der Rhein wurde zur festen Reichsgrenze."
   },
   {
     "id": "rome_r18",
@@ -2197,9 +2238,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das Signalsystem mit Fackeln und Spiegeln entlang der 500 Wachtürme perfektionieren",
         "description": "Macht die Alarmkette unüberwindbar: Alarm erreicht die Hauptlegion in wenigen Minuten.",
         "statChanges": {
-          "priester": 20,
           "goetter": 15,
-          "adel": 10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -2216,9 +2257,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Feste Markttage an den Grenzübergängen erlauben und Zölle für die Staatskasse erheben",
         "description": "Verwandelt die Grenze in einen florierenden Wirtschaftsmotor.",
         "statChanges": {
-          "volk": 25,
           "adel": 15,
-          "priester": 10
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2234,9 +2275,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Auxiliarsoldaten nach 25 Jahren treuem Grenzdienst das volle Bürgerrecht feierlich verleihen",
         "description": "Lohnt die Treue der Hilfstruppen und bindet ihre Familien für immer an Rom.",
         "statChanges": {
-          "volk": 20,
-          "adel": 15,
-          "goetter": 15
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2253,10 +2295,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um römische Lebensart und Zivilisation tief im germanischen Urwald zu verankern.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 25,
-          "volk": 25,
-          "adel": 20,
-          "ep": 1
+          "goetter": 15,
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2277,7 +2320,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "In den Lagersiedlungen (Vici) rings um die Kastelle (wie die berühmte Saalburg bei Bad Homburg) lebten Handwerker, Gastwirte und die Familien der Soldaten – hier fand die Verschmelzung römischer und keltisch-germanischer Kultur statt."
       },
       "curiosityFact": "Auxiliarsoldaten erhielten bei der Entlassung eine bronzene Tafel ('Militärdiplom') im Taschenformat – sie bewies, dass sie und ihre Nachkommen vollwertige römische Bürger waren!"
-    }
+    },
+    "hefterEintrag": "Der Limes war ein über 500 km langer befestigter Grenzwall mit Kastellen zur Sicherung des Reiches gegen das freie Germanien."
   },
   {
     "id": "rome_r19",
@@ -2306,7 +2350,7 @@ export const ROME_ROUNDS: RoundStory[] = [
       {
         "id": "hs_r19_brot",
         "x": 25,
-        "y": 70,
+        "y": 65,
         "label": "Kostenlose Brotfladen",
         "description": "'Panem et Circenses' – wer das Volk füttert und unterhält, regiert ohne Aufstand.",
         "icon": "🍞"
@@ -2323,9 +2367,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "100 Tage Festspiele mit Gladiatorenkämpfen und kostenlosem Brot finanzieren",
         "description": "Macht das Volk glücklich und festigt eure unangefochtene Popularität.",
         "statChanges": {
-          "volk": 30,
           "goetter": 15,
-          "priester": -10,
+          "adel": -15,
+          "volk": -5,
           "ep": 1
         },
         "skillChanges": {
@@ -2342,9 +2386,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Ein riesiges Segeltuch-Dach (Velarium) spannen lassen, um die Bürger vor Sommerhitze zu schützen",
         "description": "Kaiserliche Fürsorge: Römische Flottensoldaten bedienen gigantische Sonnensegel.",
         "statChanges": {
-          "volk": 20,
           "adel": 15,
-          "priester": 10
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2360,9 +2404,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Gefallene Gladiatoren ehrenvoll bestatten und Verwundete von Hofärzten versorgen lassen",
         "description": "Mäßigt die Härte der Arena durch Anstand und Respekt vor tapferen Kämpfern.",
         "statChanges": {
-          "adel": 15,
-          "volk": 15,
-          "goetter": 10
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2379,10 +2424,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt Wissen ein, um das gigantische Amphitheater mit Aquäduktwasser in einen See zu verwandeln.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 30,
-          "volk": 30,
-          "adel": 20,
-          "ep": 1
+          "goetter": 15,
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2403,7 +2449,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Das Kolosseum wurde aus dem Beton 'Opus Caementicium' und Travertinstein erbaut. Das ausgeklügelte Treppensystem ('Vomitorien') erlaubte es, die 50.000 Zuschauer in nur 15 Minuten komplett zu evakuieren."
       },
       "curiosityFact": "Das Kolosseum hieß ursprünglich gar nicht 'Kolosseum', sondern 'Amphitheatrum Flavium' – der Spitzname entstand wegen einer 35 Meter hohen Kolossalstatue des Kaisers Nero, die direkt daneben stand!"
-    }
+    },
+    "hefterEintrag": "Im Kolosseum und Circus Maximus besänftigten die Kaiser das Volk mit 'Brot und Spielen' (Panem et Circenses) durch Gladiatorenkämpfe."
   },
   {
     "id": "rome_r20",
@@ -2449,9 +2496,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Das Siegesopfer auf dem Kapitol den Göttern weihen und ewigen Frieden schwören",
         "description": "Dankt Jupiter Optimus Maximus und besiegelt das goldene Zeitalter des Imperiums.",
         "statChanges": {
-          "goetter": 30,
-          "adel": 25,
-          "volk": 20
+          "goetter": 15,
+          "adel": -15,
+          "volk": -5,
+          "ep": 1
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2467,9 +2515,9 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die riesige Kriegsbeute an die Bürger und Veteranen zur Hälfte verschenken",
         "description": "Teilt den Wohlstand mit denen, die das Reich mit ihrem Blut erbaut haben.",
         "statChanges": {
-          "volk": 30,
-          "priester": 20,
-          "adel": 15
+          "adel": 15,
+          "goetter": -15,
+          "priester": 5
         },
         "skillChanges": {
           "politischeGeschicklichkeit": 1
@@ -2485,9 +2533,10 @@ export const ROME_ROUNDS: RoundStory[] = [
         "label": "Die Mahnung des Sklaven ('Memento mori') demütig annehmen und Gesetze der Mäßigung erlassen",
         "description": "Bewahrt Bürgersinn und Weisheit: Niemand darf sich für unfehlbar halten.",
         "statChanges": {
-          "adel": 25,
-          "goetter": 25,
-          "volk": 20
+          "priester": 15,
+          "volk": 10,
+          "goetter": -10,
+          "adel": -10
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 1
@@ -2504,11 +2553,11 @@ export const ROME_ROUNDS: RoundStory[] = [
         "description": "Setzt alles gesammelte Wissen ein, um das Erbe Roms für alle kommenden Jahrtausende unsterblich zu machen.",
         "epCost": 2,
         "statChanges": {
-          "goetter": 35,
-          "adel": 30,
-          "volk": 30,
-          "priester": 25,
-          "ep": 1
+          "goetter": 15,
+          "adel": 15,
+          "priester": 10,
+          "volk": 10,
+          "ep": -2
         },
         "skillChanges": {
           "goettlicheAuserwaehltheit": 2
@@ -2529,7 +2578,8 @@ export const ROME_ROUNDS: RoundStory[] = [
         "oberstufe": "Was von Rom blieb: Nahezu alle modernen europäischen Sprachen (Spanisch, Französisch, Italienisch etc.) stammen vom Lateinischen ab. Das römische Recht bildet das Fundament moderner Demokratien und der Bogenbau revolutionierte die Architektur."
       },
       "curiosityFact": "Die Trajanssäule in Rom ist 35 Meter hoch und mit einem 200 Meter langen, spiralförmigen Reliefband verziert – fast wie der längste Comicstrip der Antike!"
-    }
+    },
+    "hefterEintrag": "Unter Kaiser Trajan erreichte das Römische Reich 117 n. Chr. seine größte Ausdehnung. Römische Kultur prägt Europa bis heute."
   }
 ];
 
