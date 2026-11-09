@@ -4,6 +4,7 @@ import { Crown, Trophy, RotateCcw, Printer, Eye, X, Award } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { soundFX } from '../utils/sound';
 import { EraThemeConfig } from '../utils/themeManager';
+import { getPillarDisplay, getSkillDisplay, getSpecialResourceDisplay } from '../utils/gameIcons';
 
 interface EndingScreenProps {
   profile: PlayerProfile;
@@ -243,10 +244,15 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
     window.print();
   };
 
-  const pillar1Label = activeGame?.pillars?.[0]?.label || '⚡ Götter / Gunst';
-  const pillar2Label = activeGame?.pillars?.[1]?.label || '🙏 Priester / Vorräte';
-  const pillar3Label = activeGame?.pillars?.[2]?.label || '👑 Adel / Truppen';
-  const pillar4Label = activeGame?.pillars?.[3]?.label || '😊 Volk / Moral';
+  const p1 = getPillarDisplay(activeGame?.pillars?.[0], { label: 'Götter / Ma\'at', icon: '⚡' });
+  const p2 = getPillarDisplay(activeGame?.pillars?.[1], { label: 'Priester / Kult', icon: '🙏' });
+  const p3 = getPillarDisplay(activeGame?.pillars?.[2], { label: 'Adel / Hofstaat', icon: '👑' });
+  const p4 = getPillarDisplay(activeGame?.pillars?.[3], { label: 'Volk / Bauern', icon: '😊' });
+
+  const s1 = getSkillDisplay(activeGame, 1);
+  const s2 = getSkillDisplay(activeGame, 2);
+  const s3 = getSkillDisplay(activeGame, 3);
+  const specialRes = getSpecialResourceDisplay(activeGame);
 
   const certificateGameTitle = activeGame?.title || 'Helfer des Pharaos';
   const certIcon = theme?.icon || '🏛️';
@@ -301,19 +307,19 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
       {/* 4 Pillars Stats Grid */}
       <div className="grid grid-cols-4 gap-2 text-center my-4 max-w-lg mx-auto font-sans">
         <div className="border border-stone-300 p-2 rounded bg-white">
-          <span className="text-[10px] text-stone-600 font-medium line-clamp-1 block">{pillar1Label}</span>
+          <span className="text-[10px] text-stone-600 font-medium line-clamp-1 block">{p1.icon} {p1.label}</span>
           <strong className="text-base text-stone-900">{stats.goetter}%</strong>
         </div>
         <div className="border border-stone-300 p-2 rounded bg-white">
-          <span className="text-[10px] text-stone-600 font-medium line-clamp-1 block">{pillar2Label}</span>
+          <span className="text-[10px] text-stone-600 font-medium line-clamp-1 block">{p2.icon} {p2.label}</span>
           <strong className="text-base text-stone-900">{stats.priester}%</strong>
         </div>
         <div className="border border-stone-300 p-2 rounded bg-white">
-          <span className="text-[10px] text-stone-600 font-medium line-clamp-1 block">{pillar3Label}</span>
+          <span className="text-[10px] text-stone-600 font-medium line-clamp-1 block">{p3.icon} {p3.label}</span>
           <strong className="text-base text-stone-900">{stats.adel}%</strong>
         </div>
         <div className="border border-stone-300 p-2 rounded bg-white">
-          <span className="text-[10px] text-stone-600 font-medium line-clamp-1 block">{pillar4Label}</span>
+          <span className="text-[10px] text-stone-600 font-medium line-clamp-1 block">{p4.icon} {p4.label}</span>
           <strong className="text-base text-stone-900">{stats.volk}%</strong>
         </div>
       </div>
@@ -480,31 +486,55 @@ export const EndingScreen: React.FC<EndingScreenProps> = ({
               Deine finalen Werte am Ziel:
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-700/40 text-center">
-                <span className="text-xs text-stone-400 block truncate">{pillar1Label}</span>
+              <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-700/40 text-center flex flex-col items-center">
+                <span className="text-xs text-stone-400 truncate flex items-center gap-1.5 mb-1">
+                  <span className="text-base select-none leading-none">{p1.icon}</span>
+                  <span>{p1.label}</span>
+                </span>
                 <strong className="text-lg text-amber-300">{stats.goetter}%</strong>
               </div>
-              <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-700/40 text-center">
-                <span className="text-xs text-stone-400 block truncate">{pillar2Label}</span>
+              <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-700/40 text-center flex flex-col items-center">
+                <span className="text-xs text-stone-400 truncate flex items-center gap-1.5 mb-1">
+                  <span className="text-base select-none leading-none">{p2.icon}</span>
+                  <span>{p2.label}</span>
+                </span>
                 <strong className="text-lg text-purple-300">{stats.priester}%</strong>
               </div>
-              <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-700/40 text-center">
-                <span className="text-xs text-stone-400 block truncate">{pillar3Label}</span>
+              <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-700/40 text-center flex flex-col items-center">
+                <span className="text-xs text-stone-400 truncate flex items-center gap-1.5 mb-1">
+                  <span className="text-base select-none leading-none">{p3.icon}</span>
+                  <span>{p3.label}</span>
+                </span>
                 <strong className="text-lg text-blue-300">{stats.adel}%</strong>
               </div>
-              <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-700/40 text-center">
-                <span className="text-xs text-stone-400 block truncate">{pillar4Label}</span>
+              <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-700/40 text-center flex flex-col items-center">
+                <span className="text-xs text-stone-400 truncate flex items-center gap-1.5 mb-1">
+                  <span className="text-base select-none leading-none">{p4.icon}</span>
+                  <span>{p4.label}</span>
+                </span>
                 <strong className="text-lg text-emerald-300">{stats.volk}%</strong>
               </div>
             </div>
           </div>
 
-          {/* Skills Summary */}
+          {/* Skills Summary (Guaranteed matching emojis) */}
           <div className="p-4 rounded-xl bg-stone-950/70 border border-stone-800 flex flex-wrap items-center justify-between gap-3 text-xs sm:text-sm text-stone-300">
-            <span>🧠 Verbliebene EP: <strong className="text-amber-400">{stats.ep}</strong></span>
-            <span>🌟 {activeGame?.skillNames?.skill1 || 'Stärke / Weisheit'}: <strong className="text-yellow-400">{skills.goettlicheAuserwaehltheit}</strong></span>
-            <span>🗣️ {activeGame?.skillNames?.skill2 || 'Politik / Charisma'}: <strong className="text-cyan-400">{skills.politischeGeschicklichkeit}</strong></span>
-            <span>⚔️ {activeGame?.skillNames?.skill3 || 'Militär / Führung'}: <strong className="text-rose-400">{skills.militaerischeStaerke}</strong></span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-base select-none leading-none">{specialRes.emoji}</span>
+              <span>Verbliebene {specialRes.name}: <strong className="text-amber-400">{stats.ep}</strong></span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-base select-none leading-none">{s1.icon}</span>
+              <span>{s1.label}: <strong className="text-yellow-400">{skills.goettlicheAuserwaehltheit}</strong></span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-base select-none leading-none">{s2.icon}</span>
+              <span>{s2.label}: <strong className="text-cyan-400">{skills.politischeGeschicklichkeit}</strong></span>
+            </span>
+            <span className="flex items-center gap-1.5">
+              <span className="text-base select-none leading-none">{s3.icon}</span>
+              <span>{s3.label}: <strong className="text-rose-400">{skills.militaerischeStaerke}</strong></span>
+            </span>
           </div>
 
           {/* Action Buttons: Preview Certificate, Print & Restart */}

@@ -4,6 +4,7 @@ import { soundFX } from '../utils/sound';
 import { Crown, Sparkles, BookCheck, Shield, Lock, Key, ArrowRight, Share2, CheckCircle } from 'lucide-react';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
 import { detectEraTheme, ERA_THEMES } from '../utils/themeManager';
+import { getPillarDisplay } from '../utils/gameIcons';
 
 interface SetupScreenProps {
   onStartGame: (profile: PlayerProfile) => void;
@@ -738,7 +739,7 @@ export const SetupScreen: React.FC<SetupScreenProps> = ({
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs text-stone-300">
             <div className="p-2 rounded bg-stone-900 border border-stone-800">
               <span className="block font-bold text-amber-400">
-                {activeGame?.pillars ? activeGame.pillars.map(p => p.icon).join(' ') : '⚡ 🙏 👑 😊'}
+                {activeGame?.pillars ? activeGame.pillars.map(p => getPillarDisplay(p).icon).join(' ') : '⚡ 🙏 👑 😊'}
               </span>
               <span>Startwerte je 10%</span>
             </div>

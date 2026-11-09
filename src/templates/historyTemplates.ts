@@ -17,6 +17,7 @@ export interface PredefinedTemplate {
   ];
   specialResource: { name: string; emoji: string };
   skills: { skill1: string; skill2: string; skill3: string };
+  skillIcons?: { skill1: string; skill2: string; skill3: string };
   historicalContext: string;
   eraThemeId: import('../utils/themeManager').EraThemeId;
 }

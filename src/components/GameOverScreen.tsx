@@ -3,6 +3,7 @@ import { PlayerProfile, Stats, GameDefinition } from '../types/game';
 import { EraThemeConfig } from '../utils/themeManager';
 import { RotateCcw, ShieldAlert } from 'lucide-react';
 import { soundFX } from '../utils/sound';
+import { getPillarDisplay } from '../utils/gameIcons';
 
 interface GameOverScreenProps {
   profile: PlayerProfile;
@@ -36,11 +37,11 @@ export const GameOverScreen: React.FC<GameOverScreenProps> = ({
   const isStoneage = combined.includes('steinzeit') || combined.includes('neolith') || theme?.id === 'stoneage_earth';
   const isAncientEgypt = combined.includes('ägypt') || combined.includes('pharao') || combined.includes('nil') || theme?.id === 'egypt_gold' || (!activeGame && !theme);
 
-  // Get era-appropriate labels for the 4 pillars
-  const p1 = activeGame?.pillars?.[0]?.label || 'Säule 1';
-  const p2 = activeGame?.pillars?.[1]?.label || 'Säule 2';
-  const p3 = activeGame?.pillars?.[2]?.label || 'Säule 3';
-  const p4 = activeGame?.pillars?.[3]?.label || 'Säule 4';
+  // Get era-appropriate labels and emojis for the 4 pillars
+  const p1 = getPillarDisplay(activeGame?.pillars?.[0], { label: 'Säule 1', icon: '⚡' }).fullLabel;
+  const p2 = getPillarDisplay(activeGame?.pillars?.[1], { label: 'Säule 2', icon: '🙏' }).fullLabel;
+  const p3 = getPillarDisplay(activeGame?.pillars?.[2], { label: 'Säule 3', icon: '👑' }).fullLabel;
+  const p4 = getPillarDisplay(activeGame?.pillars?.[3], { label: 'Säule 4', icon: '😊' }).fullLabel;
 
   // Dynamic Headline
   const getHeadline = () => {

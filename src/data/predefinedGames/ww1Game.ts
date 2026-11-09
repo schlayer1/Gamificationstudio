@@ -2624,6 +2624,11 @@ export const WW1_MASTER_GAME: GameDefinition = {
     skill2: 'Kameradschaftshilfe',
     skill3: 'Kritischer Scharfsinn',
   },
+  skillIcons: {
+    skill1: '🎖️',
+    skill2: '🩹',
+    skill3: '🧭',
+  },
   heroImage: '/assets/ww1_hero.jpg',
   rounds: WW1_ROUNDS,
   shareCode: 'WW101',

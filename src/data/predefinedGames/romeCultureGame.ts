@@ -2629,6 +2629,11 @@ export const ROME_CULTURE_MASTER_GAME: GameDefinition = {
     skill2: 'Alltags- & Redekunst',
     skill3: 'Ingenieur- & Bauwissen',
   },
+  skillIcons: {
+    skill1: '🔮',
+    skill2: '🗣️',
+    skill3: '📐',
+  },
   heroImage: '/assets/rome_hero.jpg',
   rounds: ROME_CULTURE_ROUNDS,
   shareCode: 'ROM02',

@@ -15,6 +15,7 @@ import { EntryPortal } from './components/EntryPortal';
 import { soundFX } from './utils/sound';
 import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon, CheckCircle2, PenTool } from 'lucide-react';
 import { detectEraTheme, ERA_THEMES } from './utils/themeManager';
+import { getPillarDisplay, getSkillDisplay, getSpecialResourceDisplay } from './utils/gameIcons';
 
 export const App: React.FC = () => {
   // Game Lifecycle State: portal (Code-Eingabe / Lehrer-Login) -> setup -> playing -> gameover / ending / studio
@@ -171,16 +172,20 @@ export const App: React.FC = () => {
     soundFX.playClick();
 
     // 1. Calculate new stats dynamically according to game pillars
-    const p1 = activeGameDefinition?.pillars?.[0] || { key: 'goetter', label: 'Götter ⚡', icon: '⚡' };
-    const p2 = activeGameDefinition?.pillars?.[1] || { key: 'priester', label: 'Priester 🙏', icon: '🙏' };
-    const p3 = activeGameDefinition?.pillars?.[2] || { key: 'adel', label: 'Adel 👑', icon: '👑' };
-    const p4 = activeGameDefinition?.pillars?.[3] || { key: 'volk', label: 'Volk 😊', icon: '😊' };
+    const p1 = getPillarDisplay(activeGameDefinition?.pillars?.[0], { label: 'Götter / Ma\'at', icon: '⚡' });
+    const p2 = getPillarDisplay(activeGameDefinition?.pillars?.[1], { label: 'Priester / Kult', icon: '🙏' });
+    const p3 = getPillarDisplay(activeGameDefinition?.pillars?.[2], { label: 'Adel / Hofstaat', icon: '👑' });
+    const p4 = getPillarDisplay(activeGameDefinition?.pillars?.[3], { label: 'Volk / Bauern', icon: '😊' });
+    const p1Key = activeGameDefinition?.pillars?.[0]?.key || 'goetter';
+    const p2Key = activeGameDefinition?.pillars?.[1]?.key || 'priester';
+    const p3Key = activeGameDefinition?.pillars?.[2]?.key || 'adel';
+    const p4Key = activeGameDefinition?.pillars?.[3]?.key || 'volk';
 
     const rawStatChanges = choice.statChanges as any;
-    const p1Delta = (typeof rawStatChanges[p1.key] === 'number') ? rawStatChanges[p1.key] : (choice.statChanges.goetter || 0);
-    const p2Delta = (typeof rawStatChanges[p2.key] === 'number') ? rawStatChanges[p2.key] : (choice.statChanges.priester || 0);
-    const p3Delta = (typeof rawStatChanges[p3.key] === 'number') ? rawStatChanges[p3.key] : (choice.statChanges.adel || 0);
-    const p4Delta = (typeof rawStatChanges[p4.key] === 'number') ? rawStatChanges[p4.key] : (choice.statChanges.volk || 0);
+    const p1Delta = (typeof rawStatChanges[p1Key] === 'number') ? rawStatChanges[p1Key] : (choice.statChanges.goetter || 0);
+    const p2Delta = (typeof rawStatChanges[p2Key] === 'number') ? rawStatChanges[p2Key] : (choice.statChanges.priester || 0);
+    const p3Delta = (typeof rawStatChanges[p3Key] === 'number') ? rawStatChanges[p3Key] : (choice.statChanges.adel || 0);
+    const p4Delta = (typeof rawStatChanges[p4Key] === 'number') ? rawStatChanges[p4Key] : (choice.statChanges.volk || 0);
 
     let newGoetter = stats.goetter + p1Delta;
     let newPriester = stats.priester + p2Delta;
@@ -228,11 +233,7 @@ export const App: React.FC = () => {
         if (newPriester <= 0) newPriester = 15;
         if (newAdel <= 0) newAdel = 15;
         if (newVolk <= 0) newVolk = 15;
-        const p1 = activeGameDefinition?.pillars?.[0]?.label || 'Säule 1';
-        const p2 = activeGameDefinition?.pillars?.[1]?.label || 'Säule 2';
-        const p3 = activeGameDefinition?.pillars?.[2]?.label || 'Säule 3';
-        const p4 = activeGameDefinition?.pillars?.[3]?.label || 'Säule 4';
-        const statLabel = criticalFailStat === 'Götter' ? p1 : criticalFailStat === 'Priester' ? p2 : criticalFailStat === 'Adel' ? p3 : p4;
+        const statLabel = criticalFailStat === 'Götter' ? p1.fullLabel : criticalFailStat === 'Priester' ? p2.fullLabel : criticalFailStat === 'Adel' ? p3.fullLabel : p4.fullLabel;
         const isEgypt = (activeGameDefinition?.era || '').toLowerCase().includes('ägypt') || (activeGameDefinition?.title || '').toLowerCase().includes('pharao') || !activeGameDefinition;
         const eraGraceMsg = isEgypt
           ? `⚡ GNADENFRIST DER GÖTTER AKTIVIERT! ${statLabel} fiel auf 0%. Durch das Opfer all deiner Gunst & Punkte (${activeGameDefinition?.specialResourceName || 'EP'}) wurdest du vor dem Absturz gerettet!`
@@ -550,23 +551,28 @@ export const App: React.FC = () => {
                       const isDLocked = isOptionD && stats.ep < (choice.epCost ?? 3);
 
                       // Helper to get pillar key and label dynamically
-                      const p1 = activeGameDefinition?.pillars?.[0] || { key: 'goetter', label: 'Götter ⚡', icon: '⚡' };
-                      const p2 = activeGameDefinition?.pillars?.[1] || { key: 'priester', label: 'Priester 🙏', icon: '🙏' };
-                      const p3 = activeGameDefinition?.pillars?.[2] || { key: 'adel', label: 'Adel 👑', icon: '👑' };
-                      const p4 = activeGameDefinition?.pillars?.[3] || { key: 'volk', label: 'Volk 😊', icon: '😊' };
+                      const p1 = getPillarDisplay(activeGameDefinition?.pillars?.[0], { label: 'Götter / Ma\'at', icon: '⚡' });
+                      const p2 = getPillarDisplay(activeGameDefinition?.pillars?.[1], { label: 'Priester / Kult', icon: '🙏' });
+                      const p3 = getPillarDisplay(activeGameDefinition?.pillars?.[2], { label: 'Adel / Hofstaat', icon: '👑' });
+                      const p4 = getPillarDisplay(activeGameDefinition?.pillars?.[3], { label: 'Volk / Bauern', icon: '😊' });
+                      const p1Key = activeGameDefinition?.pillars?.[0]?.key || 'goetter';
+                      const p2Key = activeGameDefinition?.pillars?.[1]?.key || 'priester';
+                      const p3Key = activeGameDefinition?.pillars?.[2]?.key || 'adel';
+                      const p4Key = activeGameDefinition?.pillars?.[3]?.key || 'volk';
 
                       // Stat changes mapping (both canonical key and pillar key)
                       const rawStats = choice.statChanges as any;
-                      const p1Delta = rawStats[p1.key] ?? rawStats.goetter;
-                      const p2Delta = rawStats[p2.key] ?? rawStats.priester;
-                      const p3Delta = rawStats[p3.key] ?? rawStats.adel;
-                      const p4Delta = rawStats[p4.key] ?? rawStats.volk;
+                      const p1Delta = rawStats[p1Key] ?? rawStats.goetter;
+                      const p2Delta = rawStats[p2Key] ?? rawStats.priester;
+                      const p3Delta = rawStats[p3Key] ?? rawStats.adel;
+                      const p4Delta = rawStats[p4Key] ?? rawStats.volk;
                       const epDelta = rawStats.ep;
 
-                      // Skill changes mapping
-                      const s1Name = activeGameDefinition?.skillNames?.skill1 || 'Göttliche Auserwähltheit';
-                      const s2Name = activeGameDefinition?.skillNames?.skill2 || 'Politische Geschicklichkeit';
-                      const s3Name = activeGameDefinition?.skillNames?.skill3 || 'Militärische Stärke';
+                      // Skill changes mapping (Guaranteed matching emojis)
+                      const s1 = getSkillDisplay(activeGameDefinition, 1);
+                      const s2 = getSkillDisplay(activeGameDefinition, 2);
+                      const s3 = getSkillDisplay(activeGameDefinition, 3);
+                      const specialRes = getSpecialResourceDisplay(activeGameDefinition);
 
                       const rawSkills = (choice.skillChanges as any) || {};
                       const s1Delta = rawSkills.goettlicheAuserwaehltheit ?? rawSkills.skill1;
@@ -602,7 +608,7 @@ export const App: React.FC = () => {
                                   isDLocked ? 'text-red-400' : 'text-amber-300'
                                 }`}>
                                   {isDLocked ? <Lock className="w-3.5 h-3.5" /> : <Sparkles className="w-3.5 h-3.5 text-yellow-400" />}
-                                  {choice.epCost ?? 3} {activeGameDefinition?.specialResourceEmoji || 'EP'}
+                                  {choice.epCost ?? 3} {specialRes.emoji}
                                 </span>
                               )}
                             </div>
@@ -618,48 +624,48 @@ export const App: React.FC = () => {
                             </p>
                           </div>
 
-                          {/* Stat & Skill Preview Pills */}
+                          {/* Stat & Skill Preview Pills (Guaranteed matching emojis) */}
                           <div className="flex flex-wrap items-center gap-1.5 pt-2 border-t border-stone-800/80 text-[11px]">
                             {typeof p1Delta === 'number' && p1Delta !== 0 && (
-                              <span className={`px-1.5 py-0.5 rounded ${p1Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
-                                {p1.icon} {p1Delta > 0 ? `+${p1Delta}` : p1Delta}%
+                              <span className={`px-1.5 py-0.5 rounded flex items-center gap-1 ${p1Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
+                                <span className="leading-none">{p1.icon}</span> <span>{p1Delta > 0 ? `+${p1Delta}` : p1Delta}%</span>
                               </span>
                             )}
                             {typeof p2Delta === 'number' && p2Delta !== 0 && (
-                              <span className={`px-1.5 py-0.5 rounded ${p2Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
-                                {p2.icon} {p2Delta > 0 ? `+${p2Delta}` : p2Delta}%
+                              <span className={`px-1.5 py-0.5 rounded flex items-center gap-1 ${p2Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
+                                <span className="leading-none">{p2.icon}</span> <span>{p2Delta > 0 ? `+${p2Delta}` : p2Delta}%</span>
                               </span>
                             )}
                             {typeof p3Delta === 'number' && p3Delta !== 0 && (
-                              <span className={`px-1.5 py-0.5 rounded ${p3Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
-                                {p3.icon} {p3Delta > 0 ? `+${p3Delta}` : p3Delta}%
+                              <span className={`px-1.5 py-0.5 rounded flex items-center gap-1 ${p3Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
+                                <span className="leading-none">{p3.icon}</span> <span>{p3Delta > 0 ? `+${p3Delta}` : p3Delta}%</span>
                               </span>
                             )}
                             {typeof p4Delta === 'number' && p4Delta !== 0 && (
-                              <span className={`px-1.5 py-0.5 rounded ${p4Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
-                                {p4.icon} {p4Delta > 0 ? `+${p4Delta}` : p4Delta}%
+                              <span className={`px-1.5 py-0.5 rounded flex items-center gap-1 ${p4Delta > 0 ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-800' : 'bg-red-950/80 text-red-300 border border-red-800'}`}>
+                                <span className="leading-none">{p4.icon}</span> <span>{p4Delta > 0 ? `+${p4Delta}` : p4Delta}%</span>
                               </span>
                             )}
                             {typeof epDelta === 'number' && epDelta !== 0 && (
-                              <span className="px-1.5 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800 font-bold">
-                                {activeGameDefinition?.specialResourceEmoji || '🧠'} {epDelta > 0 ? `+${epDelta}` : epDelta} {activeGameDefinition?.specialResourceName || 'EP'}
+                              <span className="px-1.5 py-0.5 rounded bg-amber-950/80 text-amber-300 border border-amber-800 font-bold flex items-center gap-1">
+                                <span className="leading-none">{specialRes.emoji}</span> <span>{epDelta > 0 ? `+${epDelta}` : epDelta} {specialRes.name}</span>
                               </span>
                             )}
 
                             {/* Talent/Fertigkeiten Zuwachs-Pills */}
                             {typeof s1Delta === 'number' && s1Delta > 0 && (
-                              <span className="px-1.5 py-0.5 rounded bg-yellow-950/80 text-yellow-300 border border-yellow-700/60 font-semibold" title={s1Name}>
-                                🌟 +{s1Delta} {s1Name.split(' ')[0]}
+                              <span className="px-1.5 py-0.5 rounded bg-yellow-950/80 text-yellow-300 border border-yellow-700/60 font-semibold flex items-center gap-1" title={s1.label}>
+                                <span className="leading-none">{s1.icon}</span> <span>+{s1Delta} {s1.shortLabel}</span>
                               </span>
                             )}
                             {typeof s2Delta === 'number' && s2Delta > 0 && (
-                              <span className="px-1.5 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 font-semibold" title={s2Name}>
-                                🗣️ +{s2Delta} {s2Name.split(' ')[0]}
+                              <span className="px-1.5 py-0.5 rounded bg-cyan-950/80 text-cyan-300 border border-cyan-700/60 font-semibold flex items-center gap-1" title={s2.label}>
+                                <span className="leading-none">{s2.icon}</span> <span>+{s2Delta} {s2.shortLabel}</span>
                               </span>
                             )}
                             {typeof s3Delta === 'number' && s3Delta > 0 && (
-                              <span className="px-1.5 py-0.5 rounded bg-rose-950/80 text-rose-300 border border-rose-700/60 font-semibold" title={s3Name}>
-                                ⚔️ +{s3Delta} {s3Name.split(' ')[0]}
+                              <span className="px-1.5 py-0.5 rounded bg-rose-950/80 text-rose-300 border border-rose-700/60 font-semibold flex items-center gap-1" title={s3.label}>
+                                <span className="leading-none">{s3.icon}</span> <span>+{s3Delta} {s3.shortLabel}</span>
                               </span>
                             )}
                           </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { Stats, Skills, PlayerProfile } from '../types/game';
-import { Zap, Heart, ShieldAlert, Users, Sparkles, BookOpen, Volume2, VolumeX, Shield, Award, Sword, FolderOpen, ExternalLink } from 'lucide-react';
+import { BookOpen, Volume2, VolumeX, Shield, FolderOpen, ExternalLink } from 'lucide-react';
 import { soundFX } from '../utils/sound';
+import { getPillarDisplay, getSkillDisplay, getSpecialResourceDisplay } from '../utils/gameIcons';
 
 interface DashboardHeaderProps {
   profile: PlayerProfile;
@@ -34,18 +35,17 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   theme,
   hefterCount,
 }) => {
-  // Dynamic Pillars
-  const pillar1 = activeGame?.pillars?.[0] || { label: 'Götter ⚡', icon: '⚡' };
-  const pillar2 = activeGame?.pillars?.[1] || { label: 'Priester 🙏', icon: '🙏' };
-  const pillar3 = activeGame?.pillars?.[2] || { label: 'Adel 👑', icon: '👑' };
-  const pillar4 = activeGame?.pillars?.[3] || { label: 'Volk 😊', icon: '😊' };
+  // Dynamic Pillars (Guaranteed matching emojis)
+  const pillar1 = getPillarDisplay(activeGame?.pillars?.[0], { label: 'Götter / Ma\'at', icon: '⚡' });
+  const pillar2 = getPillarDisplay(activeGame?.pillars?.[1], { label: 'Priester / Kult', icon: '🙏' });
+  const pillar3 = getPillarDisplay(activeGame?.pillars?.[2], { label: 'Adel / Hofstaat', icon: '👑' });
+  const pillar4 = getPillarDisplay(activeGame?.pillars?.[3], { label: 'Volk / Bauern', icon: '😊' });
 
-  const resName = activeGame?.specialResourceName || 'Erfahrung (EP)';
-  const resEmoji = activeGame?.specialResourceEmoji || '🧠';
+  const specialRes = getSpecialResourceDisplay(activeGame);
 
-  const skill1Name = activeGame?.skillNames?.skill1 || 'Göttliche Auserwähltheit';
-  const skill2Name = activeGame?.skillNames?.skill2 || 'Politische Geschicklichkeit';
-  const skill3Name = activeGame?.skillNames?.skill3 || 'Militärische Stärke';
+  const s1 = getSkillDisplay(activeGame, 1);
+  const s2 = getSkillDisplay(activeGame, 2);
+  const s3 = getSkillDisplay(activeGame, 3);
 
   // Stat Bar helper with color coding
   const renderStatBar = (
@@ -212,28 +212,28 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           {renderStatBar(
             pillar1.label,
             stats.goetter,
-            <Zap className="w-3.5 h-3.5 text-yellow-400" />,
+            <span className="text-base select-none leading-none shrink-0" role="img" aria-label={pillar1.label}>{pillar1.icon}</span>,
             'bg-gradient-to-r from-yellow-600 to-amber-400',
             stats.goetter <= 15 ? 'bg-red-500 text-white' : 'bg-yellow-950 text-yellow-300'
           )}
           {renderStatBar(
             pillar2.label,
             stats.priester,
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />,
+            <span className="text-base select-none leading-none shrink-0" role="img" aria-label={pillar2.label}>{pillar2.icon}</span>,
             'bg-gradient-to-r from-purple-700 to-indigo-400',
             stats.priester <= 15 ? 'bg-red-500 text-white' : 'bg-purple-950 text-purple-300'
           )}
           {renderStatBar(
             pillar3.label,
             stats.adel,
-            <Award className="w-3.5 h-3.5 text-blue-400" />,
+            <span className="text-base select-none leading-none shrink-0" role="img" aria-label={pillar3.label}>{pillar3.icon}</span>,
             'bg-gradient-to-r from-blue-700 to-cyan-400',
             stats.adel <= 15 ? 'bg-red-500 text-white' : 'bg-blue-950 text-blue-300'
           )}
           {renderStatBar(
             pillar4.label,
             stats.volk,
-            <Heart className="w-3.5 h-3.5 text-emerald-400" />,
+            <span className="text-base select-none leading-none shrink-0" role="img" aria-label={pillar4.label}>{pillar4.icon}</span>,
             'bg-gradient-to-r from-emerald-600 to-green-400',
             stats.volk <= 15 ? 'bg-red-500 text-white' : 'bg-emerald-950 text-emerald-300'
           )}
@@ -241,9 +241,9 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
           {/* Special Resource Box */}
           <div className="col-span-2 sm:col-span-1 flex items-center justify-between px-3 py-2 rounded-xl bg-stone-900/80 border border-stone-800 hover:border-amber-700/50 transition-all">
             <div className="flex items-center gap-2">
-              <span className="text-base select-none">{resEmoji}</span>
+              <span className="text-base select-none shrink-0" role="img" aria-label={specialRes.name}>{specialRes.emoji}</span>
               <div className="leading-tight">
-                <span className="text-[10px] block uppercase font-mono font-semibold text-stone-400 truncate max-w-[110px]">{resName}</span>
+                <span className="text-[10px] block uppercase font-mono font-semibold text-stone-400 truncate max-w-[110px]">{specialRes.name}</span>
                 <span className="text-[10px] text-stone-500">3 Punkte für Option D</span>
               </div>
             </div>
@@ -256,19 +256,19 @@ export const DashboardHeader: React.FC<DashboardHeaderProps> = ({
         {/* Secondary Skill Ribbons: 3 Talente */}
         <div className="flex flex-wrap items-center gap-3 text-xs bg-stone-900/60 px-3 py-1.5 rounded-md border border-stone-800">
           <span className="text-stone-400 font-medium">Talente & Fertigkeiten:</span>
-          <span className="flex items-center gap-1 text-amber-300">
-            <Sparkles className="w-3.5 h-3.5 text-yellow-400" />
-            {skill1Name}: <strong>{skills.goettlicheAuserwaehltheit}</strong>
+          <span className="flex items-center gap-1.5 text-amber-300">
+            <span className="text-sm select-none leading-none shrink-0" role="img" aria-label={s1.label}>{s1.icon}</span>
+            <span>{s1.label}: <strong>{skills.goettlicheAuserwaehltheit}</strong></span>
           </span>
           <span className="text-stone-600">•</span>
-          <span className="flex items-center gap-1 text-cyan-300">
-            <Users className="w-3.5 h-3.5 text-cyan-400" />
-            {skill2Name}: <strong>{skills.politischeGeschicklichkeit}</strong>
+          <span className="flex items-center gap-1.5 text-cyan-300">
+            <span className="text-sm select-none leading-none shrink-0" role="img" aria-label={s2.label}>{s2.icon}</span>
+            <span>{s2.label}: <strong>{skills.politischeGeschicklichkeit}</strong></span>
           </span>
           <span className="text-stone-600">•</span>
-          <span className="flex items-center gap-1 text-red-300">
-            <Sword className="w-3.5 h-3.5 text-red-400" />
-            {skill3Name}: <strong>{skills.militaerischeStaerke}</strong>
+          <span className="flex items-center gap-1.5 text-rose-300">
+            <span className="text-sm select-none leading-none shrink-0" role="img" aria-label={s3.label}>{s3.icon}</span>
+            <span>{s3.label}: <strong>{skills.militaerischeStaerke}</strong></span>
           </span>
         </div>
       </div>

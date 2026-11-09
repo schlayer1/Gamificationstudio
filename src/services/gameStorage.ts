@@ -71,6 +71,11 @@ export class GameStorageService {
           skill2: 'Politische Geschicklichkeit',
           skill3: 'Militärische Stärke',
         },
+        skillIcons: {
+          skill1: '🌟',
+          skill2: '🗣️',
+          skill3: '⚔️',
+        },
         rounds: [], // Dynamic rounds resolved via storyData engine
         authorId: 'official',
         authorName: 'Meisterspiel',

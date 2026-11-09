@@ -1618,6 +1618,11 @@ export const GREECE_MASTER_GAME: GameDefinition = {
     skill2: 'Verfassungswissen',
     skill3: 'Phalanxtaktik',
   },
+  skillIcons: {
+    skill1: '🗣️',
+    skill2: '📜',
+    skill3: '🛡️',
+  },
   heroImage: '/assets/greece_hero.jpg',
   rounds: GREECE_ROUNDS,
   shareCode: 'GRE01',

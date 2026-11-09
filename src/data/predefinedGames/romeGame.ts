@@ -2625,6 +2625,11 @@ export const ROME_MASTER_GAME: GameDefinition = {
     skill2: 'Diplomatie & Rhetorik',
     skill3: 'Rechts- & Staatskunst',
   },
+  skillIcons: {
+    skill1: '🛡️',
+    skill2: '🗣️',
+    skill3: '📜',
+  },
   heroImage: '/assets/rome_hero.jpg',
   rounds: ROME_ROUNDS,
   shareCode: 'ROM01',

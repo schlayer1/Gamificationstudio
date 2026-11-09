@@ -2,6 +2,7 @@ import { geminiRotationService } from './geminiRotation';
 import { GameDefinition, PillarConfig, RoundStory, GradeLevel, StationHotspot } from '../types/game';
 import { detectEraTheme } from '../utils/themeManager';
 import { PREDEFINED_HISTORY_ASSETS } from '../data/historyAssetPool';
+import { getPillarDisplay, getSkillDisplay, getCleanLabel } from '../utils/gameIcons';
 
 export interface GenerationRequest {
   title: string;
@@ -19,6 +20,7 @@ export interface GenerationRequest {
   specialResourceName: string;
   specialResourceEmoji: string;
   skills: { skill1: string; skill2: string; skill3: string };
+  skillIcons?: { skill1: string; skill2: string; skill3: string };
   onProgress?: (status: string, percent?: number) => void;
 }
 
@@ -32,6 +34,7 @@ export interface CustomSettingProposal {
   suggestedPillars: [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
   specialResource: { name: string; emoji: string };
   skills: { skill1: string; skill2: string; skill3: string };
+  skillIcons?: { skill1: string; skill2: string; skill3: string };
   heroImagePrompt: string;
 }
 
@@ -152,12 +155,13 @@ Erstelle daraus ein pädagogisch stimmiges und spielmechanisch ausgewogenes Konz
 6. "defaultTopics": Genau 5 didaktische Kernthemen aus dem Geschichtsunterricht als Array von Strings.
 7. "suggestedPillars": Genau 4 spezifische Mächte- oder Ressourcensäulen mit:
    - "key": Eindeutiger englischer Key (z.B. "patricians", "supplies", "morale", "legions")
-   - "label": Titel mit passendem Emoji (z.B. "🏛️ Senat", "🌾 Vorräte", "⚔️ Legionen")
-   - "icon": Einzelnes Emoji
+   - "label": Titel der Säule OHNE Emoji (z.B. "Senat & Patrizier", "Legionen", "Vorräte", "Volk")
+   - "icon": Genau EIN einzigartiges, passendes Emoji für diese Säule (z.B. "🏛️", "⚔️", "🌾", "😊")
    - "description": 1 kurzer didaktischer Satz zur Bedeutung im Spiel
-8. "specialResource": Name und Emoji für die besondere Ressource (z.B. { "name": "Golddinare", "emoji": "🪙" } oder { "name": "Seide & Jade", "emoji": "🧵" }).
-9. "skills": 3 historische Kompetenzen (z.B. { "skill1": "Verhandlungsgeschick", "skill2": "Topografischer Weitblick", "skill3": "Kulturelle Diplomatie" }).
-10. "heroImagePrompt": Ein detailreicher englischer Bild-Prompt im 16-Bit Pixel-Art SNES-Retro-Stil für das epische Titel-Banner (16:9).
+8. "specialResource": Name (ohne Emoji) und genau ein Emoji für die besondere Ressource (z.B. { "name": "Golddinare", "emoji": "🪙" }).
+9. "skills": 3 historische Kompetenzen (ohne Emoji, z.B. { "skill1": "Verhandlungsgeschick", "skill2": "Topografischer Weitblick", "skill3": "Kulturelle Diplomatie" }).
+10. "skillIcons": Genau ein passendes Emoji pro Kompetenz (z.B. { "skill1": "🗣️", "skill2": "🗺️", "skill3": "📜" }).
+11. "heroImagePrompt": Ein detailreicher englischer Bild-Prompt im 16-Bit Pixel-Art SNES-Retro-Stil für das epische Titel-Banner (16:9).
 
 Antworte STRENG als valides JSON nach diesem Schema:
 {
@@ -168,13 +172,14 @@ Antworte STRENG als valides JSON nach diesem Schema:
   "defaultTargetGrades": "Mittelstufe (7.–9. Klasse)",
   "defaultTopics": ["Thema 1", "Thema 2", "Thema 3", "Thema 4", "Thema 5"],
   "suggestedPillars": [
-    { "key": "p1", "label": "... Emoji", "icon": "Emoji", "description": "..." },
-    { "key": "p2", "label": "... Emoji", "icon": "Emoji", "description": "..." },
-    { "key": "p3", "label": "... Emoji", "icon": "Emoji", "description": "..." },
-    { "key": "p4", "label": "... Emoji", "icon": "Emoji", "description": "..." }
+    { "key": "p1", "label": "Titel ohne Emoji", "icon": "🏛️", "description": "..." },
+    { "key": "p2", "label": "Titel ohne Emoji", "icon": "⚔️", "description": "..." },
+    { "key": "p3", "label": "Titel ohne Emoji", "icon": "🌾", "description": "..." },
+    { "key": "p4", "label": "Titel ohne Emoji", "icon": "😊", "description": "..." }
   ],
-  "specialResource": { "name": "...", "emoji": "..." },
+  "specialResource": { "name": "Name ohne Emoji", "emoji": "🪙" },
   "skills": { "skill1": "...", "skill2": "...", "skill3": "..." },
+  "skillIcons": { "skill1": "🗣️", "skill2": "🗺️", "skill3": "📜" },
   "heroImagePrompt": "16-bit pixel art style of ..., atmospheric retro SNES RPG aesthetic, 16:9 aspect ratio"
 }
 `;
@@ -189,6 +194,42 @@ Antworte STRENG als valides JSON nach diesem Schema:
     if (!parsed) {
       throw new Error('Die KI konnte für dieses Setting kein gültiges Datenformat erstellen. Bitte versuche es erneut.');
     }
+
+    // Sanitize & normalize pillars so labels have no duplicate emojis and icons are always valid emojis
+    const rawPillars = (parsed.suggestedPillars && Array.isArray(parsed.suggestedPillars) && parsed.suggestedPillars.length === 4)
+      ? parsed.suggestedPillars
+      : [
+          { key: 'power1', label: 'Macht I', icon: '👑', description: 'Erste Säule der Ordnung' },
+          { key: 'power2', label: 'Macht II', icon: '⚖️', description: 'Zweite Säule der Ordnung' },
+          { key: 'power3', label: 'Macht III', icon: '🌾', description: 'Wirtschaft und Versorgung' },
+          { key: 'power4', label: 'Macht IV', icon: '😊', description: 'Bevölkerung und Moral' }
+        ];
+
+    const sanitizedPillars = rawPillars.map((p: any, idx: number) => {
+      const display = getPillarDisplay(p, {
+        icon: idx === 0 ? '👑' : idx === 1 ? '⚖️' : idx === 2 ? '🌾' : '😊',
+        label: p.label || `Säule ${idx + 1}`
+      });
+      return {
+        key: p.key || `pillar_${idx + 1}`,
+        label: display.label,
+        icon: display.icon,
+        description: p.description || ''
+      };
+    }) as [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
+
+    const parsedSkills = parsed.skills || { skill1: 'Strategie', skill2: 'Weitsicht', skill3: 'Diplomatie' };
+    const cleanedSkills = {
+      skill1: getCleanLabel(parsedSkills.skill1) || 'Strategie',
+      skill2: getCleanLabel(parsedSkills.skill2) || 'Weitsicht',
+      skill3: getCleanLabel(parsedSkills.skill3) || 'Diplomatie',
+    };
+    const resolvedSkillIcons = parsed.skillIcons || {
+      skill1: getSkillDisplay({ skillNames: cleanedSkills } as any, 1).icon,
+      skill2: getSkillDisplay({ skillNames: cleanedSkills } as any, 2).icon,
+      skill3: getSkillDisplay({ skillNames: cleanedSkills } as any, 3).icon,
+    };
+
     return {
       title: parsed.title || freeformSetting,
       era: parsed.era || 'Historische Epoche',
@@ -196,16 +237,13 @@ Antworte STRENG als valides JSON nach diesem Schema:
       defaultGradeLevel: parsed.defaultGradeLevel || 'mittelstufe',
       defaultTargetGrades: parsed.defaultTargetGrades || 'Mittelstufe (7.–9. Klasse)',
       defaultTopics: Array.isArray(parsed.defaultTopics) && parsed.defaultTopics.length > 0 ? parsed.defaultTopics : [freeformSetting],
-      suggestedPillars: (parsed.suggestedPillars && parsed.suggestedPillars.length === 4)
-        ? parsed.suggestedPillars
-        : [
-            { key: 'power1', label: 'Macht I 👑', icon: '👑', description: 'Erste Säule der Ordnung' },
-            { key: 'power2', label: 'Macht II ⚖️', icon: '⚖️', description: 'Zweite Säule der Ordnung' },
-            { key: 'power3', label: 'Macht III 🌾', icon: '🌾', description: 'Wirtschaft und Versorgung' },
-            { key: 'power4', label: 'Macht IV 😊', icon: '😊', description: 'Bevölkerung und Moral' }
-          ],
-      specialResource: parsed.specialResource || { name: 'Einfluss', emoji: '✨' },
-      skills: parsed.skills || { skill1: 'Strategie', skill2: 'Weitsicht', skill3: 'Diplomatie' },
+      suggestedPillars: sanitizedPillars,
+      specialResource: {
+        name: getCleanLabel(parsed.specialResource?.name) || 'Einfluss',
+        emoji: parsed.specialResource?.emoji?.trim() || '✨'
+      },
+      skills: cleanedSkills,
+      skillIcons: resolvedSkillIcons,
       heroImagePrompt: parsed.heroImagePrompt || `16-bit pixel art illustration of ${freeformSetting}, retro SNES RPG title screen, 16:9 aspect ratio`
     };
   }
@@ -681,10 +719,30 @@ WICHTIGSTE FORMATIERUNGS-REGELN:
       heroPrompt,
       heroImage: defaultHeroImg,
       coreTopics: req.coreTopics,
-      pillars: req.pillars,
-      specialResourceName: req.specialResourceName,
-      specialResourceEmoji: req.specialResourceEmoji,
-      skillNames: req.skills,
+      pillars: req.pillars.map((p, idx) => {
+        const d = getPillarDisplay(p, {
+          icon: idx === 0 ? '⚡' : idx === 1 ? '🙏' : idx === 2 ? '👑' : '😊',
+          label: p.label || `Säule ${idx + 1}`
+        });
+        return {
+          key: p.key || `pillar_${idx + 1}`,
+          label: d.label,
+          icon: d.icon,
+          description: p.description || ''
+        };
+      }) as [PillarConfig, PillarConfig, PillarConfig, PillarConfig],
+      specialResourceName: getCleanLabel(req.specialResourceName) || 'Erfahrungspunkte (EP)',
+      specialResourceEmoji: req.specialResourceEmoji?.trim() || '🧠',
+      skillNames: {
+        skill1: getCleanLabel(req.skills.skill1) || 'Stärke & Weisheit',
+        skill2: getCleanLabel(req.skills.skill2) || 'Politik & Diplomatie',
+        skill3: getCleanLabel(req.skills.skill3) || 'Militär & Führung',
+      },
+      skillIcons: req.skillIcons || {
+        skill1: getSkillDisplay({ skillNames: req.skills } as any, 1).icon,
+        skill2: getSkillDisplay({ skillNames: req.skills } as any, 2).icon,
+        skill3: getSkillDisplay({ skillNames: req.skills } as any, 3).icon,
+      },
       rounds: parsedRounds,
       worksheet,
     };

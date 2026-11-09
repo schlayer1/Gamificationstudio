@@ -42,6 +42,7 @@ import { gameStorageService, PublishedGameRecord } from '../services/gameStorage
 import { googleDriveSyncService } from '../services/googleDriveSync';
 import { teacherAuthService } from '../services/teacherAuth';
 import { PortalUser } from '../types/user';
+import { getPillarDisplay, getSkillDisplay, getCleanLabel } from '../utils/gameIcons';
 
 interface TeacherStudioProps {
   onLoadGameToPlayer: (game: GameDefinition) => void;
@@ -82,11 +83,16 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
   const [specialResourceName, setSpecialResourceName] = useState<string>(selectedTemplate.specialResource.name);
   const [specialResourceEmoji, setSpecialResourceEmoji] = useState<string>(selectedTemplate.specialResource.emoji);
 
-  // Skills
+  // Skills & Skill Icons (Guaranteed matching emojis)
   const [skills, setSkills] = useState<{ skill1: string; skill2: string; skill3: string }>({
-    skill1: selectedTemplate.skills.skill1,
-    skill2: selectedTemplate.skills.skill2,
-    skill3: selectedTemplate.skills.skill3,
+    skill1: getCleanLabel(selectedTemplate.skills.skill1),
+    skill2: getCleanLabel(selectedTemplate.skills.skill2),
+    skill3: getCleanLabel(selectedTemplate.skills.skill3),
+  });
+  const [skillIcons, setSkillIcons] = useState<{ skill1: string; skill2: string; skill3: string }>({
+    skill1: getSkillDisplay({ skillNames: selectedTemplate.skills } as any, 1).icon,
+    skill2: getSkillDisplay({ skillNames: selectedTemplate.skills } as any, 2).icon,
+    skill3: getSkillDisplay({ skillNames: selectedTemplate.skills } as any, 3).icon,
   });
 
   // Game Customization (Rounds, Reflection, Source Material, Scanned Textbook Photo, Art Style)
@@ -148,15 +154,32 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       ));
     }
 
-    setPillars([
-      tpl.suggestedPillars[0],
-      tpl.suggestedPillars[1],
-      tpl.suggestedPillars[2],
-      tpl.suggestedPillars[3],
-    ]);
-    setSpecialResourceName(tpl.specialResource.name);
+    const resolvedPillars = tpl.suggestedPillars.map((p, idx) => {
+      const d = getPillarDisplay(p, {
+        icon: idx === 0 ? '⚡' : idx === 1 ? '🙏' : idx === 2 ? '👑' : '😊',
+        label: p.label || `Säule ${idx + 1}`
+      });
+      return {
+        key: p.key,
+        label: d.label,
+        icon: d.icon,
+        description: p.description
+      };
+    }) as [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
+
+    setPillars(resolvedPillars);
+    setSpecialResourceName(getCleanLabel(tpl.specialResource.name));
     setSpecialResourceEmoji(tpl.specialResource.emoji);
-    setSkills(tpl.skills);
+    setSkills({
+      skill1: getCleanLabel(tpl.skills.skill1),
+      skill2: getCleanLabel(tpl.skills.skill2),
+      skill3: getCleanLabel(tpl.skills.skill3),
+    });
+    setSkillIcons({
+      skill1: getSkillDisplay({ skillNames: tpl.skills } as any, 1).icon,
+      skill2: getSkillDisplay({ skillNames: tpl.skills } as any, 2).icon,
+      skill3: getSkillDisplay({ skillNames: tpl.skills } as any, 3).icon,
+    });
   };
 
   // Meisterspiel in den Editor laden (zur Anpassung / KI-Neugenerierung)
@@ -169,18 +192,33 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
     setTargetGrades(game.targetGrades || 'Mittelstufe (Klasse 7–9)');
     setCoreTopics(game.coreTopics || []);
     if (game.pillars && game.pillars.length === 4) {
-      setPillars([
-        game.pillars[0],
-        game.pillars[1],
-        game.pillars[2],
-        game.pillars[3],
-      ]);
+      setPillars(game.pillars.map((p, idx) => {
+        const d = getPillarDisplay(p, {
+          icon: idx === 0 ? '⚡' : idx === 1 ? '🙏' : idx === 2 ? '👑' : '😊',
+          label: p.label || `Säule ${idx + 1}`
+        });
+        return {
+          key: p.key,
+          label: d.label,
+          icon: d.icon,
+          description: p.description
+        };
+      }) as [PillarConfig, PillarConfig, PillarConfig, PillarConfig]);
     }
-    setSpecialResourceName(game.specialResourceName || 'Erfahrungspunkte');
+    setSpecialResourceName(getCleanLabel(game.specialResourceName) || 'Erfahrungspunkte');
     setSpecialResourceEmoji(game.specialResourceEmoji || '🧠');
     if (game.skillNames) {
-      setSkills(game.skillNames);
+      setSkills({
+        skill1: getCleanLabel(game.skillNames.skill1),
+        skill2: getCleanLabel(game.skillNames.skill2),
+        skill3: getCleanLabel(game.skillNames.skill3),
+      });
     }
+    setSkillIcons(game.skillIcons || {
+      skill1: getSkillDisplay(game, 1).icon,
+      skill2: getSkillDisplay(game, 2).icon,
+      skill3: getSkillDisplay(game, 3).icon,
+    });
     setRoundCount(game.rounds?.length || 20);
     setPublishedNotice(`Spiel „${game.title}“ wurde in den Editor geladen! Du kannst die Einstellungen unten anpassen oder direkt generieren.`);
   };
@@ -212,6 +250,11 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
       setSpecialResourceName(proposal.specialResource.name);
       setSpecialResourceEmoji(proposal.specialResource.emoji);
       setSkills(proposal.skills);
+      setSkillIcons(proposal.skillIcons || {
+        skill1: getSkillDisplay({ skillNames: proposal.skills } as any, 1).icon,
+        skill2: getSkillDisplay({ skillNames: proposal.skills } as any, 2).icon,
+        skill3: getSkillDisplay({ skillNames: proposal.skills } as any, 3).icon,
+      });
 
       setIsAnalyzingSetting(false);
       soundFX.playMilestone();
@@ -312,6 +355,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
         specialResourceName,
         specialResourceEmoji,
         skills,
+        skillIcons,
         onProgress: (status, percent) => {
           setGenerationProgress(status);
           if (typeof percent === 'number') {
@@ -1636,27 +1680,50 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
 
       {/* STEP 3: The 4 Pillars & Resources */}
       <div className="papyrus-dark p-6 rounded-2xl border border-amber-700/60 space-y-4 shadow-xl">
-        <h2 className="text-base font-bold text-amber-200 font-serif">
-          Schritt 3: Das 4-Säulen-Modell & Spezialressourcen anpassen
-        </h2>
+        <div>
+          <h2 className="text-base font-bold text-amber-200 font-serif">
+            Schritt 3: Das 4-Säulen-Modell, Spezialressource & Talente anpassen
+          </h2>
+          <p className="text-xs text-stone-400 mt-1">
+            Alle Icons werden als kinderfreundliche, thematisch abgestimmte Emojis dargestellt – einheitlich in der Ressourcenleiste und bei den Entscheidungs-Optionen.
+          </p>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {pillars.map((p, idx) => (
             <div key={idx} className="p-3.5 rounded-xl bg-stone-900/90 border border-amber-800/40 space-y-2">
-              <span className="text-[11px] font-mono uppercase text-amber-400 block">Säule {idx + 1}</span>
-              <input
-                type="text"
-                value={p.label}
-                onChange={(e) => {
-                  const copy = [...pillars] as [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
-                  copy[idx].label = e.target.value;
-                  setPillars(copy);
-                }}
-                className="w-full px-2.5 py-1.5 rounded bg-stone-950 border border-stone-700 text-xs font-bold text-amber-200"
-              />
+              <div className="flex items-center justify-between">
+                <span className="text-[11px] font-mono uppercase text-amber-400 block font-bold">Säule {idx + 1}</span>
+                <span className="text-[10px] text-stone-500 font-mono">{p.key}</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <input
+                  type="text"
+                  value={p.icon || '⚡'}
+                  title="Emoji-Icon der Säule (z.B. 🍖, 🛠️, 🏛️, ⚔️)"
+                  onChange={(e) => {
+                    const copy = [...pillars] as [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
+                    copy[idx].icon = e.target.value;
+                    setPillars(copy);
+                  }}
+                  className="w-12 px-1.5 py-1.5 text-center rounded bg-stone-950 border border-amber-700/70 text-base"
+                />
+                <input
+                  type="text"
+                  value={p.label}
+                  placeholder="Name der Säule"
+                  onChange={(e) => {
+                    const copy = [...pillars] as [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
+                    copy[idx].label = e.target.value;
+                    setPillars(copy);
+                  }}
+                  className="flex-1 px-2.5 py-1.5 rounded bg-stone-950 border border-stone-700 text-xs font-bold text-amber-200"
+                />
+              </div>
               <input
                 type="text"
                 value={p.description}
+                placeholder="Kurze didaktische Beschreibung..."
                 onChange={(e) => {
                   const copy = [...pillars] as [PillarConfig, PillarConfig, PillarConfig, PillarConfig];
                   copy[idx].description = e.target.value;
@@ -1668,6 +1735,72 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
           ))}
         </div>
 
+        {/* 3 Historical Skills / Talente */}
+        <div className="pt-2 border-t border-stone-800/80">
+          <span className="text-xs font-mono uppercase text-amber-400 font-bold block mb-2">3 Historische Talente & Fertigkeiten:</span>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-800/40 space-y-1.5">
+              <span className="text-[10px] text-stone-400 block font-mono">Talent 1 (Stärke / Jagd / Sakral)</span>
+              <div className="flex items-center gap-1.5">
+                <input
+                  type="text"
+                  value={skillIcons.skill1}
+                  title="Emoji für Talent 1"
+                  onChange={(e) => setSkillIcons({ ...skillIcons, skill1: e.target.value })}
+                  className="w-10 px-1 py-1 text-center rounded bg-stone-950 border border-amber-700/70 text-base"
+                />
+                <input
+                  type="text"
+                  value={skills.skill1}
+                  placeholder="Name Talent 1"
+                  onChange={(e) => setSkills({ ...skills, skill1: e.target.value })}
+                  className="flex-1 px-2.5 py-1.5 rounded bg-stone-950 border border-stone-700 text-xs font-bold text-amber-200"
+                />
+              </div>
+            </div>
+
+            <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-800/40 space-y-1.5">
+              <span className="text-[10px] text-stone-400 block font-mono">Talent 2 (Politik / Organisation)</span>
+              <div className="flex items-center gap-1.5">
+                <input
+                  type="text"
+                  value={skillIcons.skill2}
+                  title="Emoji für Talent 2"
+                  onChange={(e) => setSkillIcons({ ...skillIcons, skill2: e.target.value })}
+                  className="w-10 px-1 py-1 text-center rounded bg-stone-950 border border-amber-700/70 text-base"
+                />
+                <input
+                  type="text"
+                  value={skills.skill2}
+                  placeholder="Name Talent 2"
+                  onChange={(e) => setSkills({ ...skills, skill2: e.target.value })}
+                  className="flex-1 px-2.5 py-1.5 rounded bg-stone-950 border border-stone-700 text-xs font-bold text-amber-200"
+                />
+              </div>
+            </div>
+
+            <div className="p-3 rounded-xl bg-stone-900/90 border border-amber-800/40 space-y-1.5">
+              <span className="text-[10px] text-stone-400 block font-mono">Talent 3 (Handwerk / Militär)</span>
+              <div className="flex items-center gap-1.5">
+                <input
+                  type="text"
+                  value={skillIcons.skill3}
+                  title="Emoji für Talent 3"
+                  onChange={(e) => setSkillIcons({ ...skillIcons, skill3: e.target.value })}
+                  className="w-10 px-1 py-1 text-center rounded bg-stone-950 border border-amber-700/70 text-base"
+                />
+                <input
+                  type="text"
+                  value={skills.skill3}
+                  placeholder="Name Talent 3"
+                  onChange={(e) => setSkills({ ...skills, skill3: e.target.value })}
+                  className="flex-1 px-2.5 py-1.5 rounded bg-stone-950 border border-stone-700 text-xs font-bold text-amber-200"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
           <div className="p-3.5 rounded-xl bg-stone-900/90 border border-stone-800 flex items-center justify-between">
             <span className="text-xs text-stone-300">Spezialressource (Option D):</span>
@@ -1676,13 +1809,13 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
                 type="text"
                 value={specialResourceEmoji}
                 onChange={(e) => setSpecialResourceEmoji(e.target.value)}
-                className="w-10 px-2 py-1 text-center rounded bg-stone-950 border border-stone-700 text-xs"
+                className="w-12 px-2 py-1 text-center rounded bg-stone-950 border border-stone-700 text-base"
               />
               <input
                 type="text"
                 value={specialResourceName}
                 onChange={(e) => setSpecialResourceName(e.target.value)}
-                className="px-2.5 py-1 rounded bg-stone-950 border border-stone-700 text-xs text-amber-200"
+                className="px-2.5 py-1.5 rounded bg-stone-950 border border-stone-700 text-xs text-amber-200"
               />
             </div>
           </div>
