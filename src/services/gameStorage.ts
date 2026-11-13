@@ -1,5 +1,5 @@
 import { GameDefinition } from '../types/game';
-import { PortalUser } from '../types/user';
+import { formatTeacherName, PortalUser } from '../types/user';
 import { teacherAuthService } from './teacherAuth';
 import { WW1_MASTER_GAME } from '../data/predefinedGames/ww1Game';
 import { STONEAGE_MASTER_GAME } from '../data/predefinedGames/stoneageGame';
@@ -225,7 +225,7 @@ export class GameStorageService {
     const existingRec = existing.find((g) => g.id === game.id);
 
     const authorId = author.id;
-    const authorName = author.name;
+    const authorName = formatTeacherName(author);
 
     game.authorId = authorId;
     game.authorName = authorName;
@@ -286,7 +286,7 @@ export class GameStorageService {
 
     // Keep author information
     const authorId = author?.id || game.authorId || existingRec?.authorId || 't-lehrer';
-    const authorName = author?.name || game.authorName || existingRec?.authorName || 'Lehrkraft';
+    const authorName = (author ? formatTeacherName(author) : '') || game.authorName || existingRec?.authorName || 'Lehrkraft';
 
     game.shareCode = shareCode;
     game.authorId = authorId;
@@ -378,9 +378,9 @@ export class GameStorageService {
     const clonedGame: GameDefinition = JSON.parse(JSON.stringify(sourceRec.game));
     
     clonedGame.id = newId;
-    clonedGame.title = `${clonedGame.title} (Kopie ${targetTeacher.name})`;
+    clonedGame.title = `${clonedGame.title} (Kopie ${formatTeacherName(targetTeacher)})`;
     clonedGame.authorId = targetTeacher.id;
-    clonedGame.authorName = targetTeacher.name;
+    clonedGame.authorName = formatTeacherName(targetTeacher);
     clonedGame.isDraft = true;
     delete clonedGame.shareCode;
 

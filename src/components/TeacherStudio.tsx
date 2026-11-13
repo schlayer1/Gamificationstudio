@@ -41,7 +41,7 @@ import { WorksheetPrintModal } from './WorksheetPrintModal';
 import { gameStorageService, PublishedGameRecord } from '../services/gameStorage';
 import { googleDriveSyncService } from '../services/googleDriveSync';
 import { teacherAuthService } from '../services/teacherAuth';
-import { PortalUser } from '../types/user';
+import { formatTeacherName, PortalUser } from '../types/user';
 import { getPillarDisplay, getSkillDisplay, getCleanLabel } from '../utils/gameIcons';
 
 interface TeacherStudioProps {
@@ -578,7 +578,7 @@ export const TeacherStudio: React.FC<TeacherStudioProps> = ({
             <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-amber-950/80 border border-amber-600/50 text-xs shadow-inner">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span className="text-stone-300 hidden sm:inline">Lehrkraft:</span>
-              <span className="font-bold text-amber-200">{currentTeacher.name}</span>
+              <span className="font-bold text-amber-200">{formatTeacherName(currentTeacher)}</span>
               {currentTeacher.role === 'admin' && (
                 <span className="px-1.5 py-0.5 rounded text-[10px] bg-red-900/60 border border-red-500/50 text-red-200 font-bold">Admin</span>
               )}

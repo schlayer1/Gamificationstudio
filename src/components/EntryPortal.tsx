@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GameDefinition } from '../types/game';
-import { PortalUser } from '../types/user';
+import { formatTeacherName, PortalUser } from '../types/user';
 import { soundFX } from '../utils/sound';
 import { 
   KeyRound, 
@@ -306,7 +306,7 @@ export const EntryPortal: React.FC<EntryPortalProps> = ({
                     )}
                   </div>
                   <h3 className="text-lg font-bold text-amber-200">
-                    {currentTeacher.name}
+                    {formatTeacherName(currentTeacher)}
                   </h3>
                 </div>
               </div>

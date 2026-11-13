@@ -1,6 +1,6 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore, doc, getDoc, onSnapshot, Firestore } from 'firebase/firestore';
-import { PortalUser } from '../types/user';
+import { getFirestore, doc, onSnapshot, Firestore } from 'firebase/firestore';
+import { PortalUser, TeacherGender } from '../types/user';
 
 // Shared Firebase configuration from Appportal / Terminkalender
 export const DEFAULT_FIREBASE_CONFIG = {
@@ -10,6 +10,16 @@ export const DEFAULT_FIREBASE_CONFIG = {
   storageBucket: "terminkalender-7f269.firebasestorage.app",
   messagingSenderId: "919163141331",
   appId: "1:919163141331:web:12c659f5c2946e7c7e2826"
+};
+
+// Authoritative teacher/PIN source: Vertretungsstatistik (statistik-91f25)
+export const STATISTIK_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCnleowgQT4XoMK5P5b_t1uWYGsWoYxT80",
+  authDomain: "statistik-91f25.firebaseapp.com",
+  projectId: "statistik-91f25",
+  storageBucket: "statistik-91f25.firebasestorage.app",
+  messagingSenderId: "277742289737",
+  appId: "1:277742289737:web:b87043732524cc283d5098"
 };
 
 export const PORTAL_COLLECTION = "hbs_appportal";
@@ -57,8 +67,24 @@ export const INITIAL_SEED_TEACHERS: PortalUser[] = [
 const LOCAL_STORAGE_TEACHERS_KEY = "hbs_gameportal_teachers_cache";
 const LOCAL_STORAGE_ACTIVE_USER_KEY = "hbs_gameportal_logged_teacher";
 
+interface StatistikTeacherRaw {
+  id?: string;
+  name?: string;
+  pin?: string;
+  gender?: string;
+  active?: boolean;
+}
+
+const normalizeGender = (val: unknown): TeacherGender => {
+  if (val === 'f' || val === 'm' || val === 'd') return val;
+  return '';
+};
+
 export class TeacherAuthService {
   private db: Firestore | null = null;
+  private statistikDb: Firestore | null = null;
+  private baseTeachers: PortalUser[] = INITIAL_SEED_TEACHERS;
+  private statistikTeachers: StatistikTeacherRaw[] = [];
   private teachers: PortalUser[] = INITIAL_SEED_TEACHERS;
   private listeners: Array<(user: PortalUser | null) => void> = [];
 
@@ -75,6 +101,13 @@ export class TeacherAuthService {
     } catch (err) {
       console.warn("Firebase Init-Warnung in TeacherAuthService (Offline-Fallback):", err);
     }
+    try {
+      const existingStatistik = getApps().find((a) => a.name === 'hbs-statistik-source');
+      const statistikApp = existingStatistik || initializeApp(STATISTIK_FIREBASE_CONFIG, 'hbs-statistik-source');
+      this.statistikDb = getFirestore(statistikApp);
+    } catch (err) {
+      console.warn("Statistik-Firebase Init-Warnung in TeacherAuthService:", err);
+    }
   }
 
   private loadCachedTeachers() {
@@ -84,6 +117,7 @@ export class TeacherAuthService {
       if (cached) {
         const parsed = JSON.parse(cached);
         if (Array.isArray(parsed) && parsed.length > 0) {
+          this.baseTeachers = parsed;
           this.teachers = parsed;
         }
       }
@@ -101,35 +135,138 @@ export class TeacherAuthService {
     }
   }
 
-  private initRealtimeSync() {
-    if (!this.db) return;
+  private mergeAndRefreshTeachers() {
+    const merged = this.baseTeachers.map((u) => ({ ...u }));
 
+    this.statistikTeachers.forEach((st) => {
+      const rawName = (st?.name || '').trim();
+      if (!rawName || rawName.toLowerCase().includes('schulleitung')) return;
+
+      const stId = st.id ? String(st.id).trim() : '';
+      const cleanLower = rawName.toLowerCase();
+      const idx = merged.findIndex(
+        (u) =>
+          (stId && (u.sourceTeacherId === stId || u.id === `t-${stId}` || u.id === stId)) ||
+          u.name.trim().toLowerCase() === cleanLower
+      );
+
+      const rawPin = st.pin !== undefined && st.pin !== null ? String(st.pin).trim() : '';
+      const validPin = /^\d{4,}$/.test(rawPin) ? rawPin : '';
+      const hasGenderField = st.gender !== undefined && st.gender !== null;
+      const incomingGender = normalizeGender(st.gender);
+      const incomingActive = st.active !== false;
+
+      if (idx >= 0) {
+        const target = merged[idx];
+        if (validPin) target.pin = validPin;
+        if (hasGenderField) target.gender = incomingGender;
+        target.name = rawName;
+        target.active = incomingActive;
+        if (stId) target.sourceTeacherId = stId;
+      } else if (validPin) {
+        merged.push({
+          id: stId ? `t-${stId}` : `t-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+          sourceTeacherId: stId || undefined,
+          name: rawName,
+          gender: incomingGender,
+          pin: validPin,
+          role: 'teacher',
+          active: incomingActive,
+          createdAt: Date.now()
+        });
+      }
+    });
+
+    this.teachers = merged;
+    this.saveCachedTeachers(merged);
+
+    const current = this.getCurrentTeacher();
+    if (current && current.id !== 'master-admin' && current.id !== 't-gastlehrer') {
+      const updated = merged.find(
+        (u: PortalUser) =>
+          u.id === current.id ||
+          (current.sourceTeacherId && u.sourceTeacherId === current.sourceTeacherId) ||
+          u.name.trim().toLowerCase() === current.name.trim().toLowerCase()
+      );
+      if (updated) {
+        const refreshed: PortalUser = {
+          ...updated,
+          role: current.role === 'admin' ? 'admin' : updated.role,
+          lastLoginAt: current.lastLoginAt
+        };
+        localStorage.setItem(LOCAL_STORAGE_ACTIVE_USER_KEY, JSON.stringify(refreshed));
+        this.notifyListeners(refreshed);
+      }
+    }
+  }
+
+  private async fetchStatistikViaRest() {
     try {
-      const portalDocRef = doc(this.db, PORTAL_COLLECTION, PORTAL_DATA_DOC);
-      // Realtime listener from central appportal doc
-      onSnapshot(portalDocRef, (snap) => {
-        if (snap.exists()) {
-          const data = snap.data();
-          if (Array.isArray(data?.users) && data.users.length > 0) {
-            this.teachers = data.users;
-            this.saveCachedTeachers(data.users);
-            
-            // Check if current user info needs refresh
-            const current = this.getCurrentTeacher();
-            if (current && current.id !== 'master-admin') {
-              const updated = data.users.find((u: PortalUser) => u.id === current.id);
-              if (updated) {
-                localStorage.setItem(LOCAL_STORAGE_ACTIVE_USER_KEY, JSON.stringify(updated));
-                this.notifyListeners(updated);
-              }
+      const res = await fetch(
+        'https://firestore.googleapis.com/v1/projects/statistik-91f25/databases/(default)/documents/schools/HBS'
+      );
+      if (!res.ok) return;
+      const docJson = await res.json();
+      const values = docJson?.fields?.teachers?.arrayValue?.values;
+      if (!Array.isArray(values)) return;
+      this.statistikTeachers = values.map((v: any) => {
+        const f = v?.mapValue?.fields || {};
+        return {
+          id: f.id?.stringValue ?? '',
+          name: f.name?.stringValue ?? '',
+          pin: f.pin?.stringValue ?? '',
+          gender: f.gender?.stringValue ?? '',
+          active: f.active?.booleanValue !== undefined ? Boolean(f.active.booleanValue) : true
+        };
+      });
+      this.mergeAndRefreshTeachers();
+    } catch (err) {
+      console.warn("Statistik REST fallback error in Gameportal:", err);
+    }
+  }
+
+  private initRealtimeSync() {
+    if (this.db) {
+      try {
+        const portalDocRef = doc(this.db, PORTAL_COLLECTION, PORTAL_DATA_DOC);
+        // Realtime listener from central appportal doc
+        onSnapshot(portalDocRef, (snap) => {
+          if (snap.exists()) {
+            const data = snap.data();
+            if (Array.isArray(data?.users) && data.users.length > 0) {
+              this.baseTeachers = data.users;
+              this.mergeAndRefreshTeachers();
             }
           }
-        }
-      }, (err) => {
-        console.warn("Firestore onSnapshot error in Gameportal:", err);
-      });
-    } catch (err) {
-      console.warn("Firestore sync init error:", err);
+        }, (err) => {
+          console.warn("Firestore onSnapshot error in Gameportal:", err);
+        });
+      } catch (err) {
+        console.warn("Firestore sync init error:", err);
+      }
+    }
+
+    if (this.statistikDb) {
+      try {
+        const statistikDocRef = doc(this.statistikDb, "schools", "HBS");
+        onSnapshot(statistikDocRef, (snap) => {
+          if (snap.exists()) {
+            const data = snap.data();
+            if (Array.isArray(data?.teachers)) {
+              this.statistikTeachers = data.teachers;
+              this.mergeAndRefreshTeachers();
+            }
+          }
+        }, (err) => {
+          console.warn("Statistik onSnapshot error in Gameportal:", err);
+          this.fetchStatistikViaRest();
+        });
+      } catch (err) {
+        console.warn("Statistik sync init error in Gameportal:", err);
+        this.fetchStatistikViaRest();
+      }
+    } else {
+      this.fetchStatistikViaRest();
     }
   }
 
