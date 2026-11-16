@@ -1,4 +1,4 @@
-import { CANDIDATE_FLASH_MODELS, DEFAULT_SCHOOL_GEMINI_KEY } from './geminiConstants';
+import { CANDIDATE_FLASH_MODELS } from './geminiConstants';
 
 export interface KeyRotationState {
   keys: string[];
@@ -14,23 +14,11 @@ class GeminiRotationService {
     this.loadKeys();
   }
 
-  // Load configured keys from localStorage, Vercel Environment Variables or school fallback
+  /**
+   * Lädt optionale persönliche Lehrer-Keys aus localStorage (BYOK).
+   * Wenn keine hinterlegt sind, nutzt die App automatisch den sicheren Server-Proxy (/api/gemini).
+   */
   public loadKeys(): string[] {
-    // 1. Check Vercel / Vite Environment Variables first
-    const envKeys: string[] = [];
-    if (typeof import.meta !== 'undefined' && import.meta.env) {
-      const k1 = import.meta.env.VITE_GEMINI_API_KEY_1 || import.meta.env.VITE_GEMINI_API_KEY;
-      const k2 = import.meta.env.VITE_GEMINI_API_KEY_2;
-      const k3 = import.meta.env.VITE_GEMINI_API_KEY_3;
-      const k4 = import.meta.env.VITE_GEMINI_API_KEY_4;
-
-      if (k1 && k1.trim()) envKeys.push(k1.trim());
-      if (k2 && k2.trim()) envKeys.push(k2.trim());
-      if (k3 && k3.trim()) envKeys.push(k3.trim());
-      if (k4 && k4.trim()) envKeys.push(k4.trim());
-    }
-
-    // 2. Check localStorage for teacher custom overrides
     let localKeys: string[] = [];
     if (typeof window !== 'undefined') {
       try {
@@ -38,31 +26,24 @@ class GeminiRotationService {
         if (saved) {
           const parsed = JSON.parse(saved);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            localKeys = parsed.filter((k: string) => k && k.trim().length > 0);
+            localKeys = parsed.filter((k: string) => typeof k === 'string' && k.trim().length > 0);
           }
         }
       } catch {}
     }
 
-    if (localKeys.length > 0) {
-      this.keys = localKeys.slice(0, 4);
-    } else if (envKeys.length > 0) {
-      this.keys = envKeys.slice(0, 4);
-    } else if (DEFAULT_SCHOOL_GEMINI_KEY) {
-      this.keys = [DEFAULT_SCHOOL_GEMINI_KEY];
-    }
-
+    this.keys = localKeys.slice(0, 4);
     return this.keys;
   }
 
-  // Save up to 4 teacher keys
   public saveKeys(newKeys: string[]) {
     this.keys = newKeys.filter((k) => k && k.trim().length > 0).slice(0, 4);
-    if (this.keys.length === 0 && DEFAULT_SCHOOL_GEMINI_KEY) {
-      this.keys = [DEFAULT_SCHOOL_GEMINI_KEY];
-    }
     if (typeof window !== 'undefined') {
-      localStorage.setItem(this.storageKey, JSON.stringify(this.keys));
+      if (this.keys.length > 0) {
+        localStorage.setItem(this.storageKey, JSON.stringify(this.keys));
+      } else {
+        localStorage.removeItem(this.storageKey);
+      }
     }
     this.currentIndex = 0;
   }
@@ -72,7 +53,7 @@ class GeminiRotationService {
   }
 
   public getActiveKey(): string {
-    if (this.keys.length === 0) return DEFAULT_SCHOOL_GEMINI_KEY;
+    if (this.keys.length === 0) return '';
     return this.keys[this.currentIndex % this.keys.length];
   }
 
@@ -83,27 +64,80 @@ class GeminiRotationService {
   }
 
   /**
-   * Robust multi-key and multi-model cascade generation
-   * Supports both pure text prompts and multimodal image attachments (textbook photos, worksheets)
-   * Automatically catches 429 Rate Limits and 503 Overloads, switches to next key & model
+   * Ruft Gemini primär über den sicheren Vercel-Proxy (/api/gemini) auf.
+   * Unterstützt Text-Prompts sowie multimodale Anhänge (Schulbuchfotos, Arbeitsblätter).
    */
   public async generateContentWithRotation(
     promptOrParts: string | Array<{ text?: string; inlineData?: { mimeType: string; data: string } }>,
     systemInstruction?: string,
     isJsonOutput: boolean = false
   ): Promise<string> {
-    const candidateModels = CANDIDATE_FLASH_MODELS;
-    const maxAttempts = Math.max(1, this.keys.length) * candidateModels.length;
-    let attempts = 0;
-
     const parts = typeof promptOrParts === 'string'
       ? [{ text: promptOrParts }]
       : promptOrParts;
 
+    // 1. Primärer Pfad: Sicherer Serverless-Proxy (/api/gemini)
+    const customAttempts = Math.max(1, this.keys.length);
+    for (let i = 0; i < customAttempts; i++) {
+      const customKey = this.getActiveKey();
+      try {
+        const proxyResponse = await fetch('/api/gemini', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            apiKey: customKey || 'serverless-proxy',
+            parts,
+            systemInstruction,
+            temperature: 0.3,
+            maxOutputTokens: 8192,
+            responseMimeType: isJsonOutput ? 'application/json' : undefined,
+          }),
+        });
+
+        if (proxyResponse.ok) {
+          const data = await proxyResponse.json();
+          if (data?.text) {
+            return data.text;
+          }
+        }
+
+        if (proxyResponse.status === 404) {
+          break; // Statisches Hosting -> Direkt-Fallback nur falls BYOK-Keys vorliegen
+        }
+
+        if ((proxyResponse.status === 429 || proxyResponse.status === 503) && this.keys.length > 1) {
+          this.rotateToNextKey();
+          continue;
+        }
+
+        const errJson = await proxyResponse.json().catch(() => ({}));
+        throw new Error(errJson?.error || `HTTP ${proxyResponse.status} vom Gemini-Proxy`);
+      } catch (err: any) {
+        if (i < customAttempts - 1) {
+          this.rotateToNextKey();
+          continue;
+        }
+        if (err?.message && !err.message.includes('404')) {
+          throw err;
+        }
+      }
+    }
+
+    // 2. Fallback bei 404 nur mit persönlichen BYOK-Keys
+    if (this.keys.length === 0) {
+      throw new Error(
+        'Der Gemini-Server-Proxy (/api/gemini) ist nicht erreichbar und es ist kein persönlicher API-Schlüssel hinterlegt.'
+      );
+    }
+
+    const candidateModels = CANDIDATE_FLASH_MODELS;
+    const maxAttempts = this.keys.length * candidateModels.length;
+    let attempts = 0;
+
     while (attempts < maxAttempts) {
       const activeKey = this.getActiveKey();
       const model = candidateModels[attempts % candidateModels.length];
-      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${activeKey}`;
+      const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${encodeURIComponent(model)}:generateContent?key=${encodeURIComponent(activeKey)}`;
 
       const bodyPayload: any = {
         contents: [{ role: 'user', parts }],
@@ -114,9 +148,7 @@ class GeminiRotationService {
       };
 
       if (systemInstruction) {
-        bodyPayload.systemInstruction = {
-          parts: [{ text: systemInstruction }],
-        };
+        bodyPayload.systemInstruction = { parts: [{ text: systemInstruction }] };
       }
 
       if (isJsonOutput) {
@@ -133,18 +165,13 @@ class GeminiRotationService {
         if (response.ok) {
           const data = await response.json();
           const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (text) {
-            return text;
-          }
+          if (text) return text;
         }
 
-        // Handle Rate Limit (429) or Server Overload (503) -> Rotate Key!
         if (response.status === 429 || response.status === 503) {
-          console.warn(`Key / Model rate limited (${response.status}) on ${model}. Rotating key...`);
           this.rotateToNextKey();
         }
-      } catch (err) {
-        console.warn(`Network/API error with model ${model}, trying next...`, err);
+      } catch {
         this.rotateToNextKey();
       }
 
@@ -152,7 +179,7 @@ class GeminiRotationService {
     }
 
     throw new Error(
-      "Alle konfigurierten Gemini-Schlüssel und Modelle haben aktuell ein temporäres Limit erreicht. Bitte kurz warten oder einen weiteren API-Key im Studio hinterlegen."
+      'Alle konfigurierten Gemini-Schlüssel und Modelle haben aktuell ein temporäres Limit erreicht. Bitte kurz warten.'
     );
   }
 }
