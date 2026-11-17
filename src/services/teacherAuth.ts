@@ -1,5 +1,25 @@
-import { initializeApp, getApps, getApp } from 'firebase/app';
-import { getFirestore, doc, onSnapshot, Firestore } from 'firebase/firestore';
+import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
+import {
+  getFirestore,
+  initializeFirestore,
+  persistentLocalCache,
+  persistentMultipleTabManager,
+  doc,
+  onSnapshot,
+  Firestore
+} from 'firebase/firestore';
+
+function createPersistentFirestore(firebaseApp: FirebaseApp): Firestore {
+  try {
+    return initializeFirestore(firebaseApp, {
+      localCache: persistentLocalCache({
+        tabManager: persistentMultipleTabManager(),
+      }),
+    });
+  } catch {
+    return getFirestore(firebaseApp);
+  }
+}
 import { PortalUser, TeacherGender } from '../types/user';
 
 // Shared Firebase configuration from Appportal / Terminkalender
@@ -97,14 +117,14 @@ export class TeacherAuthService {
   private initFirebase() {
     try {
       const app = getApps().length === 0 ? initializeApp(DEFAULT_FIREBASE_CONFIG) : getApp();
-      this.db = getFirestore(app);
+      this.db = createPersistentFirestore(app);
     } catch (err) {
       console.warn("Firebase Init-Warnung in TeacherAuthService (Offline-Fallback):", err);
     }
     try {
       const existingStatistik = getApps().find((a) => a.name === 'hbs-statistik-source');
       const statistikApp = existingStatistik || initializeApp(STATISTIK_FIREBASE_CONFIG, 'hbs-statistik-source');
-      this.statistikDb = getFirestore(statistikApp);
+      this.statistikDb = createPersistentFirestore(statistikApp);
     } catch (err) {
       console.warn("Statistik-Firebase Init-Warnung in TeacherAuthService:", err);
     }
