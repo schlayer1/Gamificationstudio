@@ -1,21 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { PlayerProfile, Stats, Skills, GameLogEntry, DecisionChoice, GameDefinition } from './types/game';
 import { getStoryForRound } from './data/storyData';
 import { ExpeditionProgressBar } from './components/ExpeditionProgressBar';
 import { DashboardHeader } from './components/DashboardHeader';
 import { SetupScreen } from './components/SetupScreen';
-import { LexiconModal } from './components/LexiconModal';
-import { EndingScreen } from './components/EndingScreen';
-import { GameOverScreen } from './components/GameOverScreen';
-import { TeacherStudio } from './components/TeacherStudio';
-import { StationImagePromptModal } from './components/StationImagePromptModal';
 import { StationHeroStage } from './components/StationHeroStage';
-import { ExpeditionMapModal } from './components/ExpeditionMapModal';
 import { EntryPortal } from './components/EntryPortal';
 import { soundFX } from './utils/sound';
 import { Lock, Sparkles, BookOpen, AlertTriangle, Camera, Image as ImageIcon, CheckCircle2, PenTool } from 'lucide-react';
 import { detectEraTheme, ERA_THEMES } from './utils/themeManager';
 import { getPillarDisplay, getSkillDisplay, getSpecialResourceDisplay } from './utils/gameIcons';
+
+const LexiconModal = lazy(() => import('./components/LexiconModal').then((m) => ({ default: m.LexiconModal })));
+const EndingScreen = lazy(() => import('./components/EndingScreen').then((m) => ({ default: m.EndingScreen })));
+const GameOverScreen = lazy(() => import('./components/GameOverScreen').then((m) => ({ default: m.GameOverScreen })));
+const TeacherStudio = lazy(() => import('./components/TeacherStudio').then((m) => ({ default: m.TeacherStudio })));
+const StationImagePromptModal = lazy(() => import('./components/StationImagePromptModal').then((m) => ({ default: m.StationImagePromptModal })));
+const ExpeditionMapModal = lazy(() => import('./components/ExpeditionMapModal').then((m) => ({ default: m.ExpeditionMapModal })));
 
 export const App: React.FC = () => {
   // Game Lifecycle State: portal (Code-Eingabe / Lehrer-Login) -> setup -> playing -> gameover / ending / studio
@@ -323,10 +324,12 @@ export const App: React.FC = () => {
     <div className={`min-h-screen flex flex-col ${currentTheme.bodyBgClass} text-stone-100 transition-colors duration-700`}>
       {/* 0. TEACHER STUDIO STATE */}
       {gameState === 'studio' && (
-        <TeacherStudio
-          onLoadGameToPlayer={handleLoadGameFromStudio}
-          onCloseStudio={() => setGameState('portal')}
-        />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-amber-200 text-sm font-semibold">Lehrer-Studio wird geladen…</div>}>
+          <TeacherStudio
+            onLoadGameToPlayer={handleLoadGameFromStudio}
+            onCloseStudio={() => setGameState('portal')}
+          />
+        </Suspense>
       )}
 
       {/* 0. ENTRY PORTAL STATE (Code-Eingabe für Schüler & Lehrer-PIN-Login) */}
@@ -364,27 +367,31 @@ export const App: React.FC = () => {
 
       {/* 2. GAME OVER STATE */}
       {gameState === 'gameover' && (
-        <GameOverScreen
-          profile={profile}
-          fallenStat={fallenStat}
-          round={currentStory.roundNumber}
-          stats={stats}
-          onRestart={handleRestart}
-          activeGame={activeGameDefinition}
-          theme={currentTheme}
-        />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-amber-200 text-sm">Lade Auswertung…</div>}>
+          <GameOverScreen
+            profile={profile}
+            fallenStat={fallenStat}
+            round={currentStory.roundNumber}
+            stats={stats}
+            onRestart={handleRestart}
+            activeGame={activeGameDefinition}
+            theme={currentTheme}
+          />
+        </Suspense>
       )}
 
       {/* 3. ENDING / CORONATION STATE */}
       {gameState === 'ending' && (
-        <EndingScreen
-          profile={profile}
-          stats={stats}
-          skills={skills}
-          theme={currentTheme}
-          onRestart={handleRestart}
-          activeGame={activeGameDefinition}
-        />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center text-amber-200 text-sm">Lade Auswertung…</div>}>
+          <EndingScreen
+            profile={profile}
+            stats={stats}
+            skills={skills}
+            theme={currentTheme}
+            onRestart={handleRestart}
+            activeGame={activeGameDefinition}
+          />
+        </Suspense>
       )}
 
       {/* 4. ACTIVE PLAYING STATE */}
@@ -723,58 +730,70 @@ export const App: React.FC = () => {
           </main>
 
           {/* Station Image & Prompt Generator Modal */}
-          <StationImagePromptModal
-            isOpen={isImageModalOpen}
-            onClose={() => setIsImageModalOpen(false)}
-            stationTitle={currentStory.milestoneTitle}
-            locationName={currentStory.locationName}
-            roundNumber={currentStory.roundNumber}
-            currentImage={customStationImages[currentRoundIndex] || currentStory.imagePath}
-            suggestedPrompt={currentStory.imagePrompt}
-            currentArtStyle={activeGameDefinition?.artStyle || 'pixel_art'}
-            currentHotspots={customStationHotspots[currentRoundIndex] || currentStory.hotspots}
-            onSelectImage={(newUrl) => {
-              setCustomStationImages((prev) => ({
-                ...prev,
-                [currentRoundIndex]: newUrl,
-              }));
-            }}
-            onUpdateHotspots={(updatedHotspots) => {
-              setCustomStationHotspots((prev) => ({
-                ...prev,
-                [currentRoundIndex]: updatedHotspots,
-              }));
-            }}
-          />
+          {isImageModalOpen && (
+            <Suspense fallback={null}>
+              <StationImagePromptModal
+                isOpen={isImageModalOpen}
+                onClose={() => setIsImageModalOpen(false)}
+                stationTitle={currentStory.milestoneTitle}
+                locationName={currentStory.locationName}
+                roundNumber={currentStory.roundNumber}
+                currentImage={customStationImages[currentRoundIndex] || currentStory.imagePath}
+                suggestedPrompt={currentStory.imagePrompt}
+                currentArtStyle={activeGameDefinition?.artStyle || 'pixel_art'}
+                currentHotspots={customStationHotspots[currentRoundIndex] || currentStory.hotspots}
+                onSelectImage={(newUrl) => {
+                  setCustomStationImages((prev) => ({
+                    ...prev,
+                    [currentRoundIndex]: newUrl,
+                  }));
+                }}
+                onUpdateHotspots={(updatedHotspots) => {
+                  setCustomStationHotspots((prev) => ({
+                    ...prev,
+                    [currentRoundIndex]: updatedHotspots,
+                  }));
+                }}
+              />
+            </Suspense>
+          )}
 
           {/* Lexicon / Historical Archive Modal */}
-          <LexiconModal
-            isOpen={isLexiconOpen}
-            onClose={() => setIsLexiconOpen(false)}
-            logs={logs}
-            gradeLevel={profile.gradeLevel}
-            activeGame={activeGameDefinition}
-            theme={currentTheme}
-          />
+          {isLexiconOpen && (
+            <Suspense fallback={null}>
+              <LexiconModal
+                isOpen={isLexiconOpen}
+                onClose={() => setIsLexiconOpen(false)}
+                logs={logs}
+                gradeLevel={profile.gradeLevel}
+                activeGame={activeGameDefinition}
+                theme={currentTheme}
+              />
+            </Suspense>
+          )}
 
           {/* Collapsible Interactive Expedition Map Modal */}
-          <ExpeditionMapModal
-            isOpen={isMapOpen}
-            onClose={() => setIsMapOpen(false)}
-            stations={Array.from({ length: totalRounds }).map((_, idx) => {
-              const rStory = activeGameDefinition?.rounds?.[idx] || getStoryForRound(idx + 1, stats, skills);
-              return {
-                roundNumber: idx + 1,
-                locationName: rStory.locationName,
-                milestoneTitle: rStory.milestoneTitle,
-                completed: idx < currentRoundIndex,
-                current: idx === currentRoundIndex,
-              };
-            })}
-            currentRound={currentStory.roundNumber}
-            totalRounds={totalRounds}
-            theme={currentTheme}
-          />
+          {isMapOpen && (
+            <Suspense fallback={null}>
+              <ExpeditionMapModal
+                isOpen={isMapOpen}
+                onClose={() => setIsMapOpen(false)}
+                stations={Array.from({ length: totalRounds }).map((_, idx) => {
+                  const rStory = activeGameDefinition?.rounds?.[idx] || getStoryForRound(idx + 1, stats, skills);
+                  return {
+                    roundNumber: idx + 1,
+                    locationName: rStory.locationName,
+                    milestoneTitle: rStory.milestoneTitle,
+                    completed: idx < currentRoundIndex,
+                    current: idx === currentRoundIndex,
+                  };
+                })}
+                currentRound={currentStory.roundNumber}
+                totalRounds={totalRounds}
+                theme={currentTheme}
+              />
+            </Suspense>
+          )}
         </>
       )}
     </div>
